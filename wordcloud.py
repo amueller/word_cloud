@@ -8,7 +8,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 #from scipy.misc import imsave
 
 
-#@profile
 def make_wordcloud(words, counts, width=400, height=200):
     # sort words by counts
     inds = np.argsort(counts)[::-1]
@@ -18,13 +17,13 @@ def make_wordcloud(words, counts, width=400, height=200):
     #counts = counts[:50]
 
     # create image
-    img = Image.new("RGB", (width, height))
+    img = Image.new("L", (width, height))
     draw = ImageDraw.Draw(img)
-    gridx, gridy = np.indices((height, width))
     #i = 0
     for word, count in zip(words, counts):
         font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
-        img_array = np.array(img, dtype=np.float).sum(axis=2)
+        img_array = np.asarray(img, dtype=np.float)
+        #img_array = img_array.sum(axis=2)
         # set font size
         font_size = int(np.log(count)) * 20
         runs = 0
@@ -46,15 +45,16 @@ def make_wordcloud(words, counts, width=400, height=200):
                     - integral[:-off_y, off_x:]
                     - integral[off_y:, :-off_x])
             mask2 = mask2 <= 0
-            masked_x, masked_y = gridx[mask2], gridy[mask2]
-            if len(masked_x):
+            where = np.where(mask2)
+            if len(where[0]):
                 break
             font_size -= 1
             runs += 1
-        idx = np.random.randint(0, len(masked_x))
-        y, x = masked_y[idx], masked_x[idx]
-        draw.text((y, x), word,
-                fill=random.choice(['red', 'green', 'blue']))
+        idx = random.randint(0, len(where[0]) - 1)
+        y, x = where[1][idx], where[0][idx]
+        #draw.text((y, x), word,
+                #fill=random.choice(['red', 'green', 'blue']))
+        draw.text((y, x), word, fill="white")
         #imsave("img_%04d_mask2.png" % i, mask2)
         #imsave("img_%04d_mask.png" % i, mask)
         #imsave("img_%04d_integral.png" % i, integral)
@@ -72,5 +72,5 @@ if __name__ == "__main__":
     words = np.array(cv.get_feature_names())
     words = words[counts > 1]
     counts = counts[counts > 1]
-    #make_wordcloud(words, counts, width=800, height=600)
-    make_wordcloud(words, counts, width=300, height=200)
+    make_wordcloud(words, counts, width=800, height=600)
+    #make_wordcloud(words, counts, width=300, height=200)
