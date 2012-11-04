@@ -45,8 +45,8 @@ def make_wordcloud(words, counts, width=400, height=200):
         # recompute integral image
         img_array = np.asarray(img)
         # recompute bottom right
-        partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=0),
-                                     axis=1)
+        partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
+                                     axis=0)
         # paste into old image
         # if x or y is zero it is a bit annoying
         if x > 0:
@@ -71,4 +71,4 @@ if __name__ == "__main__":
     words = np.array(cv.get_feature_names())
     words = words[counts > 1]
     counts = counts[counts > 1]
-    make_wordcloud(words, counts, width=800, height=600)
+    make_wordcloud(words, counts, width=400, height=300)
