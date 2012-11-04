@@ -1,0 +1,60 @@
+
+« Talk now online: The Future of C++ (VC++, ISO C++)
+Our industry is young again, and it’s all about UI
+
+2012-11-03 by Herb Sutter
+
+Jeff Atwood’s post two days ago inspired me to write this down. Thanks, Jeff.
+
+    “I can’t even remember the last time I was this excited about a computer.”
+
+    – Jeff Atwood, November 1, 2012
+
+Our industry is young again, full of the bliss and sense of wonder and promise of adventure that comes with youth.
+
+Computing feels young and fresh in a way that it hasn’t felt for years, and that has only happened to this degree at two other times in its history. Many old-timers, including myself, have said “this feels like 1980 again.”
+
+It does indeed. And the reason why is all about user interfaces (UI).
+Wave 1: Late 1950s through 60s
+
+First, computing felt young in the late 1950s through the 60s because it was young, and made computers personally available to a select few people. Having computers at all was new, and the ability to make a machine do things opened up a whole new world for a band of pioneers like Dijkstra and Hoare, and Russell (Spacewar!) and Engelbart (Mother of All Demos) who made these computers personal for at least a few people.
+
+The machines were useful. But the excitement came from personally interacting with the machine.
+Wave 2: Late 1970s through 80s
+
+Second, computing felt young again in the late 1970s and 80s. Then, truly personal single-user computers were new. They opened up to a far wider audience the sense of wonder that came with having a computer of our very own, and often even with a colorful graphical interface to draw us into its new worlds. I’ll include Woods and Crowther (ADVENT) as an example, because they used a PDP as a personal computer (smile) and their game and many more like it took off on the earliest true PCs – Exidy Sorcerers and TRS-80s, Ataris and Apples. This was the second and much bigger wave of delivering computers we could personally interact with.
+
+The machines were somewhat useful; people kept trying to justify paying $1,000 for one “to organize recipes.” (Really.) But the real reason people wanted them was that they were more intimate – the excitement once again came from personally interacting with the machine.
+Non-wave: 1990s through mid-2000s
+
+Although WIMP interfaces proliferated in the 1990s and did deliver benefits and usability, they were never as exciting to the degree computers were in the 80s. Why not? Because they weren’t nearly as transformative in making computers more personal, more fun. And then, to add insult to injury, once we shipped WIMPiness throughout the industry, we called it good for a decade and innovation in user interfaces stagnated.
+
+I heard many people wonder whether computing was done, whether this was all there would be. Thanks, Apple, for once again taking the lead in proving them wrong.
+Wave 3: Late 2000s through the 10s
+
+Now, starting in the late 2000s and through the 10s, modern mobile computers are new and more personal than ever, and they’re just getting started. But what makes them so much more personal? There are three components of the new age of computing, and they’re all about UI (user interfaces)… count ’em:
+
+    Touch.
+    Speech.
+    Gestures.
+
+Now don’t get me wrong, these are in addition to keyboards and accurate pointing (mice, trackpads) and writing (pens), not instead of them. I don’t believe for a minute that keyboards and mice and pens are going away, because they’re incredibly useful – I agree with Joey Hess (HT to @codinghorror):
+
+    “If it doesn’t have a keyboard, I feel that my thoughts are being forced out through a straw.”
+
+Nevertheless, touch, speech, and gestures are clearly important. Why? Because interacting with touch and speech and gestures is how we’re made, and that’s what lets these interactions power a new wave of making computers more personal. All three are coming to the mainstream in about that order…
+Four predictions
+
+… and all three aren’t done, they’re just getting started, and we can now see that at least the first two are inevitable. Consider:
+
+Touchable screens on smartphones and tablets is just the beginning. Once we taste the ability to touch any screen, we immediately want and expect all screens to respond to touch. One year from now, when more people have had a taste of it, no one will question whether notebooks and monitors should respond to touch – though maybe a few will still question touch televisions. Two years from now, we’ll just assume that every screen should be touchable, and soon we’ll forget it was ever any other way. Anyone set on building non-touch mainstream screens of any size is on the wrong side of history.
+
+Speech recognition on phones and in the living room is just the beginning. This week I recorded a podcast with Scott Hanselman which will air in another week or two, when Scott shared something he observed firsthand in his son: Once a child experiences saying “Xbox Pause,” he will expect all entertainment devices to respond to speech commands, and if they don’t they’re “broken.” Two years from now, speech will probably be the norm as one way to deliver primary commands. (Insert Scotty joke here.)
+
+Likewise, gestures to control entertainment and games in the living room is just the beginning. Over the past year or two, when giving talks I’ve sometimes enjoyed messing with audiences by “changing” a PowerPoint slide by gesturing in the air in front of the screen while really changing the slide with the remote in my pocket. I immediately share the joke, of course, and we all have a laugh together, but the audience members more and more often just think it’s a new product and expect it to work. Gestures aren’t just for John Anderton any more.
+
+Bringing touch and speech and gestures to all devices is a thrilling experience. They are just the beginning of the new wave that’s still growing. And this is the most personal wave so far.
+
+This is an exciting and wonderful time to be part of our industry.
+
+Computing is being reborn, again; we are young again.
