@@ -8,7 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 #from scipy.misc import imsave
 
 
-@profile
+#@profile
 def make_wordcloud(words, counts, width=400, height=200):
     # sort words by counts
     inds = np.argsort(counts)[::-1]
@@ -45,28 +45,15 @@ def make_wordcloud(words, counts, width=400, height=200):
                     + integral[off_y:, off_x:]
                     - integral[:-off_y, off_x:]
                     - integral[off_y:, :-off_x])
-            mask2 = mask2 > 0
-            #mask = uniform_filter(img_array, size[::-1]) < 0.001
-            # forbid border:
-            #mask[0: size[1] // 2] = False
-            #mask[-size[1] // 2:] = False
-            #mask[:, 0: size[0] // 2] = False
-            #mask[:, -size[0] // 2:] = False
-            # get all available positions
             mask2 = mask2 <= 0
-            #big_mask2 = np.zeros_like(mask)
-            #big_mask2[size[1] // 2.: -size[1] // 2, size[0] // 2: -size[0] // 2] = mask2
-            masked_y, masked_x = gridx[mask2], gridy[mask2]
-            #masked_y, masked_x = gridx[mask], gridy[mask]
+            masked_x, masked_y = gridx[mask2], gridy[mask2]
             if len(masked_x):
                 break
             font_size -= 1
             runs += 1
         idx = np.random.randint(0, len(masked_x))
-        x, y = masked_x[idx], masked_y[idx]
-        x_offset = x
-        y_offset = y
-        draw.text((x_offset, y_offset), word,
+        y, x = masked_y[idx], masked_x[idx]
+        draw.text((y, x), word,
                 fill=random.choice(['red', 'green', 'blue']))
         #imsave("img_%04d_mask2.png" % i, mask2)
         #imsave("img_%04d_mask.png" % i, mask)
@@ -85,4 +72,5 @@ if __name__ == "__main__":
     words = np.array(cv.get_feature_names())
     words = words[counts > 1]
     counts = counts[counts > 1]
-    make_wordcloud(words, counts, width=800, height=600)
+    #make_wordcloud(words, counts, width=800, height=600)
+    make_wordcloud(words, counts, width=300, height=200)
