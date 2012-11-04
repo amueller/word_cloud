@@ -11,7 +11,7 @@ plt
 #from scipy.ndimage import uniform_filter
 #from scipy.misc import imsave
 
-
+@profile
 def make_wordcloud(words, counts, width=400, height=200):
     # sort words by counts
     inds = np.argsort(counts)[::-1]
@@ -44,29 +44,29 @@ def make_wordcloud(words, counts, width=400, height=200):
             # find possible places using convolution:
             off_x = size[0]
             off_y = size[1]
-            mask2 = (integral[:-off_y, :-off_x]
-                    + integral[off_y:, off_x:]
-                    - integral[:-off_y, off_x:]
-                    - integral[off_y:, :-off_x])
-            mask2 = mask2 <= 0
-            where = np.where(mask2)
-            res_x, res_y = query_integral_image(integral, off_y, off_x)
-            if len(where[0]):
+            #mask2 = (integral[:-off_y, :-off_x]
+                    #+ integral[off_y:, off_x:]
+                    #- integral[:-off_y, off_x:]
+                    #- integral[off_y:, :-off_x])
+            #mask2 = mask2 <= 0
+            #where = np.where(mask2)
+            result = query_integral_image(integral, off_y, off_x)
+            if result is not None:
                 break
             font_size -= 1
             runs += 1
-        idx = random.randint(0, len(where[0]) - 1)
-        x, y = res_x[idx], res_y[idx]
-        asdf = np.zeros(integral.shape)
-        asdf[res_x, res_y] = 1
-        asdf2 = np.zeros(integral.shape)
-        asdf2[where[0], where[1]] = 1
-        if not (asdf == asdf2).all():
-            from IPython.core.debugger import Tracer
-            Tracer()()
+        #idx = random.randint(0, len(res_x) - 1)
+        #x, y = res_x[idx], res_y[idx]
+        #asdf = np.zeros(integral.shape)
+        #asdf[res_x, res_y] = 1
+        #asdf2 = np.zeros(integral.shape)
+        #asdf2[where[0], where[1]] = 1
+        #if not (asdf == asdf2).all():
+            #from IPython.core.debugger import Tracer
+            #Tracer()()
         #draw.text((y, x), word,
                 #fill=random.choice(['red', 'green', 'blue']))
-        draw.text((y, x), word, fill="white")
+        draw.text((result[1], result[0]), word, fill="white")
         #img_array = np.asarray(img, dtype=np.float) / 255.
         img_array = np.asarray(img)
         #partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=0),
@@ -102,4 +102,4 @@ if __name__ == "__main__":
     words = words[counts > 1]
     counts = counts[counts > 1]
     #make_wordcloud(words, counts, width=800, height=600)
-    make_wordcloud(words, counts, width=200, height=100)
+    make_wordcloud(words, counts, width=400, height=200)
