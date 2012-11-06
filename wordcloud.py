@@ -1,3 +1,8 @@
+# Author: Andreas Christian Mueller <amueller@ais.uni-bonn.de>
+# (c) 2012
+#
+# License: MIT
+
 import Image
 import ImageDraw
 import ImageFont
