@@ -15,14 +15,12 @@ def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
     # create image
     img_grey = Image.new("L", (width, height))
     draw = ImageDraw.Draw(img_grey)
-    #i = 0
     integral = np.zeros((height, width), dtype=np.uint)
     img_array = np.asarray(img_grey)
     font_sizes, positions, orientations = [], [], []
     # intitiallize fontsize "large enough"
     font_size = 1000
     # start drawing grey image
-    i = 0
     for word, count in zip(words, counts):
         # set font size
         #font_size = min(font_size, int(100 * np.log(count + 100)))
@@ -71,7 +69,6 @@ def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
             partial_integral += integral[x:, y - 1][:, np.newaxis]
 
         integral[x:, y:] = partial_integral
-        i += 1
 
     # redraw in color
     img = Image.new("RGB", (width, height))
