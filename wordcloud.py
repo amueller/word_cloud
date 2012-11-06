@@ -55,6 +55,7 @@ def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
         # recompute integral image
         img_array = np.asarray(img_grey)
         # recompute bottom right
+        # the order of the cumsum's is important for speed ?!
         partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
                                      axis=0)
         # paste recomputed part into old image
