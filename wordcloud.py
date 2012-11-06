@@ -84,13 +84,13 @@ def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
                                                    orientation=orientation)
         draw.setfont(transposed_font)
         draw.text((position[1], position[0]), word,
-                  fill="hsl(%d" % random.randint(0, 255) + ", 100%, 50%)")
+                  fill="hsl(%d" % random.randint(0, 255) + ", 80%, 50%)")
     img.show()
-    img.save("constitution.png")
+    img.save("constitution_.png")
 
 if __name__ == "__main__":
     font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
-    with open("constituion.txt") as f:
+    with open("constitution.txt") as f:
         lines = f.readlines()
     text = "".join(lines)
     cv = CountVectorizer(min_df=0, charset_error="ignore",
