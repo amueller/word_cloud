@@ -7,8 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from query_integral_image import query_integral_image
 
 
-#@profile
-def make_wordcloud(words, counts, width=400, height=200, margin=20):
+def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
     # sort words by counts
     inds = np.argsort(counts)[::-1]
     counts = counts[inds]
@@ -23,12 +22,10 @@ def make_wordcloud(words, counts, width=400, height=200, margin=20):
     # intitiallize fontsize "large enough"
     font_size = 1000
     # start drawing grey image
+    i = 0
     for word, count in zip(words, counts):
-        font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
-        #img_array = img_array.sum(axis=2)
         # set font size
-        font_size = min(font_size, int(np.log(count)) * 20)
-        runs = 0
+        #font_size = min(font_size, int(100 * np.log(count + 100)))
         while True:
             # try to find a position
             font = ImageFont.truetype(font_path, font_size)
@@ -40,14 +37,19 @@ def make_wordcloud(words, counts, width=400, height=200, margin=20):
             # get size of resulting text
             box_size = draw.textsize(word)
             # find possible places using integral image:
-            result = query_integral_image(integral, box_size[1] + margin, box_size[0] + margin)
-            if result is not None:
+            result = query_integral_image(integral, box_size[1] + margin,
+                                          box_size[0] + margin)
+            if result is not None or font_size == 0:
                 break
             # if we didn't find a place, make font smaller
             font_size -= 1
-            runs += 1
+
+        if font_size == 0:
+            # we were unable to draw any more
+            break
+
+        x, y = np.array(result) + margin // 2
         # actually draw the text
-        x, y = result
         draw.text((y, x), word, fill="white")
         positions.append((x, y))
         orientations.append(orientation)
@@ -69,6 +71,7 @@ def make_wordcloud(words, counts, width=400, height=200, margin=20):
             partial_integral += integral[x:, y - 1][:, np.newaxis]
 
         integral[x:, y:] = partial_integral
+        i += 1
 
     # redraw in color
     img = Image.new("RGB", (width, height))
@@ -81,16 +84,21 @@ def make_wordcloud(words, counts, width=400, height=200, margin=20):
                                                    orientation=orientation)
         draw.setfont(transposed_font)
         draw.text((position[1], position[0]), word,
-                  fill="hsl(%d" % random.randint(0, 255) + ", 50%, 50%)")
+                  fill="hsl(%d" % random.randint(0, 255) + ", 100%, 50%)")
     img.show()
+    img.save("constitution.png")
 
 if __name__ == "__main__":
-    with open("test.txt") as f:
+    font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
+    with open("constituion.txt") as f:
         lines = f.readlines()
     text = "".join(lines)
-    cv = CountVectorizer(min_df=0, charset_error="ignore")
+    cv = CountVectorizer(min_df=0, charset_error="ignore",
+                         stop_words="english", max_features=200)
     counts = cv.fit_transform([text]).toarray().ravel()
     words = np.array(cv.get_feature_names())
+    # throw away some words, normalize
     words = words[counts > 1]
     counts = counts[counts > 1]
-    make_wordcloud(words, counts, width=400, height=300)
+    counts = counts / float(counts.max())
+    make_wordcloud(words, counts, font_path, width=800, height=600)
