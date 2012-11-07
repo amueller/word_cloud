@@ -20,7 +20,7 @@ def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
     # create image
     img_grey = Image.new("L", (width, height))
     draw = ImageDraw.Draw(img_grey)
-    integral = np.zeros((height, width), dtype=np.uint)
+    integral = np.zeros((height, width), dtype=np.uint32)
     img_array = np.asarray(img_grey)
     font_sizes, positions, orientations = [], [], []
     # intitiallize fontsize "large enough"
