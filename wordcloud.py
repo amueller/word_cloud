@@ -12,7 +12,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from query_integral_image import query_integral_image
 
 
-def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
+def make_wordcloud(words, counts, font_path, fname, width=400, height=200, margin=5):
     # sort words by counts
     inds = np.argsort(counts)[::-1]
     counts = counts[inds]
@@ -89,13 +89,23 @@ def make_wordcloud(words, counts, font_path, width=400, height=200, margin=5):
         draw.text((position[1], position[0]), word,
                   fill="hsl(%d" % random.randint(0, 255) + ", 80%, 50%)")
     img.show()
-    img.save("constitution_.png")
+    img.save(fname)
+
 
 if __name__ == "__main__":
-    font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
-    with open("constitution.txt") as f:
-        lines = f.readlines()
+
+    import os
+    import sys
+
+    sources = [arg for arg in sys.argv[1:] if os.path.exists(arg)] or ["constitution.txt"]
+    lines = []
+    for s in sources:
+        with open(s) as f:
+            lines.extend(f.readlines())
     text = "".join(lines)
+
+    font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
+
     cv = CountVectorizer(min_df=0, charset_error="ignore",
                          stop_words="english", max_features=200)
     counts = cv.fit_transform([text]).toarray().ravel()
@@ -104,4 +114,6 @@ if __name__ == "__main__":
     words = words[counts > 1]
     counts = counts[counts > 1]
     counts = counts / float(counts.max())
-    make_wordcloud(words, counts, font_path, width=800, height=600)
+
+    fname = os.path.splitext(os.path.basename(sources[0]))[0]+"_.png"
+    make_wordcloud(words, counts, font_path, width=800, height=600, fname=fname)
