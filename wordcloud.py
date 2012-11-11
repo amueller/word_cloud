@@ -96,7 +96,7 @@ if __name__ == "__main__":
     with open("constitution.txt") as f:
         lines = f.readlines()
     text = "".join(lines)
-    cv = CountVectorizer(min_df=0, charset_error="ignore",
+    cv = CountVectorizer(min_df=1, charset_error="ignore",
                          stop_words="english", max_features=200)
     counts = cv.fit_transform([text]).toarray().ravel()
     words = np.array(cv.get_feature_names())
