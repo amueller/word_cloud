@@ -117,8 +117,7 @@ if __name__ == "__main__":
     if len(counts) > 0:
         counts = counts / float(counts.max())
 
-        fname = os.path.splitext(os.path.basename(sources[0]))[0]+"_.png"
-        make_wordcloud(words, counts, font_path, width=800, height=600,
-                    fname=fname)
+        fname = os.path.splitext(os.path.basename(sources[0]))[0] + "_.png"
+        make_wordcloud(words, counts, font_path, width=800, height=600, fname=fname)
     else:
         print "We need at least 1 word to plot a word cloud, we have {}.".format(len(counts))
