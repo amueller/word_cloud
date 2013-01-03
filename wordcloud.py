@@ -14,8 +14,59 @@ from query_integral_image import query_integral_image
 FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 
 
-def make_wordcloud(words, counts, font_path, fname, width=400, height=200,
+def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
                    margin=5):
+    """Build word cloud using word counts, store in image.
+
+    Parameters
+    ----------
+    words : numpy array of strings
+        Words that will be drawn in the image.
+
+    counts : numpy array of word counts
+        Word counts or weighting of words. Determines the size of the word in
+        the final image.
+        Will be normalized to lie between zero and one.
+
+    font_path : sting
+        Font path to the font that will be used.
+        Defaults to DroidSansMono path.
+
+    fname : sting
+        Output filename. Extension determins image type
+        (written with PIL).
+
+    width : int (default=400)
+        Width of the word cloud image.
+
+    height : int (default=200)
+        Height of the word cloud image.
+
+    Notes
+    -----
+    Larger Images with make the code significantly slower.
+    If you need a large image, you can try running the algorithm at a lower
+    resolution and then drawing the result at the desired resolution.
+
+    In the current form it actually just uses the rank of the counts,
+    i.e. the relative differences don't matter.
+    Play with setting the font_size in the main loop vor differnt styles.
+
+    Colors are used completely at random. Currently the colors are sampled
+    from HSV space with a fixed S and V.
+    Adjusting the percentages at the very end gives differnt color ranges.
+    Obviously you can also set all at random - haven't tried that.
+
+    """
+    if len(counts) <= 0:
+        print("We need at least 1 word to plot a word cloud, got %d."
+              % len(counts))
+
+    if font_path is None:
+        font_path = FONT_PATH
+
+    # normalize counts
+    counts = counts / float(counts.max())
     # sort words by counts
     inds = np.argsort(counts)[::-1]
     counts = counts[inds]
@@ -26,11 +77,11 @@ def make_wordcloud(words, counts, font_path, fname, width=400, height=200,
     integral = np.zeros((height, width), dtype=np.uint32)
     img_array = np.asarray(img_grey)
     font_sizes, positions, orientations = [], [], []
-    # intitiallize fontsize "large enough"
+    # intitiallize font size "large enough"
     font_size = 1000
     # start drawing grey image
     for word, count in zip(words, counts):
-        # set font size
+        # alternative way to set the font size
         #font_size = min(font_size, int(100 * np.log(count + 100)))
         while True:
             # try to find a position
@@ -95,21 +146,6 @@ def make_wordcloud(words, counts, font_path, fname, width=400, height=200,
     img.save(fname)
 
 
-def normalise_make_wordcloud(words, counts, fname, font_path=FONT_PATH, width=800, height=600):
-    """Normalise counts to be >0 and <=1 then create the wordcloud
-
-    words is an array of the words to draw
-    counts is an array of the frequency of each word
-    fname is the filename for output e.g. "constitution_.png"
-    font_path points at a valid system font
-    """
-    # normalise counts to the interval (0..1] (>0.0, <=1.0)
-    counts = counts / float(counts.max())
-
-    make_wordcloud(words, counts, font_path, width=width, height=height, fname=fname)
-    return counts
-
-
 if __name__ == "__main__":
 
     import os
@@ -130,8 +166,6 @@ if __name__ == "__main__":
     # throw away some words, normalize
     words = words[counts > 1]
     counts = counts[counts > 1]
-    if len(counts) > 0:
-        output_filename = os.path.splitext(os.path.basename(sources[0]))[0] + "_.png"
-        counts = normalise_make_wordcloud(words, counts, output_filename)
-    else:
-        print "We need at least 1 word to plot a word cloud, we have {}.".format(len(counts))
+    output_filename = (os.path.splitext(os.path.basename(sources[0]))[0]
+                       + "_.png")
+    counts = make_wordcloud(words, counts, output_filename)
