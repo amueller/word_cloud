@@ -11,6 +11,8 @@ import random
 from sklearn.feature_extraction.text import CountVectorizer
 from query_integral_image import query_integral_image
 
+FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
+
 
 def make_wordcloud(words, counts, font_path, fname, width=400, height=200,
                    margin=5):
@@ -93,6 +95,21 @@ def make_wordcloud(words, counts, font_path, fname, width=400, height=200,
     img.save(fname)
 
 
+def normalise_make_wordcloud(words, counts, fname, font_path=FONT_PATH, width=800, height=600):
+    """Normalise counts to be >0 and <=1 then create the wordcloud
+
+    words is an array of the words to draw
+    counts is an array of the frequency of each word
+    fname is the filename for output e.g. "constitution_.png"
+    font_path points at a valid system font
+    """
+    # normalise counts to the interval (0..1] (>0.0, <=1.0)
+    counts = counts / float(counts.max())
+
+    make_wordcloud(words, counts, font_path, width=width, height=height, fname=fname)
+    return counts
+
+
 if __name__ == "__main__":
 
     import os
@@ -105,7 +122,6 @@ if __name__ == "__main__":
         with open(s) as f:
             lines.extend(f.readlines())
     text = "".join(lines)
-    font_path = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 
     cv = CountVectorizer(min_df=1, charset_error="ignore",
                          stop_words="english", max_features=200)
@@ -114,8 +130,8 @@ if __name__ == "__main__":
     # throw away some words, normalize
     words = words[counts > 1]
     counts = counts[counts > 1]
-    counts = counts / float(counts.max())
-
-    fname = os.path.splitext(os.path.basename(sources[0]))[0]+"_.png"
-    make_wordcloud(words, counts, font_path, width=800, height=600,
-                   fname=fname)
+    if len(counts) > 0:
+        output_filename = os.path.splitext(os.path.basename(sources[0]))[0] + "_.png"
+        counts = normalise_make_wordcloud(words, counts, output_filename)
+    else:
+        print "We need at least 1 word to plot a word cloud, we have {}.".format(len(counts))
