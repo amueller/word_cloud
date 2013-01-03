@@ -12,3 +12,6 @@ Build using ``make`` or ``python setup.py build_ext -i``.
 
 See my blog for some details:
 http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
+
+For the blog post I removed the word ``shall`` from the constitution word count
+which is not in the scikit-learn stopword list.
