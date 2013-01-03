@@ -3,12 +3,13 @@
 #
 # License: MIT
 
-import Image
-import ImageDraw
-import ImageFont
-import numpy as np
 import random
-from sklearn.feature_extraction.text import CountVectorizer
+
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+
+import numpy as np
 from query_integral_image import query_integral_image
 
 FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
@@ -150,6 +151,7 @@ if __name__ == "__main__":
 
     import os
     import sys
+    from sklearn.feature_extraction.text import CountVectorizer
 
     sources = ([arg for arg in sys.argv[1:] if os.path.exists(arg)]
                or ["constitution.txt"])
