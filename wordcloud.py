@@ -4,7 +4,6 @@
 # License: MIT
 
 import random
-import re
 
 from PIL import Image
 from PIL import ImageDraw
