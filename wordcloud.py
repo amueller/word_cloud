@@ -4,6 +4,7 @@
 # License: MIT
 
 import random
+import re
 
 from PIL import Image
 from PIL import ImageDraw
@@ -153,12 +154,16 @@ if __name__ == "__main__":
     import sys
     from sklearn.feature_extraction.text import CountVectorizer
 
-    sources = ([arg for arg in sys.argv[1:] if os.path.exists(arg)]
-               or ["constitution.txt"])
-    lines = []
-    for s in sources:
-        with open(s) as f:
-            lines.extend(f.readlines())
+    if "-" in sys.argv:
+        lines = sys.stdin.readlines()
+        sources = ['stdin']
+    else:
+        sources = ([arg for arg in sys.argv[1:] if os.path.exists(arg)]
+                   or ["constitution.txt"])
+        lines = []
+        for s in sources:
+            with open(s) as f:
+                lines.extend(f.readlines())
     text = "".join(lines)
 
     cv = CountVectorizer(min_df=1, charset_error="ignore",
