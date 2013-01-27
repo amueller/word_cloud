@@ -29,7 +29,7 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
         the final image.
         Will be normalized to lie between zero and one.
 
-    font_path : sting
+    font_path : string
         Font path to the font that will be used.
         Defaults to DroidSansMono path.
 
