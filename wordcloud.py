@@ -16,7 +16,7 @@ FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 
 
 def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
-                   margin=5):
+                   margin=5, ranks_only=False):
     """Build word cloud using word counts, store in image.
 
     Parameters
@@ -42,6 +42,9 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
 
     height : int (default=200)
         Height of the word cloud image.
+
+    ranks_only : boolean (default=False)
+        Only use the rank of the words, not the actual counts.
 
     Notes
     -----
@@ -83,7 +86,8 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
     # start drawing grey image
     for word, count in zip(words, counts):
         # alternative way to set the font size
-        #font_size = min(font_size, int(100 * np.log(count + 100)))
+        if not ranks_only:
+            font_size = min(font_size, int(100 * np.log(count + 100)))
         while True:
             # try to find a position
             font = ImageFont.truetype(font_path, font_size)
