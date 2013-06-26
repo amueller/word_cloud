@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Author: Andreas Christian Mueller <amueller@ais.uni-bonn.de>
 # (c) 2012
 #
