@@ -1,0 +1,5 @@
+Cython==0.19.1
+Pillow==2.1.0
+numpy==1.7.1
+scikit-learn==0.13.1
+scipy==0.12.0
