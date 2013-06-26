@@ -13,7 +13,7 @@ from PIL import ImageFont
 import numpy as np
 from query_integral_image import query_integral_image
 
-FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
+FONT_PATH = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
 
 
 def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
@@ -90,8 +90,13 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
         if not ranks_only:
             font_size = min(font_size, int(100 * np.log(count + 100)))
         while True:
-            # try to find a position
-            font = ImageFont.truetype(font_path, font_size)
+            try:
+                # try to find a position
+                font = ImageFont.truetype(font_path, font_size)
+            except IOError:
+                fontfile = FONT_PATH.rsplit('/', 1)[-1]
+                raise IOError("Font '%s' not found. Please change 'FONT_PATH' "
+                              "to a valid font file path." % fontfile)
             # transpose font optionally
             orientation = random.choice([None, Image.ROTATE_90])
             transposed_font = ImageFont.TransposedFont(font,
@@ -153,30 +158,60 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
 
 
 if __name__ == "__main__":
-
+    import argparse
     import os
     import sys
     from sklearn.feature_extraction.text import CountVectorizer
 
-    if "-" in sys.argv:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input', nargs='*',
+                        help='Source of word data. Can specify either one or '
+                        'more filenames or "-" for stdin.')
+    parser.add_argument('--stopwords', '-s', dest='stopwords',
+                        help='Path to file containing one stopword per line. '
+                        'If not specified, use SciKit-Learn "english" stopword'
+                        'dictionary.')
+    parser.add_argument('--fontfile', '-f', dest='font_path',
+                        help='Path to font file you wish to use. This will '
+                        'override the "FONT_PATH" constant.')
+    parser.add_argument('--output-name', '-o', dest='output',
+                        help='Desired name of PNG output.')
+    parser.add_argument('--skip-missing', '-k', dest='skip',
+                        help='Skip any files specified that could not be found,'
+                        ' and process with task.', action='store_true')
+    args = parser.parse_args()
+    stopwords = 'english'
+
+    if args.stopwords:
+        with open(args.stopwords, "rU") as f:
+            stopwords = [i.strip() for i in f.readlines()]
+
+    if "-" in args.input:
         lines = sys.stdin.readlines()
         sources = ['stdin']
     else:
-        sources = ([arg for arg in sys.argv[1:] if os.path.exists(arg)]
-                   or ["constitution.txt"])
         lines = []
+        sources = args.input or ['constitution.txt']
         for s in sources:
-            with open(s) as f:
-                lines.extend(f.readlines())
-    text = "".join(lines)
+            try:
+                with open(s) as f:
+                    lines.extend(f.readlines())
+            except IOError, e:
+                if args.skip:
+                    print >> sys.stderr, "File '%s' missing. Proceeding..." % s
+                    continue
+                else:
+                    raise IOError(e)
 
+    text = "".join(lines)
     cv = CountVectorizer(min_df=1, charset_error="ignore",
-                         stop_words="english", max_features=200)
+                         stop_words=stopwords, max_features=200)
     counts = cv.fit_transform([text]).toarray().ravel()
     words = np.array(cv.get_feature_names())
     # throw away some words, normalize
     words = words[counts > 1]
     counts = counts[counts > 1]
-    output_filename = (os.path.splitext(os.path.basename(sources[0]))[0]
-                       + "_.png")
-    counts = make_wordcloud(words, counts, output_filename)
+    output_filename = (args.output or '%s_.png' %
+                       (os.path.splitext(os.path.basename(sources[0]))[0]))
+    counts = make_wordcloud(words, counts, output_filename,
+                            font_path=args.font_path)
