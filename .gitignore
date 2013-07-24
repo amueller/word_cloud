@@ -3,3 +3,4 @@ query_integral_image.c
 query_integral_image.so
 *.pyc
 *~
+*.png
