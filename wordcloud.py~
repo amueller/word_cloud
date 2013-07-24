@@ -16,8 +16,7 @@ from PIL import ImageFont
 from query_integral_image import query_integral_image
 
 FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
-STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
-        'stopwords')).read().split('\n')])
+STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__), 'stopwords')).read().split('\n')])
 
 def fit_words(words, counts, font_path=None, width=400, height=200,
                    margin=5, ranks_only=False):
