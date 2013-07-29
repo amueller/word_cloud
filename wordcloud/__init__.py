@@ -20,7 +20,7 @@ STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
         'stopwords')).read().split('\n')])
 
 def fit_words(words, counts, font_path=None, width=400, height=200,
-                   margin=5, ranks_only=False):
+                   margin=5, ranks_only=False, prefer_horiz=0.90):
     """Build word cloud using word counts.
 
     Parameters
@@ -45,6 +45,9 @@ def fit_words(words, counts, font_path=None, width=400, height=200,
 
     ranks_only : boolean (default=False)
         Only use the rank of the words, not the actual counts.
+
+    prefer_horiz : float (default=0.90)
+        The ratio of times to try horizontal fitting as opposed to vertical.
 
     Notes
     -----
@@ -93,7 +96,10 @@ def fit_words(words, counts, font_path=None, width=400, height=200,
             # try to find a position
             font = ImageFont.truetype(font_path, font_size)
             # transpose font optionally
-            orientation = random.choice([None, Image.ROTATE_90])
+            if random.random() < prefer_horiz:
+                orientation = None
+            else:
+                orientation = Image.ROTATE_90
             transposed_font = ImageFont.TransposedFont(font,
                                                        orientation=orientation)
             draw.setfont(transposed_font)
