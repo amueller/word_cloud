@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Author: Andreas Christian Mueller <amueller@ais.uni-bonn.de>
 # (c) 2012
 #
@@ -12,11 +13,11 @@ from PIL import ImageFont
 import numpy as np
 from query_integral_image import query_integral_image
 
-FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
+FONT_PATH = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
 
 
-def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
-                   margin=5, ranks_only=False):
+def make_wordcloud(words, counts, fname, width, height, font_path=None,
+                   margin=5, ranks_only=False, prefer_horiz=0.9):
     """Build word cloud using word counts, store in image.
 
     Parameters
@@ -29,22 +30,25 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
         the final image.
         Will be normalized to lie between zero and one.
 
+    fname : sting
+        Output filename. Extension determines image type
+        (written with PIL).
+
+    width : int
+        Width of the word cloud image.
+
+    height : int
+        Height of the word cloud image.
+
     font_path : string
         Font path to the font that will be used.
         Defaults to DroidSansMono path.
 
-    fname : sting
-        Output filename. Extension determins image type
-        (written with PIL).
-
-    width : int (default=400)
-        Width of the word cloud image.
-
-    height : int (default=200)
-        Height of the word cloud image.
-
     ranks_only : boolean (default=False)
         Only use the rank of the words, not the actual counts.
+
+    prefer_horiz : float (default=0.90)
+        The ratio of times to try horizontal fitting as opposed to vertical.
 
     Notes
     -----
@@ -54,16 +58,16 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
 
     In the current form it actually just uses the rank of the counts,
     i.e. the relative differences don't matter.
-    Play with setting the font_size in the main loop vor differnt styles.
+    Play with setting the font_size in the main loop for different styles.
 
     Colors are used completely at random. Currently the colors are sampled
     from HSV space with a fixed S and V.
-    Adjusting the percentages at the very end gives differnt color ranges.
+    Adjusting the percentages at the very end gives different color ranges.
     Obviously you can also set all at random - haven't tried that.
 
     """
     if len(counts) <= 0:
-        print("We need at least 1 word to plot a word cloud, got %d."
+        print("We need at least one word to plot a word cloud, got %d."
               % len(counts))
 
     if font_path is None:
@@ -89,10 +93,18 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
         if not ranks_only:
             font_size = min(font_size, int(100 * np.log(count + 100)))
         while True:
-            # try to find a position
-            font = ImageFont.truetype(font_path, font_size)
+            try:
+                # try to find a position
+                font = ImageFont.truetype(font_path, font_size)
+            except IOError:
+                fontfile = FONT_PATH.rsplit('/', 1)[-1]
+                raise IOError("Font '%s' not found. Please change 'FONT_PATH' "
+                              "to a valid font file path." % fontfile)
             # transpose font optionally
-            orientation = random.choice([None, Image.ROTATE_90])
+            if random.random() < prefer_horiz:
+                orientation = None
+            else:
+                orientation = Image.ROTATE_90
             transposed_font = ImageFont.TransposedFont(font,
                                                        orientation=orientation)
             draw.setfont(transposed_font)
@@ -152,30 +164,71 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
 
 
 if __name__ == "__main__":
-
+    import argparse
     import os
     import sys
     from sklearn.feature_extraction.text import CountVectorizer
 
-    if "-" in sys.argv:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input', nargs='*',
+                        help='Source of word data. Can specify either one or '
+                        'more filenames or "-" for stdin.')
+    parser.add_argument('--skip-missing', '-k', dest='skip',
+                        help='Skip any files specified that could not be found,'
+                        ' and process with task.', action='store_true')
+    parser.add_argument('--stopwords', '-s', dest='stopwords',
+                        help='Path to file containing one stopword per line '
+                        'or None if no stopwords should be used. '
+                        'If not specified, use SciKit-Learn "english" stopword '
+                        'dictionary.')
+    parser.add_argument('--fontfile', '-f', dest='font_path',
+                        help='Path to font file you wish to use. This will '
+                        'override the "FONT_PATH" constant.')
+    parser.add_argument('--output-name', '-o', dest='output',
+                        help='Desired name of PNG output.')
+    parser.add_argument('--width', '-W', default=400, type=int,
+                        help='Output image width.')
+    parser.add_argument('--height', '-H', default=200, type=int,
+                        help='Output image height.')
+    args = parser.parse_args()
+    stopwords = 'english'
+
+    if args.stopwords:
+        if args.stopwords == "None":
+            args.stopwords = None
+        else:
+            with open(args.stopwords, "rU") as f:
+                stopwords = [i.strip() for i in f.readlines()]
+
+    if "-" in args.input:
         lines = sys.stdin.readlines()
         sources = ['stdin']
     else:
-        sources = ([arg for arg in sys.argv[1:] if os.path.exists(arg)]
-                   or ["constitution.txt"])
         lines = []
+        sources = args.input or ['constitution.txt']
         for s in sources:
-            with open(s) as f:
-                lines.extend(f.readlines())
-    text = "".join(lines)
+            try:
+                with open(s) as f:
+                    lines.extend(f.readlines())
+            except IOError, e:
+                if args.skip:
+                    print >> sys.stderr, "File '%s' missing. Proceeding..." % s
+                    continue
+                else:
+                    raise IOError(e)
 
-    cv = CountVectorizer(min_df=1, charset_error="ignore",
-                         stop_words="english", max_features=200)
+    text = "".join(lines)
+    cv = CountVectorizer(min_df=1, decode_error="ignore",
+                         stop_words=stopwords, max_features=None)
     counts = cv.fit_transform([text]).toarray().ravel()
     words = np.array(cv.get_feature_names())
     # throw away some words, normalize
     words = words[counts > 1]
     counts = counts[counts > 1]
-    output_filename = (os.path.splitext(os.path.basename(sources[0]))[0]
-                       + "_.png")
-    counts = make_wordcloud(words, counts, output_filename)
+    output_filename = (args.output or '%s_.png' %
+                       (os.path.splitext(os.path.basename(sources[0]))[0]))
+    counts = make_wordcloud(words, counts, output_filename,
+                            font_path=args.font_path, 
+                            width=args.width, height=args.height)
+
+# End of file
