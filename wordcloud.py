@@ -69,6 +69,9 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
     if font_path is None:
         font_path = FONT_PATH
 
+    if not os.path.exists(font_path):
+        raise ValueError("The provided font %s does not exist." % font_path)
+
     # normalize counts
     counts = counts / float(counts.max())
     # sort words by counts
