@@ -7,6 +7,10 @@ extendable and installable as a package.
 
 Install it by running:
 
+    pip install Cython
+    pip install numpy
+    pip install PIL
+
     wget https://github.com/paul-nechifor/word_cloud/archive/master.zip
     unzip master.zip
     cd word_cloud-master
