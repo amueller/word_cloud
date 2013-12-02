@@ -175,18 +175,32 @@ def process_text(text, max_features=200, stopwords=STOPWORDS):
     d = {}
     
     for word in re.findall(r"\w[\w']*", text):
-        word = word.lower()
-        if word in stopwords:
+        word_lower = word.lower()
+        if word_lower in stopwords:
             continue
-        if d.has_key(word):
-            d[word] += 1
+        # Look in all lowercase dict.
+        if d.has_key(word_lower):
+            d2 = d[word_lower]
         else:
-            d[word] = 1
-            
-    sd = sorted(d.iteritems(), key=lambda x: x[1], reverse=True)
+            d2 = {}
+            d[word_lower] = d2
+
+        # Look in any case dict.
+        if d2.has_key(word):
+            d2[word] += 1
+        else:
+            d2[word] = 1
+
+    d3 = {}
+    for dv in d.values():
+        # Get the most popular case.
+        first = sorted(dv.iteritems(), key=lambda x: x[1], reverse=True)[0][0]
+        d3[first] = sum(dv.values())
+
+    sd = sorted(d3.iteritems(), key=lambda x: x[1], reverse=True)
     sd = sd[:max_features]
     
-    maximum = float(max(d.values()))
+    maximum = float(max(d3.values()))
     
     words = []
     counts = []
