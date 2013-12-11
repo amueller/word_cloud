@@ -6,16 +6,23 @@ post][blog-post].
 
 ## Installation
 
-Get this package:
+Fast install:
+
+    sudo pip install git+git://github.com/paul-nechifor/word_cloud.git
+
+Otherwise, get this package:
     
     wget https://github.com/paul-nechifor/word_cloud/archive/master.zip
     unzip master.zip
     rm master.zip
     cd word_cloud-master
 
-Install it:
+Install the requirements:
 
     sudo pip install -r requirements.txt
+
+Install the package:
+
     sudo python setup.py install
 
 ## Examples
