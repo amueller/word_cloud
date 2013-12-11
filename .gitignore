@@ -1,6 +1,8 @@
 build
-wordcloud/query_integral_image.c
-wordcloud/query_integral_image.so
+/wordcloud/query_integral_image.c
+/wordcloud/query_integral_image.so
 *.pyc
 *~
 *.png
+!/examples/constitution.png
+!/examples/alice.png

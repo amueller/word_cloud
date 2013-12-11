@@ -1,6 +1,6 @@
 # Author: Andreas Christian Mueller <amueller@ais.uni-bonn.de>
 # (c) 2012
-# Author: Paul Nechifor <paul@nechifor.net>
+# Modified by: Paul Nechifor <paul@nechifor.net>
 #
 # License: MIT
 
@@ -19,29 +19,24 @@ FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
         'stopwords')).read().split('\n')])
 
-def fit_words(words, counts, font_path=None, width=400, height=200,
+def fit_words(words, font_path=None, width=400, height=200,
                    margin=5, ranks_only=False, prefer_horiz=0.90):
-    """Build word cloud using word counts.
+    """Generate the positions for words.
 
     Parameters
     ----------
-    words : numpy array of strings
-        Words that will be drawn in the image.
-
-    counts : numpy array of word counts
-        Word counts or weighting of words. Determines the size of the word in
-        the final image.
-        Will be normalized to lie between zero and one.
-
+    words : array of tuples
+        A tuple contains the word and its frequency.
+    
     font_path : string
-        Font path to the font that will be used.
-        Defaults to DroidSansMono path.
+        Font path to the font that will be used (OTF or TTF).
+        Defaults to DroidSansMono path, but you might not have it.
 
     width : int (default=400)
-        Width of the word cloud image.
+        Width of the canvas.
 
     height : int (default=200)
-        Height of the word cloud image.
+        Height of the canvas.
 
     ranks_only : boolean (default=False)
         Only use the rank of the words, not the actual counts.
@@ -51,33 +46,24 @@ def fit_words(words, counts, font_path=None, width=400, height=200,
 
     Notes
     -----
-    Larger Images with make the code significantly slower.
-    If you need a large image, you can try running the algorithm at a lower
-    resolution and then drawing the result at the desired resolution.
-
-    In the current form it actually just uses the rank of the counts,
-    i.e. the relative differences don't matter.
-    Play with setting the font_size in the main loop vor differnt styles.
-
-    Colors are used completely at random. Currently the colors are sampled
-    from HSV space with a fixed S and V.
-    Adjusting the percentages at the very end gives differnt color ranges.
-    Obviously you can also set all at random - haven't tried that.
-
+    Larger canvases with make the code significantly slower. If you need a large
+    word cloud, run this function with a lower canvas size, and draw it with a
+    larger scale.
+    
+    In the current form it actually just uses the rank of the counts, i.e. the
+    relative differences don't matter. Play with setting the font_size in the
+    main loop for different styles.
     """
-    if len(counts) <= 0:
+    
+    if len(words) <= 0:
         print("We need at least 1 word to plot a word cloud, got %d."
-              % len(counts))
+                % len(words))
 
     if font_path is None:
         font_path = FONT_PATH
 
-    # normalize counts
-    #counts = counts / float(max(counts))
-    # sort words by counts
-    #inds = np.argsort(counts)[::-1]
-    #counts = counts[inds]
-    #words = words[inds]
+    if not os.path.exists(font_path):
+        raise ValueError("The font %s does not exist." % font_path)
     
     # create image
     img_grey = Image.new("L", (width, height))
@@ -85,10 +71,12 @@ def fit_words(words, counts, font_path=None, width=400, height=200,
     integral = np.zeros((height, width), dtype=np.uint32)
     img_array = np.asarray(img_grey)
     font_sizes, positions, orientations = [], [], []
+    
     # intitiallize font size "large enough"
-    font_size = 1000
+    font_size = height
+    
     # start drawing grey image
-    for word, count in zip(words, counts):
+    for word, count in words:
         # alternative way to set the font size
         if not ranks_only:
             font_size = min(font_size, int(100 * np.log(count + 100)))
@@ -155,7 +143,7 @@ def draw(elements, file_name, font_path=None, width=400, height=200, scale=1,
         
     img = Image.new("RGB", (width * scale, height * scale))
     draw = ImageDraw.Draw(img)
-    for word, font_size, position, orientation in elements:
+    for (word, count), font_size, position, orientation in elements:
         font = ImageFont.truetype(font_path, font_size * scale)
         transposed_font = ImageFont.TransposedFont(font,
                                                    orientation=orientation)
@@ -165,20 +153,37 @@ def draw(elements, file_name, font_path=None, width=400, height=200, scale=1,
         draw.text(pos, word, fill=color)
     img.save(file_name)
 
-def process_text(text, max_features=200, stopwords=STOPWORDS):
+def process_text(text, max_features=200, stopwords=None):
     """Splits a long text into words, eliminates the stopwords and returns
     (words, counts) which is necessary for make_wordcloud().
+
+    Parameters
+    ----------
+    text : string
+        The text to be processed.
+    
+    max_features : number (default=200)
+        The maximum number of words.
+        
+    stopwords : set of strings
+        The words that will be eliminated.
+        
+    Notes
+    -----
+    There are better ways to do word tokenization, but I don't want to include
+    all those things.
     """
-    # there are better ways to do this, but I don't want to include all those
-    # things
+    
+    if stopwords is None:
+        stopwords = STOPWORDS
     
     d = {}
-    
     for word in re.findall(r"\w[\w']*", text):
         word_lower = word.lower()
         if word_lower in stopwords:
             continue
-        # Look in all lowercase dict.
+
+        # Look in lowercase dict.
         if d.has_key(word_lower):
             d2 = d[word_lower]
         else:
@@ -192,21 +197,15 @@ def process_text(text, max_features=200, stopwords=STOPWORDS):
             d2[word] = 1
 
     d3 = {}
-    for dv in d.values():
+    for d2 in d.values():
         # Get the most popular case.
-        first = sorted(dv.iteritems(), key=lambda x: x[1], reverse=True)[0][0]
-        d3[first] = sum(dv.values())
+        first = sorted(d2.iteritems(), key=lambda x: x[1], reverse=True)[0][0]
+        d3[first] = sum(d2.values())
 
-    sd = sorted(d3.iteritems(), key=lambda x: x[1], reverse=True)
-    sd = sd[:max_features]
-    
+    words = sorted(d3.iteritems(), key=lambda x: x[1], reverse=True)
+    words = words[:max_features]
     maximum = float(max(d3.values()))
+    for i, (word, count) in enumerate(words):
+        words[i] = word, count/maximum
     
-    words = []
-    counts = []
-    
-    for word, count in sd:
-        words.append(word)
-        counts.append(count / maximum)
-    
-    return words, counts
+    return words

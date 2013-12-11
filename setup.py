@@ -1,10 +1,13 @@
+import os
 from distutils.core import setup
 from Cython.Build import cythonize
 
 setup(
     name='wordcloud',
-    ext_modules=cythonize('wordcloud/query_integral_image.pyx'),
+    version='1.0.0',
     url='https://github.com/paul-nechifor/word_cloud',
+    license='MIT',
+    ext_modules=cythonize('wordcloud/query_integral_image.pyx'),
     packages=['wordcloud'],
     package_data={'wordcloud': ['stopwords']}
 )
