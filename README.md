@@ -16,7 +16,7 @@ Get this package:
 Install it:
 
     sudo pip install -r requirements.txt
-    sudo python setup
+    sudo python setup.py install
 
 ## Examples
 
@@ -27,7 +27,9 @@ Check out [examples/simple.py][simple] for a short intro. A sample output is:
 
 ![Constitution](examples/constitution.png)
 
-Or run [examples/more.py][more] to see more options.
+Or run [examples/more.py][more] to see more options. A sample output is:
+
+![Alice in Wonderland](examples/alice.png)
 
 ## Used in
 
@@ -39,7 +41,7 @@ comments in submissions and user histories. You can see it being operated on
 
 ![A Reddit Cloud sample](http://i.imgur.com/tcbZnKW.png)
 
-### <other>
+### [other]
 
 *Send a pull request to add yours here.*
 
@@ -50,7 +52,7 @@ not iterable` problem][intprob] also showcased on the blog.
 
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [simple]: examples/simple.py
-[simple]: examples/more.py
+[more]: examples/more.py
 [reddit-cloud]: https://github.com/paul-nechifor/reddit-cloud
 [wc2]: http://www.reddit.com/user/WordCloudBot2
 [wc2top]: http://www.reddit.com/user/WordCloudBot2/?sort=top
