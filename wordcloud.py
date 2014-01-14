@@ -4,6 +4,7 @@
 # License: MIT
 
 import random
+import os
 
 from PIL import Image
 from PIL import ImageDraw
@@ -156,7 +157,6 @@ def make_wordcloud(words, counts, fname, font_path=None, width=400, height=200,
 
 if __name__ == "__main__":
 
-    import os
     import sys
     from sklearn.feature_extraction.text import CountVectorizer
 
