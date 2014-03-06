@@ -8,11 +8,11 @@ post][blog-post].
 
 Fast install:
 
-    sudo pip install git+git://github.com/paul-nechifor/word_cloud.git
+    sudo pip install git+git://github.com/amueller/word_cloud.git
 
 Otherwise, get this package:
     
-    wget https://github.com/paul-nechifor/word_cloud/archive/master.zip
+    wget https://github.com/amueller/word_cloud/archive/master.zip
     unzip master.zip
     rm master.zip
     cd word_cloud-master
@@ -60,7 +60,7 @@ not iterable` problem][intprob] also showcased on the blog.
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [simple]: examples/simple.py
 [more]: examples/more.py
-[reddit-cloud]: https://github.com/paul-nechifor/reddit-cloud
+[reddit-cloud]: https://github.com/amueller/reddit-cloud
 [wc2]: http://www.reddit.com/user/WordCloudBot2
 [wc2top]: http://www.reddit.com/user/WordCloudBot2/?sort=top
 [intprob]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html#bc_0_28B
