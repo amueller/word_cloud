@@ -13,7 +13,13 @@ import numpy as np
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-from query_integral_image import query_integral_image
+
+try:
+    from query_integral_image import query_integral_image
+except:
+    from util import pythonizing_cython
+    pythonizing_cython('query_integral_image')
+    from query_integral_image import query_integral_image
 
 FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
