@@ -3,7 +3,7 @@ def pythonizing_cython(pyxfile):
     A wrapper method to convert cython's .pyx files into .so files,
     such that it is import-able without relying on setup.py
     """
-    import os
+    import os, shutil
     # Creates ssetup_pyx.py file.
     setup_py = "\n".join(["from distutils.core import setup",
                           "from Cython.Build import cythonize",
@@ -29,3 +29,7 @@ def pythonizing_cython(pyxfile):
     # Removing temporary .c and setup_pyx.py files.
     os.remove('setup_pyx.py')
     os.remove(pyxfile+'.c')
+    shutil.rmtree('./build')
+    # This is a strange thing that was created while compiling the .pyx ...
+    shutil.rmtree('./'+os.path.dirname(\
+                    os.path.abspath(__file__)).rpartition('/')[2]) 
