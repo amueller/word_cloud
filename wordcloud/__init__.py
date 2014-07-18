@@ -179,6 +179,9 @@ def process_text(text, max_features=200, stopwords=None):
     
     d = {}
     for word in re.findall(r"\w[\w']*", text):
+        if word.isdigit():
+            continue
+
         word_lower = word.lower()
         if word_lower in stopwords:
             continue
