@@ -178,7 +178,7 @@ def process_text(text, max_features=200, stopwords=None):
         stopwords = STOPWORDS
     
     d = {}
-    for word in re.findall(r"\w[\w']*", text):
+    for word in re.findall(r"\w[\w']*", text, flags=re.UNICODE):
         if word.isdigit():
             continue
 
