@@ -205,6 +205,16 @@ def process_text(text, max_features=200, stopwords=None):
         first = sorted(d2.iteritems(), key=lambda x: x[1], reverse=True)[0][0]
         d3[first] = sum(d2.values())
 
+    # merge plurals into the singular count (simple cases only)
+    keys = set(d3.keys())
+    for key, val in d3.items():
+        if key.endswith('s'):
+            key_singular = key[:-1]
+            if key_singular in d3:
+                val_singular = d3[key_singular]
+                d3[key_singular] = val_singular + val
+                del d3[key]
+
     words = sorted(d3.iteritems(), key=lambda x: x[1], reverse=True)
     words = words[:max_features]
     maximum = float(max(d3.values()))
