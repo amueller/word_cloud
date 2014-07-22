@@ -181,7 +181,8 @@ def process_text(text, max_features=200, stopwords=None):
         stopwords = STOPWORDS
     
     d = {}
-    for word in re.findall(r"\w[\w']*", text, flags=re.UNICODE):
+    flags = re.UNICODE if type(text) is unicode else 0
+    for word in re.findall(r"\w[\w']*", text, flags=flags):
         if word.isdigit():
             continue
 
