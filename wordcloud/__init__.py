@@ -9,11 +9,14 @@ import os
 import sys
 import re
 import numpy as np
+from operator import itemgetter
 
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 from query_integral_image import query_integral_image
+
+item1 = itemgetter(1)
 
 FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
@@ -133,7 +136,7 @@ def fit_words(words, font_path=None, width=400, height=200,
     return zip(words, font_sizes, positions, orientations)
 
 def random_color_func(word, font_size, position, orientation):
-    return "hsl(%d" % random.randint(0, 255) + ", 80%, 50%)"
+    return "hsl(%d, 80%%, 50%%)" % random.randint(0, 255)
 
 def draw(elements, file_name, font_path=None, width=400, height=200, scale=1,
         color_func=random_color_func):
@@ -178,7 +181,8 @@ def process_text(text, max_features=200, stopwords=None):
         stopwords = STOPWORDS
     
     d = {}
-    for word in re.findall(r"\w[\w']*", text, flags=re.UNICODE):
+    flags = re.UNICODE if type(text) is unicode else 0
+    for word in re.findall(r"\w[\w']*", text, flags=flags):
         if word.isdigit():
             continue
 
@@ -187,38 +191,35 @@ def process_text(text, max_features=200, stopwords=None):
             continue
 
         # Look in lowercase dict.
-        if d.has_key(word_lower):
+        if word_lower in d:
             d2 = d[word_lower]
         else:
             d2 = {}
             d[word_lower] = d2
 
         # Look in any case dict.
-        if d2.has_key(word):
-            d2[word] += 1
-        else:
-            d2[word] = 1
+        d2[word] = d2.get(word, 0) + 1
 
     d3 = {}
     for d2 in d.values():
         # Get the most popular case.
-        first = sorted(d2.iteritems(), key=lambda x: x[1], reverse=True)[0][0]
+        first = max(d2.iteritems(), key=item1)[0]
         d3[first] = sum(d2.values())
 
     # merge plurals into the singular count (simple cases only)
-    keys = set(d3.keys())
-    for key, val in d3.items():
+    for key in d3.keys():
         if key.endswith('s'):
             key_singular = key[:-1]
             if key_singular in d3:
+                val_plural = d3[key]
                 val_singular = d3[key_singular]
-                d3[key_singular] = val_singular + val
+                d3[key_singular] = val_singular + val_plural
                 del d3[key]
 
-    words = sorted(d3.iteritems(), key=lambda x: x[1], reverse=True)
+    words = sorted(d3.iteritems(), key=item1, reverse=True)
     words = words[:max_features]
     maximum = float(max(d3.values()))
     for i, (word, count) in enumerate(words):
         words[i] = word, count/maximum
-    
+
     return words
