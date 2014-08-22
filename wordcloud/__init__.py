@@ -139,12 +139,13 @@ def random_color_func(word, font_size, position, orientation):
     return "hsl(%d, 80%%, 50%%)" % random.randint(0, 255)
 
 def draw(elements, file_name, font_path=None, width=400, height=200, scale=1,
-        color_func=random_color_func):
+        color_func=random_color_func, bg_color=(0, 0, 0)):
         
     if font_path is None:
         font_path = FONT_PATH
         
-    img = Image.new("RGB", (width * scale, height * scale))
+    img = Image.new("RGB", (width * scale, height * scale),
+                    color=bg_color)
     draw = ImageDraw.Draw(img)
     for (word, count), font_size, position, orientation in elements:
         font = ImageFont.truetype(font_path, font_size * scale)
