@@ -6,7 +6,6 @@
 
 import random
 import os
-import sys
 import re
 import numpy as np
 from operator import itemgetter
@@ -23,7 +22,7 @@ STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
         'stopwords')).read().split('\n')])
 
 def fit_words(words, font_path=None, width=400, height=200,
-                   margin=5, ranks_only=False, prefer_horiz=0.90):
+                   margin=5, ranks_only=False, prefer_horiz=0.90, mask=None):
     """Generate the positions for words.
 
     Parameters
@@ -67,11 +66,18 @@ def fit_words(words, font_path=None, width=400, height=200,
 
     if not os.path.exists(font_path):
         raise ValueError("The font %s does not exist." % font_path)
-    
+
+    if mask is not None:  
+        width = mask.shape[1]
+        height = mask.shape[0]
+        # the order of the cumsum's is important for speed ?!
+        integral = np.cumsum(np.cumsum(mask, axis=1), axis=0).astype(np.uint32)
+    else:
+        integral = np.zeros((height, width), dtype=np.uint32)
+
     # create image
     img_grey = Image.new("L", (width, height))
     draw = ImageDraw.Draw(img_grey)
-    integral = np.zeros((height, width), dtype=np.uint32)
     img_array = np.asarray(img_grey)
     font_sizes, positions, orientations = [], [], []
     
@@ -115,7 +121,7 @@ def fit_words(words, font_path=None, width=400, height=200,
         orientations.append(orientation)
         font_sizes.append(font_size)
         # recompute integral image
-        img_array = np.asarray(img_grey)
+        img_array = np.asarray(img_grey) + mask
         # recompute bottom right
         # the order of the cumsum's is important for speed ?!
         partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
