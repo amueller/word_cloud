@@ -46,7 +46,7 @@ class WordCloud(object):
     ranks_only : boolean (default=False)
         Only use the rank of the words, not the actual counts.
 
-    prefer_horiz : float (default=0.90)
+    prefer_horizontal : float (default=0.90)
         The ratio of times to try horizontal fitting as opposed to vertical.
 
     mask : nd-array or None (default=None)
@@ -54,7 +54,7 @@ class WordCloud(object):
         width and height will be ignored and the shape of mask will be used
         instead.
 
-    max_features : number (default=200)
+    max_words : number (default=200)
         The maximum number of words.
 
     stopwords : set of strings
@@ -71,8 +71,8 @@ class WordCloud(object):
     """
 
     def __init__(self, font_path=None, width=400, height=200, margin=5,
-                 rank_only=False, prefer_horizontal=0.9, mask=None, scale=1,
-                 color_func=random_color_func, max_features=200, stopwords=None):
+                 ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
+                 color_func=random_color_func, max_words=200, stopwords=None):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -81,13 +81,13 @@ class WordCloud(object):
         self.width = width
         self.height = height
         self.margin = margin
-        self.rank_only = rank_only
+        self.ranks_only = ranks_only
         self.prefer_horizontal = prefer_horizontal
         self.mask = mask
         self.scale = scale
         self.color_func = color_func
-        self.max_features = max_features
-        self.stopword = stopwords
+        self.max_words = max_words
+        self.stopwords = stopwords
 
     def fit_words(self, words):
         """Generate the positions for words.
@@ -124,6 +124,7 @@ class WordCloud(object):
             # the order of the cumsum's is important for speed ?!
             integral = np.cumsum(np.cumsum(self.mask, axis=1), axis=0).astype(np.uint32)
         else:
+            height, width = self.height, self.width
             integral = np.zeros((height, width), dtype=np.uint32)
 
         # create image
@@ -144,7 +145,7 @@ class WordCloud(object):
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
                 # transpose font optionally
-                if random.random() < self.prefer_horiz:
+                if random.random() < self.prefer_horizontal:
                     orientation = None
                 else:
                     orientation = Image.ROTATE_90
@@ -173,7 +174,10 @@ class WordCloud(object):
             font_sizes.append(font_size)
             colors.append(self.color_func(word, font_size, (x, y), orientation))
             # recompute integral image
-            img_array = np.asarray(img_grey) + self.mask
+            if self.mask is None:
+                img_array = np.asarray(img_grey)
+            else:
+                img_array = np.asarray(img_grey) + self.mask
             # recompute bottom right
             # the order of the cumsum's is important for speed ?!
             partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
@@ -251,7 +255,7 @@ class WordCloud(object):
                     del d3[key]
 
         words = sorted(d3.iteritems(), key=item1, reverse=True)
-        words = words[:self.max_features]
+        words = words[:self.max_words]
         maximum = float(max(d3.values()))
         for i, (word, count) in enumerate(words):
             words[i] = word, count / maximum
@@ -336,9 +340,9 @@ class WordCloud(object):
         image : nd-array size (width, height, 3)
             Word cloud image as numpy matrix.
         """
-        return np.array(self.to_image)
+        return np.array(self.to_image())
 
-    def __asarray__(self):
+    def __array__(self):
         """Convert to numpy array.
 
         Returns
@@ -346,7 +350,7 @@ class WordCloud(object):
         image : nd-array size (width, height, 3)
             Word cloud image as numpy matrix.
         """
-        return self.toarray()
+        return self.to_array()
 
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
