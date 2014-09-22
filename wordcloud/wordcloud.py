@@ -64,6 +64,10 @@ class WordCloud(object):
     background_color : color value (default="black")
         Background color for the word cloud image.
 
+    max_font_size : int or None (default=None)
+        Maximum font size for the largest word. If None, height of the image is
+        used.
+
     Attributes
     ----------
     words_ : list of tuples (string, float)
@@ -77,7 +81,7 @@ class WordCloud(object):
     def __init__(self, font_path=None, width=400, height=200, margin=5,
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, stopwords=None,
-                 random_state=None, background_color='black'):
+                 random_state=None, background_color='black', max_font_size=None):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -97,6 +101,9 @@ class WordCloud(object):
             random_state = Random(random_state)
         self.random_state = random_state
         self.background_color = background_color
+        if max_font_size is None:
+            max_font_size = height
+        self.max_font_size = max_font_size
 
     def _fit_words(self, words):
         """Generate the positions for words.
@@ -146,8 +153,7 @@ class WordCloud(object):
         img_array = np.asarray(img_grey)
         font_sizes, positions, orientations, colors = [], [], [], []
 
-        # intitiallize font size "large enough"
-        font_size = height
+        font_size = self.max_font_size
 
         # start drawing grey image
         for word, count in words:
