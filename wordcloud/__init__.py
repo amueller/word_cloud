@@ -1,3 +1,3 @@
-from .wordcloud import WordCloud
+from .wordcloud import WordCloud, STOPWORDS
 
-__all__ = ['WordCloud']
+__all__ = ['WordCloud', 'STOPWORDS']

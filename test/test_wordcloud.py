@@ -93,6 +93,11 @@ def test_recolor():
     # check that they are not the same
     assert_greater(np.abs(array_before - array_after).sum(), 10000)
 
+    # check that recoloring is deterministic
+    wc.recolor(random_state=10)
+    wc_again = wc.to_array()
+    assert_array_equal(wc_again, wc.recolor(random_state=10))
+
 
 def test_random_state():
     # check that random state makes everything deterministic

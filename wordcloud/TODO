@@ -1,13 +1,9 @@
 * command line interface
 * html export
 * good notebook interface
-* recoloring support
 * by default differnt color schemes
-* unit tests
 * website
-* deterministic functionality
 * long functions?
-* no dependency on sklearn any more?
 * redo examples
 * examples
 * filter one-letter words

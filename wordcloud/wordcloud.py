@@ -61,6 +61,9 @@ class WordCloud(object):
     stopwords : set of strings
         The words that will be eliminated.
 
+    background_color : color value (default="black")
+        Background color for the word cloud image.
+
     Attributes
     ----------
     words_ : list of tuples (string, float)
@@ -73,7 +76,8 @@ class WordCloud(object):
 
     def __init__(self, font_path=None, width=400, height=200, margin=5,
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
-                 color_func=random_color_func, max_words=200, stopwords=None, random_state=None):
+                 color_func=random_color_func, max_words=200, stopwords=None,
+                 random_state=None, background_color='black'):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -92,6 +96,7 @@ class WordCloud(object):
         if isinstance(random_state, int):
             random_state = Random(random_state)
         self.random_state = random_state
+        self.background_color = background_color
 
     def _fit_words(self, words):
         """Generate the positions for words.
@@ -299,7 +304,7 @@ class WordCloud(object):
         else:
             height, width = self.height, self.width
 
-        img = Image.new("RGB", (width * self.scale, height * self.scale))
+        img = Image.new("RGB", (width * self.scale, height * self.scale), self.background_color)
         draw = ImageDraw.Draw(img)
         for (word, count), font_size, position, orientation, color in self.layout_:
             font = ImageFont.truetype(self.font_path, font_size * self.scale)
@@ -329,6 +334,8 @@ class WordCloud(object):
         -------
         self
         """
+        if isinstance(random_state, int):
+            random_state = Random(random_state)
         self._check_generated()
 
         if color_func is None:
