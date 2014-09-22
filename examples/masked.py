@@ -20,7 +20,13 @@ plt.imshow(alice_mask)
 
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_mask,
                stopwords=STOPWORDS.add("said"))
+# generate word cloud
 wc.generate(text)
+
+# store to file
+wc.to_file(path.join(d, "alice.png"))
+
+# show
 plt.figure()
 plt.imshow(wc)
 plt.show()
