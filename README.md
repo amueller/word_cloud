@@ -2,7 +2,7 @@ word_cloud
 ==========
 
 A little word cloud generator in Python. Read more about it on the [blog
-post][blog-post].
+post][blog-post] or the [website][website]
 
 ## Installation
 
@@ -34,7 +34,7 @@ Check out [examples/simple.py][simple] for a short intro. A sample output is:
 
 ![Constitution](examples/constitution.png)
 
-Or run [examples/more.py][more] to see more options. A sample output is:
+Or run [examples/masked.py][masked] to see more options. A sample output is:
 
 ![Alice in Wonderland](examples/alice.png)
 
@@ -58,8 +58,9 @@ Using Pillow instead of PIL might might get you the [`TypeError: 'int' object is
 not iterable` problem][intprob] also showcased on the blog.
 
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
+[website]: http://amueller.github.io/word_cloud/
 [simple]: examples/simple.py
-[more]: examples/more.py
+[masked]: examples/masked.py
 [reddit-cloud]: https://github.com/amueller/reddit-cloud
 [wc2]: http://www.reddit.com/user/WordCloudBot2
 [wc2top]: http://www.reddit.com/user/WordCloudBot2/?sort=top
