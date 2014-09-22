@@ -4,7 +4,7 @@
 #
 # License: MIT
 
-import random
+from random import Random
 import os
 import re
 import numpy as np
@@ -24,7 +24,7 @@ STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
 
 def random_color_func(word, font_size, position, orientation, random_state=None):
     if random_state is None:
-        random_state = random.Random()
+        random_state = Random()
     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
 
 
@@ -50,9 +50,10 @@ class WordCloud(object):
         The ratio of times to try horizontal fitting as opposed to vertical.
 
     mask : nd-array or None (default=None)
-        If not None, gives a binary mask on where to draw words.  In this case,
-        width and height will be ignored and the shape of mask will be used
-        instead.
+        If not None, gives a binary mask on where to draw words. All zero
+        entries will be considered "free" to draw on, while all non-zero
+        entries will be deemed occupied. If mask is not None, width and height will be
+        ignored and the shape of mask will be used instead.
 
     max_words : number (default=200)
         The maximum number of words.
@@ -72,7 +73,7 @@ class WordCloud(object):
 
     def __init__(self, font_path=None, width=400, height=200, margin=5,
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
-                 color_func=random_color_func, max_words=200, stopwords=None):
+                 color_func=random_color_func, max_words=200, stopwords=None, random_state=None):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -88,8 +89,11 @@ class WordCloud(object):
         self.color_func = color_func
         self.max_words = max_words
         self.stopwords = stopwords
+        if isinstance(random_state, int):
+            random_state = Random(random_state)
+        self.random_state = random_state
 
-    def fit_words(self, words):
+    def _fit_words(self, words):
         """Generate the positions for words.
 
         Parameters
@@ -113,6 +117,10 @@ class WordCloud(object):
         relative differences don't matter. Play with setting the font_size in the
         main loop for different styles.
         """
+        if self.random_state is not None:
+            random_state = self.random_state
+        else:
+            random_state = Random()
 
         if len(words) <= 0:
             print("We need at least 1 word to plot a word cloud, got %d."
@@ -145,7 +153,7 @@ class WordCloud(object):
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
                 # transpose font optionally
-                if random.random() < self.prefer_horizontal:
+                if random_state.random() < self.prefer_horizontal:
                     orientation = None
                 else:
                     orientation = Image.ROTATE_90
@@ -156,7 +164,7 @@ class WordCloud(object):
                 box_size = draw.textsize(word)
                 # find possible places using integral image:
                 result = query_integral_image(integral, box_size[1] + self.margin,
-                                              box_size[0] + self.margin)
+                                              box_size[0] + self.margin, random_state)
                 if result is not None or font_size == 0:
                     break
                 # if we didn't find a place, make font smaller
@@ -172,7 +180,8 @@ class WordCloud(object):
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
-            colors.append(self.color_func(word, font_size, (x, y), orientation))
+            colors.append(self.color_func(word, font_size, (x, y), orientation,
+                                          random_state=random_state))
             # recompute integral image
             if self.mask is None:
                 img_array = np.asarray(img_grey)
@@ -198,7 +207,7 @@ class WordCloud(object):
         self.layout_ = zip(words, font_sizes, positions, orientations, colors)
         return self.layout_
 
-    def process_text(self, text):
+    def _process_text(self, text):
         """Splits a long text into words, eliminates the stopwords.
 
         Parameters
@@ -265,20 +274,32 @@ class WordCloud(object):
         return words
 
     def generate(self, text):
-        """Convenience function that calls process_text and fit_words.
+        """Generate wordcloud from text.
+
+        Calls _process_text and _fit_words.
 
         Returns
         -------
         self
         """
-        self.process_text(text)
-        self.fit_words(self.words_)
+        self._process_text(text)
+        self._fit_words(self.words_)
         return self
 
-    def to_image(self):
+    def _check_generated(self):
+        """Check if layout_ was computed, otherwise raise error."""
         if not hasattr(self, "layout_"):
             raise ValueError("WordCloud has not been calculated, call generate first.")
-        img = Image.new("RGB", (self.width * self.scale, self.height * self.scale))
+
+    def to_image(self):
+        self._check_generated()
+        if self.mask is not None:
+            width = self.mask.shape[1]
+            height = self.mask.shape[0]
+        else:
+            height, width = self.height, self.width
+
+        img = Image.new("RGB", (width * self.scale, height * self.scale))
         draw = ImageDraw.Draw(img)
         for (word, count), font_size, position, orientation, color in self.layout_:
             font = ImageFont.truetype(self.font_path, font_size * self.scale)
@@ -296,8 +317,9 @@ class WordCloud(object):
 
         Parameters
         ----------
-        random_state : RandomState or None, default=None
-            If not None, a fixed random state is used.
+        random_state : RandomState, int, or None, default=None
+            If not None, a fixed random state is used. If an int is given, this
+            is used as seed for a random.Random state.
 
         color_func : function or None, default=None
             Function to generate new color from word count, font size, position
@@ -307,6 +329,7 @@ class WordCloud(object):
         -------
         self
         """
+        self._check_generated()
 
         if color_func is None:
             color_func = self.color_func
