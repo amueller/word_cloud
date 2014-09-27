@@ -23,6 +23,19 @@ STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
 
 
 def random_color_func(word, font_size, position, orientation, random_state=None):
+    """Random hue color generation.
+
+    Default coloring method. This just picks a random hue with value 80% and
+    lumination 50%.
+
+    Parameters
+    ----------
+    word, font_size, position, orientation  : ignored.
+
+    random_state : random.Random object or None, (default=None)
+        If a random object is given, this is used for generating random numbers.
+
+    """
     if random_state is None:
         random_state = Random()
     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
@@ -35,7 +48,8 @@ class WordCloud(object):
     ----------
     font_path : string
         Font path to the font that will be used (OTF or TTF).
-        Defaults to DroidSansMono path, but you might not have it.
+        Defaults to DroidSansMono path on a Linux machine. If you are on
+        another OS or don't have this font, you need to adjust this path.
 
     width : int (default=400)
         Width of the canvas.
