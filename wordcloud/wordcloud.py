@@ -9,6 +9,7 @@ import os
 import re
 import numpy as np
 from operator import itemgetter
+import fontconfig as fc
 
 from PIL import Image
 from PIL import ImageDraw
@@ -17,7 +18,7 @@ from query_integral_image import query_integral_image
 
 item1 = itemgetter(1)
 
-FONT_PATH = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
+FONT_PATH = "DroidSansMono.ttf"
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
 
@@ -82,11 +83,14 @@ class WordCloud(object):
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, stopwords=None,
                  random_state=None, background_color='black', max_font_size=None):
+
         if stopwords is None:
             stopwords = STOPWORDS
+
         if font_path is None:
             font_path = FONT_PATH
-        self.font_path = font_path
+        self.font_path = self.__font_get_path(font_path)
+
         self.width = width
         self.height = height
         self.margin = margin
@@ -104,6 +108,13 @@ class WordCloud(object):
         if max_font_size is None:
             max_font_size = height
         self.max_font_size = max_font_size
+
+    def __font_get_path(self, font):
+
+        for fp in fc.query():
+            if font in fp: return fp
+
+        return None
 
     def _fit_words(self, words):
         """Generate the positions for words.

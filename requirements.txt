@@ -1,3 +1,4 @@
 Cython>=0.19.1
 PIL>=1.1.7
 numpy>=1.7.1
+Python-fontconfig>=0.5.0
