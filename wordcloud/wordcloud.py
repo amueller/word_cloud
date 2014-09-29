@@ -119,7 +119,7 @@ class WordCloud(object):
             max_font_size = height
         self.max_font_size = max_font_size
 
-    def _fit_words(self, words):
+    def fit_words(self, words):
         """Generate the positions for words.
 
         Parameters
@@ -232,7 +232,7 @@ class WordCloud(object):
         self.layout_ = zip(words, font_sizes, positions, orientations, colors)
         return self.layout_
 
-    def _process_text(self, text):
+    def process_text(self, text):
         """Splits a long text into words, eliminates the stopwords.
 
         Parameters
@@ -301,14 +301,14 @@ class WordCloud(object):
     def generate(self, text):
         """Generate wordcloud from text.
 
-        Calls _process_text and _fit_words.
+        Calls process_text and fit_words.
 
         Returns
         -------
         self
         """
-        self._process_text(text)
-        self._fit_words(self.words_)
+        self.process_text(text)
+        self.fit_words(self.words_)
         return self
 
     def _check_generated(self):
