@@ -18,7 +18,7 @@ from query_integral_image import query_integral_image
 
 item1 = itemgetter(1)
 
-FONT_PATH = "DroidSansMono.ttf"
+DEFAULT_FONT = "DroidSansMono.ttf"
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
 
@@ -88,8 +88,9 @@ class WordCloud(object):
             stopwords = STOPWORDS
 
         if font_path is None:
-            font_path = FONT_PATH
-        self.font_path = self.__font_get_path(font_path)
+            font_path = DEFAULT_FONT
+        self.font_path = self.__get_font_path(font_path)
+        assert(self.font_path in self.__get_system_fonts())
 
         self.width = width
         self.height = height
@@ -109,7 +110,11 @@ class WordCloud(object):
             max_font_size = height
         self.max_font_size = max_font_size
 
-    def __font_get_path(self, font):
+    def __get_system_fonts(self):
+
+        return fc.query()
+
+    def __get_font_path(self, font):
 
         for fp in fc.query():
             if font in fp: return fp
