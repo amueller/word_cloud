@@ -1,0 +1,24 @@
+
+
+.. _simple.py:
+
+
+Minimal Example
+===============
+Generating a square wordcloud from the US constitution using default arguments.
+
+
+
+.. image:: images/simple_1.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`simple.py <simple.py>`
+
+.. literalinclude:: simple.py
+    :lines: 7-
+
+**Total running time of the example:**  0.41 seconds
+    

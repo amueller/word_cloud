@@ -1,0 +1,8 @@
+.navbar-text{
+    display: none
+}
+
+body .content-container{
+    margin-top: 30px;
+    width: 940px;
+}

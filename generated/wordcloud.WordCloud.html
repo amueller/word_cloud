@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>wordcloud.WordCloud &mdash; wordcloud 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/main.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="wordcloud 0.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="../references.html" />
+    <link rel="next" title="wordcloud.random_color_func" href="wordcloud.random_color_func.html" />
+    <link rel="prev" title="wordcloud.random_color_func" href="wordcloud.random_color_func.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../index.html">wordcloud</a>
+        <span class="navbar-text pull-left"><b>0.1</b></span>
+
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="divider-vertical"></li>
+            
+                <li><a href="../auto_examples/index.html">Examples</a></li>
+                <li><a href="../references.html">References</a></li>
+            
+            
+
+            
+
+            
+          </ul>
+
+          
+            
+<form class="navbar-search pull-right" action="../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container content-container">
+  
+  <div class="section" id="wordcloud-wordcloud">
+<h1>wordcloud.WordCloud<a class="headerlink" href="#wordcloud-wordcloud" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="wordcloud.WordCloud">
+<em class="property">class </em><tt class="descclassname">wordcloud.</tt><tt class="descname">WordCloud</tt><big>(</big><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=5</em>, <em>ranks_only=False</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=&lt;function random_color_func at 0x2aabf704d230&gt;</em>, <em>max_words=200</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Word cloud object for generating and drawing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>font_path</strong> : string</p>
+<blockquote>
+<div><p>Font path to the font that will be used (OTF or TTF).
+Defaults to DroidSansMono path on a Linux machine. If you are on
+another OS or don&#8217;t have this font, you need to adjust this path.</p>
+</div></blockquote>
+<p><strong>width</strong> : int (default=400)</p>
+<blockquote>
+<div><p>Width of the canvas.</p>
+</div></blockquote>
+<p><strong>height</strong> : int (default=200)</p>
+<blockquote>
+<div><p>Height of the canvas.</p>
+</div></blockquote>
+<p><strong>ranks_only</strong> : boolean (default=False)</p>
+<blockquote>
+<div><p>Only use the rank of the words, not the actual counts.</p>
+</div></blockquote>
+<p><strong>prefer_horizontal</strong> : float (default=0.90)</p>
+<blockquote>
+<div><p>The ratio of times to try horizontal fitting as opposed to vertical.</p>
+</div></blockquote>
+<p><strong>mask</strong> : nd-array or None (default=None)</p>
+<blockquote>
+<div><p>If not None, gives a binary mask on where to draw words. All zero
+entries will be considered &#8220;free&#8221; to draw on, while all non-zero
+entries will be deemed occupied. If mask is not None, width and height will be
+ignored and the shape of mask will be used instead.</p>
+</div></blockquote>
+<p><strong>max_words</strong> : number (default=200)</p>
+<blockquote>
+<div><p>The maximum number of words.</p>
+</div></blockquote>
+<p><strong>stopwords</strong> : set of strings</p>
+<blockquote>
+<div><p>The words that will be eliminated.</p>
+</div></blockquote>
+<p><strong>background_color</strong> : color value (default=&#8221;black&#8221;)</p>
+<blockquote>
+<div><p>Background color for the word cloud image.</p>
+</div></blockquote>
+<p><strong>max_font_size</strong> : int or None (default=None)</p>
+<blockquote class="last">
+<div><p>Maximum font size for the largest word. If None, height of the image is
+used.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="41%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id1"><span class="problematic" id="id2">words_</span></a></td>
+<td>list of tuples (string, float)</td>
+<td>Word tokens with associated frequency.</td>
+</tr>
+<tr class="row-even"><td><a href="#id3"><span class="problematic" id="id4">layout_</span></a></td>
+<td>list of tuples (string, int, (int, int), int, color))</td>
+<td>Encodes the fitted word cloud. Encodes for each word the string, font
+size, position, orientation and color.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.fit_words" title="wordcloud.WordCloud.fit_words"><tt class="xref py py-obj docutils literal"><span class="pre">fit_words</span></tt></a>(words)</td>
+<td>Generate the positions for words.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.generate" title="wordcloud.WordCloud.generate"><tt class="xref py py-obj docutils literal"><span class="pre">generate</span></tt></a>(text)</td>
+<td>Generate wordcloud from text.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.process_text" title="wordcloud.WordCloud.process_text"><tt class="xref py py-obj docutils literal"><span class="pre">process_text</span></tt></a>(text)</td>
+<td>Splits a long text into words, eliminates the stopwords.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.recolor" title="wordcloud.WordCloud.recolor"><tt class="xref py py-obj docutils literal"><span class="pre">recolor</span></tt></a>([random_state,&nbsp;color_func])</td>
+<td>Recolor existing layout.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.to_array" title="wordcloud.WordCloud.to_array"><tt class="xref py py-obj docutils literal"><span class="pre">to_array</span></tt></a>()</td>
+<td>Convert to numpy array.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.to_file" title="wordcloud.WordCloud.to_file"><tt class="xref py py-obj docutils literal"><span class="pre">to_file</span></tt></a>(filename)</td>
+<td>Export to image file.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_html</span></tt>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_image</span></tt>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="wordcloud.WordCloud.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=5</em>, <em>ranks_only=False</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=&lt;function random_color_func at 0x2aabf704d230&gt;</em>, <em>max_words=200</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="wordcloud.WordCloud.fit_words">
+<tt class="descname">fit_words</tt><big>(</big><em>words</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.fit_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the positions for words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>words</strong> : array of tuples</p>
+<blockquote>
+<div><p>A tuple contains the word and its frequency.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>layout_</strong> : list of tuples (string, int, (int, int), int, color))</p>
+<blockquote class="last">
+<div><p>Encodes the fitted word cloud. Encodes for each word the string, font
+size, position, orientation and color.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Larger canvases with make the code significantly slower. If you need a large
+word cloud, run this function with a lower canvas size, and draw it with a
+larger scale.</p>
+<p>In the current form it actually just uses the rank of the counts, i.e. the
+relative differences don&#8217;t matter. Play with setting the font_size in the
+main loop for different styles.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wordcloud.WordCloud.generate">
+<tt class="descname">generate</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate wordcloud from text.</p>
+<p>Calls process_text and fit_words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wordcloud.WordCloud.process_text">
+<tt class="descname">process_text</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.process_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a long text into words, eliminates the stopwords.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>text</strong> : string</p>
+<blockquote>
+<div><p>The text to be processed.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>words</strong> : list of tuples (string, float)</p>
+<blockquote class="last">
+<div><p>Word tokens with associated frequency.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>There are better ways to do word tokenization, but I don&#8217;t want to
+include all those things.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wordcloud.WordCloud.recolor">
+<tt class="descname">recolor</tt><big>(</big><em>random_state=None</em>, <em>color_func=None</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.recolor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recolor existing layout.</p>
+<p>Applying a new coloring is much faster than generating the whole wordcloud.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>random_state</strong> : RandomState, int, or None, default=None</p>
+<blockquote>
+<div><p>If not None, a fixed random state is used. If an int is given, this
+is used as seed for a random.Random state.</p>
+</div></blockquote>
+<p><strong>color_func</strong> : function or None, default=None</p>
+<blockquote>
+<div><p>Function to generate new color from word count, font size, position
+and orientation.  If None, self.color_func is used.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wordcloud.WordCloud.to_array">
+<tt class="descname">to_array</tt><big>(</big><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.to_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert to numpy array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>image</strong> : nd-array size (width, height, 3)</p>
+<blockquote class="last">
+<div><p>Word cloud image as numpy matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wordcloud.WordCloud.to_file">
+<tt class="descname">to_file</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export to image file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : string</p>
+<blockquote>
+<div><p>Location to write to.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

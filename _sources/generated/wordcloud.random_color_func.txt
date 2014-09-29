@@ -1,0 +1,7 @@
+wordcloud.random_color_func
+===========================
+
+.. currentmodule:: wordcloud
+
+.. autofunction:: random_color_func
+

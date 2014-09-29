@@ -1,0 +1,11 @@
+wordcloud.WordCloud
+===================
+
+.. currentmodule:: wordcloud
+
+.. autoclass:: WordCloud
+
+   
+   .. automethod:: __init__
+   
+
