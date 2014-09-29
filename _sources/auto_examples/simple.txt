@@ -20,5 +20,5 @@ Generating a square wordcloud from the US constitution using default arguments.
 .. literalinclude:: simple.py
     :lines: 7-
 
-**Total running time of the example:**  0.41 seconds
+**Total running time of the example:**  0.40 seconds
     

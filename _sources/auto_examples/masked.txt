@@ -30,5 +30,5 @@ Using a mask you can generate wordclouds in arbitrary shapes.
 .. literalinclude:: masked.py
     :lines: 7-
 
-**Total running time of the example:**  16.76 seconds
+**Total running time of the example:**  12.41 seconds
     
