@@ -55,7 +55,7 @@ which generates word clouds for comments made by Twitch users in the chat.
 It also creates various charts and graphs pertaining to concurrent viewership
 and chat rate over time.
 
-![Chat Stats Sample](http://i.imgur.com/wuRvpEZ.png)
+![Chat Stats Sample](http://i.imgur.com/xBczk0x.png)
 
 ### [other]
 
