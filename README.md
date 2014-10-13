@@ -48,6 +48,15 @@ comments in submissions and user histories. You can see it being operated on
 
 ![A Reddit Cloud sample](http://i.imgur.com/tcbZnKW.png)
 
+### Chat Stats (Twitch.tv)
+
+[Chat Stats][chat-stats] is a visualization program for Twitch streams,
+which generates word clouds for comments made by Twitch users in the chat.
+It also creates various charts and graphs pertaining to concurrent viewership
+and chat rate over time.
+
+![Chat Stats Sample](http://i.imgur.com/wuRvpEZ.png)
+
 ### [other]
 
 *Send a pull request to add yours here.*
@@ -64,5 +73,6 @@ not iterable` problem][intprob] also showcased on the blog.
 [reddit-cloud]: https://github.com/amueller/reddit-cloud
 [wc2]: http://www.reddit.com/user/WordCloudBot2
 [wc2top]: http://www.reddit.com/user/WordCloudBot2/?sort=top
+[chat-stats]: https://github.com/popcorncolonel/Chat_stats
 [intprob]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html#bc_0_28B
 
