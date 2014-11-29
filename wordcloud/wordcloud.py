@@ -229,7 +229,7 @@ class WordCloud(object):
 
             integral[x:, y:] = partial_integral
 
-        self.layout_ = zip(words, font_sizes, positions, orientations, colors)
+        self.layout_ = list(zip(words, font_sizes, positions, orientations, colors))
         return self.layout_
 
     def process_text(self, text):
@@ -253,7 +253,7 @@ class WordCloud(object):
         """
 
         d = {}
-        flags = re.UNICODE if type(text) is unicode else 0
+        flags = re.UNICODE if type(text) is str else 0
         for word in re.findall(r"\w[\w']*", text, flags=flags):
             if word.isdigit():
                 continue
@@ -275,11 +275,11 @@ class WordCloud(object):
         d3 = {}
         for d2 in d.values():
             # Get the most popular case.
-            first = max(d2.iteritems(), key=item1)[0]
+            first = max(d2.items(), key=item1)[0]
             d3[first] = sum(d2.values())
 
         # merge plurals into the singular count (simple cases only)
-        for key in d3.keys():
+        for key in list(d3.keys()):
             if key.endswith('s'):
                 key_singular = key[:-1]
                 if key_singular in d3:
@@ -288,7 +288,7 @@ class WordCloud(object):
                     d3[key_singular] = val_singular + val_plural
                     del d3[key]
 
-        words = sorted(d3.iteritems(), key=item1, reverse=True)
+        words = sorted(d3.items(), key=item1, reverse=True)
         words = words[:self.max_words]
         maximum = float(max(d3.values()))
         for i, (word, count) in enumerate(words):
