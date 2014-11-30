@@ -57,6 +57,13 @@ and chat rate over time.
 
 ![Chat Stats Sample](http://i.imgur.com/xBczk0x.png)
 
+### Twitter Word Cloud Bot
+
+[Twitter Word Cloud Bot][twitter-word-cloud-bot] is a twitter bot which generates
+word clouds for twitter users when it is mentioned with a particular hashtag.
+[Here][twitter-wordnuvola] you can see it in action, while [here][imgur-wordnuvola]
+you can see all the word clouds generated so far.
+
 ### [other]
 
 *Send a pull request to add yours here.*
@@ -74,5 +81,8 @@ not iterable` problem][intprob] also showcased on the blog.
 [wc2]: http://www.reddit.com/user/WordCloudBot2
 [wc2top]: http://www.reddit.com/user/WordCloudBot2/?sort=top
 [chat-stats]: https://github.com/popcorncolonel/Chat_stats
+[twitter-word-cloud-bot]: https://github.com/defacto133/twitter-wordcloud-bot
+[twitter-wordnuvola]: https://twitter.com/wordnuvola
+[imgur-wordnuvola]: http://defacto133.imgur.com/all/
 [intprob]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html#bc_0_28B
 
