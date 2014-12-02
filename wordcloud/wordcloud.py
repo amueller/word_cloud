@@ -7,6 +7,7 @@
 from random import Random
 import os
 import re
+import sys
 import numpy as np
 from operator import itemgetter
 
@@ -253,7 +254,8 @@ class WordCloud(object):
         """
 
         d = {}
-        flags = re.UNICODE if type(text) is str else 0
+        flags = re.UNICODE if sys.version < '3' and \
+                                type(text) is unicode else 0
         for word in re.findall(r"\w[\w']*", text, flags=flags):
             if word.isdigit():
                 continue
