@@ -1,0 +1,13 @@
+language: python
+virtualenv:
+  system_site_packages: true
+env:
+  matrix:
+    - DISTRIB="ubuntu" PYTHON_VERSION="2.7"
+    # This environment tests the oldest supported anaconda env
+    - DISTRIB="conda" PYTHON_VERSION="2.7" NUMPY_VERSION="1.7.1"
+    # This environment tests the newest supported anaconda env
+    - DISTRIB="conda" PYTHON_VERSION="3.4" NUMPY_VERSION="1.8.1"
+install: source continuous_integration/install.sh
+cache: apt
+script: nosetests
