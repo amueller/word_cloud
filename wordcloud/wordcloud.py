@@ -82,6 +82,9 @@ class WordCloud(object):
     max_font_size : int or None (default=None)
         Maximum font size for the largest word. If None, height of the image is
         used.
+    mode: string (default="RGB")
+        Transparent background will be generated when mode is "RGBA" and
+        background_color is None.
 
     Attributes
     ----------
@@ -96,7 +99,8 @@ class WordCloud(object):
     def __init__(self, font_path=None, width=400, height=200, margin=5,
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, stopwords=None,
-                 random_state=None, background_color='black', max_font_size=None):
+                 random_state=None, background_color='black', max_font_size=None,
+                 mode="RGB"):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -119,6 +123,7 @@ class WordCloud(object):
         if max_font_size is None:
             max_font_size = height
         self.max_font_size = max_font_size
+        self.mode = mode
 
     def fit_words(self, words):
         """Generate the positions for words.
@@ -326,7 +331,8 @@ class WordCloud(object):
         else:
             height, width = self.height, self.width
 
-        img = Image.new("RGB", (width * self.scale, height * self.scale), self.background_color)
+        img = Image.new(self.mode, (width * self.scale, height * self.scale),
+                        self.background_color)
         draw = ImageDraw.Draw(img)
         for (word, count), font_size, position, orientation, color in self.layout_:
             font = ImageFont.truetype(self.font_path, font_size * self.scale)
