@@ -254,7 +254,7 @@ texinfo_documents = [
 # theme further.
 html_theme_options = {
     # Navigation bar title. (Default: ``project`` value)
-    #'navbar_title': "Wordcloud",
+    'navbar_title': "Wordcloud",
 
     # Tab name for entire site. (Default: "Site")
     #'navbar_site_name': "Site",
