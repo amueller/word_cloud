@@ -301,15 +301,19 @@ class WordCloud(object):
         return words
 
     def generate(self, text):
-        """Generate wordcloud from text.
+        """Generate wordcloud from text or from a list of (word,weight) pairs.
 
-        Calls process_text and fit_words.
+        Calls process_text (if text is string) and fit_words.
 
         Returns
         -------
         self
         """
-        self.process_text(text)
+        if not isinstance(text, list):
+            self.process_text(text)
+        else:
+            self.words_ = text
+
         self.fit_words(self.words_)
         return self
 
