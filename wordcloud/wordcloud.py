@@ -233,8 +233,8 @@ class WordCloud(object):
         self.layout_ = list(zip(words, font_sizes, positions, orientations, colors))
         return self.layout_
 
-    def process_text(self, text):
-        """Splits a long text into words, eliminates the stopwords.
+    def _get_words(self, text):
+        """Splits a long text into words
 
         Parameters
         ----------
@@ -243,20 +243,38 @@ class WordCloud(object):
 
         Returns
         -------
-        words : list of tuples (string, float)
-            Word tokens with associated frequency.
-
+        words : list of string
+            Word tokens 
 
         Notes
         -----
         There are better ways to do word tokenization, but I don't want to
         include all those things.
+
+        """
+        flags = re.UNICODE if sys.version < '3' and \
+                type(text) is unicode else 0
+
+        return re.findall(r"\w[\w']*", text, flags=flags)
+        
+    def _process_words(self, words):
+        """Splits a long text into words, eliminates the stopwords.
+
+        Parameters
+        ----------
+        words : list of string
+            The words to be processed.
+
+        Returns
+        -------
+        words : list of tuples (string, float)
+            Word tokens with associated frequency.
+
+
         """
 
         d = {}
-        flags = re.UNICODE if sys.version < '3' and \
-                                type(text) is unicode else 0
-        for word in re.findall(r"\w[\w']*", text, flags=flags):
+        for word in words:
             if word.isdigit():
                 continue
 
@@ -300,8 +318,15 @@ class WordCloud(object):
 
         return words
 
-    def generate(self, text):
-        """Generate wordcloud from text.
+    def generate(self, stuff):
+        """Generate wordcloud from either raw text or words(list of string)
+
+        
+        Parameters
+        ----------
+        stuff : string | list of string
+            The text string or words to be processed.
+
 
         Calls process_text and fit_words.
 
@@ -309,7 +334,15 @@ class WordCloud(object):
         -------
         self
         """
-        self.process_text(text)
+        if isinstance(stuff, basestring):
+            stuff = self._get_words(stuff)
+        else:
+            try:
+                _ = iter(stuff)
+            except TypeError, te:
+                print stuff_object, 'is not iterable'
+                
+        self._process_words(stuff)
         self.fit_words(self.words_)
         return self
 
