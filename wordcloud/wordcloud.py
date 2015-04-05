@@ -339,7 +339,7 @@ class WordCloud(object):
         else:
             try:
                 _ = iter(stuff)
-            except TypeError, te:
+            except TypeError:
                 print stuff_object, 'is not iterable'
                 
         self._process_words(stuff)
