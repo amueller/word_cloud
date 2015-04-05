@@ -137,8 +137,7 @@ def check_parameters():
 
 def test_generate_using_tokens():
     wc1 = WordCloud(random_state=42)
-    words = wc1._get_words(THIS)
-    wc1.generate(words)
+    wc1.generate_from_words(wc1.tokenize(THIS))
 
     wc2 = WordCloud(random_state=42)
     wc2.generate(THIS)

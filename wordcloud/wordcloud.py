@@ -15,7 +15,6 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 from .query_integral_image import query_integral_image
-from .util import isstr
 
 item1 = itemgetter(1)
 
@@ -234,8 +233,30 @@ class WordCloud(object):
         self.layout_ = list(zip(words, font_sizes, positions, orientations, colors))
         return self.layout_
 
-    def _get_words(self, text):
-        """Splits a long text into words
+    def tokenize(self, text):
+        """Tokenize text into individual words
+
+        Parameters
+        ----------
+        text : string
+            The text to be tokenized.
+
+        Returns
+        -------
+        words : list of string
+
+
+        Notes
+        -----
+        There are better ways to do word tokenization, but I don't want to
+        include all those things.
+        """
+        flags = re.UNICODE if sys.version < '3' and \
+                                type(text) is unicode else 0
+        return re.findall(r"\w[\w']*", text, flags=flags)
+        
+    def process_text(self, text):
+        """Splits a long text into words, eliminates the stopwords.
 
         Parameters
         ----------
@@ -244,36 +265,26 @@ class WordCloud(object):
 
         Returns
         -------
-        words : list of string
-            Word tokens 
-
-        Notes
-        -----
-        There are better ways to do word tokenization, but I don't want to
-        include all those things.
+        words : list of tuples (string, float)
+            Word tokens with associated frequency.
 
         """
-        flags = re.UNICODE if sys.version < '3' and \
-                type(text) is unicode else 0
+        words = self.tokenize(text)
+        return self.process_words(words)
 
-        return re.findall(r"\w[\w']*", text, flags=flags)
+    def process_words(self, words):
+        """Gather word frequency statistics
         
-    def _process_words(self, words):
-        """Splits a long text into words, eliminates the stopwords.
-
         Parameters
         ----------
         words : list of string
-            The words to be processed.
+            The word tokens to be processed.
 
         Returns
         -------
         words : list of tuples (string, float)
             Word tokens with associated frequency.
-
-
         """
-
         d = {}
         for word in words:
             if word.isdigit():
@@ -318,15 +329,29 @@ class WordCloud(object):
         self.words_ = words
 
         return words
+    
+    def generate_from_words(self, words):
+        """Generate wordcloud from words.
+        Similar to `generate` except it accepts word tokens instead of text
 
-    def generate(self, stuff):
-        """Generate wordcloud from either raw text or words(list of string)
-
+        Calls process_words and fit_words.
+        
         Parameters
         ----------
-        stuff : string | list of string
-            The text string or words to be processed.
-
+        words: list of string
+            The word tokens to be used.
+        
+        
+        Returns
+        -------
+        self
+        """
+        self.process_words(words)
+        self.fit_words(self.words_)
+        return self
+        
+    def generate(self, text):
+        """Generate wordcloud from text.
 
         Calls process_text and fit_words.
 
@@ -334,16 +359,7 @@ class WordCloud(object):
         -------
         self
         """
-
-        if isstr(stuff):
-            stuff = self._get_words(stuff)
-        else:
-            try:
-                _ = iter(stuff)
-            except TypeError:
-                raise TypeError("%r is not iterable" %(stuff))
-                
-        self._process_words(stuff)
+        self.process_text(text)
         self.fit_words(self.words_)
         return self
 
