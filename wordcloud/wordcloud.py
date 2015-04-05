@@ -15,6 +15,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 from .query_integral_image import query_integral_image
+from .util import isstr
 
 item1 = itemgetter(1)
 
@@ -321,7 +322,6 @@ class WordCloud(object):
     def generate(self, stuff):
         """Generate wordcloud from either raw text or words(list of string)
 
-        
         Parameters
         ----------
         stuff : string | list of string
@@ -334,7 +334,8 @@ class WordCloud(object):
         -------
         self
         """
-        if isinstance(stuff, basestring):
+
+        if isstr(stuff):
             stuff = self._get_words(stuff)
         else:
             try:
