@@ -233,6 +233,28 @@ class WordCloud(object):
         self.layout_ = list(zip(words, font_sizes, positions, orientations, colors))
         return self.layout_
 
+    def tokenize(self, text):
+        """Tokenize text into individual words
+
+        Parameters
+        ----------
+        text : string
+            The text to be tokenized.
+
+        Returns
+        -------
+        words : list of string
+
+
+        Notes
+        -----
+        There are better ways to do word tokenization, but I don't want to
+        include all those things.
+        """
+        flags = re.UNICODE if sys.version < '3' and \
+                                type(text) is unicode else 0
+        return re.findall(r"\w[\w']*", text, flags=flags)
+        
     def process_text(self, text):
         """Splits a long text into words, eliminates the stopwords.
 
@@ -246,17 +268,25 @@ class WordCloud(object):
         words : list of tuples (string, float)
             Word tokens with associated frequency.
 
-
-        Notes
-        -----
-        There are better ways to do word tokenization, but I don't want to
-        include all those things.
         """
+        words = self.tokenize(text)
+        return self.process_words(words)
 
+    def process_words(self, words):
+        """Gather word frequency statistics
+        
+        Parameters
+        ----------
+        words : list of string
+            The word tokens to be processed.
+
+        Returns
+        -------
+        words : list of tuples (string, float)
+            Word tokens with associated frequency.
+        """
         d = {}
-        flags = re.UNICODE if sys.version < '3' and \
-                                type(text) is unicode else 0
-        for word in re.findall(r"\w[\w']*", text, flags=flags):
+        for word in words:
             if word.isdigit():
                 continue
 
@@ -299,7 +329,27 @@ class WordCloud(object):
         self.words_ = words
 
         return words
+    
+    def generate_from_words(self, words):
+        """Generate wordcloud from words.
+        Similar to `generate` except it accepts word tokens instead of text
 
+        Calls process_words and fit_words.
+        
+        Parameters
+        ----------
+        words: list of string
+            The word tokens to be used.
+        
+        
+        Returns
+        -------
+        self
+        """
+        self.process_words(words)
+        self.fit_words(self.words_)
+        return self
+        
     def generate(self, text):
         """Generate wordcloud from text.
 
