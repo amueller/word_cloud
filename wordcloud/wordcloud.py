@@ -340,7 +340,7 @@ class WordCloud(object):
             try:
                 _ = iter(stuff)
             except TypeError:
-                raise TypeErro("%r is not iterable" %(stuff_object))
+                raise TypeError("%r is not iterable" %(stuff))
                 
         self._process_words(stuff)
         self.fit_words(self.words_)

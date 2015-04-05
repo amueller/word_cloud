@@ -134,3 +134,16 @@ def test_mask():
 def check_parameters():
     # check that parameters are actually used
     pass
+
+def test_generate_using_tokens():
+    wc1 = WordCloud(random_state=42)
+    words = wc1._get_words(THIS)
+    wc1.generate(words)
+
+    wc2 = WordCloud(random_state=42)
+    wc2.generate(THIS)
+
+    assert_equal(wc1.words_, wc2.words_)
+
+    wc3 = WordCloud(random_state=42)
+    assert_raises(TypeError, wc3.generate, 3) #invalid data types
