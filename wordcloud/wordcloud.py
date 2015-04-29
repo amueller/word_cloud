@@ -1,9 +1,11 @@
-# Author: Andreas Christian Mueller <amueller@ais.uni-bonn.de>
+# Author: Andreas Christian Mueller <t3kcit@gmail.com>
+#
 # (c) 2012
 # Modified by: Paul Nechifor <paul@nechifor.net>
 #
 # License: MIT
 
+import warnings
 from random import Random
 import os
 import re
@@ -23,7 +25,8 @@ STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
 
 
-def random_color_func(word, font_size, position, orientation, random_state=None):
+def random_color_func(word=None, font_size=None, position=None,
+                      orientation=None, font_path=None, random_state=None):
     """Random hue color generation.
 
     Default coloring method. This just picks a random hue with value 80% and
@@ -65,10 +68,11 @@ class WordCloud(object):
         The ratio of times to try horizontal fitting as opposed to vertical.
 
     mask : nd-array or None (default=None)
-        If not None, gives a binary mask on where to draw words. All zero
-        entries will be considered "free" to draw on, while all non-zero
-        entries will be deemed occupied. If mask is not None, width and height will be
-        ignored and the shape of mask will be used instead.
+        If not None, gives a binary mask on where to draw words. If mask is not
+        None, width and height will be ignored and the shape of mask will be
+        used instead. All white (#FF or #FFFFFF) entries will be considerd
+        "masked out" while other entries will be free to draw on. [This
+        changed in the most recent version!]
 
     scale : float (default=1)
         Scaling between computation and drawing. For large word-cloud images,
@@ -173,22 +177,21 @@ class WordCloud(object):
                   % len(frequencies))
 
         if self.mask is not None:
-            width = self.mask.shape[1]
-            height = self.mask.shape[0]
             mask = self.mask
+            width = mask.shape[1]
+            height = mask.shape[0]
             if mask.dtype.kind == 'f':
-                # threshold float images
-                mask = mask >= .5
-            elif mask.dtype.kind == 'i':
-                # threshold ubyte images
-                mask = mask >= 128
-            if self.mask.ndim == 3:
-                # "OR" all channels
-                mask = mask.sum(axis=-1) > 0
-            if mask.ndim != 2:
+                warnings.warn("mask image should be unsigned byte between 0 and"
+                              "255. Got a float array")
+            if mask.ndim == 2:
+                boolean_mask = mask == 255
+            elif mask.ndim == 3:
+                # "OR" the color channels
+                boolean_mask = np.sum(mask[:, :, :3] == 255, axis=-1)
+            else:
                 raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
             # the order of the cumsum's is important for speed ?!
-            integral = np.cumsum(np.cumsum(mask, axis=1), axis=0).astype(np.uint32)
+            integral = np.cumsum(np.cumsum(boolean_mask * 255, axis=1), axis=0).astype(np.uint32)
         else:
             height, width = self.height, self.width
             integral = np.zeros((height, width), dtype=np.uint32)
@@ -237,13 +240,16 @@ class WordCloud(object):
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
-            colors.append(self.color_func(word, font_size, (x, y), orientation,
-                                          random_state=random_state))
+            colors.append(self.color_func(word, font_size=font_size,
+                                          position=(x, y),
+                                          orientation=orientation,
+                                          random_state=random_state,
+                                          font_path=self.font_path))
             # recompute integral image
             if self.mask is None:
                 img_array = np.asarray(img_grey)
             else:
-                img_array = np.asarray(img_grey) + mask
+                img_array = np.asarray(img_grey) + boolean_mask
             # recompute bottom right
             # the order of the cumsum's is important for speed ?!
             partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
@@ -406,7 +412,9 @@ class WordCloud(object):
         if color_func is None:
             color_func = self.color_func
         self.layout_ = [(word, font_size, position, orientation,
-                         color_func(word, font_size, position, orientation, random_state))
+                         color_func(word=word, font_size=font_size,
+                                    position=position, orientation=orientation,
+                                    random_state=random_state, font_path=self.font_path))
                         for word, font_size, position, orientation, _ in self.layout_]
         return self
 
