@@ -85,10 +85,10 @@ class WordCloud(object):
 
     Attributes
     ----------
-    words_ : list of tuples (string, float)
+    ``words_``: list of tuples (string, float)
         Word tokens with associated frequency.
 
-    layout_ : list of tuples (string, int, (int, int), int, color))
+    ``layout_`` : list of tuples (string, int, (int, int), int, color))
         Encodes the fitted word cloud. Encodes for each word the string, font
         size, position, orientation and color.
     """
@@ -351,7 +351,7 @@ class WordCloud(object):
         return self.generate_from_text(text)
 
     def _check_generated(self):
-        """Check if layout_ was computed, otherwise raise error."""
+        """Check if ``layout_`` was computed, otherwise raise error."""
         if not hasattr(self, "layout_"):
             raise ValueError("WordCloud has not been calculated, call generate first.")
 
