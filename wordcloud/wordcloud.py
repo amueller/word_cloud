@@ -175,8 +175,20 @@ class WordCloud(object):
         if self.mask is not None:
             width = self.mask.shape[1]
             height = self.mask.shape[0]
+            mask = self.mask
+            if mask.dtype.kind == 'f':
+                # threshold float images
+                mask = mask >= .5
+            elif mask.dtype.kind == 'i':
+                # threshold ubyte images
+                mask = mask >= 128
+            if self.mask.ndim == 3:
+                # "OR" all channels
+                mask = mask.sum(axis=-1) > 0
+            if mask.ndim != 2:
+                raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
             # the order of the cumsum's is important for speed ?!
-            integral = np.cumsum(np.cumsum(self.mask, axis=1), axis=0).astype(np.uint32)
+            integral = np.cumsum(np.cumsum(mask, axis=1), axis=0).astype(np.uint32)
         else:
             height, width = self.height, self.width
             integral = np.zeros((height, width), dtype=np.uint32)
@@ -231,7 +243,7 @@ class WordCloud(object):
             if self.mask is None:
                 img_array = np.asarray(img_grey)
             else:
-                img_array = np.asarray(img_grey) + self.mask
+                img_array = np.asarray(img_grey) + mask
             # recompute bottom right
             # the order of the cumsum's is important for speed ?!
             partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
