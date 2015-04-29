@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Masked wordcloud &mdash; wordcloud 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/main.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="wordcloud 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="index.html" />
+    <link rel="next" title="Using custom colors" href="a_new_hope.html" />
+    <link rel="prev" title="Masked wordcloud" href="masked.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Wordcloud</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../references.html">References</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="simple.html">Minimal Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Masked wordcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.WordCloud.html">wordcloud.WordCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.ImageColorGenerator.html">wordcloud.ImageColorGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.random_color_func.html">wordcloud.random_color_func</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Masked wordcloud</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="masked.html" title="Previous Chapter: Masked wordcloud"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Masked wordcloud</span>
+    </a>
+  </li>
+  <li>
+    <a href="a_new_hope.html" title="Next Chapter: Using custom colors"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Using custom col... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container content-container">
+  
+  <div class="section" id="masked-wordcloud">
+<span id="colored-py"></span><h1>Masked wordcloud<a class="headerlink" href="#masked-wordcloud" title="Permalink to this headline"></a></h1>
+<p>Using a mask you can generate wordclouds in arbitrary shapes.</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../_images/colored_1.png"><img alt="../_images/colored_1.png" src="../_images/colored_1.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/colored_3.png"><img alt="../_images/colored_3.png" src="../_images/colored_3.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/colored_2.png"><img alt="../_images/colored_2.png" src="../_images/colored_2.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/colored.py"><tt class="xref download docutils literal"><span class="pre">colored.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.imread.html#scipy.misc.imread"><span class="n">imread</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+
+<span class="c"># Read the whole text.</span>
+<span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;alice.txt&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c"># read the mask / color image</span>
+<span class="c"># taken from http://jirkavinse.deviantart.com/art/quot-Real-Life-quot-Alice-282261010</span>
+<span class="n">alice_coloring</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.imread.html#scipy.misc.imread"><span class="n">imread</span></a><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&quot;alice_color.png&quot;</span><span class="p">))</span>
+
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">alice_coloring</span><span class="p">,</span>
+               <span class="n">stopwords</span><span class="o">=</span><span class="n">STOPWORDS</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;said&quot;</span><span class="p">),</span>
+               <span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c"># generate word cloud</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c"># create coloring from image</span>
+<a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator"><span class="n">image_colors</span></a> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">alice_coloring</span><span class="p">)</span>
+
+<span class="c"># show</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="p">)</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&quot;off&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="c"># recolor wordcloud and show</span>
+<span class="c"># we could also give color_func=image_colors directly in the constructor</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator"><span class="n">image_colors</span></a><span class="p">))</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&quot;off&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">alice_coloring</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&quot;off&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>  5.67 seconds</p>
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -13,7 +13,7 @@ import random
 from wordcloud import WordCloud, STOPWORDS
 
 
-def grey_color_func(word, font_size, position, orientation, random_state=None):
+def grey_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
     return "hsl(0, 0%%, %d%%)" % random.randint(60, 100)
 
 d = path.dirname(__file__)

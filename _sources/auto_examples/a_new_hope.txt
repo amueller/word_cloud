@@ -8,8 +8,27 @@ Using custom colors
 Using the recolor method and custom coloring functions.
 
 
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/a_new_hope_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/a_new_hope_2.png
+            :scale: 47
+
+
+
+
 **Python source code:** :download:`a_new_hope.py <a_new_hope.py>`
 
 .. literalinclude:: a_new_hope.py
     :lines: 7-
+
+**Total running time of the example:**  10.74 seconds
     

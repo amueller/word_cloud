@@ -26,6 +26,11 @@
             </a>
           </div>
           <div class="col-xs-3 col-md-3">
+            <a href="auto_examples/colored.html" class="thumbnail">
+              <img src="_images/colored_2.png" alt="...">
+            </a>
+          </div>
+          <div class="col-xs-3 col-md-3">
             <a href="auto_examples/a_new_hope.html" class="thumbnail">
               <img src="_images/a_new_hope_1.png" alt="...">
             </a>

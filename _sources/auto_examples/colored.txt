@@ -1,0 +1,39 @@
+
+
+.. _colored.py:
+
+
+Masked wordcloud
+================
+Using a mask you can generate wordclouds in arbitrary shapes.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/colored_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/colored_3.png
+            :scale: 47
+
+    *
+
+      .. image:: images/colored_2.png
+            :scale: 47
+
+
+
+
+**Python source code:** :download:`colored.py <colored.py>`
+
+.. literalinclude:: colored.py
+    :lines: 7-
+
+**Total running time of the example:**  5.67 seconds
+    

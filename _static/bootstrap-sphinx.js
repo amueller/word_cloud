@@ -51,23 +51,24 @@
       .attr("border", 0);
   };
 
-  $(document).ready(function () {
-
+  $(window).load(function () {
     /*
      * Scroll the window to avoid the topnav bar
-     * https://github.com/twitter/bootstrap/issues/1768
+     * https://github.com/twbs/bootstrap/issues/1768
      */
     if ($("#navbar.navbar-fixed-top").length > 0) {
       var navHeight = $("#navbar").height(),
         shiftWindow = function() { scrollBy(0, -navHeight - 10); };
 
       if (location.hash) {
-        shiftWindow();
+        setTimeout(shiftWindow, 1);
       }
 
       window.addEventListener("hashchange", shiftWindow);
     }
+  });
 
+  $(document).ready(function () {
     // Add styling, structure to TOC's.
     $(".dropdown-menu").each(function () {
       $(this).find("ul").each(function (index, item){
@@ -83,6 +84,33 @@
       // Remove Global TOC.
       $(".globaltoc-container").remove();
     }
+
+    // Local TOC.
+    $(".bs-sidenav ul").addClass("nav nav-list");
+    $(".bs-sidenav > ul > li > a").addClass("nav-header");
+
+    
+    // back to top
+    setTimeout(function () {
+      var $sideBar = $('.bs-sidenav');
+
+      $sideBar.affix({
+        offset: {
+          top: function () {
+            var offsetTop      = $sideBar.offset().top;
+            var sideBarMargin  = parseInt($sideBar.children(0).css('margin-top'), 10);
+            var navOuterHeight = $('#navbar').height();
+
+            return (this.top = offsetTop - navOuterHeight - sideBarMargin);
+          }
+        , bottom: function () {
+            // add 25 because the footer height doesn't seem to be enough
+            return (this.bottom = $('.footer').outerHeight(true) + 25);
+          }
+        }
+      });
+    }, 100);
+    
 
     // Local TOC.
     patchToc($("ul.localtoc"), 2);
@@ -110,23 +138,36 @@
       $localLi.first().after('<li class="divider"></li>');
     }
 
-    // Enable dropdown.
-    $('.dropdown-toggle').dropdown();
+    // Manually add dropdown.
+    // Appears unnecessary as of:
+    //   https://github.com/ryan-roemer/sphinx-bootstrap-theme/pull/90
+    // Remove next time around...
+    // a.dropdown-toggle class needed in globaltoc.html
+    //$('.dropdown-toggle').dropdown();
 
     // Patch tables.
     patchTables();
 
-    // Add Note, Warning styles.
-    $('div.note').addClass('alert').addClass('alert-info');
-    $('div.warning').addClass('alert');
+    // Add Note, Warning styles. (BS v2,3 compatible).
+    $('.admonition').addClass('alert alert-info')
+      .filter('.warning, .caution')
+        .removeClass('alert-info')
+        .addClass('alert-warning').end()
+      .filter('.error, .danger')
+        .removeClass('alert-info')
+        .addClass('alert-danger alert-error').end();
 
     // Inline code styles to Bootstrap style.
     $('tt.docutils.literal').not(".xref").each(function (i, e) {
       // ignore references
       if (!$(e).parent().hasClass("reference")) {
         $(e).replaceWith(function () {
-          return $("<code />").text($(this).text());
+          return $("<code />").html($(this).html());
         });
       }});
+
+    // Update sourcelink to remove outerdiv (fixes appearance in navbar).
+    var $srcLink = $(".nav #sourcelink");
+    $srcLink.parent().html($srcLink.html());
   });
-}($jqTheme || window.jQuery));
+}(window.$jqTheme || window.jQuery));

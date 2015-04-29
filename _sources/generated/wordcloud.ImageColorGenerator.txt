@@ -1,0 +1,11 @@
+wordcloud.ImageColorGenerator
+=============================
+
+.. currentmodule:: wordcloud
+
+.. autoclass:: ImageColorGenerator
+
+   
+   .. automethod:: __init__
+   
+
