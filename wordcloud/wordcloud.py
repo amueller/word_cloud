@@ -120,19 +120,43 @@ class WordCloud(object):
             max_font_size = height
         self.max_font_size = max_font_size
 
-    def fit_words(self, words):
-        """Generate the positions for words.
+    def fit_words(self, frequencies):
+        """Create a word_cloud from words and frequencies.
+
+        Alias to generate_from_frequencies.
 
         Parameters
         ----------
-        words : array of tuples
+        frequencies : array of tuples
             A tuple contains the word and its frequency.
 
         Returns
         -------
-        layout_ : list of tuples (string, int, (int, int), int, color))
-            Encodes the fitted word cloud. Encodes for each word the string, font
-            size, position, orientation and color.
+        self
+
+        Notes
+        -----
+        Larger canvases with make the code significantly slower. If you need a large
+        word cloud, run this function with a lower canvas size, and draw it with a
+        larger scale.
+
+        In the current form it actually just uses the rank of the counts, i.e. the
+        relative differences don't matter. Play with setting the font_size in the
+        main loop for different styles.
+        """
+        return self.generate_from_frequencies(frequencies)
+
+    def generate_from_frequencies(self, frequencies):
+        """Create a word_cloud from words and frequencies.
+
+        Parameters
+        ----------
+        frequencies : array of tuples
+            A tuple contains the word and its frequency.
+
+        Returns
+        -------
+        self
 
         Notes
         -----
@@ -149,9 +173,9 @@ class WordCloud(object):
         else:
             random_state = Random()
 
-        if len(words) <= 0:
+        if len(frequencies) <= 0:
             print("We need at least 1 word to plot a word cloud, got %d."
-                  % len(words))
+                  % len(frequencies))
 
         if self.mask is not None:
             width = self.mask.shape[1]
@@ -171,7 +195,7 @@ class WordCloud(object):
         font_size = self.max_font_size
 
         # start drawing grey image
-        for word, count in words:
+        for word, count in frequencies:
             # alternative way to set the font size
             if not self.ranks_only:
                 font_size = min(font_size, int(100 * np.log(count + 100)))
@@ -230,8 +254,8 @@ class WordCloud(object):
 
             integral[x:, y:] = partial_integral
 
-        self.layout_ = list(zip(words, font_sizes, positions, orientations, colors))
-        return self.layout_
+        self.layout_ = list(zip(frequencies, font_sizes, positions, orientations, colors))
+        return self
 
     def process_text(self, text):
         """Splits a long text into words, eliminates the stopwords.
@@ -254,8 +278,8 @@ class WordCloud(object):
         """
 
         d = {}
-        flags = re.UNICODE if sys.version < '3' and \
-                                type(text) is unicode else 0
+        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
+                 else 0)
         for word in re.findall(r"\w[\w']*", text, flags=flags):
             if word.isdigit():
                 continue
@@ -300,7 +324,7 @@ class WordCloud(object):
 
         return words
 
-    def generate(self, text):
+    def generate_from_text(self, text):
         """Generate wordcloud from text.
 
         Calls process_text and fit_words.
@@ -312,6 +336,19 @@ class WordCloud(object):
         self.process_text(text)
         self.fit_words(self.words_)
         return self
+
+    def generate(self, text):
+        """Generate wordcloud from text.
+
+        Alias to generate_from_text.
+
+        Calls process_text and fit_words.
+
+        Returns
+        -------
+        self
+        """
+        return self.generate_from_text(text)
 
     def _check_generated(self):
         """Check if layout_ was computed, otherwise raise error."""
