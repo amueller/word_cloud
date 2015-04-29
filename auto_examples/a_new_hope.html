@@ -89,12 +89,6 @@
   <div class="section" id="using-custom-colors">
 <span id="a-new-hope-py"></span><h1>Using custom colors<a class="headerlink" href="#using-custom-colors" title="Permalink to this headline"></a></h1>
 <p>Using the recolor method and custom coloring functions.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../_images/a_new_hope_1.png"><img alt="../_images/a_new_hope_1.png" src="../_images/a_new_hope_1.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../_images/a_new_hope_2.png"><img alt="../_images/a_new_hope_2.png" src="../_images/a_new_hope_2.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-</ul>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/a_new_hope.py"><tt class="xref download docutils literal"><span class="pre">a_new_hope.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
 <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.imread.html#scipy.misc.imread"><span class="n">imread</span></a>
@@ -134,6 +128,7 @@
 <span class="n">default_colors</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Custom colors&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">grey_color_func</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s">&quot;a_new_hope.png&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&quot;off&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s">&quot;Default colors&quot;</span><span class="p">)</span>
@@ -142,7 +137,6 @@
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  17.21 seconds</p>
 </div>
 
 

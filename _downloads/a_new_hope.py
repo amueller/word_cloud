@@ -43,6 +43,7 @@ wc = WordCloud(max_words=1000, mask=mask, stopwords=stopwords, margin=10,
 default_colors = wc.to_array()
 plt.title("Custom colors")
 plt.imshow(wc.recolor(color_func=grey_color_func, random_state=3))
+wc.to_file("a_new_hope.png")
 plt.axis("off")
 plt.figure()
 plt.title("Default colors")
