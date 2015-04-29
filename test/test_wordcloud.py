@@ -114,14 +114,14 @@ def test_mask():
     # check that using an empty mask is equivalent to not using a mask
     wc = WordCloud(random_state=42)
     wc.generate(THIS)
-    mask = np.zeros(np.array(wc).shape[:2])
+    mask = np.zeros(np.array(wc).shape[:2], dtype=np.int)
     wc_mask = WordCloud(mask=mask, random_state=42)
     wc_mask.generate(THIS)
     assert_array_equal(wc, wc_mask)
 
     # use actual nonzero mask
-    mask = np.zeros((234, 456))
-    mask[100:150, 300:400] = 1
+    mask = np.zeros((234, 456), dtype=np.int)
+    mask[100:150, 300:400] = 255
 
     wc = WordCloud(mask=mask)
     wc.generate(THIS)

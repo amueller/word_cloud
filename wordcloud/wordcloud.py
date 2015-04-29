@@ -182,7 +182,7 @@ class WordCloud(object):
             height = mask.shape[0]
             if mask.dtype.kind == 'f':
                 warnings.warn("mask image should be unsigned byte between 0 and"
-                              "255. Got a float array")
+                              " 255. Got a float array")
             if mask.ndim == 2:
                 boolean_mask = mask == 255
             elif mask.ndim == 3:

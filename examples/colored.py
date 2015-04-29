@@ -9,8 +9,7 @@ from os import path
 from scipy.misc import imread
 import matplotlib.pyplot as plt
 
-from wordcloud import WordCloud, STOPWORDS
-from wordcloud.color_from_image import ImageColorGenerator
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 
 d = path.dirname(__file__)
 
@@ -18,6 +17,7 @@ d = path.dirname(__file__)
 text = open(path.join(d, 'alice.txt')).read()
 
 # read the mask / color image
+# taken from http://jirkavinse.deviantart.com/art/quot-Real-Life-quot-Alice-282261010
 alice_coloring = imread(path.join(d, "alice_color.png"))
 
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_coloring,

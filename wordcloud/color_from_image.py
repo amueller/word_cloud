@@ -3,6 +3,20 @@ from PIL import ImageFont
 
 
 class ImageColorGenerator(object):
+    """Color generator based on a color image.
+
+    Generates colors based on an RGB image. A word will be colored using
+    the mean color of the enclosing rectangle in the color image.
+
+    After construction, the object acts as a callable that can be passed as
+    color_func to the word cloud constructor or to the recolor method.
+
+    Parameters
+    ----------
+    image : nd-array, shape (height, width, 3)
+        Image to use to generate word colors. Alpha channels are ignored.
+        This should be the same size as the canvas. for the wordcloud.
+    """
     # returns the average color of the image in that region
     def __init__(self, image):
         if image.ndim not in [2, 3]:
@@ -14,6 +28,7 @@ class ImageColorGenerator(object):
         self.image = image
 
     def __call__(self, word, font_size, font_path, position, orientation, **kwargs):
+        """Generate a color for a given word using a fixed image."""
         # get the font to get the box size
         font = ImageFont.truetype(font_path, font_size)
         transposed_font = ImageFont.TransposedFont(font,
