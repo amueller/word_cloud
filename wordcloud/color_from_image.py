@@ -19,7 +19,7 @@ class ImageColorGenerator(object):
         transposed_font = ImageFont.TransposedFont(font,
                                                    orientation=orientation)
         # get size of resulting text
-        box_size = transposed_font.getsize(word[0])
+        box_size = transposed_font.getsize(word)
         x = position[0]
         y = position[1]
         # cut out patch under word box

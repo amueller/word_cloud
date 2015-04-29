@@ -411,11 +411,11 @@ class WordCloud(object):
 
         if color_func is None:
             color_func = self.color_func
-        self.layout_ = [(word, font_size, position, orientation,
-                         color_func(word=word, font_size=font_size,
+        self.layout_ = [(word_freq, font_size, position, orientation,
+                         color_func(word=word_freq[0], font_size=font_size,
                                     position=position, orientation=orientation,
                                     random_state=random_state, font_path=self.font_path))
-                        for word, font_size, position, orientation, _ in self.layout_]
+                        for word_freq, font_size, position, orientation, _ in self.layout_]
         return self
 
     def to_file(self, filename):
