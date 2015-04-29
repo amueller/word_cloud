@@ -31,13 +31,11 @@ image_colors = ImageColorGenerator(alice_coloring)
 
 # show
 plt.imshow(wc)
-plt.title("original")
 plt.axis("off")
 plt.figure()
 # recolor wordcloud and show
 # we could also give color_func=image_colors directly in the constructor
 plt.imshow(wc.recolor(color_func=image_colors))
-plt.title("recolored")
 plt.axis("off")
 plt.figure()
 plt.imshow(alice_coloring, cmap=plt.cm.gray)

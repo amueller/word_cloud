@@ -16,6 +16,7 @@ All functionality is encapsulated in the WordCloud class.
    :template: class.rst
 
     WordCloud
+    ImageColorGenerator
 
    :template: function.rst
    
