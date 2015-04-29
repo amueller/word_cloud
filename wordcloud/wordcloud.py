@@ -70,6 +70,11 @@ class WordCloud(object):
         entries will be deemed occupied. If mask is not None, width and height will be
         ignored and the shape of mask will be used instead.
 
+    scale : float (default=1)
+        Scaling between computation and drawing. For large word-cloud images,
+        using scale instead of larger canvas size is significantly faster, but
+        might lead to a coarser fit for the words.
+
     max_words : number (default=200)
         The maximum number of words.
 
@@ -91,6 +96,15 @@ class WordCloud(object):
     ``layout_`` : list of tuples (string, int, (int, int), int, color))
         Encodes the fitted word cloud. Encodes for each word the string, font
         size, position, orientation and color.
+
+    Notes
+    -----
+    Larger canvases with make the code significantly slower. If you need a large
+    word cloud, try a lower canvas size, and set the scale parameter.
+
+    The algorithm might give more weight to the ranking of the words
+    than their actual frequencies, depending on the ``max_font_size`` and the
+    scaling heuristic.
     """
 
     def __init__(self, font_path=None, width=400, height=200, margin=5,
@@ -133,16 +147,6 @@ class WordCloud(object):
         Returns
         -------
         self
-
-        Notes
-        -----
-        Larger canvases with make the code significantly slower. If you need a large
-        word cloud, run this function with a lower canvas size, and draw it with a
-        larger scale.
-
-        In the current form it actually just uses the rank of the counts, i.e. the
-        relative differences don't matter. Play with setting the font_size in the
-        main loop for different styles.
         """
         return self.generate_from_frequencies(frequencies)
 
@@ -158,15 +162,6 @@ class WordCloud(object):
         -------
         self
 
-        Notes
-        -----
-        Larger canvases with make the code significantly slower. If you need a large
-        word cloud, run this function with a lower canvas size, and draw it with a
-        larger scale.
-
-        In the current form it actually just uses the rank of the counts, i.e. the
-        relative differences don't matter. Play with setting the font_size in the
-        main loop for different styles.
         """
         if self.random_state is not None:
             random_state = self.random_state
@@ -269,7 +264,6 @@ class WordCloud(object):
         -------
         words : list of tuples (string, float)
             Word tokens with associated frequency.
-
 
         Notes
         -----
