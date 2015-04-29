@@ -30,5 +30,5 @@ Using the recolor method and custom coloring functions.
 .. literalinclude:: a_new_hope.py
     :lines: 7-
 
-**Total running time of the example:**  10.74 seconds
+**Total running time of the example:**  11.23 seconds
     

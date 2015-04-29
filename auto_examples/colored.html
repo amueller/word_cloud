@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Masked wordcloud &mdash; wordcloud 0.1 documentation</title>
+    <title>Image-colored wordcloud &mdash; wordcloud 0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -77,7 +77,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="simple.html">Minimal Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Masked wordcloud</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Image-colored wordcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
 </ul>
 </li>
@@ -100,7 +100,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Masked wordcloud</a></li>
+<li><a class="reference internal" href="#">Image-colored wordcloud</a></li>
 </ul>
 </ul>
 </li>
@@ -140,15 +140,20 @@
 
 <div class="container content-container">
   
-  <div class="section" id="masked-wordcloud">
-<span id="colored-py"></span><h1>Masked wordcloud<a class="headerlink" href="#masked-wordcloud" title="Permalink to this headline"></a></h1>
-<p>Using a mask you can generate wordclouds in arbitrary shapes.</p>
+  <div class="section" id="image-colored-wordcloud">
+<span id="colored-py"></span><h1>Image-colored wordcloud<a class="headerlink" href="#image-colored-wordcloud" title="Permalink to this headline"></a></h1>
+<p>You can color a word-cloud by using an image-based coloring strategy implemented in
+ImageColorGenerator. It uses the average color of the region occupied by the word
+in a source image. You can combine this with masking - pure-white will be interpreted
+as &#8216;don&#8217;t occupy&#8217; by the WordCloud object when passed as mask.
+If you want white as a legal color, you can just pass a different image to &#8220;mask&#8221;,
+but make sure the image shapes line up.</p>
 <ul class="horizontal">
 <li><a class="first reference internal image-reference" href="../_images/colored_1.png"><img alt="../_images/colored_1.png" src="../_images/colored_1.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../_images/colored_3.png"><img alt="../_images/colored_3.png" src="../_images/colored_3.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
 <li><a class="first reference internal image-reference" href="../_images/colored_2.png"><img alt="../_images/colored_2.png" src="../_images/colored_2.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/colored_3.png"><img alt="../_images/colored_3.png" src="../_images/colored_3.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 </ul>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/colored.py"><tt class="xref download docutils literal"><span class="pre">colored.py</span></tt></a></p>
@@ -190,7 +195,7 @@
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  5.67 seconds</p>
+<p><strong>Total running time of the example:</strong>  5.93 seconds</p>
 </div>
 
 
