@@ -186,8 +186,8 @@ class WordCloud(object):
             if mask.ndim == 2:
                 boolean_mask = mask == 255
             elif mask.ndim == 3:
-                # "OR" the color channels
-                boolean_mask = np.sum(mask[:, :, :3] == 255, axis=-1)
+                # if all channels are white, mask out
+                boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
             else:
                 raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
             # the order of the cumsum's is important for speed ?!
