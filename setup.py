@@ -3,7 +3,7 @@ from Cython.Build import cythonize
 
 setup(
     name='wordcloud',
-    version='1.0.0',
+    version='1.1.0',
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     license='MIT',
