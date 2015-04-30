@@ -12,6 +12,7 @@ import re
 import sys
 import numpy as np
 from operator import itemgetter
+from platform import system
 
 from PIL import Image
 from PIL import ImageDraw
@@ -20,7 +21,10 @@ from .query_integral_image import query_integral_image
 
 item1 = itemgetter(1)
 
-FONT_PATH = os.environ.get("FONT_PATH", "/usr/share/fonts/truetype/droid/DroidSansMono.ttf")
+if system() == "Windows":
+    FONT_PATH = r"C:\Windows\Fonts\consola.ttf"
+else:
+    FONT_PATH = os.environ.get("FONT_PATH", "/usr/share/fonts/truetype/droid/DroidSansMono.ttf")
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
 
