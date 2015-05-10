@@ -131,6 +131,14 @@ class WordCloud(object):
         using scale instead of larger canvas size is significantly faster, but
         might lead to a coarser fit for the words.
 
+    min_size : int (default=4)
+        Smallest font size to use. Will stop when there is no more room in this
+        size.
+
+    font_step : int (default=2)
+        Step size for the font. font_step=1 might give a better fit but is
+        somewhat slower.
+
     max_words : number (default=200)
         The maximum number of words.
 
@@ -165,8 +173,9 @@ class WordCloud(object):
 
     def __init__(self, font_path=None, width=400, height=200, margin=5,
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
-                 color_func=random_color_func, max_words=200, stopwords=None,
-                 random_state=None, background_color='black', max_font_size=None):
+                 color_func=random_color_func, max_words=200, min_size=5,
+                 stopwords=None, random_state=None, background_color='black',
+                 max_font_size=None, font_step=2):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -182,6 +191,8 @@ class WordCloud(object):
         self.color_func = color_func
         self.max_words = max_words
         self.stopwords = stopwords
+        self.min_size = min_size
+        self.font_step = font_step
         if isinstance(random_state, int):
             random_state = Random(random_state)
         self.random_state = random_state
@@ -245,8 +256,8 @@ class WordCloud(object):
         else:
             boolean_mask = None
             height, width = self.height, self.width
-        #occupancy = IntegralOccupancyMap(height, width, boolean_mask)
-        occupancy = SeparableConvolutionMap(height, width, boolean_mask)
+        occupancy = IntegralOccupancyMap(height, width, boolean_mask)
+        #occupancy = SeparableConvolutionMap(height, width, boolean_mask)
 
         # create image
         img_grey = Image.new("L", (width, height))
@@ -281,9 +292,9 @@ class WordCloud(object):
                 if result is not None or font_size == 0:
                     break
                 # if we didn't find a place, make font smaller
-                font_size -= 1
+                font_size -= self.font_step
 
-            if font_size == 0:
+            if font_size < self.min_size:
                 # we were unable to draw any more
                 break
 
