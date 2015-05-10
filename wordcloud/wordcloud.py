@@ -25,6 +25,37 @@ STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
 
 
+class IntegralOccupancyMap(object):
+    def __init__(self, height, width, mask):
+        self.height = height
+        self.width = width
+        if mask is not None:
+            # the order of the cumsum's is important for speed ?!
+            self.integral = np.cumsum(np.cumsum(255 * mask, axis=1),
+                                      axis=0).astype(np.uint32)
+        else:
+            self.integral = np.zeros((height, width), dtype=np.uint32)
+
+    def sample_position(self, size_x, size_y, random_state=None):
+        return query_integral_image(self.integral, size_x, size_y, random_state)
+
+    def update(self, img_array, pos_x, pos_y):
+        partial_integral = np.cumsum(np.cumsum(img_array[pos_x:, pos_y:], axis=1),
+                                     axis=0)
+        # paste recomputed part into old image
+        # if x or y is zero it is a bit annoying
+        if pos_x > 0:
+            if pos_y > 0:
+                partial_integral += (self.integral[pos_x - 1, pos_y:]
+                                     - self.integral[pos_x - 1, pos_y - 1])
+            else:
+                partial_integral += self.integral[pos_x - 1, pos_y:]
+        if pos_y > 0:
+            partial_integral += self.integral[pos_x:, pos_y - 1][:, np.newaxis]
+
+        self.integral[pos_x:, pos_y:] = partial_integral
+
+
 def random_color_func(word=None, font_size=None, position=None,
                       orientation=None, font_path=None, random_state=None):
     """Random hue color generation.
@@ -190,11 +221,10 @@ class WordCloud(object):
                 boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
             else:
                 raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
-            # the order of the cumsum's is important for speed ?!
-            integral = np.cumsum(np.cumsum(boolean_mask * 255, axis=1), axis=0).astype(np.uint32)
         else:
+            boolean_mask = None
             height, width = self.height, self.width
-            integral = np.zeros((height, width), dtype=np.uint32)
+        occupancy = IntegralOccupancyMap(height, width, boolean_mask)
 
         # create image
         img_grey = Image.new("L", (width, height))
@@ -223,8 +253,9 @@ class WordCloud(object):
                 # get size of resulting text
                 box_size = draw.textsize(word)
                 # find possible places using integral image:
-                result = query_integral_image(integral, box_size[1] + self.margin,
-                                              box_size[0] + self.margin, random_state)
+                result = occupancy.sample_position(box_size[1] + self.margin,
+                                                   box_size[0] + self.margin,
+                                                   random_state)
                 if result is not None or font_size == 0:
                     break
                 # if we didn't find a place, make font smaller
@@ -252,20 +283,7 @@ class WordCloud(object):
                 img_array = np.asarray(img_grey) + boolean_mask
             # recompute bottom right
             # the order of the cumsum's is important for speed ?!
-            partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
-                                         axis=0)
-            # paste recomputed part into old image
-            # if x or y is zero it is a bit annoying
-            if x > 0:
-                if y > 0:
-                    partial_integral += (integral[x - 1, y:]
-                                         - integral[x - 1, y - 1])
-                else:
-                    partial_integral += integral[x - 1, y:]
-            if y > 0:
-                partial_integral += integral[x:, y - 1][:, np.newaxis]
-
-            integral[x:, y:] = partial_integral
+            occupancy.update(img_array, x, y)
 
         self.layout_ = list(zip(frequencies, font_sizes, positions, orientations, colors))
         return self

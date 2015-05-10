@@ -4,7 +4,8 @@ import array
 import numpy as np
 
 
-def query_integral_image(unsigned int[:,:] integral_image, int size_x, int size_y, random_state):
+def query_integral_image(unsigned int[:,:] integral_image, int size_x, int
+                         size_y, random_state):
     cdef int x = integral_image.shape[0]
     cdef int y = integral_image.shape[1]
     cdef int area, i, j
