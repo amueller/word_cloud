@@ -16,6 +16,8 @@ from operator import itemgetter
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+from scipy import ndimage
+
 from .query_integral_image import query_integral_image
 
 item1 = itemgetter(1)
@@ -23,6 +25,25 @@ item1 = itemgetter(1)
 FONT_PATH = os.environ.get("FONT_PATH", "/usr/share/fonts/truetype/droid/DroidSansMono.ttf")
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
+
+
+class SeparableConvolutionMap(object):
+    def __init__(self, height, width, mask):
+        if mask is not None:
+            self.image = 255 * mask
+        self.image = np.zeros((height, width), dtype=np.uint32)
+
+    def sample_position(self, size_x, size_y, random_state):
+        conf = ndimage.uniform_filter(self.image, (size_x, size_y),
+                                      mode='constant', cval=255)
+        where = np.where(conf == 0)
+        if len(where[0]) == 0:
+            return None
+        index = random_state.randint(0, len(where[0]) - 1)
+        return where[0][index] - size_x // 2, where[1][index] - size_y // 2
+
+    def update(self, img_array, pos_x, pos_y):
+        self.image = img_array
 
 
 class IntegralOccupancyMap(object):
@@ -36,7 +57,7 @@ class IntegralOccupancyMap(object):
         else:
             self.integral = np.zeros((height, width), dtype=np.uint32)
 
-    def sample_position(self, size_x, size_y, random_state=None):
+    def sample_position(self, size_x, size_y, random_state):
         return query_integral_image(self.integral, size_x, size_y, random_state)
 
     def update(self, img_array, pos_x, pos_y):
@@ -224,7 +245,8 @@ class WordCloud(object):
         else:
             boolean_mask = None
             height, width = self.height, self.width
-        occupancy = IntegralOccupancyMap(height, width, boolean_mask)
+        #occupancy = IntegralOccupancyMap(height, width, boolean_mask)
+        occupancy = SeparableConvolutionMap(height, width, boolean_mask)
 
         # create image
         img_grey = Image.new("L", (width, height))
