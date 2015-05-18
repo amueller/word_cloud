@@ -17,6 +17,7 @@ from platform import system
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+
 from .query_integral_image import query_integral_image
 
 item1 = itemgetter(1)
@@ -27,6 +28,37 @@ else:
     FONT_PATH = os.environ.get("FONT_PATH", "/usr/share/fonts/truetype/droid/DroidSansMono.ttf")
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
+
+
+class IntegralOccupancyMap(object):
+    def __init__(self, height, width, mask):
+        self.height = height
+        self.width = width
+        if mask is not None:
+            # the order of the cumsum's is important for speed ?!
+            self.integral = np.cumsum(np.cumsum(255 * mask, axis=1),
+                                      axis=0).astype(np.uint32)
+        else:
+            self.integral = np.zeros((height, width), dtype=np.uint32)
+
+    def sample_position(self, size_x, size_y, random_state):
+        return query_integral_image(self.integral, size_x, size_y, random_state)
+
+    def update(self, img_array, pos_x, pos_y):
+        partial_integral = np.cumsum(np.cumsum(img_array[pos_x:, pos_y:], axis=1),
+                                     axis=0)
+        # paste recomputed part into old image
+        # if x or y is zero it is a bit annoying
+        if pos_x > 0:
+            if pos_y > 0:
+                partial_integral += (self.integral[pos_x - 1, pos_y:]
+                                     - self.integral[pos_x - 1, pos_y - 1])
+            else:
+                partial_integral += self.integral[pos_x - 1, pos_y:]
+        if pos_y > 0:
+            partial_integral += self.integral[pos_x:, pos_y - 1][:, np.newaxis]
+
+        self.integral[pos_x:, pos_y:] = partial_integral
 
 
 def random_color_func(word=None, font_size=None, position=None,
@@ -83,6 +115,14 @@ class WordCloud(object):
         using scale instead of larger canvas size is significantly faster, but
         might lead to a coarser fit for the words.
 
+    min_font_size : int (default=4)
+        Smallest font size to use. Will stop when there is no more room in this
+        size.
+
+    font_step : int (default=1)
+        Step size for the font. font_step > 1 might speed up computation but
+        give a worse fit.
+
     max_words : number (default=200)
         The maximum number of words.
 
@@ -95,6 +135,7 @@ class WordCloud(object):
     max_font_size : int or None (default=None)
         Maximum font size for the largest word. If None, height of the image is
         used.
+
     mode: string (default="RGB")
         Transparent background will be generated when mode is "RGBA" and
         background_color is None.
@@ -118,11 +159,11 @@ class WordCloud(object):
     scaling heuristic.
     """
 
-    def __init__(self, font_path=None, width=400, height=200, margin=5,
+    def __init__(self, font_path=None, width=400, height=200, margin=2,
                  ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
-                 color_func=random_color_func, max_words=200, stopwords=None,
-                 random_state=None, background_color='black', max_font_size=None,
-                 mode="RGB"):
+                 color_func=random_color_func, max_words=200, min_font_size=4,
+                 stopwords=None, random_state=None, background_color='black',
+                 max_font_size=None, font_step=1, mode="RGB"):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -138,6 +179,8 @@ class WordCloud(object):
         self.color_func = color_func
         self.max_words = max_words
         self.stopwords = stopwords
+        self.min_font_size = min_font_size
+        self.font_step = font_step
         if isinstance(random_state, int):
             random_state = Random(random_state)
         self.random_state = random_state
@@ -199,11 +242,10 @@ class WordCloud(object):
                 boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
             else:
                 raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
-            # the order of the cumsum's is important for speed ?!
-            integral = np.cumsum(np.cumsum(boolean_mask * 255, axis=1), axis=0).astype(np.uint32)
         else:
+            boolean_mask = None
             height, width = self.height, self.width
-            integral = np.zeros((height, width), dtype=np.uint32)
+        occupancy = IntegralOccupancyMap(height, width, boolean_mask)
 
         # create image
         img_grey = Image.new("L", (width, height))
@@ -232,14 +274,15 @@ class WordCloud(object):
                 # get size of resulting text
                 box_size = draw.textsize(word)
                 # find possible places using integral image:
-                result = query_integral_image(integral, box_size[1] + self.margin,
-                                              box_size[0] + self.margin, random_state)
+                result = occupancy.sample_position(box_size[1] + self.margin,
+                                                   box_size[0] + self.margin,
+                                                   random_state)
                 if result is not None or font_size == 0:
                     break
                 # if we didn't find a place, make font smaller
-                font_size -= 1
+                font_size -= self.font_step
 
-            if font_size == 0:
+            if font_size < self.min_font_size:
                 # we were unable to draw any more
                 break
 
@@ -261,20 +304,7 @@ class WordCloud(object):
                 img_array = np.asarray(img_grey) + boolean_mask
             # recompute bottom right
             # the order of the cumsum's is important for speed ?!
-            partial_integral = np.cumsum(np.cumsum(img_array[x:, y:], axis=1),
-                                         axis=0)
-            # paste recomputed part into old image
-            # if x or y is zero it is a bit annoying
-            if x > 0:
-                if y > 0:
-                    partial_integral += (integral[x - 1, y:]
-                                         - integral[x - 1, y - 1])
-                else:
-                    partial_integral += integral[x - 1, y:]
-            if y > 0:
-                partial_integral += integral[x:, y - 1][:, np.newaxis]
-
-            integral[x:, y:] = partial_integral
+            occupancy.update(img_array, x, y)
 
         self.layout_ = list(zip(frequencies, font_sizes, positions, orientations, colors))
         return self
