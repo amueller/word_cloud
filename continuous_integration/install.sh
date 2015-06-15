@@ -41,7 +41,7 @@ elif [[ "$DISTRIB" == "ubuntu" ]]; then
     sudo apt-get install -qq python-numpy cython
 fi
 
-pip install -r requirements.txt --use-mirrors
+pip install -r requirements.txt
 
 python --version
 python -c "import numpy; print('numpy %s' % numpy.__version__)"
