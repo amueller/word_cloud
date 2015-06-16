@@ -79,7 +79,7 @@ class Palettes(dict):
     
     def update(self, *args, **kwargs):
         "Add all items from a dict containing valid palettes in one go."
-        for k, v in dict(*args, **kwargs).iteritems():
+        for k, v in dict(*args, **kwargs).items():
             if self.valid_rgb_palette(v):
                 self[k] = v
             else:
