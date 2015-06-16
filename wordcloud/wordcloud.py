@@ -550,7 +550,7 @@ class WordCloud(object):
             draw.text(pos, word, fill=color)
         return img
 
-    def recolor(self, random_state=None, color=None):
+    def recolor(self, random_state=None, color_func=None):
         """Recolor existing layout.
 
         Applying a new coloring is much faster than generating the whole wordcloud.
