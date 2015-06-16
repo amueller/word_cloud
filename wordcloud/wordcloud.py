@@ -61,6 +61,130 @@ class IntegralOccupancyMap(object):
         self.integral[pos_x:, pos_y:] = partial_integral
 
 
+class Palettes(dict):
+    "Palettes class, designed such that only valid palettes can be added."
+    
+    def __init__(self, *args, **kwargs):
+        self.update(*args, **kwargs)
+    
+    @staticmethod
+    def valid_rgb_tuple(t):
+        "Check if a tuple is a valid RGB tuple. I.e. length equals 3, and values between 0 and 255."
+        return len(t) == 3 and all(val in range(0,256) for val in t)
+    
+    @staticmethod
+    def valid_rgb_palette(palette):
+        "Check whether all RGB tuples in a palette are valid, and that there is at least one RGB tuple."
+        return len(palette) > 0 and all(valid_rgb_tuple(t) for t in palette)
+    
+    def update(self, *args, **kwargs):
+        "Add all items from a dict containing valid palettes in one go."
+        for k, v in dict(*args, **kwargs).iteritems():
+            if self.valid_rgb_palette(v):
+                self[k] = v
+            else:
+                raise ValueError("Not all RGB tuples have the correct format, " +
+                                 "should be 3-tuples with integer values between 0 and 255. " +
+                                 "The problem is with key: " + str(k))
+    
+    def add(self, palette):
+        """Add a new palette. Make sure it is valid!
+        Use Palettes.valid_rgb_palette to check."""
+        if self.valid_rgb_palette(palette):
+            try:
+                new_key = max(self.keys()) + 1
+            # ValueError arises when self.keys() is empty.
+            except ValueError:
+                new_key = 0
+            self[new_key] = palette
+            print("Added palette with key: " + str(new_key))
+        else:
+            raise ValueError("List is empty or not all RGB tuples have the correct format, "
+                             "should be 3-tuples with integer values between 0 and 255.")
+
+
+# Some palettes picked from www.colorcombos.com. Add your own using the class methods.
+palettes = Palettes({0: [(77, 137, 99), (105, 165, 131), (225, 179, 120),
+                        (224, 204, 151), (236, 121, 154), (159, 2, 81)],
+                        
+                    1: [(163, 30, 57), (72, 92, 90), (140, 156, 154),
+                        (157, 178, 177), (191, 207, 204), (214, 228, 225)],
+                        
+                    2: [(97, 148, 188), (165, 209, 243), (208, 234, 255),
+                        (228, 0, 27), (236, 236, 236), (96, 96, 96)],
+                        
+                    3: [(230, 84, 0), (116, 32, 104), (35, 68, 131), (12, 99, 124),
+                        (1, 137, 130), (71, 100, 117), (80, 84, 77)],
+                        
+                    4: [(2, 120, 120), (253, 182, 50), (43, 196, 68), (16, 197, 205),
+                        (158, 243, 235), (2, 120, 42), (242, 243, 158), (194, 35, 38)],
+                        
+                    5: [(33, 182, 168), (23, 127, 117), (182, 119, 33), (127, 23, 31), (182, 33, 45)],
+                    
+                    6: [(52, 152, 219), (68, 187, 255), (137, 127, 186), (113, 186, 81),
+                        (223, 85, 79), (252, 208, 54), (237, 87, 132), (255, 116, 22)],
+                    })
+
+def palette_color_func(word=None, font_size=None, position=None,
+                       orientation=None, font_path=None, random_state=None,
+                       palette=None):
+    """Color generation using color palettes.
+
+    Additional coloring method. Can be called using a predefined color palette,
+    or you can provide your own color palette.
+
+    Parameters
+    ----------
+    word, font_size, position, orientation  : ignored.
+
+    random_state : random.Random object or None, (default=None)
+        If a random object is given, this is used for generating random numbers.
+        
+    palette : integer, a list of RGB tuples or None.
+        If an integer i is given, we take the i-th color palette in the palettes dict.
+        If a list of RGB values is given, we use that.
+        If None, we take the 0-th palette in the palettes dict.
+    """
+    # Set defaults:
+    if random_state is None:
+        random_state = Random()
+    
+    if palette is None:
+        palette = 0
+    
+    # If palette is an index (that should be in the palettes dictionary)
+    if isinstance(palette, int):
+        # We'll assume that the index is in the dictionary:
+        try:
+            colors = palettes[palette]
+        # But if it's not, then the resulting KeyError is caught and we'll use a
+        # random palette (and print a warning instead):
+        except KeyError:
+            print('Warning: Palette not found! Using random palette.')
+            colors = random_state.choice(palettes.values())
+    
+    # If palette is not an index, but rather a list of RGB color values
+    elif isinstance(palette, list):
+        # If the list is a valid rgb palette
+        if Palettes.valid_rgb_palette(palette):
+            # Use the colors provided
+            colors = palette
+        # Else (if the RGB tuples are not valid)
+        else:
+            # Raise a ValueError with a relevant error message.
+            raise ValueError("Not all RGB tuples have the correct format, "
+                             "should be 3-tuples with integer values between 0 and 255.")
+    # Else (if the input has an unexpected type):
+    else:
+        # Raise a TypeError with a relevant error message.
+        raise TypeError("Palette should be an int between 0 and " +
+                        str(max(palettes.keys())) +
+                        ", or a list of RGB values.")
+    
+    # Return a random color from the chosen palette.
+    return random_state.choice(colors)
+
+
 def random_color_func(word=None, font_size=None, position=None,
                       orientation=None, font_path=None, random_state=None):
     """Random hue color generation.
@@ -426,7 +550,7 @@ class WordCloud(object):
             draw.text(pos, word, fill=color)
         return img
 
-    def recolor(self, random_state=None, color_func=None):
+    def recolor(self, random_state=None, color=None):
         """Recolor existing layout.
 
         Applying a new coloring is much faster than generating the whole wordcloud.
