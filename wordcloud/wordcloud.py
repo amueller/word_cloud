@@ -75,7 +75,7 @@ class Palettes(dict):
     @staticmethod
     def valid_rgb_palette(palette):
         "Check whether all RGB tuples in a palette are valid, and that there is at least one RGB tuple."
-        return len(palette) > 0 and all(valid_rgb_tuple(t) for t in palette)
+        return len(palette) > 0 and all(Palettes.valid_rgb_tuple(t) for t in palette)
     
     def update(self, *args, **kwargs):
         "Add all items from a dict containing valid palettes in one go."
