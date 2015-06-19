@@ -1,4 +1,10 @@
 language: python
+sudo: false
+addons:
+  apt:
+    packages:
+      # Only used by the DISTRIB="ubuntu" setting
+      - python-numpy
 virtualenv:
   system_site_packages: true
 env:

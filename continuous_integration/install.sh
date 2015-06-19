@@ -13,9 +13,6 @@ set -e
 export CC=gcc
 export CXX=g++
 
-sudo apt-get update -qq
-sudo apt-get install fonts-droid
-
 if [[ "$DISTRIB" == "conda" ]]; then
     # Deactivate the travis-provided virtual environment and setup a
     # conda-based environment instead
@@ -31,14 +28,16 @@ if [[ "$DISTRIB" == "conda" ]]; then
 
     # Configure the conda environment and put it in the path using the
     # provided versions
-    conda create -n testenv --yes python=$PYTHON_VERSION pip nose cython \
+    conda create -n testenv --yes python=$PYTHON_VERSION pip nose \
         numpy=$NUMPY_VERSION
     source activate testenv
 
 
 elif [[ "$DISTRIB" == "ubuntu" ]]; then
     # Use standard ubuntu packages in their default version
-    sudo apt-get install -qq python-numpy cython
+    virtualenv --system-site-packages testvenv
+    source testvenv/bin/activate
+    pip install nose
 fi
 
 pip install -r requirements.txt
@@ -46,5 +45,3 @@ pip install -r requirements.txt
 python --version
 python -c "import numpy; print('numpy %s' % numpy.__version__)"
 python setup.py build_ext --inplace
-ls /usr/share/fonts/truetype/
-ls /usr/share/fonts/truetype/droid
