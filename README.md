@@ -93,3 +93,7 @@ not iterable` problem][intprob] also showcased on the blog.
 [imgur-wordnuvola]: http://defacto133.imgur.com/all/
 [intprob]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html#bc_0_28B
 
+
+## Licensing
+The wordcloud library is MIT licenced, but contains DroidSansMono.ttf, a true type font by Google, that is apache licensed.
+The font is by no means integral, and any other font can be used by setting the ``font_path`` variable when creating a ``WordCloud`` object.
