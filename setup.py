@@ -10,5 +10,5 @@ setup(
     ext_modules=[Extension("wordcloud/query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
     packages=['wordcloud'],
-    package_data={'wordcloud': ['stopwords']}
+    package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
 )
