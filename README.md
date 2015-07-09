@@ -11,9 +11,9 @@ post][blog-post] or the [website][website]
 
 Fast install:
 
-    sudo pip install git+git://github.com/amueller/word_cloud.git
+    pip install wordcloud
 
-Otherwise, get this package:
+For a manual install get this package:
     
     wget https://github.com/amueller/word_cloud/archive/master.zip
     unzip master.zip
@@ -26,7 +26,7 @@ Install the requirements:
 
 Install the package:
 
-    sudo python setup.py install
+    python setup.py install
 
 Note that if you are not on Ubuntu, you need to pass a ``font_path`` to the WordCloud object ([docs](http://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html#wordcloud.WordCloud)) to point to
 some existing font.
