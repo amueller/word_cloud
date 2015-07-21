@@ -7,7 +7,7 @@ setup(
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     license='MIT',
-    ext_modules=[Extension("wordcloud/query_integral_image",
+    ext_modules=[Extension("wordcloud.query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
     packages=['wordcloud'],
     package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
