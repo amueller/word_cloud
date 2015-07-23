@@ -7,6 +7,12 @@ word_cloud
 A little word cloud generator in Python. Read more about it on the [blog
 post][blog-post] or the [website][website]
 
+This fork adds a tiny hack which allows words to be grouped into small 
+phrases. To do this the word source is pre-parsed to insert underscores
+in place of spaces in the phrases you wish to have treated as a single 
+word. The 1 line of code which is changed results in these underscores
+being removed when the phrase is written into the word cloud.
+
 ## Installation
 
 Fast install:
@@ -31,8 +37,13 @@ Install the package:
 Note that if you are not on Ubuntu, you need to pass a ``font_path`` to the WordCloud object ([docs](http://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html#wordcloud.WordCloud)) to point to
 some existing font.
 
+## Phrase Example
 
-## Examples
+Check out [examples/phrases.py][phrases] for an example based on the original simple demo. A sample output is:
+
+![Phrases](examples/phrases.png)
+
+## Original Examples
 
 Check out [examples/simple.py][simple] for a short intro. A sample output is:
 
