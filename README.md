@@ -93,6 +93,7 @@ not iterable` problem][intprob] also showcased on the blog.
 
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [website]: http://amueller.github.io/word_cloud/
+[phrases]: examples/phrases.py
 [simple]: examples/simple.py
 [masked]: examples/masked.py
 [reddit-cloud]: https://github.com/amueller/reddit-cloud
