@@ -39,7 +39,7 @@ some existing font.
 
 ## Phrase Example
 
-Check out [examples/phrases.py][phrases] for an example based on the original simple demo. A sample output is:
+Check out [examples/phrases.py][phrases] for an example based on the original simple demo. A sample output is: 
 
 ![Phrases](examples/phrases.png)
 
