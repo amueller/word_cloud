@@ -94,9 +94,6 @@ class WordCloud(object):
     height : int (default=200)
         Height of the canvas.
 
-    ranks_only : boolean (default=False)
-        Only use the rank of the words, not the actual counts.
-
     prefer_horizontal : float (default=0.90)
         The ratio of times to try horizontal fitting as opposed to vertical.
 
@@ -133,9 +130,16 @@ class WordCloud(object):
         Maximum font size for the largest word. If None, height of the image is
         used.
 
-    mode: string (default="RGB")
+    mode : string (default="RGB")
         Transparent background will be generated when mode is "RGBA" and
         background_color is None.
+
+    relative_scaling : float (default=0)
+        Importance of relative word frequencies for font-size.
+        With relative_scaling=0, only word-ranks are considered.
+        With relative_scaling=1, a word that is twice as frequent will have twice the size.
+        If you want to consider the word frequencies and not only their rank, relative_scaling
+        around .5 often looks good.
 
     Attributes
     ----------
@@ -157,10 +161,10 @@ class WordCloud(object):
     """
 
     def __init__(self, font_path=None, width=400, height=200, margin=2,
-                 ranks_only=False, prefer_horizontal=0.9, mask=None, scale=1,
+                 ranks_only=None, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
-                 max_font_size=None, font_step=1, mode="RGB"):
+                 max_font_size=None, font_step=1, mode="RGB", relative_scaling=0):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
@@ -169,7 +173,6 @@ class WordCloud(object):
         self.width = width
         self.height = height
         self.margin = margin
-        self.ranks_only = ranks_only
         self.prefer_horizontal = prefer_horizontal
         self.mask = mask
         self.scale = scale
@@ -186,6 +189,13 @@ class WordCloud(object):
             max_font_size = height
         self.max_font_size = max_font_size
         self.mode = mode
+        if relative_scaling < 0 or relative_scaling > 1:
+            raise ValueError("relative_scaling needs to be between 0 and 1, got %f."
+                             % relative_scaling)
+        self.relative_scaling = relative_scaling
+        if ranks_only is not None:
+            warnings.warn("ranks_only is deprecated and will be removed as"
+                          " it had no effect. Look into relative_scaling.", DeprecationWarning)
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -266,9 +276,10 @@ class WordCloud(object):
 
         # start drawing grey image
         for word, freq in frequencies:
-            # alternative way to set the font size
-            if not self.ranks_only:
-                font_size = freq / float(last_freq) * font_size
+            # select the font size
+            rs = self.relative_scaling
+            if rs != 0:
+                font_size = int(round((rs * (freq / float(last_freq)) + (1 - rs)) * font_size))
             while True:
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
