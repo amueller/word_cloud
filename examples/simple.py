@@ -17,4 +17,10 @@ wordcloud = WordCloud().generate(text)
 # Open a plot of the generated image.
 plt.imshow(wordcloud)
 plt.axis("off")
+
+# take relative word frequencies into account, lower max_font_size
+wordcloud = WordCloud(max_font_size=40, relative_scaling=.5).generate(text)
+plt.figure()
+plt.imshow(wordcloud)
+plt.axis("off")
 plt.show()
