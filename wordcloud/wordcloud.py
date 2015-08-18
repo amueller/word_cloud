@@ -262,12 +262,13 @@ class WordCloud(object):
         font_sizes, positions, orientations, colors = [], [], [], []
 
         font_size = self.max_font_size
+        last_freq = 1.
 
         # start drawing grey image
-        for word, count in frequencies:
+        for word, freq in frequencies:
             # alternative way to set the font size
             if not self.ranks_only:
-                font_size = min(font_size, int(100 * np.log(count + 100)))
+                font_size = freq / float(last_freq) * font_size
             while True:
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
@@ -313,6 +314,7 @@ class WordCloud(object):
             # recompute bottom right
             # the order of the cumsum's is important for speed ?!
             occupancy.update(img_array, x, y)
+            last_freq = freq
 
         self.layout_ = list(zip(frequencies, font_sizes, positions, orientations, colors))
         return self
