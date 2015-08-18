@@ -21,7 +21,8 @@ from .query_integral_image import query_integral_image
 
 item1 = itemgetter(1)
 
-FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__), "DroidSansMono.ttf"))
+FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
+                                                     "DroidSansMono.ttf"))
 STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
                                                       'stopwords')).read().split('\n')])
 
@@ -215,6 +216,17 @@ class WordCloud(object):
         self
 
         """
+        # make sure frequencies are sorted and normalized
+        frequencies = sorted(frequencies, key=lambda x: x[1], reverse=True)
+        frequencies = frequencies[:self.max_words]
+        # largest entry will be 1
+        max_frequency = float(np.max([freq for word, freq in frequencies]))
+
+        for i, (word, freq) in enumerate(frequencies):
+            frequencies[i] = word, freq / max_frequency
+
+        self.words_ = frequencies
+
         if self.random_state is not None:
             random_state = self.random_state
         else:
@@ -361,27 +373,19 @@ class WordCloud(object):
                     d3[key_singular] = val_singular + val_plural
                     del d3[key]
 
-        words = sorted(d3.items(), key=item1, reverse=True)
-        words = words[:self.max_words]
-        maximum = float(max(d3.values()))
-        for i, (word, count) in enumerate(words):
-            words[i] = word, count / maximum
-
-        self.words_ = words
-
-        return words
+        return d3.items()
 
     def generate_from_text(self, text):
         """Generate wordcloud from text.
 
-        Calls process_text and fit_words.
+        Calls process_text and generate_from_frequencies.
 
         Returns
         -------
         self
         """
-        self.process_text(text)
-        self.fit_words(self.words_)
+        words = self.process_text(text)
+        self.generate_from_frequencies(words)
         return self
 
     def generate(self, text):
@@ -389,7 +393,7 @@ class WordCloud(object):
 
         Alias to generate_from_text.
 
-        Calls process_text and fit_words.
+        Calls process_text and generate_from_frequencies.
 
         Returns
         -------
