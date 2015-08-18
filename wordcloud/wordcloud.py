@@ -220,10 +220,12 @@ class WordCloud(object):
         frequencies = sorted(frequencies, key=lambda x: x[1], reverse=True)
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
-        max_frequency = np.max([freq for word, freq in frequencies])
+        max_frequency = float(np.max([freq for word, freq in frequencies]))
 
         for i, (word, freq) in enumerate(frequencies):
             frequencies[i] = word, freq / max_frequency
+
+        self.words_ = frequencies
 
         if self.random_state is not None:
             random_state = self.random_state
@@ -371,9 +373,7 @@ class WordCloud(object):
                     d3[key_singular] = val_singular + val_plural
                     del d3[key]
 
-        self.words_ = d3.items()
-
-        return self.words_
+        return d3.items()
 
     def generate_from_text(self, text):
         """Generate wordcloud from text.
@@ -384,8 +384,8 @@ class WordCloud(object):
         -------
         self
         """
-        self.process_text(text)
-        self.generate_from_frequencies(self.words_)
+        words = self.process_text(text)
+        self.generate_from_frequencies(words)
         return self
 
     def generate(self, text):
