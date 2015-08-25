@@ -6,7 +6,8 @@ Using a mask you can generate wordclouds in arbitrary shapes.
 """
 
 from os import path
-from scipy.misc import imread
+import Image
+import numpy as np
 import matplotlib.pyplot as plt
 
 from wordcloud import WordCloud, STOPWORDS
@@ -19,7 +20,7 @@ text = open(path.join(d, 'alice.txt')).read()
 # read the mask image
 # taken from
 # http://www.stencilry.org/stencils/movies/alice%20in%20wonderland/255fk.jpg
-alice_mask = imread(path.join(d, "alice_mask.png"))
+alice_mask = np.array(Image.open(path.join(d, "alice_mask.png")))
 
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_mask,
                stopwords=STOPWORDS.add("said"))
