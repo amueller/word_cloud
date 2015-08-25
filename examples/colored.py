@@ -11,7 +11,8 @@ but make sure the image shapes line up.
 """
 
 from os import path
-from scipy.misc import imread
+import Image
+import numpy as np
 import matplotlib.pyplot as plt
 
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
@@ -23,7 +24,7 @@ text = open(path.join(d, 'alice.txt')).read()
 
 # read the mask / color image
 # taken from http://jirkavinse.deviantart.com/art/quot-Real-Life-quot-Alice-282261010
-alice_coloring = imread(path.join(d, "alice_color.png"))
+alice_coloring = np.array(Image.open(path.join(d, "alice_color.png")))
 
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_coloring,
                stopwords=STOPWORDS.add("said"),

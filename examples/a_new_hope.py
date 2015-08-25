@@ -5,8 +5,9 @@ Using custom colors
 Using the recolor method and custom coloring functions.
 """
 
+import numpy as np
+import Image
 from os import path
-from scipy.misc import imread
 import matplotlib.pyplot as plt
 import random
 
@@ -21,7 +22,7 @@ d = path.dirname(__file__)
 # read the mask image
 # taken from
 # http://www.stencilry.org/stencils/movies/star%20wars/storm-trooper.gif
-mask = imread(path.join(d, "stormtrooper_mask.png"))
+mask = np.array(Image.open(path.join(d, "stormtrooper_mask.png")))
 
 # movie script of "a new hope"
 # http://www.imsdb.com/scripts/Star-Wars-A-New-Hope.html
