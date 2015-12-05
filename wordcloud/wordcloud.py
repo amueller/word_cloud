@@ -359,9 +359,9 @@ class WordCloud(object):
                 continue
 
             # Look in lowercase dict.
-            if word_lower in d:
+            try:
                 d2 = d[word_lower]
-            else:
+            except KeyError:
                 d2 = {}
                 d[word_lower] = d2
 
