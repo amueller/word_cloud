@@ -368,21 +368,23 @@ class WordCloud(object):
             # Look in any case dict.
             d2[word] = d2.get(word, 0) + 1
 
+        # merge plurals into the singular count (simple cases only)
+        for key in list(d.keys()):
+            if key.endswith('s'):
+                key_singular = key[:-1]
+                if key_singular in d:
+                    dict_plural = d[key]
+                    dict_singular = d[key_singular]
+                    for word, count in dict_plural.items():
+                        singular = word[:-1]
+                        dict_singular[singular] = dict_singular.get(singular, 0) + count
+                    del d[key]
+
         d3 = {}
         for d2 in d.values():
             # Get the most popular case.
             first = max(d2.items(), key=item1)[0]
             d3[first] = sum(d2.values())
-
-        # merge plurals into the singular count (simple cases only)
-        for key in list(d3.keys()):
-            if key.endswith('s'):
-                key_singular = key[:-1]
-                if key_singular in d3:
-                    val_plural = d3[key]
-                    val_singular = d3[key_singular]
-                    d3[key_singular] = val_singular + val_plural
-                    del d3[key]
 
         return d3.items()
 
