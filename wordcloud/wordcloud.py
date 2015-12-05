@@ -227,13 +227,12 @@ class WordCloud(object):
 
         """
         # make sure frequencies are sorted and normalized
-        frequencies = sorted(frequencies, key=lambda x: x[1], reverse=True)
+        frequencies = sorted(frequencies, key=item1, reverse=True)
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
-        max_frequency = float(np.max([freq for word, freq in frequencies]))
+        max_frequency = float(frequencies[0][1])
 
-        for i, (word, freq) in enumerate(frequencies):
-            frequencies[i] = word, freq / max_frequency
+        frequencies = [ (word, freq / max_frequency) for word, freq in frequencies ]
 
         self.words_ = frequencies
 
