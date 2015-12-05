@@ -6,7 +6,7 @@ Using the recolor method and custom coloring functions.
 """
 
 import numpy as np
-import Image
+from PIL import Image
 from os import path
 import matplotlib.pyplot as plt
 import random

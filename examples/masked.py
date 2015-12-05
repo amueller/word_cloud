@@ -6,7 +6,7 @@ Using a mask you can generate wordclouds in arbitrary shapes.
 """
 
 from os import path
-import Image
+from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 

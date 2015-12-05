@@ -289,9 +289,8 @@ class WordCloud(object):
                     orientation = Image.ROTATE_90
                 transposed_font = ImageFont.TransposedFont(font,
                                                            orientation=orientation)
-                draw.setfont(transposed_font)
                 # get size of resulting text
-                box_size = draw.textsize(word)
+                box_size = draw.textsize(word, font=transposed_font)
                 # find possible places using integral image:
                 result = occupancy.sample_position(box_size[1] + self.margin,
                                                    box_size[0] + self.margin,
@@ -307,7 +306,7 @@ class WordCloud(object):
 
             x, y = np.array(result) + self.margin // 2
             # actually draw the text
-            draw.text((y, x), word, fill="white")
+            draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
@@ -433,9 +432,8 @@ class WordCloud(object):
             font = ImageFont.truetype(self.font_path, font_size * self.scale)
             transposed_font = ImageFont.TransposedFont(font,
                                                        orientation=orientation)
-            draw.setfont(transposed_font)
             pos = (position[1] * self.scale, position[0] * self.scale)
-            draw.text(pos, word, fill=color)
+            draw.text(pos, word, fill=color, font=transposed_font)
         return img
 
     def recolor(self, random_state=None, color_func=None):

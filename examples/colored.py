@@ -11,7 +11,7 @@ but make sure the image shapes line up.
 """
 
 from os import path
-import Image
+from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
