@@ -9,6 +9,7 @@ setup(
     license='MIT',
     ext_modules=[Extension("wordcloud.query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
+    scripts=['wordcloud/wordcloud_cli.py'],
     packages=['wordcloud'],
     package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
 )
