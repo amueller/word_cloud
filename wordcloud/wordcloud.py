@@ -350,7 +350,7 @@ class WordCloud(object):
         d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
-        for word in re.findall(r"\w[\w']*", text, flags=flags):
+        for word in re.findall(r"\w[\w']+", text, flags=flags):
             if word.isdigit():
                 continue
 
