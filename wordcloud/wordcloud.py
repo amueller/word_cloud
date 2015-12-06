@@ -227,13 +227,12 @@ class WordCloud(object):
 
         """
         # make sure frequencies are sorted and normalized
-        frequencies = sorted(frequencies, key=lambda x: x[1], reverse=True)
+        frequencies = sorted(frequencies, key=item1, reverse=True)
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
-        max_frequency = float(np.max([freq for word, freq in frequencies]))
+        max_frequency = float(frequencies[0][1])
 
-        for i, (word, freq) in enumerate(frequencies):
-            frequencies[i] = word, freq / max_frequency
+        frequencies = [ (word, freq / max_frequency) for word, freq in frequencies ]
 
         self.words_ = frequencies
 
@@ -290,9 +289,8 @@ class WordCloud(object):
                     orientation = Image.ROTATE_90
                 transposed_font = ImageFont.TransposedFont(font,
                                                            orientation=orientation)
-                draw.setfont(transposed_font)
                 # get size of resulting text
-                box_size = draw.textsize(word)
+                box_size = draw.textsize(word, font=transposed_font)
                 # find possible places using integral image:
                 result = occupancy.sample_position(box_size[1] + self.margin,
                                                    box_size[0] + self.margin,
@@ -308,7 +306,7 @@ class WordCloud(object):
 
             x, y = np.array(result) + self.margin // 2
             # actually draw the text
-            draw.text((y, x), word, fill="white")
+            draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
@@ -361,30 +359,32 @@ class WordCloud(object):
                 continue
 
             # Look in lowercase dict.
-            if word_lower in d:
+            try:
                 d2 = d[word_lower]
-            else:
+            except KeyError:
                 d2 = {}
                 d[word_lower] = d2
 
             # Look in any case dict.
             d2[word] = d2.get(word, 0) + 1
 
+        # merge plurals into the singular count (simple cases only)
+        for key in list(d.keys()):
+            if key.endswith('s'):
+                key_singular = key[:-1]
+                if key_singular in d:
+                    dict_plural = d[key]
+                    dict_singular = d[key_singular]
+                    for word, count in dict_plural.items():
+                        singular = word[:-1]
+                        dict_singular[singular] = dict_singular.get(singular, 0) + count
+                    del d[key]
+
         d3 = {}
         for d2 in d.values():
             # Get the most popular case.
             first = max(d2.items(), key=item1)[0]
             d3[first] = sum(d2.values())
-
-        # merge plurals into the singular count (simple cases only)
-        for key in list(d3.keys()):
-            if key.endswith('s'):
-                key_singular = key[:-1]
-                if key_singular in d3:
-                    val_plural = d3[key]
-                    val_singular = d3[key_singular]
-                    d3[key_singular] = val_singular + val_plural
-                    del d3[key]
 
         return d3.items()
 
@@ -434,9 +434,8 @@ class WordCloud(object):
             font = ImageFont.truetype(self.font_path, font_size * self.scale)
             transposed_font = ImageFont.TransposedFont(font,
                                                        orientation=orientation)
-            draw.setfont(transposed_font)
             pos = (position[1] * self.scale, position[0] * self.scale)
-            draw.text(pos, word, fill=color)
+            draw.text(pos, word, fill=color, font=transposed_font)
         return img
 
     def recolor(self, random_state=None, color_func=None):
