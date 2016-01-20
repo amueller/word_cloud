@@ -10,10 +10,12 @@ from random import Random
 import os
 import re
 import sys
+import colorsys
 import numpy as np
 from operator import itemgetter
 
 from PIL import Image
+from PIL import ImageColor
 from PIL import ImageDraw
 from PIL import ImageFont
 
@@ -76,6 +78,37 @@ def random_color_func(word=None, font_size=None, position=None,
     if random_state is None:
         random_state = Random()
     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
+
+def get_single_color_func(color):
+    """Create a color function which returns a single hue and saturation with.
+    different values (HSV). Accepted values are color strings as usable by PIL/Pillow.
+
+    >>> color_func1 = get_single_color_func('deepskyblue')
+    >>> color_func2 = get_single_color_func('#00b4d2')
+    """
+    old_r, old_g, old_b = ImageColor.getrgb(color)
+    rgb_max = 255.
+    h, s, v = colorsys.rgb_to_hsv(old_r/rgb_max, old_g/rgb_max, old_b/rgb_max)
+    def single_color_func(word=None, font_size=None, position=None,
+                          orientation=None, font_path=None, random_state=None):
+        """Random color generation.
+
+        Additional coloring method. It picks a random value with hue and
+        saturation based on the color given to the generating function.
+
+        Parameters
+        ----------
+        word, font_size, position, orientation  : ignored.
+
+        random_state : random.Random object or None, (default=None)
+          If a random object is given, this is used for generating random numbers.
+
+        """
+        if random_state is None:
+            random_state = Random()
+        r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
+        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max, b * rgb_max)
+    return single_color_func
 
 
 class WordCloud(object):
