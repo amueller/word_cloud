@@ -1,8 +1,7 @@
 import argparse
 import inspect
-import wordcloud_cli
+from wordcloud import wordcloud_cli as cli
 import wordcloud as wc
-import sys
 from collections import namedtuple
 from mock import patch, MagicMock
 from nose.tools import assert_equal, assert_true, assert_in
@@ -50,10 +49,10 @@ def test_main_passes_arguments_through():
     args.imagefile = NamedTemporaryFile()
     args.text = 'some long text'
 
-    with patch('wordcloud_cli.wc.WordCloud', autospec=True) as mock_word_cloud:
+    with patch('wordcloud.wordcloud_cli.wc.WordCloud', autospec=True) as mock_word_cloud:
         instance = mock_word_cloud.return_value
         instance.to_image.return_value = MagicMock()
-        wordcloud_cli.main(args)
+        cli.main(args)
 
     posargs, kwargs = mock_word_cloud.call_args
     for option in all_arguments():
@@ -63,7 +62,7 @@ def test_main_passes_arguments_through():
 def check_argument(name, result_name, value):
     text = NamedTemporaryFile()
 
-    args = wordcloud_cli.parse_args(['--text', text.name, '--' + name, str(value)])
+    args = cli.parse_args(['--text', text.name, '--' + name, str(value)])
     assert_in(result_name, vars(args))
 
 
@@ -71,8 +70,8 @@ def check_argument_type(name, value):
     text = NamedTemporaryFile()
 
     try:
-        with patch('wordcloud_cli.sys.stderr') as mock_stdout:
-            args = wordcloud_cli.parse_args(['--text', text.name, '--' + name, str(value)])
+        with patch('sys.stderr') as mock_stderr:
+            args = cli.parse_args(['--text', text.name, '--' + name, str(value)])
         raise AssertionError('argument "{}" was accepted even though the type did not match'.format(name))
     except SystemExit:
         pass
@@ -96,7 +95,7 @@ def test_check_duplicate_color_error():
     text_file = NamedTemporaryFile()
 
     try:
-        wordcloud_cli.parse_args(['--color', 'red', '--colormask', color_mask_file.name, '--text', text_file.name])
+        cli.parse_args(['--color', 'red', '--colormask', color_mask_file.name, '--text', text_file.name])
         raise AssertionError('parse_args(...) didn\'t raise')
     except ValueError as e:
         assert_true('specify either' in str(e), msg='expecting the correct error message, instead got: ' + str(e))
@@ -105,5 +104,5 @@ def test_check_duplicate_color_error():
 def test_parse_args_defaults_to_random_color():
     text = NamedTemporaryFile()
 
-    args = wordcloud_cli.parse_args(['--text', text.name])
+    args = cli.parse_args(['--text', text.name])
     assert_equal(args.color_func, wc.random_color_func)
