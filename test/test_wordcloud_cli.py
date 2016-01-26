@@ -1,5 +1,4 @@
 import argparse
-import inspect
 from wordcloud import wordcloud_cli as cli
 import wordcloud as wc
 from collections import namedtuple
@@ -31,22 +30,12 @@ def all_arguments():
     return arguments
 
 
-def test_argument_spec_matches_to_constructor_args():
-    args = argparse.Namespace()
-    for option in all_arguments():
-        setattr(args, option.init_name, option.pass_value)
-
-    supported_args = inspect.getargspec(wc.WordCloud.__init__).args
-    supported_args.remove('self')
-    for arg_name in vars(args).keys():
-        assert_in(arg_name, supported_args)
-
-
 def test_main_passes_arguments_through():
     args = argparse.Namespace()
     for option in all_arguments():
         setattr(args, option.init_name, option.pass_value)
     args.imagefile = NamedTemporaryFile()
+    args.imagefile.buffer = MagicMock()
     args.text = 'some long text'
 
     with patch('wordcloud.wordcloud_cli.wc.WordCloud', autospec=True) as mock_word_cloud:

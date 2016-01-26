@@ -10,7 +10,6 @@ import argparse
 import wordcloud as wc
 import numpy as np
 import sys
-import io
 from PIL import Image
 
 def main(args):
@@ -20,10 +19,9 @@ def main(args):
         color_func=args.color_func, background_color=args.background_color).generate(args.text)
     image = wordcloud.to_image()
 
-    b = io.BytesIO()
-    image.save(b, format='png')
     with args.imagefile:
-        args.imagefile.write(b.getvalue())
+        out = args.imagefile if sys.version < '3' else args.imagefile.buffer
+        image.save(out, format='png')
 
 def parse_args(arguments):
     prog = 'python wordcloud_cli.py'
