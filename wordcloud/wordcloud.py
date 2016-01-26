@@ -460,14 +460,14 @@ class WordCloud(object):
         else:
             height, width = self.height, self.width
 
-        img = Image.new(self.mode, (width * self.scale, height * self.scale),
+        img = Image.new(self.mode, (int(width * self.scale), int(height * self.scale)),
                         self.background_color)
         draw = ImageDraw.Draw(img)
         for (word, count), font_size, position, orientation, color in self.layout_:
-            font = ImageFont.truetype(self.font_path, font_size * self.scale)
+            font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
             transposed_font = ImageFont.TransposedFont(font,
                                                        orientation=orientation)
-            pos = (position[1] * self.scale, position[0] * self.scale)
+            pos = (int(position[1] * self.scale), int(position[0] * self.scale))
             draw.text(pos, word, fill=color, font=transposed_font)
         return img
 
