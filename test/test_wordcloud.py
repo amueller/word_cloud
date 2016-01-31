@@ -160,7 +160,6 @@ def test_single_color_func_grey():
     assert_equal(red_function(random_state=random), 'rgb(181, 181, 181)')
     assert_equal(red_function(random_state=random), 'rgb(56, 56, 56)')
 
-
 def check_parameters():
     # check that parameters are actually used
     pass
