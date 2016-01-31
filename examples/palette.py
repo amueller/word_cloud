@@ -22,12 +22,12 @@ text = open(path.join(d, 'constitution.txt')).read()
 palette_imagefile =  path.join(d, 'cheeremo.jpg')
 ipc_from_filename = ImagePaletteGenerator().add_image(palette_imagefile, 5)
 
+f, axarr = plt.subplots(nrows=3, ncols=1,figsize=(192,108), dpi=100)
 # Generate a word cloud image
 wordcloud = WordCloud().generate(text)
 wordcloud.recolor(color_func=ipc_from_filename)
-plt.subplot(3, 1, 1)
-plt.imshow(wordcloud)
-plt.axis("off")
+axarr[0].imshow(wordcloud)
+axarr[0].set_title("Palette A")
 
 # Create palette from array
 palette_image =  np.array(Image.open(path.join(d, 'vintage.jpg')))
@@ -35,9 +35,8 @@ ipc_from_array = ImagePaletteGenerator().add_image(palette_image,5)
 wordcloud.recolor(color_func=ipc_from_array)
 # Display the generated image:
 # the matplotlib way:
-plt.subplot(3, 1, 2)
-plt.imshow(wordcloud)
-plt.axis("off")
+axarr[1].imshow(wordcloud)
+axarr[1].set_title("Palette B")
 
 # Create palette from multiple images
 palette_imagefile_emo =  path.join(d, 'cheeremo.jpg')
@@ -47,9 +46,12 @@ ipc_from_multiple_files = ImagePaletteGenerator()\
     .add_image(palette_imagefile_emo,5)\
     .shuffle_colors()
 wordcloud.recolor(color_func=ipc_from_multiple_files)
-plt.subplot(3, 1, 3)
-plt.imshow(wordcloud)
-plt.axis("off")
+axarr[2].imshow(wordcloud)
+axarr[2].set_title("Palette A+B Shuffled")
+
+for ax in axarr:
+    ax.axis("off")
+plt.tight_layout()
 
 # The pil way (if you don't have matplotlib)
 #image = wordcloud.to_image()
