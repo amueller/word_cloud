@@ -14,14 +14,10 @@ class ImagePaletteGenerator(object):
     are extracted and sorted by frequency. The words will be
     colored starting wit the most used color in the image.
 
-    After construction, the object acts as a callable that can be passed as
+    After construction, the object is to be filled with image colors
+    and further acts as a callable that can be passed as
     color_func to the word cloud constructor or to the recolor method.
 
-    Parameters
-    ----------
-    images : multiple nd-array, shape (height, width, 3) or multiple filenames
-        Image to use to generate word colors. Alpha channels are ignored.
-        This should be the same size as the canvas. for the wordcloud.
     """
 
     def __init__(self):
@@ -29,6 +25,18 @@ class ImagePaletteGenerator(object):
         self.ucolors=[]
 
     def add_image(self, image, max_colors = np.inf):
+        """Add the colors of an image by filename or image nd-array
+
+        Parameters
+        ----------
+        image : A string containing the image path or a nd-array, shape (height, width, 3).
+        Alpha channels are ignored.
+        max_colors : The n most used colors in the image that are to be added to the palette.
+
+        Returns
+        -------
+        self : The object to allow chaining.
+        """
         if isinstance(image, str):
             if os.path.isfile(image):
                 try:
@@ -50,9 +58,18 @@ class ImagePaletteGenerator(object):
         else:
             self.ucolors += colors
         return self
-        # self.ucolors = Counter([tuple(colors) for image in image_arrays for i in image for colors in i]).most_common()
 
     def shuffle_colors(self, seed = 42):
+        """Shuffle the colors of the palette
+
+        Parameters
+        ----------
+        seed : A custom seed.
+
+        Returns
+        -------
+        self : The object to allow chaining.
+        """
         random.seed(seed)
         random.shuffle(self.ucolors)
         return self
