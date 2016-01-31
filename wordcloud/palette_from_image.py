@@ -3,6 +3,8 @@ from PIL import ImageFont
 from PIL import Image
 from collections import Counter
 import os.path
+import random
+
 
 
 class ImagePaletteGenerator(object):
@@ -50,6 +52,10 @@ class ImagePaletteGenerator(object):
         return self
         # self.ucolors = Counter([tuple(colors) for image in image_arrays for i in image for colors in i]).most_common()
 
+    def shuffle_colors(self, seed = 42):
+        random.seed(seed)
+        random.shuffle(self.ucolors)
+        return self
 
     def __call__(self, word, font_size, font_path, position, orientation, **kwargs):
         """Generate a color for a given word using a fixed image."""
