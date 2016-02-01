@@ -1,12 +1,13 @@
 import argparse
-import inspect
-from wordcloud import wordcloud_cli as cli
-import wordcloud as wc
+import os
 from collections import namedtuple
-from mock import patch, MagicMock
-from nose.tools import assert_equal, assert_true, assert_in
-
 from tempfile import NamedTemporaryFile
+
+import wordcloud as wc
+from wordcloud import wordcloud_cli as cli
+from mock import patch
+from nose.tools import assert_equal, assert_greater, assert_true, assert_in, assert_not_in
+
 
 temp = NamedTemporaryFile()
 ArgOption = namedtuple('ArgOption', ['cli_name', 'init_name', 'pass_value', 'fail_value'])
@@ -31,27 +32,14 @@ def all_arguments():
     return arguments
 
 
-def test_argument_spec_matches_to_constructor_args():
-    args = argparse.Namespace()
-    for option in all_arguments():
-        setattr(args, option.init_name, option.pass_value)
-
-    supported_args = inspect.getargspec(wc.WordCloud.__init__).args
-    supported_args.remove('self')
-    for arg_name in vars(args).keys():
-        assert_in(arg_name, supported_args)
-
-
 def test_main_passes_arguments_through():
-    args = argparse.Namespace()
+    temp_imagefile = NamedTemporaryFile()
+
+    args = argparse.Namespace(text='some long text', imagefile=open(temp_imagefile.name, 'w'))
     for option in all_arguments():
         setattr(args, option.init_name, option.pass_value)
-    args.imagefile = NamedTemporaryFile()
-    args.text = 'some long text'
 
     with patch('wordcloud.wordcloud_cli.wc.WordCloud', autospec=True) as mock_word_cloud:
-        instance = mock_word_cloud.return_value
-        instance.to_image.return_value = MagicMock()
         cli.main(args)
 
     posargs, kwargs = mock_word_cloud.call_args
@@ -106,3 +94,16 @@ def test_parse_args_defaults_to_random_color():
 
     args = cli.parse_args(['--text', text.name])
     assert_equal(args.color_func, wc.random_color_func)
+
+
+def test_cli_writes_image():
+    # ensure writting works with all python versions
+    temp_imagefile = NamedTemporaryFile()
+    temp_textfile = NamedTemporaryFile()
+    temp_textfile.write(b'some text')
+    temp_textfile.flush()
+
+    args = cli.parse_args(['--text', temp_textfile.name, '--imagefile', temp_imagefile.name])
+    cli.main(args)
+
+    assert_greater(os.path.getsize(temp_imagefile.name), 0, msg='expecting image to be written')
