@@ -169,6 +169,15 @@ def test_single_color_func_grey():
     assert_equal(red_function(random_state=random), 'rgb(56, 56, 56)')
 
 
+def test_process_text():
+    # test that process function returns a dict
+    wc = WordCloud(max_words=50)
+    result = wc.process_text(THIS)
+
+    # check for proper return type
+    assert_true(isinstance(result, dict))
+
+
 def check_parameters():
     # check that parameters are actually used
     pass

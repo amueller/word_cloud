@@ -427,7 +427,7 @@ class WordCloud(object):
             first = max(d2.items(), key=item1)[0]
             d3[first] = sum(d2.values())
 
-        return d3.items()
+        return d3
 
     def generate_from_text(self, text):
         """Generate wordcloud from text.
@@ -439,7 +439,7 @@ class WordCloud(object):
         self
         """
         words = self.process_text(text)
-        self.generate_from_frequencies(words)
+        self.generate_from_frequencies(words.items())
         return self
 
     def generate(self, text):
