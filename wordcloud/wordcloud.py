@@ -21,6 +21,8 @@ from PIL import ImageFont
 
 from .query_integral_image import query_integral_image
 
+from nltk.tokenize import TreebankWordTokenizer
+
 item1 = itemgetter(1)
 
 FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
@@ -383,7 +385,19 @@ class WordCloud(object):
         d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
-        for word in re.findall(r"\w[\w']+", text, flags=flags):
+        tokens = TreebankWordTokenizer().tokenize(text)
+        contractions = ["n't", "'ll", "'m"]
+        fix = []
+        for i in range(len(tokens)):
+            for c in contractions:
+                if tokens[i] == c: fix.append(i)
+        fix_offset = 0
+        for fix_id in fix:
+            idx = fix_id - 1 - fix_offset
+            tokens[idx] = tokens[idx] + tokens[idx+1]
+            del tokens[idx+1]
+            fix_offset += 1
+        for word in tokens:
             if word.isdigit():
                 continue
 
