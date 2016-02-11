@@ -12,14 +12,32 @@ import re
 import sys
 import colorsys
 import numpy as np
+import sys
+
 from operator import itemgetter
 
 from PIL import Image
 from PIL import ImageColor
 from PIL import ImageDraw
 from PIL import ImageFont
-
 from .query_integral_image import query_integral_image
+
+PY3 = sys.version_info[0] == 3
+
+if PY3:
+    unichr = chr
+
+try:
+    from fontTools.ttLib import TTFont
+    from fontTools.unicode import Unicode
+    HAS_FONT_TOOLS = True
+except ImportError:
+    HAS_FONT_TOOLS = False
+    warnings.warn(
+        "Couldn't import fonttools, if you are accepting emojis you may want"
+        " to pip install fonttools"
+    )
+
 
 item1 = itemgetter(1)
 
@@ -111,6 +129,29 @@ def get_single_color_func(color):
     return single_color_func
 
 
+def get_supported_characters_for_font(font_path):
+    supported_chars = []
+
+    ttf = TTFont(
+        font_path, 0, verbose=0, allowVID=0,
+        ignoreDecompileErrors=True,
+        fontNumber=-1
+    )
+
+    missed = 0
+
+    for table in ttf["cmap"].tables:
+        for glyph in list(table.cmap.items()):
+            try:
+                char = unichr(glyph[0])
+                supported_chars.append(char)
+            except:
+                continue
+
+    ttf.close()
+
+    return supported_chars
+
 class WordCloud(object):
     """Word cloud object for generating and drawing.
 
@@ -197,12 +238,14 @@ class WordCloud(object):
                  ranks_only=None, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
-                 max_font_size=None, font_step=1, mode="RGB", relative_scaling=0):
+                 max_font_size=None, font_step=1, mode="RGB",
+                 relative_scaling=0, include_emojis=False):
         if stopwords is None:
             stopwords = STOPWORDS
         if font_path is None:
             font_path = FONT_PATH
         self.font_path = font_path
+        self.include_emojis = include_emojis
         self.width = width
         self.height = height
         self.margin = margin
@@ -381,15 +424,52 @@ class WordCloud(object):
         """
 
         d = {}
-        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
-                 else 0)
-        for word in re.findall(r"\w[\w']+", text, flags=flags):
+        flags = 0
+        supported_chars = None
+
+        if self.include_emojis and HAS_FONT_TOOLS:
+            supported_chars = get_supported_characters_for_font(
+                self.font_path
+            )
+
+        if (not PY3 and type(text) is unicode) or PY3:
+            flags = re.UNICODE
+
+        if self.include_emojis:
+            regex = re.compile(
+                u"\w[\w]+|"
+                u'['
+                u'\U0001F300-\U0001F64F'
+                u'\U0001F680-\U0001F6FF'
+                u'\u2600-\u26FF\u2700-\u27BF]+',
+                flags
+            )
+        else:
+            regex = re.compile(
+                u"\w[\w]+",
+                flags
+            )
+
+        for word in regex.findall(text):
             if word.isdigit():
                 continue
 
+            word = word.strip()
             word_lower = word.lower()
+
             if word_lower in self.stopwords:
                 continue
+
+            if supported_chars is not None:
+                # remove any words that have characters unavailable in our font
+                good_chars = True
+
+                for c in word_lower:
+                    if c not in supported_chars:
+                        good_chars = False
+
+                if not good_chars:
+                    continue
 
             # Look in lowercase dict.
             try:

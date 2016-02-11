@@ -11,5 +11,7 @@ setup(
                            ["wordcloud/query_integral_image.c"])],
     scripts=['wordcloud/wordcloud_cli.py'],
     packages=['wordcloud'],
-    package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
+    package_data={
+        'wordcloud': ['stopwords', 'DroidSansMono.ttf', 'Symbola.ttf']
+    }
 )
