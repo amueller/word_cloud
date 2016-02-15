@@ -84,7 +84,7 @@ $ cd word_cloud
 
 First, a small introduction on why we need to recreate the environment I used to make these notebooks.  Anaconda makes it easy to manage virtual environments, or the place where the script and analytic operates (in this case, where we make the wordcloud).  Virtual environments are important to data analytics, data science, and development because you can create, export, list, remove, and update environments that have different versions of software, modules, and/or packages installed in them. These environments are independent of one another, and, most importantly, of your root system's requirements and modules.  Therefore, installing an updated or older version of a module in an Anaconda environment doesn't update the version in any other environment. Bottomline, environments keep you from breaking things.
 
-For you, this is beneficial becuase I can "export" an environment file that allows you to recreate your environment I used to make the wordcloud notebook (see picture above).
+For you, this is beneficial becuase I can "export" an environment file that allows you to recreate the exact Python environment I used to make the wordcloud notebook (see picture above).
 
 Make sure you are in the base `word_cloud` repistory from the previous step.Return to your ** Git Bash** or terminal or command prompt and enter:
 
