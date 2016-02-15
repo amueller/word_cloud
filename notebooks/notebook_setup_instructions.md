@@ -8,7 +8,7 @@ These instructions walk you through setting up and installing all the necessary 
 
 Jupyter Notebook is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text in over 40 programming languages.  To learn more about Jupyter and try a python demonstration, see [this online browser demo of a python notebook](https://try.jupyter.org/).  Follow the steps below, and you will be creating wordclouds in a notebook!
 
-![alt text](../examples/wordcloud_notebook.jpg "Building wordclouds in a notebook")
+![The link is broken](./images/wordcloud_notebook.jpg "Building wordclouds in a notebook")
 
 
 ### First Step: Downloading and Installing Git and Anaconda
@@ -118,7 +118,19 @@ $ source activate wordcloud
 $ jupyter notebook wordcloudexample.ipynb
 ```
 
-Your web browser should open up and you're ready to go.  Just hit the `play` button to watch the code run.  You can also copy the examples from the examples folder by changing a few parameters!  Have fun!
+Your web browser should open up and you're ready to go.  The address should be something like `http://localhost:8888/notebooks/wordcloudexample.ipynb`.  Just hit the `play` button to watch the code run.  You can also copy the examples from the examples folder by changing a few parameters!  Have fun!
+
+### When you're done...
+
+To exit the environment we created for the wordcloud, do the following:
+
+1.  In the browser, select `File` and then `Close and Halt` (see image below)
+2.  Move to your **Git Bash** or terminal or command prompt and press `Ctrl C` on your keyboard two (2) times. 
+3.  Now exit the environment by entering `source deactivate` in your ** Git Bash** terminal or command prompt
+4. **Optional** If you want to remove the environment completely, enter `conda env remove --name wordcloud`
+5. **Optional** To remove Anconda completely, use **Git Bash** or terminal to navigate to the directory where the anacoda folder is located and enter `rm -r -f anaconda`
+
+![The link is broken](./images/CloseandHalt1.jpg "Close and halt the notebook")
 
 ### Random notes to help test this out
 
