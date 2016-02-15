@@ -4,11 +4,11 @@ Creating wordclouds in Jupyter Notebooks
 Setup instructions
 ---------------------
 
-These instructions walk your through setting up and installing all the necessary components to test and build wordclouds in a Jupyter notebook embedded in an Anaconda environment. I'm starting from the lowest common denominator (complete beginner), so feel free to skip around. 
+These instructions walk you through setting up and installing all the necessary components to test and build wordclouds in a Jupyter notebook embedded in an Anaconda environment. I'm starting from the lowest common denominator (complete beginner), so feel free to skip around. 
 
 Jupyter Notebook is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text in over 40 programming languages.  To learn more about Jupyter and try a python demonstration, see [this online browser demo of a python notebook](https://try.jupyter.org/).  Follow the steps below, and you will be creating wordclouds in a notebook!
 
-![alt text](../examples/wordcloud_notebook.png "Building wordclouds in a notebook")
+![alt text](../examples/wordcloud_notebook.jpg "Building wordclouds in a notebook")
 
 
 ### First Step: Downloading and Installing Git and Anaconda
@@ -86,7 +86,7 @@ First, a small introduction on why we need to recreate the environment I used to
 
 For you, this is beneficial becuase I can "export" an environment file that allows you to recreate your environment I used to make the wordcloud notebook (see picture above).
 
-Make sure you are in the base `word_cloud` repistory from the previous step.Return to your * Git Bash** or terminal or command prompt and enter:
+Make sure you are in the base `word_cloud` repistory from the previous step.Return to your ** Git Bash** or terminal or command prompt and enter:
 
 ```
 $ cd notebooks/requirements_notebook/
@@ -100,6 +100,35 @@ $ ipython kernel install
 To handle this in one swoop, just cut and paste the text below:<br>
 > conda env create -f anaconda_wordcloud.yml <br>source activate wordcloud<br>conda install notebook ipykernel<br>ipython kernel install<br>
 
-You may get some prompts (not errors) asking for permission to install.  Always hit `y` and `Enter`.  Wait for everything to finish
+You may get some prompts (not errors) asking for permission to install.  Always hit `y` and `Enter`.  Wait for everything to finish.
 
-With that small 
+### Final Step:  Launch environment and launch Jupyter notebook
+
+Now, it's time to launch the notebook!  Return to your ** Git Bash** or terminal or command prompt and enter:
+
+```
+$ cd ..
+```
+
+This should get you to the `notebook` directory.  First we activate the wordcloud environment we just created by entering `source activate wordcloud` in the terminal.  Then we'll launch the notebook using a simple command `jupyter notebook wordcloudexample.ipynb`.  Here's how it would look:
+
+```
+$ source activate wordcloud
+
+$ jupyter notebook wordcloudexample.ipynb
+```
+
+Your web browser should open up and you're ready to go.  Just hit the `play` button to watch the code run.  You can also copy the examples from the examples folder by changing a few parameters!  Have fun!
+
+### Random notes to help test this out
+
+You can get `mask` images from the net easily.  Just do a Google image search.  Here is an [example of a search for `soldier silouhettes`](https://www.google.com/search?q=soldier+silhouette&safe=active&espv=2&biw=1215&bih=634&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiYlszfu_rKAhXDeT4KHev3BNgQ_AUIBigB#q=soldier+silhouette&safe=active&tbm=isch&tbs=isz:l).  
+
+Here is a [good tutorial on using Google's image search](https://techboomers.com/t/google-image-search).
+
+Finding text is even simpler!  Just find some text, copy or save it to a `.txt` file, and have fun!
+
+Later, I'll add examples that iterate over cells of text in a spreadsheet to build a wordcloud.  This is useful for mining social web text (Facebook, Google+, Twitter).  
+
+
+
