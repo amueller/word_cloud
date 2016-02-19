@@ -37,7 +37,7 @@ elif [[ "$DISTRIB" == "ubuntu" ]]; then
     # Use standard ubuntu packages in their default version
     virtualenv --system-site-packages testvenv
     source testvenv/bin/activate
-    pip install nose mock
+    pip install nose mock fonttools emoji
 fi
 
 pip install -r requirements.txt

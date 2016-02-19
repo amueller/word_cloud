@@ -4,8 +4,21 @@ from random import Random
 from nose.tools import assert_equal, assert_greater, assert_true, assert_raises
 from numpy.testing import assert_array_equal
 from PIL import Image
-
+from nose.plugins.skip import SkipTest
 from tempfile import NamedTemporaryFile
+import os
+import functools
+
+
+def skip_if(skip_check, reason=None):
+    def inner(fn):
+        @functools.wraps(fn)
+        def wrapper():
+            if skip_check() is True:
+                raise SkipTest(reason)
+            return fn()
+        return wrapper
+    return inner
 
 THIS = """The Zen of Python, by Tim Peters
 
@@ -164,3 +177,57 @@ def test_single_color_func_grey():
 def check_parameters():
     # check that parameters are actually used
     pass
+
+
+@skip_if(
+    lambda: os.environ.get('DISTRIB') == 'conda',
+    reason="Conda doesn't have font tools"
+)
+def test_supported_characters():
+    from wordcloud.wordcloud import PY3
+    from wordcloud.wordcloud import (
+        FONT_PATH,
+        get_supported_characters_for_font
+    )
+    result = sorted(get_supported_characters_for_font(FONT_PATH))
+
+    if PY3:
+        fn = chr
+    else:
+        fn = unichr
+
+    assert fn(128169) not in result
+
+@skip_if(
+    lambda: os.environ.get('DISTRIB') == 'conda',
+    reason="Conda doesn't have font tools"
+)
+def test_emoji_support():
+    import emoji
+    import os
+
+    text = emoji.emojize(
+        ':poop: :smile: :joy:',
+        use_aliases=True
+    )
+    font_path = os.path.abspath(os.path.join(
+        os.path.dirname(__file__),
+        '../wordcloud/Symbola.ttf'
+    ))
+
+    wc = WordCloud(
+        max_words=50,
+        include_emojis=True,
+        font_path=font_path
+    )
+    wc.generate(text)
+
+    assert_equal(len(wc.words_), 3)
+
+    # check that we got enough words
+    assert_equal(len(wc.layout_), 3)
+
+    # check image export
+    wc_image = wc.to_image()
+    assert_equal(wc_image.size, (wc.width, wc.height))
+    assert_equal(ord(sorted(wc.words_)[0][0]), 128169)
