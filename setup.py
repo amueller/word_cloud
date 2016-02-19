@@ -2,6 +2,8 @@ from distutils.core import setup
 from distutils.extension import Extension
 
 setup(
+    author="Andreas Mueller",
+    author_email="t3kcit+wordcloud@gmail.com",
     name='wordcloud',
     version='1.2.1',
     url='https://github.com/amueller/word_cloud',
