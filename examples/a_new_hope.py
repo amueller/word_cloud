@@ -34,7 +34,7 @@ text = text.replace("HAN", "Han")
 text = text.replace("LUKE'S", "Luke")
 
 # adding movie script specific stopwords
-stopwords = STOPWORDS.copy()
+stopwords = set(STOPWORDS)
 stopwords.add("int")
 stopwords.add("ext")
 
