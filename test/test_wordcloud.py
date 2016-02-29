@@ -54,6 +54,14 @@ def test_default():
     assert_equal(wc_array.shape, (wc.height, wc.width, 3))
 
 
+def test_stopwords_lowercasing():
+    # test that capitalized stopwords work.
+    wc = WordCloud(stopwords=["Beautiful"])
+    processed = wc.process_text(THIS)
+    words = [count[0] for count in processed]
+    assert_true("Beautiful" not in words)
+
+
 def test_writing_to_file():
     wc = WordCloud()
     wc.generate(THIS)
