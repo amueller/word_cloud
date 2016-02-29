@@ -79,6 +79,7 @@ def random_color_func(word=None, font_size=None, position=None,
         random_state = Random()
     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
 
+
 def get_single_color_func(color):
     """Create a color function which returns a single hue and saturation with.
     different values (HSV). Accepted values are color strings as usable by PIL/Pillow.
@@ -88,7 +89,8 @@ def get_single_color_func(color):
     """
     old_r, old_g, old_b = ImageColor.getrgb(color)
     rgb_max = 255.
-    h, s, v = colorsys.rgb_to_hsv(old_r/rgb_max, old_g/rgb_max, old_b/rgb_max)
+    h, s, v = colorsys.rgb_to_hsv(old_r / rgb_max, old_g / rgb_max, old_b / rgb_max)
+
     def single_color_func(word=None, font_size=None, position=None,
                           orientation=None, font_path=None, random_state=None):
         """Random color generation.
@@ -265,7 +267,7 @@ class WordCloud(object):
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
 
-        frequencies = [ (word, freq / max_frequency) for word, freq in frequencies ]
+        frequencies = [(word, freq / max_frequency) for word, freq in frequencies]
 
         self.words_ = frequencies
 
@@ -380,6 +382,8 @@ class WordCloud(object):
         include all those things.
         """
 
+        self.stopwords_lower_ = [word.lower() for word in self.stopwords]
+
         d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
@@ -388,7 +392,7 @@ class WordCloud(object):
                 continue
 
             word_lower = word.lower()
-            if word_lower in self.stopwords:
+            if word_lower in self.stopwords_lower_:
                 continue
 
             # Look in lowercase dict.
