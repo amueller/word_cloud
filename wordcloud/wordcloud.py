@@ -200,8 +200,6 @@ class WordCloud(object):
                  color_func=random_color_func, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB", relative_scaling=0):
-        if stopwords is None:
-            stopwords = STOPWORDS
         if font_path is None:
             font_path = FONT_PATH
         self.font_path = font_path
@@ -213,7 +211,7 @@ class WordCloud(object):
         self.scale = scale
         self.color_func = color_func
         self.max_words = max_words
-        self.stopwords = stopwords
+        self.stopwords = stopwords or STOPWORDS
         self.min_font_size = min_font_size
         self.font_step = font_step
         if isinstance(random_state, int):
@@ -382,7 +380,7 @@ class WordCloud(object):
         include all those things.
         """
 
-        self.stopwords_lower_ = [word.lower() for word in self.stopwords]
+        self.stopwords_lower_ = set(map(str.lower, self.stopwords))
 
         d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
