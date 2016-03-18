@@ -176,6 +176,10 @@ class WordCloud(object):
         If you want to consider the word frequencies and not only their rank, relative_scaling
         around .5 often looks good.
 
+    regexp : string or None (optional)
+        Regular expression to split the input text into tokens in process_text.
+        If None is specified, ``r"\w[\w']+"`` is used.
+
     Attributes
     ----------
     ``words_``: list of tuples (string, float)
@@ -199,7 +203,7 @@ class WordCloud(object):
                  ranks_only=None, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
-                 max_font_size=None, font_step=1, mode="RGB", relative_scaling=0):
+                 max_font_size=None, font_step=1, mode="RGB", relative_scaling=0, regexp=None):
         if font_path is None:
             font_path = FONT_PATH
         self.font_path = font_path
@@ -214,6 +218,7 @@ class WordCloud(object):
         self.stopwords = stopwords or STOPWORDS
         self.min_font_size = min_font_size
         self.font_step = font_step
+        self.regexp = regexp
         if isinstance(random_state, int):
             random_state = Random(random_state)
         self.random_state = random_state
@@ -385,7 +390,8 @@ class WordCloud(object):
         d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
-        for word in re.findall(r"\w[\w']+", text, flags=flags):
+        regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
+        for word in re.findall(regexp, text, flags=flags):
             if word.isdigit():
                 continue
 
