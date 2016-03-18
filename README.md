@@ -13,6 +13,10 @@ Fast install:
 
     pip install wordcloud
 
+If you are using conda, it might be even easier to use anaconda cloud:
+
+    conda install -c https://conda.anaconda.org/amueller wordcloud
+
 For a manual install get this package:
     
     wget https://github.com/amueller/word_cloud/archive/master.zip
