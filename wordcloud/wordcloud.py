@@ -158,6 +158,9 @@ class WordCloud(object):
     stopwords : set of strings
         The words that will be eliminated.
 
+    whitelist : set of strings
+        The words that will be removed from the stopwords.
+
     background_color : color value (default="black")
         Background color for the word cloud image.
 
@@ -198,7 +201,7 @@ class WordCloud(object):
     def __init__(self, font_path=None, width=400, height=200, margin=2,
                  ranks_only=None, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, min_font_size=4,
-                 stopwords=None, random_state=None, background_color='black',
+                 stopwords=None, whitelist=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB", relative_scaling=0):
         if font_path is None:
             font_path = FONT_PATH
@@ -212,6 +215,8 @@ class WordCloud(object):
         self.color_func = color_func
         self.max_words = max_words
         self.stopwords = stopwords or STOPWORDS
+        if whitelist:
+            self.stopwords.difference_update(whitelist)
         self.min_font_size = min_font_size
         self.font_step = font_step
         if isinstance(random_state, int):
@@ -385,7 +390,7 @@ class WordCloud(object):
         d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
-        for word in re.findall(r"\w[\w']+", text, flags=flags):
+        for word in re.findall(r"[\w']+", text, flags=flags):
             if word.isdigit():
                 continue
 
