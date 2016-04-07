@@ -178,6 +178,17 @@ def test_process_text():
     assert_true(isinstance(result, dict))
 
 
+def test_generate_from_frequencies():
+    # test that generate_from_frequencies() takes input argument of class
+    # 'dict_items'
+    wc = WordCloud(max_words=50)
+    words = wc.process_text(THIS)
+    items = words.items()
+    result = wc.generate_from_frequencies(items)
+
+    assert_true(isinstance(result, WordCloud))
+
+
 def check_parameters():
     # check that parameters are actually used
     pass
