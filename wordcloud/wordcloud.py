@@ -376,7 +376,7 @@ class WordCloud(object):
 
         Returns
         -------
-        words : list of tuples (string, float)
+        words : dict (string, int)
             Word tokens with associated frequency.
 
         Notes
