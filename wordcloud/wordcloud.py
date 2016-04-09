@@ -379,6 +379,9 @@ class WordCloud(object):
         words : dict (string, int)
             Word tokens with associated frequency.
 
+        ..versionchanged:: 1.2.2
+            Changed return type from list of tuples to dict.
+
         Notes
         -----
         There are better ways to do word tokenization, but I don't want to
@@ -433,6 +436,10 @@ class WordCloud(object):
         """Generate wordcloud from text.
 
         Calls process_text and generate_from_frequencies.
+
+        ..versionchanged:: 1.2.2
+            Argument of generate_from_frequencies() is not return of
+            process_text() any more.
 
         Returns
         -------
