@@ -376,8 +376,11 @@ class WordCloud(object):
 
         Returns
         -------
-        words : list of tuples (string, float)
+        words : dict (string, int)
             Word tokens with associated frequency.
+
+        ..versionchanged:: 1.2.2
+            Changed return type from list of tuples to dict.
 
         Notes
         -----
@@ -427,19 +430,23 @@ class WordCloud(object):
             first = max(d2.items(), key=item1)[0]
             d3[first] = sum(d2.values())
 
-        return d3.items()
+        return d3
 
     def generate_from_text(self, text):
         """Generate wordcloud from text.
 
         Calls process_text and generate_from_frequencies.
 
+        ..versionchanged:: 1.2.2
+            Argument of generate_from_frequencies() is not return of
+            process_text() any more.
+
         Returns
         -------
         self
         """
         words = self.process_text(text)
-        self.generate_from_frequencies(words)
+        self.generate_from_frequencies(words.items())
         return self
 
     def generate(self, text):
