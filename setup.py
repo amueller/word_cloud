@@ -1,5 +1,5 @@
-from distutils.core import setup
-from distutils.extension import Extension
+from setuptools import setup
+from setuptools.extension import Extension
 
 setup(
     author="Andreas Mueller",
@@ -9,6 +9,7 @@ setup(
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     license='MIT',
+    install_requires=['numpy', 'pillow'],
     ext_modules=[Extension("wordcloud.query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
     scripts=['wordcloud/wordcloud_cli.py'],
