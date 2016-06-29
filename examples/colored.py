@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 """
 Image-colored wordcloud
 ========================
@@ -25,10 +25,11 @@ text = open(path.join(d, 'alice.txt')).read()
 # read the mask / color image
 # taken from http://jirkavinse.deviantart.com/art/quot-Real-Life-quot-Alice-282261010
 alice_coloring = np.array(Image.open(path.join(d, "alice_color.png")))
+stopwords = set(STOPWORDS)
+stopwords.add("said")
 
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_coloring,
-               stopwords=STOPWORDS.add("said"),
-               max_font_size=40, random_state=42)
+               stopwords=stopwords, max_font_size=40, random_state=42)
 # generate word cloud
 wc.generate(text)
 
