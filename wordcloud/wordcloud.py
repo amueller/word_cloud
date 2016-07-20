@@ -13,6 +13,7 @@ import sys
 import colorsys
 import numpy as np
 from operator import itemgetter
+from xml.sax.saxutils import escape as xml_escape, quoteattr
 
 from PIL import Image
 from PIL import ImageColor
@@ -557,3 +558,46 @@ class WordCloud(object):
 
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
+
+    def to_svg(self):
+        out = []
+        font = ImageFont.truetype(self.font_path, self.max_font_size)
+        font_name, font_variants = font.getname()
+        font_variants = font_variants.lower().split()
+        font_style = "font-family: {0}; font-weight: {1}; font-style: {2}".format(
+            quoteattr(font_name),
+            'bold' if 'bold' in font_variants else 'normal',
+            'italic' if 'italic' in font_variants else
+            'oblique' if 'oblique' in font_variants else 'normal')
+
+        # XXX: Only need draw for sizes because SVG places by baseline :(
+        img_grey = Image.new("L", (self.width, self.height))
+        draw = ImageDraw.Draw(img_grey)
+
+        out.append('<svg xmlns="http://www.w3.org/2000/svg" '
+                   'width="{0}" height="{1}" style={2}>'.format(
+                       self.width, self.height, quoteattr(font_style)))
+        out.append('<rect width="100%" height="100%" '
+                   'style="background: {0}"></rect>'.format(self.background_color))
+        for (word, count), font_size, position, orientation, color in self.layout_:
+            font = ImageFont.truetype(self.font_path, font_size)
+            size_x, size_y = draw.textsize(word, font=font)
+            y, x = position
+            if orientation == Image.ROTATE_90:
+                x += size_y
+                y += size_x
+                open_tag = ('<g transform="translate({x:d}, {y:d})">'
+                            '<text transform="rotate(-90)"').format(x=x, y=y)
+                close_tag = '</text></g>'
+                x, y = 0, 0
+            else:
+                y += size_y
+                open_tag = '<text'
+                close_tag = '</text>'
+            out.append('{open_tag} x="{x:d}" y="{y:d}" '
+                       'font-size="{font_size:d}" style="fill: {color}">'
+                       '{word}{close_tag}'.format(word=word, x=x, y=y,
+                                                  font_size=font_size, color=color,
+                                                  open_tag=open_tag, close_tag=close_tag))
+        out.append('</svg>')
+        return u'\n'.join(out)
