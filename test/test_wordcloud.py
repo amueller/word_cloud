@@ -31,6 +31,16 @@ Namespaces are one honking great idea -- let's do more of those!
 """
 
 
+def test_collocations():
+    wc = WordCloud(collocations=False)
+    wc.generate(THIS)
+
+    wc2 = WordCloud(collocations=True)
+    wc2.generate(THIS)
+
+    assert_greater(len(wc2.words_), len(wc.words_))
+
+
 def test_default():
     # test that default word cloud creation and conversions work
     wc = WordCloud(max_words=50)
@@ -187,8 +197,3 @@ def test_generate_from_frequencies():
     result = wc.generate_from_frequencies(items)
 
     assert_true(isinstance(result, WordCloud))
-
-
-def check_parameters():
-    # check that parameters are actually used
-    pass
