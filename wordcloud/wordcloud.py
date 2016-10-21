@@ -422,9 +422,9 @@ class WordCloud(object):
                  for word in words]
 
         if self.collocations:
-            word_counts = unigrams_and_bigrams(words, stopwords, regexp, flags)
+            word_counts = unigrams_and_bigrams(words)
         else:
-            word_counts = process_tokens(words)
+            word_counts, _ = process_tokens(words)
 
         return word_counts
 

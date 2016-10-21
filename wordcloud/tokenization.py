@@ -10,12 +10,12 @@ def l(k, n, x):
     return log(max(x, 1e-10)) * k + log(max(1 - x, 1e-10)) * (n - k)
 
 
-def score(bigram, counts, n_words):
+def score(count_bigram, count1, count2, n_words):
     """Collocation score"""
     N = n_words
-    c12 = counts[bigram]
-    c1 = counts[bigram[0]]
-    c2 = counts[bigram[1]]
+    c12 = count_bigram
+    c1 = count1
+    c2 = count2
     p = c2 / N
     p1 = c12 / c1
     p2 = (c2 - c12) / (N - c1)
@@ -38,20 +38,24 @@ def unigrams_and_bigrams(words):
     bigrams = list(pairwise(words))
     counts_unigrams = defaultdict(int)
     counts_bigrams = defaultdict(int)
-    counts_unigrams = process_tokens(words)
-    counts_bigrams = process_tokens(bigrams)
-    counts_all = {}
-    counts_all.update(counts_unigrams)
-    counts_all.update(counts_bigrams)
+    counts_unigrams, standard_form = process_tokens(words)
+    counts_bigrams, standard_form_bigrams = process_tokens(
+        [" ".join(bigram) for bigram in bigrams])
+    # create a copy of counts_unigram so the score computation is not changed
+    counts = counts_unigrams.copy()
 
     # decount words inside bigrams
-    for bigram in counts_bigrams.keys():
+    for bigram_string, count in counts_bigrams.items():
+        bigram = tuple(bigram_string.split(" "))
         # collocation detection (30 is arbitrary):
-        if score(bigram, counts_all, n_words) > 30:
-            counts_unigrams[bigram[0]] -= counts_bigrams[bigram]
-            counts_unigrams[bigram[1]] -= counts_bigrams[bigram]
+        word1 = standard_form[bigram[0].lower()]
+        word2 = standard_form[bigram[1].lower()]
+
+        if score(count, counts[word1], counts[word2], n_words) > 30:
+            counts_unigrams[word1] -= counts_bigrams[bigram_string]
+            counts_unigrams[word2] -= counts_bigrams[bigram_string]
         # add joined bigram into unigrams
-        counts_unigrams[' '.join(bigram)] = counts_bigrams[bigram]
+        counts_unigrams[bigram_string] = counts_bigrams[bigram_string]
     return counts_unigrams
 
 
@@ -73,6 +77,9 @@ def process_tokens(words):
     counts : dict from string to int
         Counts for each unique word, with cases represented by the most common
         case, and plurals removed.
+
+    standard_forms : dict from string to string
+        For each lower-case word the standard capitalization.
     """
     # words can be either a list of unigrams or bigrams
     # d is a dict of dicts.
@@ -101,11 +108,12 @@ def process_tokens(words):
                     dict_singular[singular] = (dict_singular.get(singular, 0)
                                                + count)
                 del d[key]
-
     fused_cases = {}
+    standard_cases = {}
     item1 = itemgetter(1)
-    for case_dict in d.values():
+    for word_lower, case_dict in d.items():
         # Get the most popular case.
         first = max(case_dict.items(), key=item1)[0]
         fused_cases[first] = sum(case_dict.values())
-    return fused_cases
+        standard_cases[word_lower] = first
+    return fused_cases, standard_cases
