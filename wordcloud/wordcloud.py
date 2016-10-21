@@ -25,8 +25,8 @@ item1 = itemgetter(1)
 
 FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
                                                      "DroidSansMono.ttf"))
-STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
-                                                      'stopwords')).read().split('\n')])
+STOPWORDS = set([x.strip() for x in open(
+    os.path.join(os.path.dirname(__file__), 'stopwords')).read().split('\n')])
 
 
 class IntegralOccupancyMap(object):
@@ -41,11 +41,12 @@ class IntegralOccupancyMap(object):
             self.integral = np.zeros((height, width), dtype=np.uint32)
 
     def sample_position(self, size_x, size_y, random_state):
-        return query_integral_image(self.integral, size_x, size_y, random_state)
+        return query_integral_image(self.integral, size_x, size_y,
+                                    random_state)
 
     def update(self, img_array, pos_x, pos_y):
-        partial_integral = np.cumsum(np.cumsum(img_array[pos_x:, pos_y:], axis=1),
-                                     axis=0)
+        partial_integral = np.cumsum(np.cumsum(img_array[pos_x:, pos_y:],
+                                               axis=1), axis=0)
         # paste recomputed part into old image
         # if x or y is zero it is a bit annoying
         if pos_x > 0:
@@ -72,7 +73,8 @@ def random_color_func(word=None, font_size=None, position=None,
     word, font_size, position, orientation  : ignored.
 
     random_state : random.Random object or None, (default=None)
-        If a random object is given, this is used for generating random numbers.
+        If a random object is given, this is used for generating random
+        numbers.
 
     """
     if random_state is None:
@@ -82,14 +84,16 @@ def random_color_func(word=None, font_size=None, position=None,
 
 def get_single_color_func(color):
     """Create a color function which returns a single hue and saturation with.
-    different values (HSV). Accepted values are color strings as usable by PIL/Pillow.
+    different values (HSV). Accepted values are color strings as usable by
+    PIL/Pillow.
 
     >>> color_func1 = get_single_color_func('deepskyblue')
     >>> color_func2 = get_single_color_func('#00b4d2')
     """
     old_r, old_g, old_b = ImageColor.getrgb(color)
     rgb_max = 255.
-    h, s, v = colorsys.rgb_to_hsv(old_r / rgb_max, old_g / rgb_max, old_b / rgb_max)
+    h, s, v = colorsys.rgb_to_hsv(old_r / rgb_max, old_g / rgb_max,
+                                  old_b / rgb_max)
 
     def single_color_func(word=None, font_size=None, position=None,
                           orientation=None, font_path=None, random_state=None):
@@ -103,13 +107,15 @@ def get_single_color_func(color):
         word, font_size, position, orientation  : ignored.
 
         random_state : random.Random object or None, (default=None)
-          If a random object is given, this is used for generating random numbers.
+          If a random object is given, this is used for generating random
+          numbers.
 
         """
         if random_state is None:
             random_state = Random()
         r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
-        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max, b * rgb_max)
+        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
+                                                    b * rgb_max)
     return single_color_func
 
 
@@ -170,11 +176,11 @@ class WordCloud(object):
         background_color is None.
 
     relative_scaling : float (default=0)
-        Importance of relative word frequencies for font-size.
-        With relative_scaling=0, only word-ranks are considered.
-        With relative_scaling=1, a word that is twice as frequent will have twice the size.
-        If you want to consider the word frequencies and not only their rank, relative_scaling
-        around .5 often looks good.
+        Importance of relative word frequencies for font-size.  With
+        relative_scaling=0, only word-ranks are considered.  With
+        relative_scaling=1, a word that is twice as frequent will have twice
+        the size.  If you want to consider the word frequencies and not only
+        their rank, relative_scaling around .5 often looks good.
 
     regexp : string or None (optional)
         Regular expression to split the input text into tokens in process_text.
@@ -191,8 +197,8 @@ class WordCloud(object):
 
     Notes
     -----
-    Larger canvases with make the code significantly slower. If you need a large
-    word cloud, try a lower canvas size, and set the scale parameter.
+    Larger canvases with make the code significantly slower. If you need a
+    large word cloud, try a lower canvas size, and set the scale parameter.
 
     The algorithm might give more weight to the ranking of the words
     than their actual frequencies, depending on the ``max_font_size`` and the
@@ -203,7 +209,8 @@ class WordCloud(object):
                  ranks_only=None, prefer_horizontal=0.9, mask=None, scale=1,
                  color_func=random_color_func, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
-                 max_font_size=None, font_step=1, mode="RGB", relative_scaling=0, regexp=None):
+                 max_font_size=None, font_step=1, mode="RGB",
+                 relative_scaling=0, regexp=None):
         if font_path is None:
             font_path = FONT_PATH
         self.font_path = font_path
@@ -228,12 +235,13 @@ class WordCloud(object):
         self.max_font_size = max_font_size
         self.mode = mode
         if relative_scaling < 0 or relative_scaling > 1:
-            raise ValueError("relative_scaling needs to be between 0 and 1, got %f."
-                             % relative_scaling)
+            raise ValueError("relative_scaling needs to be "
+                             "between 0 and 1, got %f." % relative_scaling)
         self.relative_scaling = relative_scaling
         if ranks_only is not None:
             warnings.warn("ranks_only is deprecated and will be removed as"
-                          " it had no effect. Look into relative_scaling.", DeprecationWarning)
+                          " it had no effect. Look into relative_scaling.",
+                          DeprecationWarning)
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -270,7 +278,8 @@ class WordCloud(object):
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
 
-        frequencies = [(word, freq / max_frequency) for word, freq in frequencies]
+        frequencies = [(word, freq / max_frequency)
+                       for word, freq in frequencies]
 
         self.words_ = frequencies
 
@@ -288,15 +297,16 @@ class WordCloud(object):
             width = mask.shape[1]
             height = mask.shape[0]
             if mask.dtype.kind == 'f':
-                warnings.warn("mask image should be unsigned byte between 0 and"
-                              " 255. Got a float array")
+                warnings.warn("mask image should be unsigned byte between 0"
+                              " and 255. Got a float array")
             if mask.ndim == 2:
                 boolean_mask = mask == 255
             elif mask.ndim == 3:
                 # if all channels are white, mask out
                 boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
             else:
-                raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
+                raise ValueError("Got mask of invalid shape: %s"
+                                 % str(mask.shape))
         else:
             boolean_mask = None
             height, width = self.height, self.width
@@ -316,7 +326,8 @@ class WordCloud(object):
             # select the font size
             rs = self.relative_scaling
             if rs != 0:
-                font_size = int(round((rs * (freq / float(last_freq)) + (1 - rs)) * font_size))
+                font_size = int(round((rs * (freq / float(last_freq))
+                                       + (1 - rs)) * font_size))
             while True:
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
@@ -325,8 +336,8 @@ class WordCloud(object):
                     orientation = None
                 else:
                     orientation = Image.ROTATE_90
-                transposed_font = ImageFont.TransposedFont(font,
-                                                           orientation=orientation)
+                transposed_font = ImageFont.TransposedFont(
+                    font, orientation=orientation)
                 # get size of resulting text
                 box_size = draw.textsize(word, font=transposed_font)
                 # find possible places using integral image:
@@ -363,7 +374,8 @@ class WordCloud(object):
             occupancy.update(img_array, x, y)
             last_freq = freq
 
-        self.layout_ = list(zip(frequencies, font_sizes, positions, orientations, colors))
+        self.layout_ = list(zip(frequencies, font_sizes, positions,
+                                orientations, colors))
         return self
 
     def process_text(self, text):
@@ -421,7 +433,8 @@ class WordCloud(object):
                     dict_singular = d[key_singular]
                     for word, count in dict_plural.items():
                         singular = word[:-1]
-                        dict_singular[singular] = dict_singular.get(singular, 0) + count
+                        dict_singular[singular] = (dict_singular.get(singular, 0)
+                                                   + count)
                     del d[key]
 
         d3 = {}
@@ -465,7 +478,8 @@ class WordCloud(object):
     def _check_generated(self):
         """Check if ``layout_`` was computed, otherwise raise error."""
         if not hasattr(self, "layout_"):
-            raise ValueError("WordCloud has not been calculated, call generate first.")
+            raise ValueError("WordCloud has not been calculated, call generate"
+                             " first.")
 
     def to_image(self):
         self._check_generated()
@@ -475,21 +489,25 @@ class WordCloud(object):
         else:
             height, width = self.height, self.width
 
-        img = Image.new(self.mode, (int(width * self.scale), int(height * self.scale)),
+        img = Image.new(self.mode, (int(width * self.scale),
+                                    int(height * self.scale)),
                         self.background_color)
         draw = ImageDraw.Draw(img)
         for (word, count), font_size, position, orientation, color in self.layout_:
-            font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
-            transposed_font = ImageFont.TransposedFont(font,
-                                                       orientation=orientation)
-            pos = (int(position[1] * self.scale), int(position[0] * self.scale))
+            font = ImageFont.truetype(self.font_path,
+                                      int(font_size * self.scale))
+            transposed_font = ImageFont.TransposedFont(
+                font, orientation=orientation)
+            pos = (int(position[1] * self.scale),
+                   int(position[0] * self.scale))
             draw.text(pos, word, fill=color, font=transposed_font)
         return img
 
     def recolor(self, random_state=None, color_func=None):
         """Recolor existing layout.
 
-        Applying a new coloring is much faster than generating the whole wordcloud.
+        Applying a new coloring is much faster than generating the whole
+        wordcloud.
 
         Parameters
         ----------
@@ -514,8 +532,10 @@ class WordCloud(object):
         self.layout_ = [(word_freq, font_size, position, orientation,
                          color_func(word=word_freq[0], font_size=font_size,
                                     position=position, orientation=orientation,
-                                    random_state=random_state, font_path=self.font_path))
-                        for word_freq, font_size, position, orientation, _ in self.layout_]
+                                    random_state=random_state,
+                                    font_path=self.font_path))
+                        for word_freq, font_size, position, orientation, _
+                        in self.layout_]
         return self
 
     def to_file(self, filename):
