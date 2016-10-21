@@ -20,6 +20,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 from .query_integral_image import query_integral_image
+from .tokenization import remove_plurals, unigram_counts, unigrams_and_bigrams
 
 item1 = itemgetter(1)
 
@@ -175,16 +176,22 @@ class WordCloud(object):
         Transparent background will be generated when mode is "RGBA" and
         background_color is None.
 
-    relative_scaling : float (default=0)
+    relative_scaling : float (default=.5)
         Importance of relative word frequencies for font-size.  With
         relative_scaling=0, only word-ranks are considered.  With
         relative_scaling=1, a word that is twice as frequent will have twice
         the size.  If you want to consider the word frequencies and not only
         their rank, relative_scaling around .5 often looks good.
 
+        .. versionchanged: 2.0
+            Default is now 0.5.
+
     regexp : string or None (optional)
         Regular expression to split the input text into tokens in process_text.
         If None is specified, ``r"\w[\w']+"`` is used.
+
+    collocations : bool, default=True
+        Whether to include collocations (bigrams) of two words.
 
     Attributes
     ----------
@@ -210,9 +217,10 @@ class WordCloud(object):
                  color_func=random_color_func, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
-                 relative_scaling=0, regexp=None):
+                 relative_scaling=.5, regexp=None, collocations=True):
         if font_path is None:
             font_path = FONT_PATH
+        self.collocations = collocations
         self.font_path = font_path
         self.width = width
         self.height = height
@@ -400,48 +408,19 @@ class WordCloud(object):
         include all those things.
         """
 
-        self.stopwords_lower_ = set(map(str.lower, self.stopwords))
+        stopwords = set(map(str.lower, self.stopwords))
 
-        d = {}
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
-        for word in re.findall(regexp, text, flags=flags):
-            if word.isdigit():
-                continue
 
-            word_lower = word.lower()
-            if word_lower in self.stopwords_lower_:
-                continue
+        if self.collocations:
+            d2 = unigrams_and_bigrams(text, stopwords, regexp,
+                                      flags)
+        else:
+            d2 = unigram_counts(text, stopwords, regexp, flags)
 
-            # Look in lowercase dict.
-            try:
-                d2 = d[word_lower]
-            except KeyError:
-                d2 = {}
-                d[word_lower] = d2
-
-            # Look in any case dict.
-            d2[word] = d2.get(word, 0) + 1
-
-        # merge plurals into the singular count (simple cases only)
-        for key in list(d.keys()):
-            if key.endswith('s'):
-                key_singular = key[:-1]
-                if key_singular in d:
-                    dict_plural = d[key]
-                    dict_singular = d[key_singular]
-                    for word, count in dict_plural.items():
-                        singular = word[:-1]
-                        dict_singular[singular] = (dict_singular.get(singular, 0)
-                                                   + count)
-                    del d[key]
-
-        d3 = {}
-        for d2 in d.values():
-            # Get the most popular case.
-            first = max(d2.items(), key=item1)[0]
-            d3[first] = sum(d2.values())
+        d3 = remove_plurals(d2)
 
         return d3
 
