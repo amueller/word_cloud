@@ -5,6 +5,8 @@
 #
 # License: MIT
 
+from __future__ import division
+
 import warnings
 from random import Random
 import os
@@ -81,6 +83,31 @@ def random_color_func(word=None, font_size=None, position=None,
     if random_state is None:
         random_state = Random()
     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
+
+
+class colormap_color_func(object):
+    """Color func created from matplotlib colormap.
+
+    Parameters
+    ----------
+    colormap : string or matplotlib colormap
+        Colormap to sample from
+
+    Example
+    -------
+    >>> WordCloud(color_func=colormap_color_func("magma"))
+
+    """
+    def __init__(self, colormap):
+        import matplotlib.pyplot as plt
+        self.colormap = plt.cm.get_cmap(colormap)
+
+    def __call__(self, word, font_size, position, orientation,
+                 random_state=None, **kwargs):
+        if random_state is None:
+            random_state = Random()
+        r, g, b, _ = 255 * np.array(self.colormap(random_state.uniform(0, 1)))
+        return "rgb({:.0f}, {:.0f}, {:.0f})".format(r, g, b)
 
 
 def get_single_color_func(color):
@@ -186,6 +213,12 @@ class WordCloud(object):
         .. versionchanged: 2.0
             Default is now 0.5.
 
+    color_func : callable, default=None
+        Callable with parameters word, font_size, position, orientation,
+        font_path, random_state that returns a PIL color for each word.
+        Overwrites "colormap".
+        See colormap for specifying a matplotlib colormap instead.
+
     regexp : string or None (optional)
         Regular expression to split the input text into tokens in process_text.
         If None is specified, ``r"\w[\w']+"`` is used.
@@ -193,10 +226,21 @@ class WordCloud(object):
     collocations : bool, default=True
         Whether to include collocations (bigrams) of two words.
 
+        .. versionadded: 2.0
+
+    colormap : string or matplotlib colormap, default="viridis"
+        Matplotlib colormap to randomly draw colors from for each word.
+        Ignored if "color_func" is specified.
+
+        .. versionadded: 2.0
+
     Attributes
     ----------
-    ``words_``: list of tuples (string, float)
+    ``words_`` : dict of string to float
         Word tokens with associated frequency.
+
+        .. versionchanged: 2.0
+            ``words_`` is now a dictionary
 
     ``layout_`` : list of tuples (string, int, (int, int), int, color))
         Encodes the fitted word cloud. Encodes for each word the string, font
@@ -213,13 +257,15 @@ class WordCloud(object):
     """
 
     def __init__(self, font_path=None, width=400, height=200, margin=2,
-                 ranks_only=None, prefer_horizontal=0.9, mask=None, scale=1,
-                 color_func=random_color_func, max_words=200, min_font_size=4,
+                 ranks_only=None, prefer_horizontal=.9, mask=None, scale=1,
+                 color_func=None, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
-                 relative_scaling=.5, regexp=None, collocations=True):
+                 relative_scaling=.5, regexp=None, collocations=True,
+                 colormap="viridis"):
         if font_path is None:
             font_path = FONT_PATH
+        self.colormap = colormap
         self.collocations = collocations
         self.font_path = font_path
         self.width = width
@@ -228,9 +274,9 @@ class WordCloud(object):
         self.prefer_horizontal = prefer_horizontal
         self.mask = mask
         self.scale = scale
-        self.color_func = color_func
+        self.color_func = color_func or colormap_color_func(colormap)
         self.max_words = max_words
-        self.stopwords = stopwords or STOPWORDS
+        self.stopwords = stopwords if stopwords is not None else STOPWORDS
         self.min_font_size = min_font_size
         self.font_step = font_step
         self.regexp = regexp
@@ -238,8 +284,6 @@ class WordCloud(object):
             random_state = Random(random_state)
         self.random_state = random_state
         self.background_color = background_color
-        if max_font_size is None:
-            max_font_size = height
         self.max_font_size = max_font_size
         self.mode = mode
         if relative_scaling < 0 or relative_scaling > 1:
@@ -267,13 +311,16 @@ class WordCloud(object):
         """
         return self.generate_from_frequencies(frequencies)
 
-    def generate_from_frequencies(self, frequencies):
+    def generate_from_frequencies(self, frequencies, max_font_size=None):
         """Create a word_cloud from words and frequencies.
 
         Parameters
         ----------
-        frequencies : array of tuples
-            A tuple contains the word and its frequency.
+        frequencies : dict from string to float
+            A contains words and associated frequency.
+
+        max_font_size : int
+            Use this font-size instead of self.max_font_size
 
         Returns
         -------
@@ -281,7 +328,7 @@ class WordCloud(object):
 
         """
         # make sure frequencies are sorted and normalized
-        frequencies = sorted(frequencies, key=item1, reverse=True)
+        frequencies = sorted(frequencies.items(), key=item1, reverse=True)
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
@@ -289,7 +336,7 @@ class WordCloud(object):
         frequencies = [(word, freq / max_frequency)
                        for word, freq in frequencies]
 
-        self.words_ = frequencies
+        self.words_ = dict(frequencies)
 
         if self.random_state is not None:
             random_state = self.random_state
@@ -326,8 +373,22 @@ class WordCloud(object):
         img_array = np.asarray(img_grey)
         font_sizes, positions, orientations, colors = [], [], [], []
 
-        font_size = self.max_font_size
         last_freq = 1.
+
+        if max_font_size is None:
+            # if not provided use default font_size
+            max_font_size = self.max_font_size
+
+        if max_font_size is None:
+            # figure out a good font size by trying to draw with
+            # just the first two words
+            self.generate_from_frequencies(dict(frequencies[:2]),
+                                           max_font_size=self.height)
+            # find font sizes
+            sizes = [x[1] for x in self.layout_]
+            font_size = 2 * sizes[0] * sizes[1] / (sizes[0] + sizes[1])
+        else:
+            font_size = max_font_size
 
         # start drawing grey image
         for word, freq in frequencies:
@@ -336,14 +397,15 @@ class WordCloud(object):
             if rs != 0:
                 font_size = int(round((rs * (freq / float(last_freq))
                                        + (1 - rs)) * font_size))
+            if random_state.random() < self.prefer_horizontal:
+                orientation = None
+            else:
+                orientation = Image.ROTATE_90
+            tried_other_orientation = False
             while True:
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
                 # transpose font optionally
-                if random_state.random() < self.prefer_horizontal:
-                    orientation = None
-                else:
-                    orientation = Image.ROTATE_90
                 transposed_font = ImageFont.TransposedFont(
                     font, orientation=orientation)
                 # get size of resulting text
@@ -352,10 +414,17 @@ class WordCloud(object):
                 result = occupancy.sample_position(box_size[1] + self.margin,
                                                    box_size[0] + self.margin,
                                                    random_state)
-                if result is not None or font_size == 0:
+                if result is not None or font_size < self.min_font_size:
+                    # either we found a place or font-size went too small
                     break
                 # if we didn't find a place, make font smaller
-                font_size -= self.font_step
+                if tried_other_orientation is False:
+                    orientation = (Image.ROTATE_90 if orientation is None else
+                                   Image.ROTATE_90)
+                    tried_other_orientation = True
+                else:
+                    font_size -= self.font_step
+                    orientation = None
 
             if font_size < self.min_font_size:
                 # we were unable to draw any more
@@ -420,6 +489,8 @@ class WordCloud(object):
         # remove 's
         words = [word[:-2] if word.lower().endswith("'s") else word
                  for word in words]
+        # remove numbers
+        words = [word for word in words if not word.isdigit()]
 
         if self.collocations:
             word_counts = unigrams_and_bigrams(words)
@@ -442,7 +513,7 @@ class WordCloud(object):
         self
         """
         words = self.process_text(text)
-        self.generate_from_frequencies(words.items())
+        self.generate_from_frequencies(words)
         return self
 
     def generate(self, text):
@@ -486,7 +557,7 @@ class WordCloud(object):
             draw.text(pos, word, fill=color, font=transposed_font)
         return img
 
-    def recolor(self, random_state=None, color_func=None):
+    def recolor(self, random_state=None, color_func=None, colormap=None):
         """Recolor existing layout.
 
         Applying a new coloring is much faster than generating the whole
@@ -502,6 +573,10 @@ class WordCloud(object):
             Function to generate new color from word count, font size, position
             and orientation.  If None, self.color_func is used.
 
+        colormap : string or matplotlib colormap, default=None
+            Use this colormap to generate new colors. Ignored if color_func
+            is specified. If None, self.color_func (or self.color_map) is used.
+
         Returns
         -------
         self
@@ -511,7 +586,10 @@ class WordCloud(object):
         self._check_generated()
 
         if color_func is None:
-            color_func = self.color_func
+            if colormap is None:
+                color_func = self.color_func
+            else:
+                color_func = colormap_color_func(colormap)
         self.layout_ = [(word_freq, font_size, position, orientation,
                          color_func(word=word_freq[0], font_size=font_size,
                                     position=position, orientation=orientation,

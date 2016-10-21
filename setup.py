@@ -9,7 +9,7 @@ setup(
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     license='MIT',
-    install_requires=['numpy', 'pillow'],
+    install_requires=['numpy', 'pillow', 'matplotlib'],
     ext_modules=[Extension("wordcloud.query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
     scripts=['wordcloud/wordcloud_cli.py'],
