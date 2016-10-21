@@ -1,7 +1,6 @@
 from itertools import tee
 from operator import itemgetter
 from collections import defaultdict
-import re
 from math import log
 
 
@@ -33,23 +32,14 @@ def pairwise(iterable):
     return zip(a, b)
 
 
-def unigrams_and_bigrams(text, stopwords, token_regex, flags):
-    words = re.findall(r"\w[\w']+", text)
-    # remove stopwords
-    words = [word for word in words if word.lower() not in stopwords]
-    # remove 's
-    words = [word[:-2] if word.lower().endswith("'s") else word
-             for word in words]
+def unigrams_and_bigrams(words):
     n_words = len(words)
     # make tuples of two words following each other
     bigrams = list(pairwise(words))
     counts_unigrams = defaultdict(int)
     counts_bigrams = defaultdict(int)
-    for word in words:
-        counts_unigrams[word] += 1
-    for bigram in bigrams:
-        counts_bigrams[bigram] += 1
-
+    counts_unigrams = process_tokens(words)
+    counts_bigrams = process_tokens(bigrams)
     counts_all = {}
     counts_all.update(counts_unigrams)
     counts_all.update(counts_bigrams)
@@ -65,45 +55,57 @@ def unigrams_and_bigrams(text, stopwords, token_regex, flags):
     return counts_unigrams
 
 
-def unigram_counts(text, stopwords, regexp, flags):
-    d = {}
-    for word in re.findall(regexp, text, flags=flags):
+def process_tokens(words):
+    """Normalize cases and remove plurals.
+
+    Each word is represented by the most common case.
+    If a word appears with an "s" on the end and without an "s" on the end,
+    the version with "s" is assumed to be a plural and merged with the
+    version without "s".
+
+    Parameters
+    ----------
+    words : iterable of strings
+        Words to count.
+
+    Returns
+    -------
+    counts : dict from string to int
+        Counts for each unique word, with cases represented by the most common
+        case, and plurals removed.
+    """
+    # words can be either a list of unigrams or bigrams
+    # d is a dict of dicts.
+    # Keys of d are word.lower(). Values are dicts
+    # counting frequency of each capitalization
+    d = defaultdict(dict)
+    for word in words:
         if word.isdigit():
             continue
 
         word_lower = word.lower()
-        if word_lower in stopwords:
-            continue
+        # get dict of cases for word_lower
+        case_dict = d[word_lower]
+        # increase this case
+        case_dict[word] = case_dict.get(word, 0) + 1
 
-        # Look in lowercase dict.
-        try:
-            d2 = d[word_lower]
-        except KeyError:
-            d2 = {}
-            d[word_lower] = d2
-
-        # Look in any case dict.
-        d2[word] = d2.get(word, 0) + 1
-
-
-def remove_plurals(word_counts):
     # merge plurals into the singular count (simple cases only)
-    for key in list(word_counts.keys()):
+    for key in list(d.keys()):
         if key.endswith('s'):
             key_singular = key[:-1]
-            if key_singular in word_counts:
-                dict_plural = word_counts[key]
-                dict_singular = word_counts[key_singular]
+            if key_singular in d:
+                dict_plural = d[key]
+                dict_singular = d[key_singular]
                 for word, count in dict_plural.items():
                     singular = word[:-1]
                     dict_singular[singular] = (dict_singular.get(singular, 0)
                                                + count)
-                del word_counts[key]
+                del d[key]
 
-    d3 = {}
+    fused_cases = {}
     item1 = itemgetter(1)
-    for d2 in word_counts.values():
+    for case_dict in d.values():
         # Get the most popular case.
-        first = max(d2.items(), key=item1)[0]
-        d3[first] = sum(d2.values())
-    return d3
+        first = max(case_dict.items(), key=item1)[0]
+        fused_cases[first] = sum(case_dict.values())
+    return fused_cases

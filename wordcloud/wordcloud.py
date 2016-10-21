@@ -20,7 +20,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 from .query_integral_image import query_integral_image
-from .tokenization import remove_plurals, unigram_counts, unigrams_and_bigrams
+from .tokenization import unigrams_and_bigrams, process_tokens
 
 item1 = itemgetter(1)
 
@@ -414,15 +414,19 @@ class WordCloud(object):
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
+        words = re.findall(regexp, text, flags)
+        # remove stopwords
+        words = [word for word in words if word.lower() not in stopwords]
+        # remove 's
+        words = [word[:-2] if word.lower().endswith("'s") else word
+                 for word in words]
+
         if self.collocations:
-            d2 = unigrams_and_bigrams(text, stopwords, regexp,
-                                      flags)
+            word_counts = unigrams_and_bigrams(words, stopwords, regexp, flags)
         else:
-            d2 = unigram_counts(text, stopwords, regexp, flags)
+            word_counts = process_tokens(words)
 
-        d3 = remove_plurals(d2)
-
-        return d3
+        return word_counts
 
     def generate_from_text(self, text):
         """Generate wordcloud from text.
