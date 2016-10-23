@@ -6,7 +6,10 @@ from nose.tools import (assert_equal, assert_greater, assert_true,
 from numpy.testing import assert_array_equal
 from PIL import Image
 
+
 from tempfile import NamedTemporaryFile
+import matplotlib
+matplotlib.use('Agg')
 
 THIS = """The Zen of Python, by Tim Peters
 
