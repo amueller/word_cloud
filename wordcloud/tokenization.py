@@ -87,9 +87,6 @@ def process_tokens(words):
     # counting frequency of each capitalization
     d = defaultdict(dict)
     for word in words:
-        if word.isdigit():
-            continue
-
         word_lower = word.lower()
         # get dict of cases for word_lower
         case_dict = d[word_lower]
@@ -97,6 +94,7 @@ def process_tokens(words):
         case_dict[word] = case_dict.get(word, 0) + 1
 
     # merge plurals into the singular count (simple cases only)
+    merged_plurals = {}
     for key in list(d.keys()):
         if key.endswith('s'):
             key_singular = key[:-1]
@@ -107,6 +105,7 @@ def process_tokens(words):
                     singular = word[:-1]
                     dict_singular[singular] = (dict_singular.get(singular, 0)
                                                + count)
+                merged_plurals[key] = key_singular
                 del d[key]
     fused_cases = {}
     standard_cases = {}
@@ -116,4 +115,7 @@ def process_tokens(words):
         first = max(case_dict.items(), key=item1)[0]
         fused_cases[first] = sum(case_dict.values())
         standard_cases[word_lower] = first
+    # add plurals to fused cases:
+    for plural, singular in merged_plurals.items():
+        standard_cases[plural] = standard_cases[singular.lower()]
     return fused_cases, standard_cases

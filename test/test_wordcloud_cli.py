@@ -8,6 +8,8 @@ from wordcloud import wordcloud_cli as cli
 from mock import patch
 from nose.tools import assert_equal, assert_greater, assert_true, assert_in, assert_not_in
 
+import matplotlib
+matplotlib.use('Agg')
 
 temp = NamedTemporaryFile()
 ArgOption = namedtuple('ArgOption', ['cli_name', 'init_name', 'pass_value', 'fail_value'])
