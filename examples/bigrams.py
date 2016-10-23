@@ -23,7 +23,6 @@ import numpy as np
 from PIL import Image
 from os import path
 import matplotlib.pyplot as plt
-import random
 from itertools import tee
 from collections import defaultdict
 import re
@@ -53,7 +52,9 @@ def score(bigram, counts, n_words):
 
 
 def grey_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
-    return "hsl(0, 0%%, %d%%)" % random.randint(60, 100)
+    if random_state is None:
+        random_state = np.random.RandomState()
+    return "hsl(0, 0%%, %d%%)" % random_state.randint(60, 100)
 
 
 def pairwise(iterable):
