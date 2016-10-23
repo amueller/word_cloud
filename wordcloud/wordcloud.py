@@ -262,9 +262,17 @@ class WordCloud(object):
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap="viridis"):
+                 colormap=None):
         if font_path is None:
             font_path = FONT_PATH
+        if color_func is None and colormap is None:
+            # we need a color map
+            import matplotlib
+            version = matplotlib.__version__
+            if version[0] < "2" and version[2] < "5":
+                colormap = "hsv"
+            else:
+                colormap = "viridis"
         self.colormap = colormap
         self.collocations = collocations
         self.font_path = font_path
