@@ -29,7 +29,7 @@ if [[ "$DISTRIB" == "conda" ]]; then
     # Configure the conda environment and put it in the path using the
     # provided versions
     conda create -n testenv --yes python=$PYTHON_VERSION pip nose mock \
-        numpy=$NUMPY_VERSION
+        numpy=$NUMPY_VERSION matplotlib
     source activate testenv
 
 
@@ -37,7 +37,7 @@ elif [[ "$DISTRIB" == "ubuntu" ]]; then
     # Use standard ubuntu packages in their default version
     virtualenv --system-site-packages testvenv
     source testvenv/bin/activate
-    pip install nose mock
+    pip install nose mock matplotlib
 fi
 
 pip install -r requirements.txt
