@@ -336,8 +336,6 @@ class WordCloud(object):
         frequencies = [(word, freq / max_frequency)
                        for word, freq in frequencies]
 
-        self.words_ = dict(frequencies)
-
         if self.random_state is not None:
             random_state = self.random_state
         else:
@@ -382,13 +380,21 @@ class WordCloud(object):
         if max_font_size is None:
             # figure out a good font size by trying to draw with
             # just the first two words
-            self.generate_from_frequencies(dict(frequencies[:2]),
-                                           max_font_size=self.height)
-            # find font sizes
-            sizes = [x[1] for x in self.layout_]
-            font_size = 2 * sizes[0] * sizes[1] / (sizes[0] + sizes[1])
+            if len(frequencies) == 1:
+                # we only have one word. We make it big!
+                font_size = self.height
+            else:
+                self.generate_from_frequencies(dict(frequencies[:2]),
+                                               max_font_size=self.height)
+                # find font sizes
+                sizes = [x[1] for x in self.layout_]
+                font_size = 2 * sizes[0] * sizes[1] / (sizes[0] + sizes[1])
         else:
             font_size = max_font_size
+
+        # we set self.words_ here because we called generate_from_frequencies
+        # above... hurray for good design?
+        self.words_ = dict(frequencies)
 
         # start drawing grey image
         for word, freq in frequencies:

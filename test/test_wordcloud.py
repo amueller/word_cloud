@@ -116,7 +116,7 @@ def test_check_errors():
 
 
 def test_recolor():
-    wc = WordCloud(max_words=50)
+    wc = WordCloud(max_words=50, colormap="jet")
     wc.generate(THIS)
     array_before = wc.to_array()
     wc.recolor()
