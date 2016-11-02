@@ -59,6 +59,21 @@ def test_plurals_numbers():
     assert_in("better than", wc.words_)
 
 
+def test_multiple_s():
+    text = 'flo flos floss flosss'
+    wc = WordCloud(stopwords=[]).generate(text)
+    assert_in("flo", wc.words_)
+    assert_not_in("flos", wc.words_)
+    assert_in("floss", wc.words_)
+    assert_in("flosss", wc.words_)
+    # not normalizing means that the one with just one s is kept
+    wc = WordCloud(stopwords=[], normalize_plurals=False).generate(text)
+    assert_in("flo", wc.words_)
+    assert_in("flos", wc.words_)
+    assert_in("floss", wc.words_)
+    assert_in("flosss", wc.words_)
+
+
 def test_default():
     # test that default word cloud creation and conversions work
     wc = WordCloud(max_words=50)

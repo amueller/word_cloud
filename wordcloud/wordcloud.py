@@ -234,6 +234,12 @@ class WordCloud(object):
 
         .. versionadded: 2.0
 
+    normalize_plurals : bool, default=True
+        Whether to remove trailing 's' from words. If True and a word
+        appears with and without a trailing 's', the one with trailing 's'
+        is removed and its counts are added to the version without
+        trailing 's' -- unless the word ends with 'ss'.
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -262,7 +268,7 @@ class WordCloud(object):
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap=None):
+                 colormap=None, normalize_plurals=True):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -302,6 +308,7 @@ class WordCloud(object):
             warnings.warn("ranks_only is deprecated and will be removed as"
                           " it had no effect. Look into relative_scaling.",
                           DeprecationWarning)
+        self.normalize_plurals = normalize_plurals
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -507,9 +514,9 @@ class WordCloud(object):
         words = [word for word in words if not word.isdigit()]
 
         if self.collocations:
-            word_counts = unigrams_and_bigrams(words)
+            word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
         else:
-            word_counts, _ = process_tokens(words)
+            word_counts, _ = process_tokens(words, self.normalize_plurals)
 
         return word_counts
 

@@ -32,15 +32,17 @@ def pairwise(iterable):
     return zip(a, b)
 
 
-def unigrams_and_bigrams(words):
+def unigrams_and_bigrams(words, normalize_plurals=True):
     n_words = len(words)
     # make tuples of two words following each other
     bigrams = list(pairwise(words))
     counts_unigrams = defaultdict(int)
     counts_bigrams = defaultdict(int)
-    counts_unigrams, standard_form = process_tokens(words)
+    counts_unigrams, standard_form = process_tokens(
+        words, normalize_plurals=normalize_plurals)
     counts_bigrams, standard_form_bigrams = process_tokens(
-        [" ".join(bigram) for bigram in bigrams])
+        [" ".join(bigram) for bigram in bigrams],
+        normalize_plurals=normalize_plurals)
     # create a copy of counts_unigram so the score computation is not changed
     counts = counts_unigrams.copy()
 
@@ -59,18 +61,21 @@ def unigrams_and_bigrams(words):
     return counts_unigrams
 
 
-def process_tokens(words):
+def process_tokens(words, normalize_plurals=True):
     """Normalize cases and remove plurals.
 
     Each word is represented by the most common case.
     If a word appears with an "s" on the end and without an "s" on the end,
     the version with "s" is assumed to be a plural and merged with the
-    version without "s".
+    version without "s" (except if the word ends with "ss").
 
     Parameters
     ----------
     words : iterable of strings
         Words to count.
+
+    normalize_plurals : bool, default=True
+        Whether to try and detect plurals and remove trailing "s".
 
     Returns
     -------
@@ -92,21 +97,21 @@ def process_tokens(words):
         case_dict = d[word_lower]
         # increase this case
         case_dict[word] = case_dict.get(word, 0) + 1
-
-    # merge plurals into the singular count (simple cases only)
-    merged_plurals = {}
-    for key in list(d.keys()):
-        if key.endswith('s'):
-            key_singular = key[:-1]
-            if key_singular in d:
-                dict_plural = d[key]
-                dict_singular = d[key_singular]
-                for word, count in dict_plural.items():
-                    singular = word[:-1]
-                    dict_singular[singular] = (dict_singular.get(singular, 0)
-                                               + count)
-                merged_plurals[key] = key_singular
-                del d[key]
+    if normalize_plurals:
+        # merge plurals into the singular count (simple cases only)
+        merged_plurals = {}
+        for key in list(d.keys()):
+            if key.endswith('s') and not key.endswith("ss"):
+                key_singular = key[:-1]
+                if key_singular in d:
+                    dict_plural = d[key]
+                    dict_singular = d[key_singular]
+                    for word, count in dict_plural.items():
+                        singular = word[:-1]
+                        dict_singular[singular] = (
+                            dict_singular.get(singular, 0) + count)
+                    merged_plurals[key] = key_singular
+                    del d[key]
     fused_cases = {}
     standard_cases = {}
     item1 = itemgetter(1)
@@ -115,7 +120,8 @@ def process_tokens(words):
         first = max(case_dict.items(), key=item1)[0]
         fused_cases[first] = sum(case_dict.values())
         standard_cases[word_lower] = first
-    # add plurals to fused cases:
-    for plural, singular in merged_plurals.items():
-        standard_cases[plural] = standard_cases[singular.lower()]
+    if normalize_plurals:
+        # add plurals to fused cases:
+        for plural, singular in merged_plurals.items():
+            standard_cases[plural] = standard_cases[singular.lower()]
     return fused_cases, standard_cases
