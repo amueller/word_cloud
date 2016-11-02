@@ -1,3 +1,4 @@
+from __future__ import division
 from itertools import tee
 from operator import itemgetter
 from collections import defaultdict
@@ -54,10 +55,18 @@ def unigrams_and_bigrams(words, normalize_plurals=True):
         word2 = standard_form[bigram[1].lower()]
 
         if score(count, counts[word1], counts[word2], n_words) > 30:
+            # bigram is a collocation
+            # discount words in unigrams dict. hack because one word might
+            # appear in multiple collocations at the same time
+            # (leading to negative counts)
             counts_unigrams[word1] -= counts_bigrams[bigram_string]
             counts_unigrams[word2] -= counts_bigrams[bigram_string]
-        # add joined bigram into unigrams
-        counts_unigrams[bigram_string] = counts_bigrams[bigram_string]
+            counts_unigrams[bigram_string] = counts_bigrams[bigram_string]
+    words = counts_unigrams.keys()
+    for word in words:
+        # remove empty / negative counts
+        if counts_unigrams[word] <= 0:
+            del counts_unigrams[word]
     return counts_unigrams
 
 

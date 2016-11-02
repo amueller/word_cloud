@@ -36,13 +36,15 @@ Namespaces are one honking great idea -- let's do more of those!
 
 
 def test_collocations():
-    wc = WordCloud(collocations=False)
+    wc = WordCloud(collocations=False, stopwords=[])
     wc.generate(THIS)
 
-    wc2 = WordCloud(collocations=True)
+    wc2 = WordCloud(collocations=True, stopwords=[])
     wc2.generate(THIS)
 
-    assert_greater(len(wc2.words_), len(wc.words_))
+    assert_in("is better", wc2.words_)
+    assert_not_in("is better", wc.words_)
+    assert_not_in("way may", wc2.words_)
 
 
 def test_plurals_numbers():
