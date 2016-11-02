@@ -62,7 +62,7 @@ def unigrams_and_bigrams(words, normalize_plurals=True):
             counts_unigrams[word1] -= counts_bigrams[bigram_string]
             counts_unigrams[word2] -= counts_bigrams[bigram_string]
             counts_unigrams[bigram_string] = counts_bigrams[bigram_string]
-    words = counts_unigrams.keys()
+    words = list(counts_unigrams.keys())
     for word in words:
         # remove empty / negative counts
         if counts_unigrams[word] <= 0:
