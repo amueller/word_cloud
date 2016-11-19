@@ -51,6 +51,8 @@ def parse_args(arguments):
         help='use given color as coloring for the image - accepts any value from PIL.ImageColor.getcolor')
     parser.add_argument('--background', metavar='color', default='black', type=str, dest='background_color',
         help='use given color as background color for the image - accepts any value from PIL.ImageColor.getcolor')
+    parser.add_argument('--version', action='version',
+                    version='%(prog)s {version}'.format(version=wc.__version__))
     args = parser.parse_args(arguments)
 
     if args.colormask and args.color:
