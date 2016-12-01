@@ -189,8 +189,9 @@ class WordCloud(object):
     max_words : number (default=200)
         The maximum number of words.
 
-    stopwords : set of strings
-        The words that will be eliminated.
+    stopwords : set of strings or None
+        The words that will be eliminated. If None, the build-in STOPWORDS
+        list will be used.
 
     background_color : color value (default="black")
         Background color for the word cloud image.
