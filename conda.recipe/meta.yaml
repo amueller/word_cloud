@@ -11,8 +11,9 @@ requirements:
 
   run:
     - python
+    - matplotlib
+    - numpy >=1.6.1
     - pillow
-    - numpy
 
 
 test:

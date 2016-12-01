@@ -28,10 +28,6 @@ For a manual install get this package:
     rm master.zip
     cd word_cloud-master
 
-Install the requirements:
-
-    sudo pip install -r requirements.txt
-
 Install the package:
 
     python setup.py install
