@@ -230,3 +230,9 @@ def test_generate_from_frequencies():
     result = wc.generate_from_frequencies(words)
 
     assert_true(isinstance(result, WordCloud))
+
+
+def test_relative_scaling_zero():
+    # non-regression test for non-integer font size
+    wc = WordCloud(relative_scaling=0)
+    wc.generate(THIS)
