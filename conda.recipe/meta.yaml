@@ -8,6 +8,9 @@ source:
 requirements:
   build:
     - python
+    - matplotlib
+    - numpy >=1.6.1
+    - pillow
 
   run:
     - python
@@ -19,6 +22,8 @@ requirements:
 test:
   imports:
     - wordcloud
+  commands:
+    - wordcloud_cli.py --help
 
 about:
   home: https://github.com/amueller/word_cloud
