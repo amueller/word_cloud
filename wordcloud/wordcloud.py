@@ -241,6 +241,10 @@ class WordCloud(object):
         is removed and its counts are added to the version without
         trailing 's' -- unless the word ends with 'ss'.
 
+    render_numbers : bool, default=False
+        Whether to include numbers as words for the WordCloud. This could
+        be useful in case of handle categorical data or dates.
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -269,7 +273,7 @@ class WordCloud(object):
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap=None, normalize_plurals=True):
+                 colormap=None, normalize_plurals=True, render_numbers=False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -310,6 +314,7 @@ class WordCloud(object):
                           " it had no effect. Look into relative_scaling.",
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
+        self.render_numbers = render_numbers
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -511,8 +516,9 @@ class WordCloud(object):
         # remove 's
         words = [word[:-2] if word.lower().endswith("'s") else word
                  for word in words]
-        # remove numbers
-        words = [word for word in words if not word.isdigit()]
+        if self.render_numbers is False:
+            # remove numbers
+            words = [word for word in words if not word.isdigit()]
 
         if self.collocations:
             word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
