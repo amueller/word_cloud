@@ -26,10 +26,33 @@ from .tokenization import unigrams_and_bigrams, process_tokens
 
 item1 = itemgetter(1)
 
-FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
-                                                     "DroidSansMono.ttf"))
-STOPWORDS = set([x.strip() for x in open(
-    os.path.join(os.path.dirname(__file__), 'stopwords')).read().split('\n')])
+def selectFont(path):
+    result = ''
+    fontsToTry = ['ARIALUNI.ttf', 'Arial Unicode.ttf', 'arial.ttf']
+    for font in fontsToTry:
+        testFont = os.path.join(path, font)
+        if os.path.exists(testFont):
+            result = testFont
+            break
+    return result
+    
+if sys.platform.startswith('win'):
+    FONT_PATH = selectFont(os.path.join(os.environ['WINDIR'], 'Fonts'))
+elif sys.platform.startswith('darwin'):
+    FONT_PATH = selectFont('/Library/Fonts')
+else:
+    FONT_PATH = ''
+
+if FONT_PATH == '':
+    FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
+                                                         "DroidSansMono.ttf"))
+
+# Trap if "stopwords" file does not exist
+try:
+    STOPWORDS = set([x.strip() for x in open(os.path.join(os.path.dirname(__file__),
+                                                          'stopwords')).read().split('\n')])
+except:
+    STOPWORDS = set()
 
 
 class IntegralOccupancyMap(object):
