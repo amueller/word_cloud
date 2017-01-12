@@ -165,6 +165,9 @@ class WordCloud(object):
 
     prefer_horizontal : float (default=0.90)
         The ratio of times to try horizontal fitting as opposed to vertical.
+        If prefer_horizontal < 1, the algorithm will try rotating the word
+        if it doesn't fit. (There is currently no built-in way to get only vertical
+        words.)
 
     mask : nd-array or None (default=None)
         If not None, gives a binary mask on where to draw words. If mask is not
@@ -440,7 +443,8 @@ class WordCloud(object):
                     # either we found a place or font-size went too small
                     break
                 # if we didn't find a place, make font smaller
-                if tried_other_orientation is False:
+                # but first try to rotate!
+                if not tried_other_orientation and self.prefer_horizontal < 1:
                     orientation = (Image.ROTATE_90 if orientation is None else
                                    Image.ROTATE_90)
                     tried_other_orientation = True
