@@ -32,7 +32,7 @@ Install the package:
 
     python setup.py install
 
-If you're having trouble with pip installation, you can find a .whl file at:
+If you're having trouble with pip installation on windows, you can find a .whl file at:
 
 http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
 
