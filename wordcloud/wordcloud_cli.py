@@ -16,7 +16,8 @@ def main(args):
     wordcloud = wc.WordCloud(stopwords=args.stopwords, mask=args.mask,
         width=args.width, height=args.height, font_path=args.font_path,
         margin=args.margin, relative_scaling=args.relative_scaling,
-        color_func=args.color_func, background_color=args.background_color).generate(args.text)
+        color_func=args.color_func, background_color=args.background_color,
+        weightedwords = args.weightedwords).generate(args.text)
     image = wordcloud.to_image()
 
     with args.imagefile:
@@ -51,8 +52,9 @@ def parse_args(arguments):
         help='use given color as coloring for the image - accepts any value from PIL.ImageColor.getcolor')
     parser.add_argument('--background', metavar='color', default='black', type=str, dest='background_color',
         help='use given color as background color for the image - accepts any value from PIL.ImageColor.getcolor')
-    parser.add_argument('--wordsweights' , metavar='file' , type=argparse.FileType() , 
-    help = 'specify file that has (word , weight) pairs each in a line') 
+    parser.add_argument('--weightedwords' , default=False , action='store_true' , 
+    help = 'add to indicate that text file has (word , weight) pairs each in a line') 
+    
     args = parser.parse_args(arguments)
    
     if args.colormask and args.color:
