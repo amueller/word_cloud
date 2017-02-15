@@ -350,7 +350,6 @@ class WordCloud(object):
         """
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=item1, reverse=True)
-        print frequencies
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])

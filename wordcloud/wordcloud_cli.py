@@ -53,10 +53,8 @@ def parse_args(arguments):
     parser.add_argument('--background', metavar='color', default='black', type=str, dest='background_color',
         help='use given color as background color for the image - accepts any value from PIL.ImageColor.getcolor')
     parser.add_argument('--weightedwords' , default=False , action='store_true' , 
-    help = 'add to indicate that text file has (word , weight) pairs each in a line') 
-    
+    help = 'add to indicate that text file has (word , weight) pairs each in a line')    
     args = parser.parse_args(arguments)
-   
     if args.colormask and args.color:
         raise ValueError('specify either a color mask or a color function')
 
