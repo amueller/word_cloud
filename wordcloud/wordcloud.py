@@ -14,6 +14,7 @@ import re
 import sys
 import colorsys
 import numpy as np
+import csv
 from operator import itemgetter
 
 from PIL import Image
@@ -272,7 +273,7 @@ class WordCloud(object):
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap=None, normalize_plurals=True):
+                 colormap=None, normalize_plurals=True , weightedwords = False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -298,6 +299,7 @@ class WordCloud(object):
         self.min_font_size = min_font_size
         self.font_step = font_step
         self.regexp = regexp
+        self.weightedwords = weightedwords
         if isinstance(random_state, int):
             random_state = Random(random_state)
         self.random_state = random_state
@@ -348,6 +350,7 @@ class WordCloud(object):
         """
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=item1, reverse=True)
+        print frequencies
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
@@ -538,7 +541,13 @@ class WordCloud(object):
         -------
         self
         """
-        words = self.process_text(text)
+        words = dict()
+        if not self.weightedwords :
+            words = self.process_text(text)
+        else :
+            for row in csv.reader (text.split('\n')):
+                if row:
+                    words[row[0]] = float(row[1])
         self.generate_from_frequencies(words)
         return self
 
