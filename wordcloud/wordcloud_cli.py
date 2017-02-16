@@ -16,8 +16,16 @@ def main(args):
     wordcloud = wc.WordCloud(stopwords=args.stopwords, mask=args.mask,
         width=args.width, height=args.height, font_path=args.font_path,
         margin=args.margin, relative_scaling=args.relative_scaling,
-        color_func=args.color_func, background_color=args.background_color,
-        weightedwords = args.weightedwords).generate(args.text)
+        color_func=args.color_func, background_color=args.background_color)
+        
+    if not args.weightedwords :
+        wordcloud.generate(args.text)
+    else :
+        words = dict() 
+        for row in csv.reader(args.text.split('\n')):
+            if row:
+                words[row[0]] = float(row[1])
+        wordcloud.generate_from_frequencies(words)
     image = wordcloud.to_image()
 
     with args.imagefile:
@@ -54,13 +62,14 @@ def parse_args(arguments):
         help='use given color as background color for the image - accepts any value from PIL.ImageColor.getcolor')
     parser.add_argument('--weightedwords' , default=False , action='store_true' , 
     help = 'add to indicate that text file has (word , weight) pairs each in a line')    
+    
     args = parser.parse_args(arguments)
     if args.colormask and args.color:
         raise ValueError('specify either a color mask or a color function')
-
+    
     with args.text:
         args.text = args.text.read()
-
+    
     if args.stopwords:
         with args.stopwords:
             args.stopwords = set(map(str.strip, args.stopwords.readlines()))
