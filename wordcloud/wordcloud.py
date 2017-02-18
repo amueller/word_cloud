@@ -244,6 +244,10 @@ class WordCloud(object):
         appears with and without a trailing 's', the one with trailing 's'
         is removed and its counts are added to the version without
         trailing 's' -- unless the word ends with 'ss'.
+    
+    weightedWords : bool, default=False
+        True to indicate the text provided to WordCloud.generate() is a set of
+        (word , weight) pairs each per line.
 
     Attributes
     ----------
