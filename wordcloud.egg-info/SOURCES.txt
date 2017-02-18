@@ -1,0 +1,16 @@
+setup.py
+test/test_wordcloud.py
+test/test_wordcloud_cli.py
+wordcloud/DroidSansMono.ttf
+wordcloud/__init__.py
+wordcloud/color_from_image.py
+wordcloud/query_integral_image.c
+wordcloud/stopwords
+wordcloud/tokenization.py
+wordcloud/wordcloud.py
+wordcloud/wordcloud_cli.py
+wordcloud.egg-info/PKG-INFO
+wordcloud.egg-info/SOURCES.txt
+wordcloud.egg-info/dependency_links.txt
+wordcloud.egg-info/requires.txt
+wordcloud.egg-info/top_level.txt
