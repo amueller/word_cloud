@@ -249,6 +249,8 @@ class WordCloud(object):
         True to indicate the text provided to WordCloud.generate() is a set of
         (word , weight) pairs each per line.
 
+Added arabic support
+
     Attributes
     ----------
     ``words_`` : dict of string to float
