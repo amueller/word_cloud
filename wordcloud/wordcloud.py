@@ -14,7 +14,6 @@ import re
 import sys
 import colorsys
 import numpy as np
-import csv
 from operator import itemgetter
 
 from PIL import Image
@@ -24,11 +23,13 @@ from PIL import ImageFont
 
 from .query_integral_image import query_integral_image
 from .tokenization import unigrams_and_bigrams, process_tokens
+from .textreshaper import TextReshaper
 
 item1 = itemgetter(1)
 
 FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
-                                                     "DroidSansMono.ttf"))
+                                                     "Tahoma.ttf"))
+
 STOPWORDS = set([x.strip() for x in open(
     os.path.join(os.path.dirname(__file__), 'stopwords')).read().split('\n')])
 
@@ -244,12 +245,6 @@ class WordCloud(object):
         appears with and without a trailing 's', the one with trailing 's'
         is removed and its counts are added to the version without
         trailing 's' -- unless the word ends with 'ss'.
-    
-    weightedWords : bool, default=False
-        True to indicate the text provided to WordCloud.generate() is a set of
-        (word , weight) pairs each per line.
-
-Added arabic support
 
     Attributes
     ----------
@@ -279,7 +274,7 @@ Added arabic support
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap=None, normalize_plurals=True , weightedwords = False):
+                 colormap=None, normalize_plurals=True):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -305,7 +300,6 @@ Added arabic support
         self.min_font_size = min_font_size
         self.font_step = font_step
         self.regexp = regexp
-        self.weightedwords = weightedwords
         if isinstance(random_state, int):
             random_state = Random(random_state)
         self.random_state = random_state
@@ -354,9 +348,9 @@ Added arabic support
         self
 
         """
+
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=item1, reverse=True)
-        print frequencies
         frequencies = frequencies[:self.max_words]
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
@@ -511,6 +505,7 @@ Added arabic support
         There are better ways to do word tokenization, but I don't want to
         include all those things.
         """
+        text = TextReshaper.reshape(text)
 
         stopwords = set(map(str.lower, self.stopwords))
 
@@ -547,13 +542,7 @@ Added arabic support
         -------
         self
         """
-        words = dict()
-        if not self.weightedwords :
-            words = self.process_text(text)
-        else :
-            for row in csv.reader (text.split('\n')):
-                if row:
-                    words[row[0]] = float(row[1])
+        words = self.process_text(text)
         self.generate_from_frequencies(words)
         return self
 

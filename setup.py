@@ -9,10 +9,11 @@ setup(
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     license='MIT',
-    install_requires=['matplotlib', 'numpy>=1.6.1', 'pillow'],
+    install_requires=['matplotlib', 'numpy>=1.6.1', 'pillow', 'python-bidi', 'arabic-reshaper'],
     ext_modules=[Extension("wordcloud.query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
     scripts=['wordcloud/wordcloud_cli.py'],
     packages=['wordcloud'],
-    package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
+    package_data={'wordcloud': ['stopwords', 'Tahoma.ttf']},
+    dependency_links=['https://github.com/mpcabd/python-arabic-reshaper/tarball/master#egg=python-arabic-reshaper']
 )
