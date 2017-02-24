@@ -38,7 +38,7 @@ elif [[ "$DISTRIB" == "ubuntu" ]]; then
     virtualenv --system-site-packages testvenv
     source testvenv/bin/activate
     pip install -U setuptools
-    pip install nose mock matplotlib pillow
+    pip install nose mock matplotlib==1.5.3 pillow
 fi
 
 python --version
