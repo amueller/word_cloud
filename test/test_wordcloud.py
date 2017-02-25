@@ -61,6 +61,24 @@ def test_plurals_numbers():
     assert_in("better than", wc.words_)
 
 
+def test_render_numbers():
+    text = THIS + "\n" + "1, 2, 3, 1 number 2 numbers 3 numbers although many Numbers"
+    wc = WordCloud(stopwords=[], render_numbers=True).generate(text)
+    # not capitalized usually
+    assert_not_in("Numbers", wc.words_)
+    # plural removed
+    assert_not_in("numbers", wc.words_)
+    # numbers not removed
+    assert_in("1", wc.words_)
+    assert_in("2", wc.words_)
+    assert_in("3", wc.words_)
+    # usually capitalized
+    assert_not_in("although", wc.words_)
+    assert_in("number", wc.words_)
+    assert_in("Although", wc.words_)
+    assert_in("better than", wc.words_)
+
+
 def test_multiple_s():
     text = 'flo flos floss flosss'
     wc = WordCloud(stopwords=[]).generate(text)
@@ -230,3 +248,6 @@ def test_generate_from_frequencies():
     result = wc.generate_from_frequencies(words)
 
     assert_true(isinstance(result, WordCloud))
+
+
+test_render_numbers()
