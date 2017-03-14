@@ -5,7 +5,7 @@ setup(
     author="Andreas Mueller",
     author_email="t3kcit+wordcloud@gmail.com",
     name='wordcloud',
-    version='1.2.1',
+    version='1.3',
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     license='MIT',
