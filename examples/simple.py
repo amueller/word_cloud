@@ -19,7 +19,7 @@ wordcloud = WordCloud().generate(text)
 # Display the generated image:
 # the matplotlib way:
 import matplotlib.pyplot as plt
-plt.imshow(wordcloud)
+plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 
 # lower max_font_size
@@ -30,5 +30,5 @@ plt.axis("off")
 plt.show()
 
 # The pil way (if you don't have matplotlib)
-#image = wordcloud.to_image()
-#image.show()
+# image = wordcloud.to_image()
+# image.show()

@@ -34,9 +34,9 @@ wc.generate(text)
 wc.to_file(path.join(d, "alice.png"))
 
 # show
-plt.imshow(wc)
+plt.imshow(wc, interpolation='bilinear')
 plt.axis("off")
 plt.figure()
-plt.imshow(alice_mask, cmap=plt.cm.gray)
+plt.imshow(alice_mask, cmap=plt.cm.gray, interpolation='bilinear')
 plt.axis("off")
 plt.show()
