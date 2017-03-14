@@ -4,7 +4,7 @@
    *
    * Will mutate the underlying span to have a correct ul for nav.
    *
-   * @param $span: Span containing nested UL's to mutate.
+   * @param $span: Span containing nested UL"s to mutate.
    * @param minLevel: Starting level for nested lists. (1: global, 2: local).
    */
   var patchToc = function ($ul, minLevel) {
@@ -21,16 +21,16 @@
       $items.each(function (index, item) {
         var $item = $(item),
           tag = item.tagName.toLowerCase(),
-          $childrenLi = $item.children('li'),
-          $parentLi = $($item.parent('li'), $item.parent().parent('li'));
+          $childrenLi = $item.children("li"),
+          $parentLi = $($item.parent("li"), $item.parent().parent("li"));
 
         // Add dropdowns if more children and above minimum level.
-        if (tag === 'ul' && level >= minLevel && $childrenLi.length > 0) {
+        if (tag === "ul" && level >= minLevel && $childrenLi.length > 0) {
           $parentLi
-            .addClass('dropdown-submenu')
-            .children('a').first().attr('tabindex', -1);
+            .addClass("dropdown-submenu")
+            .children("a").first().attr("tabindex", -1);
 
-          $item.addClass('dropdown-menu');
+          $item.addClass("dropdown-menu");
         }
 
         findA($item, level + 1);
@@ -69,11 +69,11 @@
   });
 
   $(document).ready(function () {
-    // Add styling, structure to TOC's.
+    // Add styling, structure to TOC"s.
     $(".dropdown-menu").each(function () {
       $(this).find("ul").each(function (index, item){
         var $item = $(item);
-        $item.addClass('unstyled');
+        $item.addClass("unstyled");
       });
     });
 
@@ -92,24 +92,33 @@
     
     // back to top
     setTimeout(function () {
-      var $sideBar = $('.bs-sidenav');
+      var $sideBar = $(".bs-sidenav");
+      var $content = $(".content");
 
-      $sideBar.affix({
-        offset: {
-          top: function () {
-            var offsetTop      = $sideBar.offset().top;
-            var sideBarMargin  = parseInt($sideBar.children(0).css('margin-top'), 10);
-            var navOuterHeight = $('#navbar').height();
+      // Enlarge content if sidebar is larger.
+      if ($sideBar.outerHeight(true) > $content.outerHeight(true)) {
+        $content.minHeight($sideBar.outerHeight(true));
+      }
 
-            return (this.top = offsetTop - navOuterHeight - sideBarMargin);
+      $sideBar
+        // Add affix.
+        .affix({
+          offset: {
+            top: function () {
+              var offsetTop      = $sideBar.offset().top;
+              var sideBarMargin  = parseInt($sideBar.css("margin-top"), 10);
+              var navOuterHeight = $("#navbar").outerHeight(true);
+
+              return (this.top = offsetTop - navOuterHeight);
+            },
+            bottom: function () {
+              return (this.bottom = $(".footer").outerHeight(true));
+            }
           }
-        , bottom: function () {
-            // add 25 because the footer height doesn't seem to be enough
-            return (this.bottom = $('.footer').outerHeight(true) + 25);
-          }
-        }
-      });
-    }, 100);
+        })
+        // Trigger to reset if page content is scrolled to bottom.
+        .trigger("scroll.bs.affix.data-api");
+    }, 0);
     
 
     // Local TOC.
@@ -135,30 +144,23 @@
     // Add divider in page TOC.
     $localLi = $("ul.localtoc li");
     if ($localLi.length > 2) {
-      $localLi.first().after('<li class="divider"></li>');
+      $localLi.first().after("<li class=\"divider\"></li>");
     }
-
-    // Manually add dropdown.
-    // Appears unnecessary as of:
-    //   https://github.com/ryan-roemer/sphinx-bootstrap-theme/pull/90
-    // Remove next time around...
-    // a.dropdown-toggle class needed in globaltoc.html
-    //$('.dropdown-toggle').dropdown();
 
     // Patch tables.
     patchTables();
 
     // Add Note, Warning styles. (BS v2,3 compatible).
-    $('.admonition').addClass('alert alert-info')
-      .filter('.warning, .caution')
-        .removeClass('alert-info')
-        .addClass('alert-warning').end()
-      .filter('.error, .danger')
-        .removeClass('alert-info')
-        .addClass('alert-danger alert-error').end();
+    $(".admonition").addClass("alert alert-info")
+      .filter(".warning, .caution")
+        .removeClass("alert-info")
+        .addClass("alert-warning").end()
+      .filter(".error, .danger")
+        .removeClass("alert-info")
+        .addClass("alert-danger alert-error").end();
 
     // Inline code styles to Bootstrap style.
-    $('tt.docutils.literal').not(".xref").each(function (i, e) {
+    $("tt.docutils.literal").not(".xref").each(function (i, e) {
       // ignore references
       if (!$(e).parent().hasClass("reference")) {
         $(e).replaceWith(function () {

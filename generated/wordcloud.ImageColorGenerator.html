@@ -6,23 +6,25 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>wordcloud.ImageColorGenerator &mdash; wordcloud 0.1 documentation</title>
+    <title>wordcloud.ImageColorGenerator &#8212; wordcloud 1.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="stylesheet" href="../_static/main.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1',
+        VERSION:     '1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -30,10 +32,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="wordcloud 0.1 documentation" href="../index.html" />
-    <link rel="up" title="API Reference" href="../references.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="wordcloud.random_color_func" href="wordcloud.random_color_func.html" />
     <link rel="prev" title="wordcloud.WordCloud" href="wordcloud.WordCloud.html" />
 <meta charset='utf-8'>
@@ -42,7 +44,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -55,7 +57,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Wordcloud</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.3</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -74,16 +76,14 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/simple.html">Minimal Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/masked.html">Masked wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/colored.html">Image-colored wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/a_new_hope.html">Using custom colors</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/simple.html">Minimal Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/masked.html">Masked wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/colored_by_group.html">Colored by Group Example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../references.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="wordcloud.WordCloud.html">wordcloud.WordCloud</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">wordcloud.ImageColorGenerator</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">wordcloud.ImageColorGenerator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wordcloud.random_color_func.html">wordcloud.random_color_func</a></li>
 </ul>
 </li>
@@ -110,11 +110,11 @@
               
                 
   <li>
-    <a href="wordcloud.WordCloud.html" title="Previous Chapter: wordcloud.WordCloud"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; wordcloud.WordCl...</span>
+    <a href="wordcloud.WordCloud.html" title="Previous Chapter: wordcloud.WordCloud"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; wordcloud.Wor...</span>
     </a>
   </li>
   <li>
-    <a href="wordcloud.random_color_func.html" title="Next Chapter: wordcloud.random_color_func"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">wordcloud.random... &raquo;</span>
+    <a href="wordcloud.random_color_func.html" title="Next Chapter: wordcloud.random_color_func"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">wordcloud.ran... &raquo;</span>
     </a>
   </li>
               
@@ -144,7 +144,7 @@
 <h1>wordcloud.ImageColorGenerator<a class="headerlink" href="#wordcloud-imagecolorgenerator" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="wordcloud.ImageColorGenerator">
-<em class="property">class </em><tt class="descclassname">wordcloud.</tt><tt class="descname">ImageColorGenerator</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#wordcloud.ImageColorGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">wordcloud.</code><code class="descname">ImageColorGenerator</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/color_from_image.html#ImageColorGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.ImageColorGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Color generator based on a color image.</p>
 <p>Generates colors based on an RGB image. A word will be colored using
 the mean color of the enclosing rectangle in the color image.</p>
@@ -163,9 +163,21 @@ This should be the same size as the canvas. for the wordcloud.</p>
 </tr>
 </tbody>
 </table>
-<dl class="staticmethod">
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">__call__</span></code>(word,&nbsp;font_size,&nbsp;font_path,&nbsp;...)</td>
+<td>Generate a color for a given word using a fixed image.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
 <dt id="wordcloud.ImageColorGenerator.__init__">
-<em class="property">static </em><tt class="descname">__init__</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#wordcloud.ImageColorGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/color_from_image.html#ImageColorGenerator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.ImageColorGenerator.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -181,8 +193,8 @@ This should be the same size as the canvas. for the wordcloud.</p>
       
     </p>
     <p>
-        &copy; Copyright 2013, Andreas Mueller.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+        &copy; Copyright 2017, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.<br/>
     </p>
   </div>
 </footer>

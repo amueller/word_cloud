@@ -6,23 +6,25 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Masked wordcloud &mdash; wordcloud 0.1 documentation</title>
+    <title>Masked wordcloud &#8212; wordcloud 1.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="stylesheet" href="../_static/main.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1',
+        VERSION:     '1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -30,10 +32,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="wordcloud 0.1 documentation" href="../index.html" />
-    <link rel="up" title="Examples" href="index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Image-colored wordcloud" href="colored.html" />
     <link rel="prev" title="Minimal Example" href="simple.html" />
 <meta charset='utf-8'>
@@ -42,7 +44,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -55,7 +57,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Wordcloud</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.3</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -74,13 +76,11 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="simple.html">Minimal Example</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Masked wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="colored.html">Image-colored wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="simple.html">Minimal Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Masked wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colored_by_group.html">Colored by Group Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.WordCloud.html">wordcloud.WordCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.ImageColorGenerator.html">wordcloud.ImageColorGenerator</a></li>
@@ -110,11 +110,11 @@
               
                 
   <li>
-    <a href="simple.html" title="Previous Chapter: Minimal Example"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Minimal Example</span>
+    <a href="simple.html" title="Previous Chapter: Minimal Example"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Minimal Example</span>
     </a>
   </li>
   <li>
-    <a href="colored.html" title="Next Chapter: Image-colored wordcloud"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Image-colored wo... &raquo;</span>
+    <a href="colored.html" title="Next Chapter: Image-colored wordcloud"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Image-colored... &raquo;</span>
     </a>
   </li>
               
@@ -141,49 +141,59 @@
 <div class="container content-container">
   
   <div class="section" id="masked-wordcloud">
-<span id="masked-py"></span><h1>Masked wordcloud<a class="headerlink" href="#masked-wordcloud" title="Permalink to this headline"></a></h1>
+<span id="sphx-glr-auto-examples-masked-py"></span><h1>Masked wordcloud<a class="headerlink" href="#masked-wordcloud" title="Permalink to this headline">¶</a></h1>
 <p>Using a mask you can generate wordclouds in arbitrary shapes.</p>
-<ul class="horizontal">
-<li><a class="first reference internal image-reference" href="../_images/masked_2.png"><img alt="../_images/masked_2.png" src="../_images/masked_2.png" style="width: 376.0px; height: 282.0px;" /></a>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_masked_001.png"><img alt="../_images/sphx_glr_masked_001.png" src="../_images/sphx_glr_masked_001.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../_images/masked_1.png"><img alt="../_images/masked_1.png" src="../_images/masked_1.png" style="width: 376.0px; height: 282.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_masked_002.png"><img alt="../_images/sphx_glr_masked_002.png" src="../_images/sphx_glr_masked_002.png" style="width: 300.79999999999995px; height: 225.6px;" /></a>
 </li>
 </ul>
-<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/masked.py"><tt class="xref download docutils literal"><span class="pre">masked.py</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.imread.html#scipy.misc.imread"><span class="n">imread</span></a>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">STOPWORDS</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
 
-<span class="c"># Read the whole text.</span>
-<span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;alice.txt&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># Read the whole text.</span>
+<span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;alice.txt&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-<span class="c"># read the mask image</span>
-<span class="c"># taken from</span>
-<span class="c"># http://www.stencilry.org/stencils/movies/alice%20in%20wonderland/255fk.jpg</span>
-<span class="n">alice_mask</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.misc.imread.html#scipy.misc.imread"><span class="n">imread</span></a><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&quot;alice_mask.png&quot;</span><span class="p">))</span>
+<span class="c1"># read the mask image</span>
+<span class="c1"># taken from</span>
+<span class="c1"># http://www.stencilry.org/stencils/movies/alice%20in%20wonderland/255fk.jpg</span>
+<span class="n">alice_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;alice_mask.png&quot;</span><span class="p">)))</span>
 
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">alice_mask</span><span class="p">,</span>
-               <span class="n">stopwords</span><span class="o">=</span><span class="n">STOPWORDS</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;said&quot;</span><span class="p">))</span>
-<span class="c"># generate word cloud</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">STOPWORDS</span><span class="p">)</span>
+<span class="n">stopwords</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;said&quot;</span><span class="p">)</span>
 
-<span class="c"># store to file</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&quot;alice.png&quot;</span><span class="p">))</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">alice_mask</span><span class="p">,</span>
+               <span class="n">stopwords</span><span class="o">=</span><span class="n">stopwords</span><span class="p">)</span>
+<span class="c1"># generate word cloud</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-<span class="c"># show</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud"><span class="n">wc</span></a><span class="p">)</span>
-<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&quot;off&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.imshow"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">alice_mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s">&quot;off&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<span class="c1"># store to file</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;alice.png&quot;</span><span class="p">))</span>
+
+<span class="c1"># show</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">alice_mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>  4.88 seconds</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  3.218 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/masked.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">masked.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/masked.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">masked.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -195,8 +205,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2013, Andreas Mueller.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+        &copy; Copyright 2017, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.<br/>
     </p>
   </div>
 </footer>

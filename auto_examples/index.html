@@ -6,23 +6,25 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Examples &mdash; wordcloud 0.1 documentation</title>
+    <title>&lt;no title&gt; &#8212; wordcloud 1.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="stylesheet" href="../_static/main.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1',
+        VERSION:     '1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -30,9 +32,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="wordcloud 0.1 documentation" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Minimal Example" href="simple.html" />
     <link rel="prev" title="&lt;no title&gt;" href="../index.html" />
 <meta charset='utf-8'>
@@ -41,7 +44,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -54,7 +57,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Wordcloud</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.3</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -72,14 +75,12 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="simple.html">Minimal Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="colored.html">Image-colored wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
-</ul>
-</li>
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="simple.html">Minimal Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colored_by_group.html">Colored by Group Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.WordCloud.html">wordcloud.WordCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.ImageColorGenerator.html">wordcloud.ImageColorGenerator</a></li>
@@ -99,9 +100,6 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Examples</a><ul>
-</ul>
-</li>
 </ul>
 </ul>
 </li>
@@ -111,11 +109,11 @@
               
                 
   <li>
-    <a href="../index.html" title="Previous Chapter: <no title>"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; <no title></span>
+    <a href="../index.html" title="Previous Chapter: <no title>"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; <no title></span>
     </a>
   </li>
   <li>
-    <a href="simple.html" title="Next Chapter: Minimal Example"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Minimal Example &raquo;</span>
+    <a href="simple.html" title="Next Chapter: Minimal Example"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Minimal Example &raquo;</span>
     </a>
   </li>
               
@@ -141,66 +139,43 @@
 
 <div class="container content-container">
   
-  <style type="text/css">
-
-div#sidebarbutton {
-    display: none;
-}
-
-.figure {
-    float: left;
-    margin: 16px;
-    top: 0;
-    left: 0;
-    -webkit-border-radius: 10px; /* Saf3-4, iOS 1-3.2, Android <1.6 */
-    -moz-border-radius: 10px; /* FF1-3.6 */
-    border-radius: 10px; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
-    border: 2px solid #fff;
-    -webkit-transition: all 0.15s ease-out;  /* Saf3.2+, Chrome */
-    -moz-transition: all 0.15s ease-out;  /* FF4+ */
-    -ms-transition: all 0.15s ease-out;  /* IE10? */
-    -o-transition: all 0.15s ease-out;  /* Opera 10.5+ */
-    transition: all 0.15s ease-out;
-    background-repeat: no-repeat;
-    /* --> Thumbnail image size */
-    width: 150px;
-    height: 130px;
-}
-
-.figure img {
-    display: inline;
-    }
-
-.figure .caption {
-    text-align: center !important;
-}
-</style><div class="section" id="examples">
-<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<div class="thumbnailContainer"><div class="figure">
-<a class="reference external image-reference" href="./simple.html"><img alt="../_images/simple.png" src="../_images/simple.png" /></a>
-<p class="caption"><a class="reference internal" href="simple.html#simple-py"><em>Minimal Example</em></a></p>
+  <div class="sphx-glr-thumbcontainer" tooltip="Generating a square wordcloud from the US constitution using default arguments. "><div class="figure" id="id1">
+<img alt="../_images/sphx_glr_simple_thumb.png" src="../_images/sphx_glr_simple_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="simple.html#sphx-glr-auto-examples-simple-py"><span class="std std-ref">Minimal Example</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="thumbnailContainer"><div class="figure">
-<a class="reference external image-reference" href="./masked.html"><img alt="../_images/masked.png" src="../_images/masked.png" /></a>
-<p class="caption"><a class="reference internal" href="masked.html#masked-py"><em>Masked wordcloud</em></a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Using a mask you can generate wordclouds in arbitrary shapes. "><div class="figure" id="id2">
+<img alt="../_images/sphx_glr_masked_thumb.png" src="../_images/sphx_glr_masked_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="masked.html#sphx-glr-auto-examples-masked-py"><span class="std std-ref">Masked wordcloud</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="thumbnailContainer"><div class="figure">
-<a class="reference external image-reference" href="./colored.html"><img alt="../_images/colored.png" src="../_images/colored.png" /></a>
-<p class="caption"><a class="reference internal" href="colored.html#colored-py"><em>Image-colored wordcloud</em></a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="You can color a word-cloud by using an image-based coloring strategy implemented in ImageColorG..."><div class="figure" id="id3">
+<img alt="../_images/sphx_glr_colored_thumb.png" src="../_images/sphx_glr_colored_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="colored.html#sphx-glr-auto-examples-colored-py"><span class="std std-ref">Image-colored wordcloud</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="thumbnailContainer"><div class="figure">
-<a class="reference external image-reference" href="./a_new_hope.html"><img alt="../_images/a_new_hope.png" src="../_images/a_new_hope.png" /></a>
-<p class="caption"><a class="reference internal" href="a_new_hope.html#a-new-hope-py"><em>Using custom colors</em></a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Using the recolor method and custom coloring functions. "><div class="figure" id="id4">
+<img alt="../_images/sphx_glr_a_new_hope_thumb.png" src="../_images/sphx_glr_a_new_hope_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="a_new_hope.html#sphx-glr-auto-examples-a-new-hope-py"><span class="std std-ref">Using custom colors</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div style="clear: both"></div></div>
+<div class="sphx-glr-thumbcontainer" tooltip="Generating a word cloud that assigns colors to words based on a predefined mapping from colors ..."><div class="figure" id="id5">
+<img alt="../_images/sphx_glr_colored_by_group_thumb.png" src="../_images/sphx_glr_colored_by_group_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="colored_by_group.html#sphx-glr-auto-examples-colored-by-group-py"><span class="std std-ref">Colored by Group Example</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div style='clear:both'></div><div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/auto_examples_python.zip" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">auto_examples_python.zip</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/auto_examples_jupyter.zip" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Jupyter</span> <span class="pre">notebooks:</span> <span class="pre">auto_examples_jupyter.zip</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 
 
 </div>
@@ -211,8 +186,8 @@ div#sidebarbutton {
       
     </p>
     <p>
-        &copy; Copyright 2013, Andreas Mueller.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+        &copy; Copyright 2017, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.<br/>
     </p>
   </div>
 </footer>

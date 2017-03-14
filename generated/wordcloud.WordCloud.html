@@ -6,23 +6,25 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>wordcloud.WordCloud &mdash; wordcloud 0.1 documentation</title>
+    <title>wordcloud.WordCloud &#8212; wordcloud 1.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="stylesheet" href="../_static/main.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1',
+        VERSION:     '1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -30,19 +32,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="wordcloud 0.1 documentation" href="../index.html" />
-    <link rel="up" title="API Reference" href="../references.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="wordcloud.ImageColorGenerator" href="wordcloud.ImageColorGenerator.html" />
-    <link rel="prev" title="wordcloud.random_color_func" href="wordcloud.random_color_func.html" />
+    <link rel="prev" title="API Reference" href="../references.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -55,7 +57,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Wordcloud</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.3</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -74,15 +76,13 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/simple.html">Minimal Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/masked.html">Masked wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/colored.html">Image-colored wordcloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/a_new_hope.html">Using custom colors</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/simple.html">Minimal Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/masked.html">Masked wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/colored_by_group.html">Colored by Group Example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../references.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">wordcloud.WordCloud</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">wordcloud.WordCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wordcloud.ImageColorGenerator.html">wordcloud.ImageColorGenerator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wordcloud.random_color_func.html">wordcloud.random_color_func</a></li>
 </ul>
@@ -110,11 +110,11 @@
               
                 
   <li>
-    <a href="wordcloud.random_color_func.html" title="Previous Chapter: wordcloud.random_color_func"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; wordcloud.random...</span>
+    <a href="../references.html" title="Previous Chapter: API Reference"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; API Reference</span>
     </a>
   </li>
   <li>
-    <a href="wordcloud.ImageColorGenerator.html" title="Next Chapter: wordcloud.ImageColorGenerator"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">wordcloud.ImageC... &raquo;</span>
+    <a href="wordcloud.ImageColorGenerator.html" title="Next Chapter: wordcloud.ImageColorGenerator"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">wordcloud.Ima... &raquo;</span>
     </a>
   </li>
               
@@ -144,7 +144,7 @@
 <h1>wordcloud.WordCloud<a class="headerlink" href="#wordcloud-wordcloud" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="wordcloud.WordCloud">
-<em class="property">class </em><tt class="descclassname">wordcloud.</tt><tt class="descname">WordCloud</tt><big>(</big><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=5</em>, <em>ranks_only=False</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=&lt;function random_color_func at 0x2b8b422a31b8&gt;</em>, <em>max_words=200</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">wordcloud.</code><code class="descname">WordCloud</code><span class="sig-paren">(</span><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=2</em>, <em>ranks_only=None</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=None</em>, <em>max_words=200</em>, <em>min_font_size=4</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em>, <em>font_step=1</em>, <em>mode='RGB'</em>, <em>relative_scaling=0.5</em>, <em>regexp=None</em>, <em>collocations=True</em>, <em>colormap=None</em>, <em>normalize_plurals=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
 <dd><p>Word cloud object for generating and drawing.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -164,13 +164,12 @@ another OS or don&#8217;t have this font, you need to adjust this path.</p>
 <blockquote>
 <div><p>Height of the canvas.</p>
 </div></blockquote>
-<p><strong>ranks_only</strong> : boolean (default=False)</p>
-<blockquote>
-<div><p>Only use the rank of the words, not the actual counts.</p>
-</div></blockquote>
 <p><strong>prefer_horizontal</strong> : float (default=0.90)</p>
 <blockquote>
-<div><p>The ratio of times to try horizontal fitting as opposed to vertical.</p>
+<div><p>The ratio of times to try horizontal fitting as opposed to vertical.
+If prefer_horizontal &lt; 1, the algorithm will try rotating the word
+if it doesn&#8217;t fit. (There is currently no built-in way to get only vertical
+words.)</p>
 </div></blockquote>
 <p><strong>mask</strong> : nd-array or None (default=None)</p>
 <blockquote>
@@ -186,49 +185,97 @@ changed in the most recent version!]</p>
 using scale instead of larger canvas size is significantly faster, but
 might lead to a coarser fit for the words.</p>
 </div></blockquote>
+<p><strong>min_font_size</strong> : int (default=4)</p>
+<blockquote>
+<div><p>Smallest font size to use. Will stop when there is no more room in this
+size.</p>
+</div></blockquote>
+<p><strong>font_step</strong> : int (default=1)</p>
+<blockquote>
+<div><p>Step size for the font. font_step &gt; 1 might speed up computation but
+give a worse fit.</p>
+</div></blockquote>
 <p><strong>max_words</strong> : number (default=200)</p>
 <blockquote>
 <div><p>The maximum number of words.</p>
 </div></blockquote>
-<p><strong>stopwords</strong> : set of strings</p>
+<p><strong>stopwords</strong> : set of strings or None</p>
 <blockquote>
-<div><p>The words that will be eliminated.</p>
+<div><p>The words that will be eliminated. If None, the build-in STOPWORDS
+list will be used.</p>
 </div></blockquote>
 <p><strong>background_color</strong> : color value (default=&#8221;black&#8221;)</p>
 <blockquote>
 <div><p>Background color for the word cloud image.</p>
 </div></blockquote>
 <p><strong>max_font_size</strong> : int or None (default=None)</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Maximum font size for the largest word. If None, height of the image is
 used.</p>
+</div></blockquote>
+<p><strong>mode</strong> : string (default=&#8221;RGB&#8221;)</p>
+<blockquote>
+<div><p>Transparent background will be generated when mode is &#8220;RGBA&#8221; and
+background_color is None.</p>
+</div></blockquote>
+<p><strong>relative_scaling</strong> : float (default=.5)</p>
+<blockquote>
+<div><p>Importance of relative word frequencies for font-size.  With
+relative_scaling=0, only word-ranks are considered.  With
+relative_scaling=1, a word that is twice as frequent will have twice
+the size.  If you want to consider the word frequencies and not only
+their rank, relative_scaling around .5 often looks good.</p>
+</div></blockquote>
+<p><strong>color_func</strong> : callable, default=None</p>
+<blockquote>
+<div><p>Callable with parameters word, font_size, position, orientation,
+font_path, random_state that returns a PIL color for each word.
+Overwrites &#8220;colormap&#8221;.
+See colormap for specifying a matplotlib colormap instead.</p>
+</div></blockquote>
+<p><strong>regexp</strong> : string or None (optional)</p>
+<blockquote>
+<div><p>Regular expression to split the input text into tokens in process_text.
+If None is specified, <code class="docutils literal"><span class="pre">r&quot;\w[\w']+&quot;</span></code> is used.</p>
+</div></blockquote>
+<p><strong>collocations</strong> : bool, default=True</p>
+<blockquote>
+<div><p>Whether to include collocations (bigrams) of two words.</p>
+</div></blockquote>
+<p><strong>colormap</strong> : string or matplotlib colormap, default=&#8221;viridis&#8221;</p>
+<blockquote>
+<div><p>Matplotlib colormap to randomly draw colors from for each word.
+Ignored if &#8220;color_func&#8221; is specified.</p>
+</div></blockquote>
+<p><strong>normalize_plurals</strong> : bool, default=True</p>
+<blockquote class="last">
+<div><p>Whether to remove trailing &#8216;s&#8217; from words. If True and a word
+appears with and without a trailing &#8216;s&#8217;, the one with trailing &#8216;s&#8217;
+is removed and its counts are added to the version without
+trailing &#8216;s&#8217; &#8211; unless the word ends with &#8216;ss&#8217;.</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>Larger canvases with make the code significantly slower. If you need a large
-word cloud, try a lower canvas size, and set the scale parameter.</p>
+<p>Larger canvases with make the code significantly slower. If you need a
+large word cloud, try a lower canvas size, and set the scale parameter.</p>
 <p>The algorithm might give more weight to the ranking of the words
-than their actual frequencies, depending on the <tt class="docutils literal"><span class="pre">max_font_size</span></tt> and the
+than their actual frequencies, depending on the <code class="docutils literal"><span class="pre">max_font_size</span></code> and the
 scaling heuristic.</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="26%" />
-<col width="32%" />
-<col width="42%" />
+<col width="6%" />
+<col width="94%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">words_</span></tt>: list of tuples (string, float)</td>
-<td>&nbsp;</td>
-<td>Word tokens with associated frequency.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">words_</span></code></td>
+<td>(dict of string to float) Word tokens with associated frequency.  .. versionchanged: 2.0 <code class="docutils literal"><span class="pre">words_</span></code> is now a dictionary</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">layout_</span></tt></td>
-<td>list of tuples (string, int, (int, int), int, color))</td>
-<td>Encodes the fitted word cloud. Encodes for each word the string, font
-size, position, orientation and color.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">layout_</span></code></td>
+<td>(list of tuples (string, int, (int, int), int, color))) Encodes the fitted word cloud. Encodes for each word the string, font size, position, orientation and color.</td>
 </tr>
 </tbody>
 </table>
@@ -239,46 +286,46 @@ size, position, orientation and color.</td>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.fit_words" title="wordcloud.WordCloud.fit_words"><tt class="xref py py-obj docutils literal"><span class="pre">fit_words</span></tt></a>(frequencies)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.fit_words" title="wordcloud.WordCloud.fit_words"><code class="xref py py-obj docutils literal"><span class="pre">fit_words</span></code></a>(frequencies)</td>
 <td>Create a word_cloud from words and frequencies.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.generate" title="wordcloud.WordCloud.generate"><tt class="xref py py-obj docutils literal"><span class="pre">generate</span></tt></a>(text)</td>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.generate" title="wordcloud.WordCloud.generate"><code class="xref py py-obj docutils literal"><span class="pre">generate</span></code></a>(text)</td>
 <td>Generate wordcloud from text.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.generate_from_frequencies" title="wordcloud.WordCloud.generate_from_frequencies"><tt class="xref py py-obj docutils literal"><span class="pre">generate_from_frequencies</span></tt></a>(frequencies)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.generate_from_frequencies" title="wordcloud.WordCloud.generate_from_frequencies"><code class="xref py py-obj docutils literal"><span class="pre">generate_from_frequencies</span></code></a>(frequencies[,&nbsp;...])</td>
 <td>Create a word_cloud from words and frequencies.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.generate_from_text" title="wordcloud.WordCloud.generate_from_text"><tt class="xref py py-obj docutils literal"><span class="pre">generate_from_text</span></tt></a>(text)</td>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.generate_from_text" title="wordcloud.WordCloud.generate_from_text"><code class="xref py py-obj docutils literal"><span class="pre">generate_from_text</span></code></a>(text)</td>
 <td>Generate wordcloud from text.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.process_text" title="wordcloud.WordCloud.process_text"><tt class="xref py py-obj docutils literal"><span class="pre">process_text</span></tt></a>(text)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.process_text" title="wordcloud.WordCloud.process_text"><code class="xref py py-obj docutils literal"><span class="pre">process_text</span></code></a>(text)</td>
 <td>Splits a long text into words, eliminates the stopwords.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.recolor" title="wordcloud.WordCloud.recolor"><tt class="xref py py-obj docutils literal"><span class="pre">recolor</span></tt></a>([random_state,&nbsp;color_func])</td>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.recolor" title="wordcloud.WordCloud.recolor"><code class="xref py py-obj docutils literal"><span class="pre">recolor</span></code></a>([random_state,&nbsp;color_func,&nbsp;colormap])</td>
 <td>Recolor existing layout.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.to_array" title="wordcloud.WordCloud.to_array"><tt class="xref py py-obj docutils literal"><span class="pre">to_array</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#wordcloud.WordCloud.to_array" title="wordcloud.WordCloud.to_array"><code class="xref py py-obj docutils literal"><span class="pre">to_array</span></code></a>()</td>
 <td>Convert to numpy array.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.to_file" title="wordcloud.WordCloud.to_file"><tt class="xref py py-obj docutils literal"><span class="pre">to_file</span></tt></a>(filename)</td>
+<tr class="row-even"><td><a class="reference internal" href="#wordcloud.WordCloud.to_file" title="wordcloud.WordCloud.to_file"><code class="xref py py-obj docutils literal"><span class="pre">to_file</span></code></a>(filename)</td>
 <td>Export to image file.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_html</span></tt>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">to_html</span></code>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_image</span></tt>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">to_image</span></code>()</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.__init__">
-<em class="property">static </em><tt class="descname">__init__</tt><big>(</big><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=5</em>, <em>ranks_only=False</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=&lt;function random_color_func at 0x2b8b422a31b8&gt;</em>, <em>max_words=200</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=2</em>, <em>ranks_only=None</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=None</em>, <em>max_words=200</em>, <em>min_font_size=4</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em>, <em>font_step=1</em>, <em>mode='RGB'</em>, <em>relative_scaling=0.5</em>, <em>regexp=None</em>, <em>collocations=True</em>, <em>colormap=None</em>, <em>normalize_plurals=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.fit_words">
-<em class="property">static </em><tt class="descname">fit_words</tt><big>(</big><em>frequencies</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.fit_words" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_words</code><span class="sig-paren">(</span><em>frequencies</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.fit_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.fit_words" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a word_cloud from words and frequencies.</p>
 <p>Alias to generate_from_frequencies.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -291,68 +338,77 @@ size, position, orientation and color.</td>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">self</p>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.generate">
-<em class="property">static </em><tt class="descname">generate</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.generate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">generate</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.generate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate wordcloud from text.</p>
 <p>Alias to generate_from_text.</p>
-<p>Calls process_text and fit_words.</p>
+<p>Calls process_text and generate_from_frequencies.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.generate_from_frequencies">
-<em class="property">static </em><tt class="descname">generate_from_frequencies</tt><big>(</big><em>frequencies</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.generate_from_frequencies" title="Permalink to this definition">¶</a></dt>
+<code class="descname">generate_from_frequencies</code><span class="sig-paren">(</span><em>frequencies</em>, <em>max_font_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.generate_from_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.generate_from_frequencies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a word_cloud from words and frequencies.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>frequencies</strong> : array of tuples</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>frequencies</strong> : dict from string to float</p>
 <blockquote>
-<div><p>A tuple contains the word and its frequency.</p>
+<div><p>A contains words and associated frequency.</p>
+</div></blockquote>
+<p><strong>max_font_size</strong> : int</p>
+<blockquote>
+<div><p>Use this font-size instead of self.max_font_size</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">self</p>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.generate_from_text">
-<em class="property">static </em><tt class="descname">generate_from_text</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.generate_from_text" title="Permalink to this definition">¶</a></dt>
+<code class="descname">generate_from_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.generate_from_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.generate_from_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate wordcloud from text.</p>
-<p>Calls process_text and fit_words.</p>
+<p>Calls process_text and generate_from_frequencies.</p>
+<dl class="docutils">
+<dt>..versionchanged:: 1.2.2</dt>
+<dd>Argument of generate_from_frequencies() is not return of
+process_text() any more.</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.process_text">
-<em class="property">static </em><tt class="descname">process_text</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.process_text" title="Permalink to this definition">¶</a></dt>
+<code class="descname">process_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.process_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.process_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Splits a long text into words, eliminates the stopwords.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -364,9 +420,13 @@ size, position, orientation and color.</td>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>words</strong> : list of tuples (string, float)</p>
-<blockquote class="last">
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>words</strong> : dict (string, int)</p>
+<blockquote>
 <div><p>Word tokens with associated frequency.</p>
+</div></blockquote>
+<p>..versionchanged:: 1.2.2</p>
+<blockquote class="last">
+<div><p>Changed return type from list of tuples to dict.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -377,11 +437,12 @@ size, position, orientation and color.</td>
 include all those things.</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.recolor">
-<em class="property">static </em><tt class="descname">recolor</tt><big>(</big><em>random_state=None</em>, <em>color_func=None</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.recolor" title="Permalink to this definition">¶</a></dt>
+<code class="descname">recolor</code><span class="sig-paren">(</span><em>random_state=None</em>, <em>color_func=None</em>, <em>colormap=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.recolor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.recolor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recolor existing layout.</p>
-<p>Applying a new coloring is much faster than generating the whole wordcloud.</p>
+<p>Applying a new coloring is much faster than generating the whole
+wordcloud.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -396,18 +457,23 @@ is used as seed for a random.Random state.</p>
 <div><p>Function to generate new color from word count, font size, position
 and orientation.  If None, self.color_func is used.</p>
 </div></blockquote>
+<p><strong>colormap</strong> : string or matplotlib colormap, default=None</p>
+<blockquote>
+<div><p>Use this colormap to generate new colors. Ignored if color_func
+is specified. If None, self.color_func (or self.color_map) is used.</p>
+</div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">self</p>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.to_array">
-<em class="property">static </em><tt class="descname">to_array</tt><big>(</big><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.to_array" title="Permalink to this definition">¶</a></dt>
+<code class="descname">to_array</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.to_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.to_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert to numpy array.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -423,9 +489,9 @@ and orientation.  If None, self.color_func is used.</p>
 </table>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="method">
 <dt id="wordcloud.WordCloud.to_file">
-<em class="property">static </em><tt class="descname">to_file</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#wordcloud.WordCloud.to_file" title="Permalink to this definition">¶</a></dt>
+<code class="descname">to_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.to_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export to image file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -437,7 +503,7 @@ and orientation.  If None, self.color_func is used.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">self</p>
 </td>
 </tr>
 </tbody>
@@ -457,8 +523,8 @@ and orientation.  If None, self.color_func is used.</p>
       
     </p>
     <p>
-        &copy; Copyright 2013, Andreas Mueller.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+        &copy; Copyright 2017, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.<br/>
     </p>
   </div>
 </footer>

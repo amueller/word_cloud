@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Colored by Group Example &#8212; wordcloud 1.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/main.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../references.html" />
+    <link rel="prev" title="Using custom colors" href="a_new_hope.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Wordcloud</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Examples</a></li>
+                <li><a href="../references.html">References</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="simple.html">Minimal Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Colored by Group Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.WordCloud.html">wordcloud.WordCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.ImageColorGenerator.html">wordcloud.ImageColorGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generated/wordcloud.random_color_func.html">wordcloud.random_color_func</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Colored by Group Example</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="a_new_hope.html" title="Previous Chapter: Using custom colors"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Using custom ...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../references.html" title="Next Chapter: API Reference"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">API Reference &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container content-container">
+  
+  <div class="section" id="colored-by-group-example">
+<span id="sphx-glr-auto-examples-colored-by-group-py"></span><h1>Colored by Group Example<a class="headerlink" href="#colored-by-group-example" title="Permalink to this headline">¶</a></h1>
+<p>Generating a word cloud that assigns colors to words based on
+a predefined mapping from colors to words</p>
+<img alt="../_images/sphx_glr_colored_by_group_001.png" class="align-center" src="../_images/sphx_glr_colored_by_group_001.png" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><span class="n">WordCloud</span><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+
+<span class="k">class</span> <span class="nc">SimpleGroupedColorFunc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a color function object which assigns EXACT colors</span>
+<span class="sd">       to certain words based on the color to words mapping</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ----------</span>
+<span class="sd">       color_to_words : dict(str -&gt; list(str))</span>
+<span class="sd">         A dictionary that maps a color to the list of words.</span>
+
+<span class="sd">       default_color : str</span>
+<span class="sd">         Color that will be assigned to a word that&#39;s not a member</span>
+<span class="sd">         of any value from color_to_words.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_to_color</span> <span class="o">=</span> <span class="p">{</span><span class="n">word</span><span class="p">:</span> <span class="n">color</span>
+                              <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                              <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span> <span class="o">=</span> <span class="n">default_color</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_to_color</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">GroupedColorFunc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a color function object which assigns DIFFERENT SHADES of</span>
+<span class="sd">       specified colors to certain words based on the color to words mapping.</span>
+
+<span class="sd">       Uses wordcloud.get_single_color_func</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ----------</span>
+<span class="sd">       color_to_words : dict(str -&gt; list(str))</span>
+<span class="sd">         A dictionary that maps a color to the list of words.</span>
+
+<span class="sd">       default_color : str</span>
+<span class="sd">         Color that will be assigned to a word that&#39;s not a member</span>
+<span class="sd">         of any value from color_to_words.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_func_to_words</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">get_single_color_func</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_color_func</span> <span class="o">=</span> <span class="n">get_single_color_func</span><span class="p">(</span><span class="n">default_color</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_color_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a single_color_func associated with the word&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">color_func</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+                <span class="n">color_func</span> <span class="k">for</span> <span class="p">(</span><span class="n">color_func</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_func_to_words</span>
+                <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="n">color_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_color_func</span>
+
+        <span class="k">return</span> <span class="n">color_func</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color_func</span><span class="p">(</span><span class="n">word</span><span class="p">)(</span><span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;The Zen of Python, by Tim Peters</span>
+<span class="s2">Beautiful is better than ugly.</span>
+<span class="s2">Explicit is better than implicit.</span>
+<span class="s2">Simple is better than complex.</span>
+<span class="s2">Complex is better than complicated.</span>
+<span class="s2">Flat is better than nested.</span>
+<span class="s2">Sparse is better than dense.</span>
+<span class="s2">Readability counts.</span>
+<span class="s2">Special cases aren&#39;t special enough to break the rules.</span>
+<span class="s2">Although practicality beats purity.</span>
+<span class="s2">Errors should never pass silently.</span>
+<span class="s2">Unless explicitly silenced.</span>
+<span class="s2">In the face of ambiguity, refuse the temptation to guess.</span>
+<span class="s2">There should be one-- and preferably only one --obvious way to do it.</span>
+<span class="s2">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
+<span class="s2">Now is better than never.</span>
+<span class="s2">Although never is often better than *right* now.</span>
+<span class="s2">If the implementation is hard to explain, it&#39;s a bad idea.</span>
+<span class="s2">If the implementation is easy to explain, it may be a good idea.</span>
+<span class="s2">Namespaces are one honking great idea -- let&#39;s do more of those!&quot;&quot;&quot;</span>
+
+<span class="c1"># Since the text is small collocations are turned off and text is lower-cased</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">collocations</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+<span class="n">color_to_words</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># words below will be colored with a green single color function</span>
+    <span class="s1">&#39;#00ff00&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;beautiful&#39;</span><span class="p">,</span> <span class="s1">&#39;explicit&#39;</span><span class="p">,</span> <span class="s1">&#39;simple&#39;</span><span class="p">,</span> <span class="s1">&#39;sparse&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;readability&#39;</span><span class="p">,</span> <span class="s1">&#39;rules&#39;</span><span class="p">,</span> <span class="s1">&#39;practicality&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;explicitly&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;now&#39;</span><span class="p">,</span> <span class="s1">&#39;easy&#39;</span><span class="p">,</span> <span class="s1">&#39;obvious&#39;</span><span class="p">,</span> <span class="s1">&#39;better&#39;</span><span class="p">],</span>
+    <span class="c1"># will be colored with a red single color function</span>
+    <span class="s1">&#39;red&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ugly&#39;</span><span class="p">,</span> <span class="s1">&#39;implicit&#39;</span><span class="p">,</span> <span class="s1">&#39;complex&#39;</span><span class="p">,</span> <span class="s1">&#39;complicated&#39;</span><span class="p">,</span> <span class="s1">&#39;nested&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dense&#39;</span><span class="p">,</span> <span class="s1">&#39;special&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="s1">&#39;silently&#39;</span><span class="p">,</span> <span class="s1">&#39;ambiguity&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;guess&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Words that are not in any of the color_to_words values</span>
+<span class="c1"># will be colored with a grey single color function</span>
+<span class="n">default_color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span>
+
+<span class="c1"># Create a color function with single tone</span>
+<span class="c1"># grouped_color_func = SimpleGroupedColorFunc(color_to_words, default_color)</span>
+
+<span class="c1"># Create a color function with multiple tones</span>
+<span class="n">grouped_color_func</span> <span class="o">=</span> <span class="n">GroupedColorFunc</span><span class="p">(</span><span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">)</span>
+
+<span class="c1"># Apply our color function</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">grouped_color_func</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.125 seconds)</p>
+<div class="sphx-glr-footer container">
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/colored_by_group.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored_by_group.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/colored_by_group.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">colored_by_group.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
