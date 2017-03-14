@@ -2,6 +2,7 @@
 """
 Masked wordcloud
 ================
+
 Using a mask you can generate wordclouds in arbitrary shapes.
 """
 

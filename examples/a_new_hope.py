@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """
 Using custom colors
-====================
+===================
+
 Using the recolor method and custom coloring functions.
 """
 

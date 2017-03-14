@@ -2,6 +2,7 @@
 """
 Minimal Example
 ===============
+
 Generating a square wordcloud from the US constitution using default arguments.
 """
 
@@ -25,7 +26,7 @@ plt.axis("off")
 # lower max_font_size
 wordcloud = WordCloud(max_font_size=40).generate(text)
 plt.figure()
-plt.imshow(wordcloud)
+plt.imshow(wordcloud, interpolation="bilinear")
 plt.axis("off")
 plt.show()
 

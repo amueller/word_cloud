@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """
 Image-colored wordcloud
-========================
+=======================
+
 You can color a word-cloud by using an image-based coloring strategy
 implemented in ImageColorGenerator. It uses the average color of the region
 occupied by the word in a source image. You can combine this with masking -

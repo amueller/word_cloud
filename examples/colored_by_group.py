@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """
 Colored by Group Example
-===============
+========================
+
 Generating a word cloud that assigns colors to words based on
 a predefined mapping from colors to words
 """
