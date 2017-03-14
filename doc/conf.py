@@ -28,13 +28,15 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['gen_rst', 'sphinx.ext.autodoc', 'sphinx.ext.autosummary',
-              'sphinx.ext.doctest', 'sphinx.ext.pngmath',
-              'sphinx.ext.viewcode', 'numpy_ext.numpydoc']
+extensions = ['sphinx_gallery.gen_gallery', 'sphinx.ext.autodoc',
+              'sphinx.ext.autosummary', 'sphinx.ext.doctest',
+              'sphinx.ext.viewcode',
+              'numpydoc']
 
 autosummary_generate = True
 
 autodoc_default_flags = ['members', 'inherited-members']
+numpydoc_class_members_toctree = False 
 
 # generate autosummary even if no references
 autosummary_generate = True
@@ -53,7 +55,13 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'wordcloud'
-copyright = u'2013, Andreas Mueller'
+copyright = u'2017, Andreas Mueller'
+
+sphinx_gallery_conf = {
+        # path to your examples scripts
+        'examples_dirs': '../examples',
+        # path where to save gallery generated examples
+        'gallery_dirs' : 'auto_examples'}
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
