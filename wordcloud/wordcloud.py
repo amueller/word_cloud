@@ -429,7 +429,7 @@ class WordCloud(object):
             tried_other_orientation = False
             while True:
                 # try to find a position
-                font = ImageFont.truetype(self.font_path, font_size)
+                font = ImageFont.truetype(self.font_path, int(font_size))
                 # transpose font optionally
                 transposed_font = ImageFont.TransposedFont(
                     font, orientation=orientation)
