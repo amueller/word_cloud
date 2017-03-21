@@ -16,7 +16,8 @@ def main(args):
     wordcloud = wc.WordCloud(stopwords=args.stopwords, mask=args.mask,
         width=args.width, height=args.height, font_path=args.font_path,
         margin=args.margin, relative_scaling=args.relative_scaling,
-        color_func=args.color_func, background_color=args.background_color).generate(args.text)
+        color_func=args.color_func, background_color=args.background_color,
+        collocations=args.collocations).generate(args.text)
     image = wordcloud.to_image()
 
     with args.imagefile:
@@ -51,6 +52,8 @@ def parse_args(arguments):
         help='use given color as coloring for the image - accepts any value from PIL.ImageColor.getcolor')
     parser.add_argument('--background', metavar='color', default='black', type=str, dest='background_color',
         help='use given color as background color for the image - accepts any value from PIL.ImageColor.getcolor')
+    parser.add_argument('--no_collocations', action='store_true',
+        help='do not add collocations (bigrams) to word cloud (default: add unigrams and bigrams)')
     args = parser.parse_args(arguments)
 
     if args.colormask and args.color:
@@ -73,6 +76,8 @@ def parse_args(arguments):
 
     if args.color:
         color_func = wc.get_single_color_func(args.color)
+
+    args.collocations = not args.no_collocations
 
     args.color_func = color_func
     return args
