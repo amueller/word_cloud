@@ -47,6 +47,26 @@ def test_collocations():
     assert_not_in("way may", wc2.words_)
 
 
+def test_min_word_length():
+    text = 'take a walky walk walk'
+
+    wc1 = WordCloud(stopwords=[], min_word_length=1)
+    wc1.generate(text)
+
+    wc2 = WordCloud(stopwords=[], min_word_length=2)
+    wc2.generate(text)
+
+    wc5 = WordCloud(stopwords=[], min_word_length=5)
+    wc5.generate(text)
+
+    assert_in('a', wc1.words_)
+    assert_in('walk', wc1.words_)
+    assert_not_in('a', wc2.words_)
+    assert_in('walk', wc2.words_)
+    assert_not_in('a', wc5.words_)
+    assert_not_in('walk', wc5.words_)
+
+
 def test_plurals_numbers():
     text = THIS + "\n" + "1 idea 2 ideas three ideas although many Ideas"
     wc = WordCloud(stopwords=[]).generate(text)

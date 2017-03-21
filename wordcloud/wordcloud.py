@@ -244,6 +244,10 @@ class WordCloud(object):
         is removed and its counts are added to the version without
         trailing 's' -- unless the word ends with 'ss'.
 
+    min_word_length : int, default=2
+        Minimum length of words to consider (words shorter than this
+        length will be discarded).
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -272,7 +276,7 @@ class WordCloud(object):
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap=None, normalize_plurals=True):
+                 colormap=None, normalize_plurals=True, min_word_length=2):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -313,6 +317,7 @@ class WordCloud(object):
                           " it had no effect. Look into relative_scaling.",
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
+        self.min_word_length = min_word_length
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -507,9 +512,11 @@ class WordCloud(object):
 
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
-        regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
+        regexp = self.regexp if self.regexp is not None else r"\w[\w']*"
 
         words = re.findall(regexp, text, flags)
+        # remove short words
+        words = [word for word in words if len(word) >= self.min_word_length]
         # remove stopwords
         words = [word for word in words if word.lower() not in stopwords]
         # remove 's

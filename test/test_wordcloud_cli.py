@@ -17,7 +17,8 @@ ARGUMENT_SPEC_TYPED = [
     ArgOption(cli_name='width', init_name='width', pass_value=13, fail_value=1.),
     ArgOption(cli_name='height', init_name='height', pass_value=15, fail_value=1.),
     ArgOption(cli_name='margin', init_name='margin', pass_value=17, fail_value=1.),
-    ArgOption(cli_name='relative_scaling', init_name='relative_scaling', pass_value=1, fail_value='c')
+    ArgOption(cli_name='relative_scaling', init_name='relative_scaling', pass_value=1, fail_value='c'),
+    ArgOption(cli_name='min_word_length', init_name='min_word_length', pass_value=1, fail_value=1.)
 ]
 ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=temp.name, fail_value=None),
