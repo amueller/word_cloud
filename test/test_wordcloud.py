@@ -76,6 +76,16 @@ def test_multiple_s():
     assert_in("flosss", wc.words_)
 
 
+def test_empty_text():
+    # test originally empty text raises an exception
+    wc = WordCloud(stopwords=[])
+    assert_raises(ValueError, wc.generate, '')
+
+    # test empty-after-filtering text raises an exception
+    wc = WordCloud(stopwords=['a', 'b'])
+    assert_raises(ValueError, wc.generate, 'a b a')
+
+
 def test_default():
     # test that default word cloud creation and conversions work
     wc = WordCloud(max_words=50)

@@ -348,7 +348,11 @@ class WordCloud(object):
         """
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=item1, reverse=True)
+        if len(frequencies) <= 0:
+            raise ValueError("We need at least 1 word to plot a word cloud, "
+                             "got %d." % len(frequencies))
         frequencies = frequencies[:self.max_words]
+
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
 
@@ -359,10 +363,6 @@ class WordCloud(object):
             random_state = self.random_state
         else:
             random_state = Random()
-
-        if len(frequencies) <= 0:
-            print("We need at least 1 word to plot a word cloud, got %d."
-                  % len(frequencies))
 
         if self.mask is not None:
             mask = self.mask
