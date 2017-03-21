@@ -17,7 +17,10 @@ ARGUMENT_SPEC_TYPED = [
     ArgOption(cli_name='width', init_name='width', pass_value=13, fail_value=1.),
     ArgOption(cli_name='height', init_name='height', pass_value=15, fail_value=1.),
     ArgOption(cli_name='margin', init_name='margin', pass_value=17, fail_value=1.),
-    ArgOption(cli_name='relative_scaling', init_name='relative_scaling', pass_value=1, fail_value='c')
+    ArgOption(cli_name='relative_scaling', init_name='relative_scaling', pass_value=1, fail_value='c'),
+]
+ARGUMENT_SPEC_UNARY = [
+    ArgOption(cli_name='no_collocations', init_name='collocations', pass_value=True, fail_value=1)
 ]
 ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=temp.name, fail_value=None),
@@ -26,10 +29,12 @@ ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='color', init_name='color_func', pass_value='red', fail_value=None),
     ArgOption(cli_name='background', init_name='background_color', pass_value='grey', fail_value=None)
 ]
+ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 
 def all_arguments():
     arguments = []
     arguments.extend(ARGUMENT_SPEC_TYPED)
+    arguments.extend(ARGUMENT_SPEC_UNARY)
     arguments.extend(ARGUMENT_SPEC_REMAINING)
     return arguments
 
@@ -56,6 +61,13 @@ def check_argument(name, result_name, value):
     assert_in(result_name, vars(args))
 
 
+def check_argument_unary(name, result_name):
+    text = NamedTemporaryFile()
+
+    args = cli.parse_args(['--text', text.name, '--' + name])
+    assert_in(result_name, vars(args))
+
+
 def check_argument_type(name, value):
     text = NamedTemporaryFile()
 
@@ -71,7 +83,9 @@ def check_argument_type(name, value):
 
 def test_parse_args_are_passed_along():
     for option in all_arguments():
-        if option.cli_name != 'mask':
+        if option.cli_name in ARGUMENT_CLI_NAMES_UNARY:
+            yield check_argument_unary, option.cli_name, option.init_name
+        elif option.cli_name != 'mask':
             yield check_argument, option.cli_name, option.init_name, option.pass_value
 
 
