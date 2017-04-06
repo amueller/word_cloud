@@ -5,3 +5,5 @@ wordcloud/query_integral_image.so
 doc/_build
 doc/auto_examples
 doc/generated
+.venv/
+.idea/
