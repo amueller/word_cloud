@@ -94,6 +94,11 @@ word clouds for twitter users when it is mentioned with a particular hashtag.
 [Here][twitter-wordnuvola] you can see it in action, while [here][imgur-wordnuvola]
 you can see all the word clouds generated so far.
 
+### Winston Churchill speech "We Shall Fight on the Beaches" 
+Pulled text from http://www.winstonchurchill.org/resources/speeches/128-we-shall-fight-on-thebeaches
+
+![Winston Churchill speech](./notebooks/notebookoutput/churchill_speech.png)
+
 ### [other]
 
 *Send a pull request to add yours here.*
