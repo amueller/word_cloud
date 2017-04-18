@@ -503,13 +503,7 @@ class WordCloud(object):
         include all those things.
         """
 
-        stopwords = []
-        for i in self.stopwords:
-            try:
-                stopwords.append(str.lower(i))
-            except:
-                stopwords.append(unicode.lower(i))
-        stopwords = set(stopwords)
+        stopwords = set([i.lower() for i in self.stopwords])
 
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
