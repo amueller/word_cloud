@@ -250,7 +250,10 @@ def test_relative_scaling_zero():
 
 def test_unicode_stopwords():
     wc_unicode = WordCloud(stopwords=[u'Beautiful'])
-    words_unicode = wc_unicode.process_text(unicode(THIS))
+    try:
+        words_unicode = wc_unicode.process_text(unicode(THIS))
+    except NameError:  # PY3
+        words_unicode = wc_unicode.process_text(str(THIS, 'utf8'))
 
     wc_str = WordCloud(stopwords=['Beautiful'])
     words_str = wc_str.process_text(str(THIS))
