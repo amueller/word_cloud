@@ -246,3 +246,14 @@ def test_relative_scaling_zero():
     # non-regression test for non-integer font size
     wc = WordCloud(relative_scaling=0)
     wc.generate(THIS)
+
+
+def test_unicode_stopwords():
+    wc_unicode = WordCloud(stopwords=[u'Beautiful'])
+    words_unicode = wc_unicode.process_text(unicode(THIS))
+
+    wc_str = WordCloud(stopwords=['Beautiful'])
+    words_str = wc_str.process_text(str(THIS))
+
+    assert_true(words_unicode == words_str)
+
