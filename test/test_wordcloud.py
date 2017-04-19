@@ -253,7 +253,7 @@ def test_unicode_stopwords():
     try:
         words_unicode = wc_unicode.process_text(unicode(THIS))
     except NameError:  # PY3
-        words_unicode = wc_unicode.process_text(str(THIS, 'utf8'))
+        words_unicode = wc_unicode.process_text(THIS)
 
     wc_str = WordCloud(stopwords=['Beautiful'])
     words_str = wc_str.process_text(str(THIS))
