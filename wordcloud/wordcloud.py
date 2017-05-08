@@ -321,8 +321,8 @@ class WordCloud(object):
 
         Parameters
         ----------
-        frequencies : array of tuples
-            A tuple contains the word and its frequency.
+        frequencies : dict from string to float
+            A contains words and associated frequency.
 
         Returns
         -------
