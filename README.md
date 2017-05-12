@@ -32,18 +32,13 @@ Install the package:
 
     python setup.py install
 
-#### Istallation notes
+#### Installation notes
 
 ##### Windows
 
 If you're having trouble with pip installation on windows, you can find a .whl file at:
 
 http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
-
-##### OS different from Ubuntu
-
-Note that if you are not on Ubuntu, you need to pass a ``font_path`` to the WordCloud object ([docs](http://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html#wordcloud.WordCloud)) to point to
-some existing font.
 
 ##### Ubuntu
 
