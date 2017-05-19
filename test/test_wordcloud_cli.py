@@ -6,7 +6,7 @@ from tempfile import NamedTemporaryFile
 import wordcloud as wc
 from wordcloud import wordcloud_cli as cli
 from mock import patch
-from nose.tools import assert_equal, assert_greater, assert_true, assert_in, assert_not_in
+from nose.tools import assert_equal, assert_greater, assert_true, assert_in
 
 import matplotlib
 matplotlib.use('Agg')
@@ -110,6 +110,11 @@ def test_parse_args_defaults_to_random_color():
 
     args = cli.parse_args(['--text', text.name])
     assert_equal(args.color_func, wc.random_color_func)
+
+
+def test_unicode_text_file():
+    args = cli.parse_args(['--text', "unicode_text.txt"])
+    assert_equal(len(args.text), 16)
 
 
 def test_cli_writes_image():
