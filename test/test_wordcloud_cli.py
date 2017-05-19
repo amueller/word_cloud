@@ -113,7 +113,8 @@ def test_parse_args_defaults_to_random_color():
 
 
 def test_unicode_text_file():
-    args = cli.parse_args(['--text', "unicode_text.txt"])
+    unicode_file = os.path.join(os.path.dirname(__file__), "unicode_text.txt")
+    args = cli.parse_args(['--text', unicode_file])
     assert_equal(len(args.text), 16)
 
 
