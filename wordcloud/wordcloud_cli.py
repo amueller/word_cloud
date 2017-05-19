@@ -123,15 +123,6 @@ def parse_args(arguments):
         '--no_collocations', action='store_true',
         help='do not add collocations (bigrams) to word cloud '
              '(default: add unigrams and bigrams)')
-    parser.add_argument(
-        '--color', metavar='color',
-        help='use given color as coloring for the image -'
-             'accepts any value from PIL.ImageColor.getcolor')
-    parser.add_argument(
-        '--background', metavar='color', default='black', type=str,
-        dest='background_color',
-        help='use given color as background color for the image -'
-             ' accepts any value from PIL.ImageColor.getcolor')
     args = parser.parse_args(arguments)
 
     if args.colormask and args.color:
