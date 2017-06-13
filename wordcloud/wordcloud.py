@@ -166,8 +166,8 @@ class WordCloud(object):
     prefer_horizontal : float (default=0.90)
         The ratio of times to try horizontal fitting as opposed to vertical.
         If prefer_horizontal < 1, the algorithm will try rotating the word
-        if it doesn't fit. (There is currently no built-in way to get only vertical
-        words.)
+        if it doesn't fit. (There is currently no built-in way to get only
+        vertical words.)
 
     mask : nd-array or None (default=None)
         If not None, gives a binary mask on where to draw words. If mask is not
@@ -407,7 +407,8 @@ class WordCloud(object):
                                                max_font_size=self.height)
                 # find font sizes
                 sizes = [x[1] for x in self.layout_]
-                font_size = int(2 * sizes[0] * sizes[1] / (sizes[0] + sizes[1]))
+                font_size = int(2 * sizes[0] * sizes[1] / (sizes[0]
+                                                           + sizes[1]))
         else:
             font_size = max_font_size
 
@@ -528,6 +529,10 @@ class WordCloud(object):
     def generate_from_text(self, text):
         """Generate wordcloud from text.
 
+        The input "text" is expected to be a natural text. If you pass a sorted
+        list of words, words will appear in your output twice. To remove this
+        duplication, set ``collocations=False``.
+
         Calls process_text and generate_from_frequencies.
 
         ..versionchanged:: 1.2.2
@@ -544,6 +549,10 @@ class WordCloud(object):
 
     def generate(self, text):
         """Generate wordcloud from text.
+
+        The input "text" is expected to be a natural text. If you pass a sorted
+        list of words, words will appear in your output twice. To remove this
+        duplication, set ``collocations=False``.
 
         Alias to generate_from_text.
 
