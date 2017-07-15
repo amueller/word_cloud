@@ -84,7 +84,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   # We need to install numpy, scipy and matplotlib through conda
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy"
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy matplotlib pillow"
   - activate test-environment
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
