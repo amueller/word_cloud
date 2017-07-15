@@ -14,6 +14,6 @@ env:
     - DISTRIB="conda" PYTHON_VERSION="2.7" NUMPY_VERSION="1.7.1"
     - DISTRIB="conda" PYTHON_VERSION="3.4" NUMPY_VERSION="1.11.2"
     - DISTRIB="conda" PYTHON_VERSION="3.6" NUMPY_VERSION="1.11.2"
-install: source continuous_integration/install.sh
+install: source continuous_integration/travis/install.sh
 cache: apt
 script: nosetests
