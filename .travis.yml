@@ -17,3 +17,12 @@ env:
 install: source continuous_integration/travis/install.sh
 cache: apt
 script: nosetests
+
+deploy:
+  provider: pypi
+  user: "t3kcit"
+  password:
+    secure: "f7Joonip7SHxPv0OpSKnGOpW8ubH2+2LFOT3F9ln0mLzeqaQyY3zccCDQf8ckCYHsbQKZqEXgR/ShwePbAY6ms+NXQWiy/q/Pe5Mabzh6nYzHp+BiSMNvv9xwR7J6vPZgZv++Flvsyx3kOI9jb4VdSJVALCGJT/dCwDtZqlsVl0="
+  distributions: "sdist bdist_wheel"
+  on:
+    tags: true
