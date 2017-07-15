@@ -3,26 +3,23 @@ sudo: false
 addons:
   apt:
     packages:
-      # Only used by the DISTRIB="ubuntu" setting
-      - python-numpy
+    - python-numpy
 virtualenv:
   system_site_packages: true
 env:
   matrix:
-    - DISTRIB="ubuntu" PYTHON_VERSION="2.7"
-    # This environment tests the oldest supported anaconda env
-    - DISTRIB="conda" PYTHON_VERSION="2.7" NUMPY_VERSION="1.7.1"
-    - DISTRIB="conda" PYTHON_VERSION="3.4" NUMPY_VERSION="1.11.2"
-    - DISTRIB="conda" PYTHON_VERSION="3.6" NUMPY_VERSION="1.11.2"
+  - DISTRIB="ubuntu" PYTHON_VERSION="2.7"
+  - DISTRIB="conda" PYTHON_VERSION="2.7" NUMPY_VERSION="1.7.1"
+  - DISTRIB="conda" PYTHON_VERSION="3.4" NUMPY_VERSION="1.11.2"
+  - DISTRIB="conda" PYTHON_VERSION="3.6" NUMPY_VERSION="1.11.2"
 install: source continuous_integration/travis/install.sh
 cache: apt
 script: nosetests
-
 deploy:
   provider: pypi
-  user: "t3kcit"
+  user: t3kcit
   password:
-    secure: "f7Joonip7SHxPv0OpSKnGOpW8ubH2+2LFOT3F9ln0mLzeqaQyY3zccCDQf8ckCYHsbQKZqEXgR/ShwePbAY6ms+NXQWiy/q/Pe5Mabzh6nYzHp+BiSMNvv9xwR7J6vPZgZv++Flvsyx3kOI9jb4VdSJVALCGJT/dCwDtZqlsVl0="
-  distributions: "sdist bdist_wheel"
+    secure: SdWS05GYoCDlIrQpNnenwoJhNvM8LXbpXV3bA7o74rBixePmQ/sgpn/p7x7+281TAw6VAKGjnGmBq7ZMKF8FQcvIIjXLs8B1RyemeKiVoxeVwZSvJJGAUP9zLHEhnt+oVWRIFmiIHQKPW79hid/lVb5xjYaImBNsse8rDKwECHM=
+  distributions: sdist bdist_wheel
   on:
     tags: true
