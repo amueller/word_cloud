@@ -34,6 +34,9 @@ Install the package:
 
 #### Installation notes
 
+worcloud depends on numpy>=1.5.1, pillow and matplotlib.
+To install it via pip, you will also need a C compiler.
+
 ##### Windows
 
 If you're having trouble with pip installation on windows, you can find a .whl file at:
