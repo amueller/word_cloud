@@ -85,7 +85,7 @@ def parse_args(arguments):
         help='specify file of stopwords (containing one word per line)'
              ' to remove from the given text after parsing')
     parser.add_argument(
-        '--imagefile', metavar='file', type=argparse.FileType('w'),
+        '--imagefile', metavar='file', type=argparse.FileType('wb'),
         default='-',
         help='file the completed PNG image should be written to'
              ' (default: stdout)')
@@ -93,10 +93,10 @@ def parse_args(arguments):
         '--fontfile', metavar='path', dest='font_path',
         help='path to font file you wish to use (default: DroidSansMono)')
     parser.add_argument(
-        '--mask', metavar='file', type=argparse.FileType(),
+        '--mask', metavar='file', type=argparse.FileType('rb'),
         help='mask to use for the image form')
     parser.add_argument(
-        '--colormask', metavar='file', type=argparse.FileType(),
+        '--colormask', metavar='file', type=argparse.FileType('rb'),
         help='color mask to use for image coloring')
     parser.add_argument(
         '--relative_scaling', type=float, default=0,
