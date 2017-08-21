@@ -69,7 +69,7 @@ def main(args):
     image = wordcloud.to_image()
 
     with args.imagefile:
-        out = args.imagefile #if sys.version < '3' else args.imagefile.buffer
+        out = args.imagefile
         image.save(out, format='png')
 
 
