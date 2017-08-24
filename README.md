@@ -55,7 +55,17 @@ For Python 3.*
 
 	sudo apt-get install python3-dev
 	
+##### CentOS / RHEL
 
+If the compilation via gcc of the package fails, due to a missing ``Python.h`` file, you need to install the python-devel package. 
+
+For Python 2.*
+
+	sudo yum install -y python-devel
+	
+For Pythn 3.*
+
+	sudo yum install -y python34-devel
 
 ## Examples
 
