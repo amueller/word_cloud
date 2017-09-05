@@ -63,7 +63,7 @@ For Python 2.*
 
 	sudo yum install -y python-devel
 	
-For Pythn 3.*
+For Python 3.*
 
 	sudo yum install -y python34-devel
 
