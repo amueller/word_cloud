@@ -29,7 +29,7 @@ mask = np.array(Image.open(path.join(d, "stormtrooper_mask.png")))
 # movie script of "a new hope"
 # http://www.imsdb.com/scripts/Star-Wars-A-New-Hope.html
 # May the lawyers deem this fair use.
-text = open("a_new_hope.txt").read()
+text = open(path.join(d, 'a_new_hope.txt')).read()
 
 # preprocessing the text a little bit
 text = text.replace("HAN", "Han")
