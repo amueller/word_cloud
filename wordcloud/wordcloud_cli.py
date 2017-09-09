@@ -13,6 +13,8 @@ import wordcloud as wc
 import numpy as np
 from PIL import Image
 
+from . import __version__
+
 
 class FileType(object):
     """Factory for creating file object types.
@@ -123,6 +125,8 @@ def parse_args(arguments):
         '--no_collocations', action='store_true',
         help='do not add collocations (bigrams) to word cloud '
              '(default: add unigrams and bigrams)')
+    parser.add_argument('--version', action='version',
+        version='%(prog)s {version}'.format(version=__version__))
     args = parser.parse_args(arguments)
 
     if args.colormask and args.color:
