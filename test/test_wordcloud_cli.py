@@ -43,12 +43,14 @@ def all_arguments():
 def test_main_passes_arguments_through():
     temp_imagefile = NamedTemporaryFile()
 
-    args = argparse.Namespace(text='some long text', imagefile=open(temp_imagefile.name, 'w'))
+    args = argparse.Namespace()
     for option in all_arguments():
         setattr(args, option.init_name, option.pass_value)
 
+    text = 'some long text'
+    imagefile = open(temp_imagefile.name, 'w')
     with patch('wordcloud.wordcloud_cli.wc.WordCloud', autospec=True) as mock_word_cloud:
-        cli.main(args)
+        cli.main(vars(args), text, imagefile)
 
     posargs, kwargs = mock_word_cloud.call_args
     for option in all_arguments():
@@ -58,15 +60,15 @@ def test_main_passes_arguments_through():
 def check_argument(name, result_name, value):
     text = NamedTemporaryFile()
 
-    args = cli.parse_args(['--text', text.name, '--' + name, str(value)])
-    assert_in(result_name, vars(args))
+    args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name, str(value)])
+    assert_in(result_name, args)
 
 
 def check_argument_unary(name, result_name):
     text = NamedTemporaryFile()
 
-    args = cli.parse_args(['--text', text.name, '--' + name])
-    assert_in(result_name, vars(args))
+    args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name])
+    assert_in(result_name, args)
 
 
 def check_argument_type(name, value):
@@ -74,7 +76,7 @@ def check_argument_type(name, value):
 
     try:
         with patch('sys.stderr') as mock_stderr:
-            args = cli.parse_args(['--text', text.name, '--' + name, str(value)])
+            args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name, str(value)])
         raise AssertionError('argument "{}" was accepted even though the type did not match'.format(name))
     except SystemExit:
         pass
@@ -109,14 +111,14 @@ def test_check_duplicate_color_error():
 def test_parse_args_defaults_to_random_color():
     text = NamedTemporaryFile()
 
-    args = cli.parse_args(['--text', text.name])
-    assert_equal(args.color_func, wc.random_color_func)
+    args, text, imagefile = cli.parse_args(['--text', text.name])
+    assert_equal(args['color_func'], wc.random_color_func)
 
 
 def test_unicode_text_file():
     unicode_file = os.path.join(os.path.dirname(__file__), "unicode_text.txt")
-    args = cli.parse_args(['--text', unicode_file])
-    assert_equal(len(args.text), 16)
+    args, text, imagefile = cli.parse_args(['--text', unicode_file])
+    assert_equal(len(text), 16)
 
 
 def test_cli_writes_image():
@@ -126,7 +128,7 @@ def test_cli_writes_image():
     temp_textfile.write(b'some text')
     temp_textfile.flush()
 
-    args = cli.parse_args(['--text', temp_textfile.name, '--imagefile', temp_imagefile.name])
-    cli.main(args)
+    args, text, imagefile = cli.parse_args(['--text', temp_textfile.name, '--imagefile', temp_imagefile.name])
+    cli.main(args, text, imagefile)
 
     assert_greater(os.path.getsize(temp_imagefile.name), 0, msg='expecting image to be written')
