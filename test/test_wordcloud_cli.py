@@ -24,6 +24,7 @@ ARGUMENT_SPEC_UNARY = [
 ]
 ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=temp.name, fail_value=None),
+    ArgOption(cli_name='regexp', init_name='regexp', pass_value=r'\w{2,}', fail_value=r'12('),
     ArgOption(cli_name='mask', init_name='mask', pass_value=temp.name, fail_value=None),
     ArgOption(cli_name='fontfile', init_name='font_path', pass_value=temp.name, fail_value=None),
     ArgOption(cli_name='color', init_name='color_func', pass_value='red', fail_value=None),
