@@ -24,12 +24,9 @@ from PIL import ImageFont
 from .query_integral_image import query_integral_image
 from .tokenization import unigrams_and_bigrams, process_tokens
 
-item1 = itemgetter(1)
-
-FONT_PATH = os.environ.get("FONT_PATH", os.path.join(os.path.dirname(__file__),
-                                                     "DroidSansMono.ttf"))
-STOPWORDS = set([x.strip() for x in open(
-    os.path.join(os.path.dirname(__file__), 'stopwords')).read().split('\n')])
+FILE = os.path.dirname(__file__)
+FONT_PATH = os.environ.get('FONT_PATH', os.path.join(FILE, 'DroidSansMono.ttf'))
+STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
 
 
 class IntegralOccupancyMap(object):
@@ -347,7 +344,7 @@ class WordCloud(object):
 
         """
         # make sure frequencies are sorted and normalized
-        frequencies = sorted(frequencies.items(), key=item1, reverse=True)
+        frequencies = sorted(frequencies.items(), key=itemgetter(1), reverse=True)
         if len(frequencies) <= 0:
             raise ValueError("We need at least 1 word to plot a word cloud, "
                              "got %d." % len(frequencies))
