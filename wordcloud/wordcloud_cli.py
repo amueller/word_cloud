@@ -143,31 +143,29 @@ def parse_args(arguments):
     if args.colormask and args.color:
         raise ValueError('specify either a color mask or a color function')
 
-    with args.text:
-        args.text = args.text.read()
+    args = vars(args)
 
-    if args.stopwords:
-        with args.stopwords:
-            args.stopwords = set(map(str.strip, args.stopwords.readlines()))
+    with args.pop('text') as f:
+        text = f.read()
 
-    if args.mask:
-        args.mask = np.array(Image.open(args.mask))
+    if args['stopwords']:
+        with args.pop('stopwords') as f:
+            args['stopwords'] = set(map(str.strip, f.readlines()))
+
+    if args['mask']:
+        mask = args.pop('mask')
+        args['mask'] = np.array(Image.open(mask))
 
     color_func = wc.random_color_func
-    if args.colormask:
-        image = np.array(Image.open(args.colormask))
+    colormask = args.pop('colormask')
+    color = args.pop('color')
+    if colormask:
+        image = np.array(Image.open(colormask))
         color_func = wc.ImageColorGenerator(image)
+    if color:
+        color_func = wc.get_single_color_func(color)
+    args['color_func'] = color_func
 
-    if args.color:
-        color_func = wc.get_single_color_func(args.color)
-
-    args.color_func = color_func
-
-    args = vars(args)
-    # remove arguments not directly mapped
-    _ = args.pop('colormask', None)
-    _ = args.pop('color', None)
-    text = args.pop('text')
     imagefile = args.pop('imagefile')
 
     return args, text, imagefile
