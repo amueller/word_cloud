@@ -8,6 +8,7 @@ Usage::
 """
 import sys
 import io
+import re
 import argparse
 import wordcloud as wc
 import numpy as np
@@ -60,13 +61,26 @@ class FileType(object):
         return '%s(%s)' % (type(self).__name__, args_str)
 
 
+class RegExpAction(argparse.Action):
+     def __init__(self, option_strings, dest, **kwargs):
+         for option in option_strings:
+             try:
+                 re.compile(option)
+             except re.error as e:
+                 raise argparse.ArgumentError('Invalid regular expression: ' + str(e))
+         super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
+
+     def __call__(self, parser, namespace, values, option_string=None):
+         setattr(namespace, self.dest, values)
+
+
 def main(args):
     wordcloud = wc.WordCloud(
         stopwords=args.stopwords, mask=args.mask,
         width=args.width, height=args.height, font_path=args.font_path,
         margin=args.margin, relative_scaling=args.relative_scaling,
         color_func=args.color_func, background_color=args.background_color,
-        collocations=args.collocations)
+        collocations=args.collocations, regexp=args.regexp)
     wordcloud.generate(args.text)
     image = wordcloud.to_image()
 
@@ -82,6 +96,9 @@ def parse_args(arguments):
     parser.add_argument(
         '--text', metavar='file', type=FileType(), default='-',
         help='specify file of words to build the word cloud (default: stdin)')
+    parser.add_argument(
+        '--regexp', metavar='regexp', default=None, action=RegExpAction,
+        help='override the regular expression defining what constitutes a word')
     parser.add_argument(
         '--stopwords', metavar='file', type=FileType(),
         help='specify file of stopwords (containing one word per line)'

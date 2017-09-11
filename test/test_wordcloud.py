@@ -1,7 +1,7 @@
 from wordcloud import WordCloud, get_single_color_func
 import numpy as np
 from random import Random
-from nose.tools import (assert_equal, assert_greater, assert_true,
+from nose.tools import (assert_equal, assert_greater, assert_true, assert_false,
                         assert_raises, assert_in, assert_not_in)
 from numpy.testing import assert_array_equal
 from PIL import Image
@@ -231,6 +231,14 @@ def test_process_text():
 
     # check for proper return type
     assert_true(isinstance(result, dict))
+
+
+def test_process_text_regexp_parameter():
+    # test that word processing is influenced by `regexp`
+    wc = WordCloud(max_words=50, regexp=r'\w{5}')
+    words = wc.process_text(THIS)
+
+    assert_false('than' in words)
 
 
 def test_generate_from_frequencies():
