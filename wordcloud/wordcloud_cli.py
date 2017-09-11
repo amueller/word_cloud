@@ -74,19 +74,13 @@ class RegExpAction(argparse.Action):
          setattr(namespace, self.dest, values)
 
 
-def main(args):
-    wordcloud = wc.WordCloud(
-        stopwords=args.stopwords, mask=args.mask,
-        width=args.width, height=args.height, font_path=args.font_path,
-        margin=args.margin, relative_scaling=args.relative_scaling,
-        color_func=args.color_func, background_color=args.background_color,
-        collocations=args.collocations, regexp=args.regexp)
-    wordcloud.generate(args.text)
+def main(args, text, imagefile):
+    wordcloud = wc.WordCloud(**args)
+    wordcloud.generate(text)
     image = wordcloud.to_image()
 
-    with args.imagefile:
-        out = args.imagefile
-        image.save(out, format='png')
+    with imagefile:
+        image.save(imagefile, format='png')
 
 
 def parse_args(arguments):
@@ -139,7 +133,7 @@ def parse_args(arguments):
         help='use given color as background color for the image -'
              ' accepts any value from PIL.ImageColor.getcolor')
     parser.add_argument(
-        '--no_collocations', action='store_true',
+        '--no_collocations', action='store_false', dest='collocations',
         help='do not add collocations (bigrams) to word cloud '
              '(default: add unigrams and bigrams)')
     parser.add_argument('--version', action='version',
@@ -149,28 +143,32 @@ def parse_args(arguments):
     if args.colormask and args.color:
         raise ValueError('specify either a color mask or a color function')
 
-    with args.text:
-        args.text = args.text.read()
+    args = vars(args)
 
-    if args.stopwords:
-        with args.stopwords:
-            args.stopwords = set(map(str.strip, args.stopwords.readlines()))
+    with args.pop('text') as f:
+        text = f.read()
 
-    if args.mask:
-        args.mask = np.array(Image.open(args.mask))
+    if args['stopwords']:
+        with args.pop('stopwords') as f:
+            args['stopwords'] = set(map(str.strip, f.readlines()))
+
+    if args['mask']:
+        mask = args.pop('mask')
+        args['mask'] = np.array(Image.open(mask))
 
     color_func = wc.random_color_func
-    if args.colormask:
-        image = np.array(Image.open(args.colormask))
+    colormask = args.pop('colormask')
+    color = args.pop('color')
+    if colormask:
+        image = np.array(Image.open(colormask))
         color_func = wc.ImageColorGenerator(image)
+    if color:
+        color_func = wc.get_single_color_func(color)
+    args['color_func'] = color_func
 
-    if args.color:
-        color_func = wc.get_single_color_func(args.color)
+    imagefile = args.pop('imagefile')
 
-    args.collocations = not args.no_collocations
-
-    args.color_func = color_func
-    return args
+    return args, text, imagefile
 
 if __name__ == '__main__':
-    main(parse_args(sys.argv[1:]))
+    main(*parse_args(sys.argv[1:]))
