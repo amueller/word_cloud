@@ -124,7 +124,7 @@ you can see all the word clouds generated so far.
 
 ### Stack Overflow Users Tag Cloud
 
-Generate tag clouds of users on [Stack Overflow](http://stackoverflow.com/) or any [Stack Exchange site](https://stackexchange.com/sites). If you are contributing to Stack Overflow community, it's an easy way to share your expertise with someone through an image. Here's Stack Overflow's highest reputation user [Jon Skeet's](http://stackoverflow.com/users/22656/jon-skeet) tag cloud -
+[Stackoverflow Tag Cloud](https://github.com/droyed/stackoverflow_tag_cloud) generates tag clouds of users on [Stack Overflow](http://stackoverflow.com/) or any [Stack Exchange site](https://stackexchange.com/sites). If you are contributing to Stack Overflow community, it's an easy way to share your expertise with others through an image. Here's Stack Overflow's highest reputation user [Jon Skeet's](http://stackoverflow.com/users/22656/jon-skeet) tag cloud -
 
 ![Screenshot](https://raw.githubusercontent.com/droyed/stackoverflow_tag_cloud/master/example_output/example_extensive_output.png)
 
