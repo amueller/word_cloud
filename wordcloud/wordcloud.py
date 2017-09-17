@@ -510,7 +510,7 @@ class WordCloud(object):
         include all those things.
         """
 
-        stopwords = set([i.lower() for i in self.stopwords])
+        stopwords = set(i.lower() for i in self.stopwords)
 
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
                  else 0)
@@ -518,10 +518,10 @@ class WordCloud(object):
 
         words = re.findall(regexp, text, flags)
         # remove stopwords
-        words = [word for word in words if word.lower() not in stopwords]
+        words = (word for word in words if word.lower() not in stopwords)
         # remove 's
-        words = [word[:-2] if word.lower().endswith("'s") else word
-                 for word in words]
+        words = (word[:-2] if word.lower().endswith("'s") else word
+                 for word in words)
         # remove numbers
         words = [word for word in words if not word.isdigit()]
 
