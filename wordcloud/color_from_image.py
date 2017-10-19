@@ -53,7 +53,6 @@ class ImageColorGenerator(object):
         if not reshape.any():
             if self.default_color is None:
                 raise ValueError('ImageColorGenerator is smaller than the canvas')
-            else:
-                return "rgb(%d, %d, %d)" % tuple(self.default_color)
+            return "rgb(%d, %d, %d)" % tuple(self.default_color)
         color = np.mean(reshape, axis=0)
         return "rgb(%d, %d, %d)" % tuple(color)
