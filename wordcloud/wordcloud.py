@@ -404,8 +404,11 @@ class WordCloud(object):
                                                max_font_size=self.height)
                 # find font sizes
                 sizes = [x[1] for x in self.layout_]
-                font_size = int(2 * sizes[0] * sizes[1] / (sizes[0]
-                                                           + sizes[1]))
+                try:
+                    font_size = int(2 * sizes[0] * sizes[1] 
+                                    / (sizes[0] + sizes[1]))
+                except IndexError:
+                    font_size = sizes[0]
         else:
             font_size = max_font_size
 
