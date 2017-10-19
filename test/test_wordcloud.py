@@ -1,11 +1,14 @@
-from wordcloud import WordCloud, get_single_color_func
+from wordcloud import WordCloud, get_single_color_func, ImageColorGenerator
 import numpy as np
 from random import Random
 from nose.tools import (assert_equal, assert_greater, assert_true, assert_false,
                         assert_raises, assert_in, assert_not_in)
+try:
+    from nose.tools import assert_raises_regex
+except ImportError:
+    from nose.tools import assert_raises_regexp as assert_raises_regex
 from numpy.testing import assert_array_equal
 from PIL import Image
-
 
 from tempfile import NamedTemporaryFile
 import matplotlib
@@ -268,3 +271,19 @@ def test_unicode_stopwords():
 
     assert_true(words_unicode == words_str)
 
+def test_recolor_too_small():
+    # check exception is raised when image is too small
+    def _test():
+        colouring = np.array(Image.new('RGB', size=(20, 20)))
+        wc = WordCloud(width=30, height=30).generate(THIS)
+        image_colors = ImageColorGenerator(colouring)
+        wc.recolor(color_func=image_colors)
+    assert_raises_regex(ValueError, 'ImageColorGenerator is smaller than the canvas', _test)
+
+
+def test_recolor_too_small_set_default():
+    # check no exception is raised when default colour is used
+    colouring = np.array(Image.new('RGB', size=(20, 20)))
+    wc = WordCloud(max_words=50, width=30, height=30).generate(THIS)
+    image_colors = ImageColorGenerator(colouring, default_color=(0, 0, 0))
+    wc.recolor(color_func=image_colors)
