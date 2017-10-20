@@ -407,8 +407,13 @@ class WordCloud(object):
                 try:
                     font_size = int(2 * sizes[0] * sizes[1] 
                                     / (sizes[0] + sizes[1]))
+                # quick fix for if self.layout_ contains less than 2 values
+                # on very small images it can be empty
                 except IndexError:
-                    font_size = sizes[0]
+                    try:
+                        font_size = sizes[0]
+                    except IndexError:
+                        raise ValueError('canvas size is too small')
         else:
             font_size = max_font_size
 
