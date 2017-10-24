@@ -150,7 +150,7 @@ def parse_args(arguments):
 
     if args['stopwords']:
         with args.pop('stopwords') as f:
-            args['stopwords'] = set(map(str.strip, f.readlines()))
+            args['stopwords'] = set(map(lambda l: l.strip(), f.readlines()))
 
     if args['mask']:
         mask = args.pop('mask')
