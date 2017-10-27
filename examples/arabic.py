@@ -22,5 +22,6 @@ text = arabic_reshaper.reshape(f.read())
 text = get_display(text)
 
 # Generate a word cloud image
+# Use your own Arabic font -- unifont covers all of UTF-8 but # is not as aesthetically pleasing!
 wordcloud = WordCloud(font_path='fonts/unifont-10.0.06.ttf').generate(text)
 wordcloud.to_file("arabic_example.png")
