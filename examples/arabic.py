@@ -24,4 +24,8 @@ text = get_display(text)
 # Generate a word cloud image
 # Use your own Arabic font -- unifont covers all of UTF-8 but # is not as aesthetically pleasing!
 wordcloud = WordCloud(font_path='fonts/unifont-10.0.06.ttf').generate(text)
+# The image sample provided in this folder was actually made using arial.ttf, but
+# we can't redistribute that font for you to use. You may download it yourself for
+# personal use
+# wordcloud = WordCloud(font_path='arial.ttf').generate(text)
 wordcloud.to_file("arabic_example.png")
