@@ -1,3 +1,4 @@
+
 import multidict as multidict
 
 import numpy as np
@@ -7,11 +8,13 @@ import re
 from PIL import Image
 from os import path
 from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 def getFrequencyDictForText(sentence):
     fullTermsDict = multidict.MultiDict()
     tmpDict = {}
 
+    # making dict for counting frequencies
     for text in sentence.split(" "):
         if re.match("a|the|an|the|to|in|for|of|or|by|with|is|on|that|be",text):
             continue
@@ -33,13 +36,13 @@ def makeImage(text):
     # generate word cloud
     wc.generate_from_frequencies(text)
 
-    # store to file
-    filepath = 'wordcloud-{}.png'.format(round(time.time( ) *1000))
-
-    wc.to_file(filepath)
-    return filepath
+    # show
+    plt.imshow(wc, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
 
 d = path.dirname(__file__)
 
-text = open(path.join(d, "what_is_tagcloud.txt")).read()
+text = open(path.join(d, 'alice.txt'),encoding='utf-8')
+text = text.read()
 makeImage(getFrequencyDictForText(text))
