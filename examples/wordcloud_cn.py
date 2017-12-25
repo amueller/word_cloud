@@ -22,17 +22,17 @@ from wordcloud import WordCloud, ImageColorGenerator,STOPWORDS
 
 d = path.dirname(__file__)
 
-stopwords_path = d + '/stopwords/CNENstopwords.txt'
-font_path = d + '/Fonts/simkai.ttf'
+stopwords_path = d + '/CNENstopwords.txt'
+font_path = d + '/simkai.ttf'
 
 # the path to save worldcloud
 imgname1 = d + '/WordCloudDefautColors.png'
 imgname2 = d + '/WordCloudColorsByImg.png'
 # read the mask / color image taken from
-back_coloring = imread(path.join(d, d + '/img/DragonRaja.jpg'))
+back_coloring = imread(path.join(d, d + '/DragonRaja.jpg'))
 
 # Read the whole text.
-text = open(path.join(d, d + '/txt/DragonRaja.txt')).read()
+text = open(path.join(d, d + '/DragonRaja.txt')).read()
 
 # if you want use wordCloud,you need it
 # add userdict by add_word()
