@@ -1,6 +1,6 @@
 # - * - coding: utf - 8 -*-
 """
-Wordcloud with chinese
+create wordcloud with chinese
 =======================
 
 Wordcloud is a very good tools, but if you want to create
