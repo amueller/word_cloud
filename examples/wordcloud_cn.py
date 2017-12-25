@@ -23,7 +23,8 @@ from wordcloud import WordCloud, ImageColorGenerator,STOPWORDS
 d = path.dirname(__file__)
 
 stopwords_path = d + '/CNENstopwords.txt'
-font_path = d + '/simkai.ttf'
+# Chinese fonts must be set
+font_path = d + '/fonts/simkai.ttf'
 
 # the path to save worldcloud
 imgname1 = d + '/WordCloudDefautColors.png'
