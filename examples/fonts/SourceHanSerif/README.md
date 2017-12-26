@@ -1,0 +1,1 @@
+Source Han Serif, also known as Noto Serif CJK is a serif Song/Ming typeface created by Adobe and Google.License : [SIL Open Font License v.1.1](http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL),Github : [https://github.com/adobe-fonts/source-han-serif](https://github.com/adobe-fonts/source-han-serif).
