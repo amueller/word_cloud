@@ -103,7 +103,8 @@ class colormap_color_func(object):
                  random_state=None, **kwargs):
         if random_state is None:
             random_state = Random()
-        r, g, b, _ = 255 * np.array(self.colormap(random_state.uniform(0, 1)))
+        r, g, b, _ = np.maximum(0, 255 * np.array(self.colormap(
+            random_state.uniform(0, 1))))
         return "rgb({:.0f}, {:.0f}, {:.0f})".format(r, g, b)
 
 
