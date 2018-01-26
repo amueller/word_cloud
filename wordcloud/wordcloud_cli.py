@@ -80,7 +80,7 @@ def main(args, text, imagefile):
     image = wordcloud.to_image()
 
     with imagefile:
-        image.save(imagefile, format='png')
+        image.save(imagefile, format='png', optimize=True)
 
 
 def parse_args(arguments):
