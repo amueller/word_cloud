@@ -654,7 +654,7 @@ class WordCloud(object):
         """
 
         img = self.to_image()
-        img.save(filename)
+        img.save(filename, optimize=True)
         return self
 
     def to_array(self):
