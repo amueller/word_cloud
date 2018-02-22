@@ -95,48 +95,6 @@ In the previous example, the `-` argument orders `pdftotext` to write the result
 
 Use `wordcloud_cli.py --help` so see all available options.
 
-
-## Used in
-
-### Reddit Cloud
-
-[Reddit Cloud][reddit-cloud] is a Reddit bot which generates word clouds for
-comments in submissions and user histories. You can see it being operated on
-[/u/WordCloudBot2][wc2] ([top posting][wc2top]).
-
-![A Reddit Cloud sample](http://i.imgur.com/tcbZnKW.png)
-
-### Chat Stats (Twitch.tv)
-
-[Chat Stats][chat-stats] is a visualization program for Twitch streams,
-which generates word clouds for comments made by Twitch users in the chat.
-It also creates various charts and graphs pertaining to concurrent viewership
-and chat rate over time.
-
-![Chat Stats Sample](http://i.imgur.com/xBczk0x.png)
-
-### Twitter Word Cloud Bot
-
-[Twitter Word Cloud Bot][twitter-word-cloud-bot] is a twitter bot which generates
-word clouds for twitter users when it is mentioned with a particular hashtag.
-[Here][twitter-wordnuvola] you can see it in action, while [here][imgur-wordnuvola]
-you can see all the word clouds generated so far.
-
-### Stack Overflow Users Tag Cloud
-
-[Stackoverflow Tag Cloud](https://github.com/droyed/stackoverflow_tag_cloud) generates tag clouds of users on [Stack Overflow](http://stackoverflow.com/) or any [Stack Exchange site](https://stackexchange.com/sites). If you are contributing to Stack Overflow community, it's an easy way to share your expertise with others through an image. Here's Stack Overflow's highest reputation user [Jon Skeet's](http://stackoverflow.com/users/22656/jon-skeet) tag cloud -
-
-![Screenshot](https://raw.githubusercontent.com/droyed/stackoverflow_tag_cloud/master/example_output/example_extensive_output.png)
-
-### [other]
-
-*Send a pull request to add yours here.*
-
-## Issues
-
-Using Pillow instead of PIL might might get you the [`TypeError: 'int' object is
-not iterable` problem][intprob] also showcased on the blog.
-
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [website]: http://amueller.github.io/word_cloud/
 [simple]: examples/simple.py
