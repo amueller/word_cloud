@@ -19,6 +19,7 @@ from operator import itemgetter
 from PIL import Image
 from PIL import ImageColor
 from PIL import ImageDraw
+from PIL import ImageFilter
 from PIL import ImageFont
 
 from .query_integral_image import query_integral_image
@@ -174,6 +175,12 @@ class WordCloud(object):
         "masked out" while other entries will be free to draw on. [This
         changed in the most recent version!]
 
+    contour_width: float (default=0)
+        If mask is not None and contour_width > 0, draw the mask contour.
+
+    contour_color: color value (default="black")
+        Mask contour color.
+
     scale : float (default=1)
         Scaling between computation and drawing. For large word-cloud images,
         using scale instead of larger canvas size is significantly faster, but
@@ -270,7 +277,8 @@ class WordCloud(object):
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
-                 colormap=None, normalize_plurals=True):
+                 colormap=None, normalize_plurals=True, contour_width=0,
+                 contour_color='black'):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -289,6 +297,8 @@ class WordCloud(object):
         self.margin = margin
         self.prefer_horizontal = prefer_horizontal
         self.mask = mask
+        self.contour_color = contour_color
+        self.contour_width = contour_width
         self.scale = scale
         self.color_func = color_func or colormap_color_func(colormap)
         self.max_words = max_words
@@ -363,20 +373,9 @@ class WordCloud(object):
             random_state = Random()
 
         if self.mask is not None:
-            mask = self.mask
-            width = mask.shape[1]
-            height = mask.shape[0]
-            if mask.dtype.kind == 'f':
-                warnings.warn("mask image should be unsigned byte between 0"
-                              " and 255. Got a float array")
-            if mask.ndim == 2:
-                boolean_mask = mask == 255
-            elif mask.ndim == 3:
-                # if all channels are white, mask out
-                boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
-            else:
-                raise ValueError("Got mask of invalid shape: %s"
-                                 % str(mask.shape))
+            boolean_mask = self._get_bolean_mask(self.mask)
+            width = self.mask.shape[1]
+            height = self.mask.shape[0]
         else:
             boolean_mask = None
             height, width = self.height, self.width
@@ -406,7 +405,7 @@ class WordCloud(object):
                 # find font sizes
                 sizes = [x[1] for x in self.layout_]
                 try:
-                    font_size = int(2 * sizes[0] * sizes[1] 
+                    font_size = int(2 * sizes[0] * sizes[1]
                                     / (sizes[0] + sizes[1]))
                 # quick fix for if self.layout_ contains less than 2 values
                 # on very small images it can be empty
@@ -596,6 +595,15 @@ class WordCloud(object):
             pos = (int(position[1] * self.scale),
                    int(position[0] * self.scale))
             draw.text(pos, word, fill=color, font=transposed_font)
+
+        if self.mask is not None and self.contour_width > 0:
+            img = self.draw_contour(
+                img=img,
+                mask=self.mask,
+                contour_width=self.contour_width,
+                contour_color=self.contour_color,
+                )
+
         return img
 
     def recolor(self, random_state=None, color_func=None, colormap=None):
@@ -679,3 +687,45 @@ class WordCloud(object):
 
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
+
+    def _get_bolean_mask(self, mask):
+        """Cast to two dimensional boolean mask."""
+        if mask.dtype.kind == 'f':
+            warnings.warn("mask image should be unsigned byte between 0"
+                            " and 255. Got a float array")
+        if mask.ndim == 2:
+            boolean_mask = mask == 255
+        elif mask.ndim == 3:
+            # if all channels are white, mask out
+            boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
+        else:
+            raise ValueError("Got mask of invalid shape: %s"
+                                % str(mask.shape))
+        return boolean_mask
+
+    def draw_contour(self, img, mask, contour_width=1, contour_color='black'):
+        """Draw mask contour on a pillow image."""
+        mask = self._get_bolean_mask(mask) * 255
+        contour = Image.fromarray(mask.astype(np.uint8))
+        contour = contour.resize(img.size)
+        contour = contour.filter(ImageFilter.FIND_EDGES)
+        contour = np.array(contour)
+
+        # make sure borders are not drawn
+        contour[[0, -1], :] = 0
+        contour[:, [0, -1]] = 0
+
+        # use a gaussian to define the contour width
+        radius = contour_width / 10
+        contour = Image.fromarray(contour)
+        contour = contour.filter(ImageFilter.GaussianBlur(radius=radius))
+        contour = np.array(contour) > 0
+        contour = np.dstack((contour, contour, contour))
+
+        # color the contour
+        ret = np.array(img) * np.invert(contour)
+        if contour_color != 'black':
+            color = Image.new(img.mode, img.size, contour_color)
+            ret += np.array(color) * contour
+
+        return Image.fromarray(ret)

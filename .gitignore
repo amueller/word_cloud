@@ -7,3 +7,6 @@ doc/auto_examples
 doc/generated
 .venv/
 .idea/
+.ipynb_checkpoints/
+*.egg-info
+.vscode/
