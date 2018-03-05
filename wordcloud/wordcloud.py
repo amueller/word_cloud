@@ -597,12 +597,9 @@ class WordCloud(object):
             draw.text(pos, word, fill=color, font=transposed_font)
 
         if self.mask is not None and self.contour_width > 0:
-            img = self.draw_contour(
-                img=img,
-                mask=self.mask,
-                contour_width=self.contour_width,
-                contour_color=self.contour_color,
-                )
+            img = self.draw_contour(img=img, mask=self.mask,
+                                    contour_width=self.contour_width,
+                                    contour_color=self.contour_color)
 
         return img
 
@@ -711,11 +708,11 @@ class WordCloud(object):
         contour = contour.filter(ImageFilter.FIND_EDGES)
         contour = np.array(contour)
 
-        # make sure borders are not drawn
+        # make sure borders are not drawn before changing width
         contour[[0, -1], :] = 0
         contour[:, [0, -1]] = 0
 
-        # use a gaussian to define the contour width
+        # use gaussian to change width, divide by 10 to give more resolution
         radius = contour_width / 10
         contour = Image.fromarray(contour)
         contour = contour.filter(ImageFilter.GaussianBlur(radius=radius))
