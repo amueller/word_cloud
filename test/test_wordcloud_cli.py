@@ -30,7 +30,7 @@ ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='color', init_name='color_func', pass_value='red', fail_value=None),
     ArgOption(cli_name='background', init_name='background_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_color', init_name='contour_color', pass_value='grey', fail_value=None),
-    ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=1.3, fail_value='blue'),
+    ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=0.5, fail_value='blue'),
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 
