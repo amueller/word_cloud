@@ -199,14 +199,10 @@ def test_mask():
 
 
 def test_mask_contour():
-    # test mask contour is created
+    # test mask contour is created, learn more at:
+    # https://github.com/amueller/word_cloud/pull/348#issuecomment-370883873
     mask = np.zeros((234, 456), dtype=np.int)
     mask[100:150, 300:400] = 255
-
-    bk = WordCloud(mask=mask, contour_width=1, contour_color='black')
-    bk.generate(THIS)
-    bk_array = np.array(bk)
-    bk_total = bk_array[100:150, 300:400].sum()
 
     sm = WordCloud(mask=mask, contour_width=1, contour_color='blue')
     sm.generate(THIS)
@@ -223,11 +219,14 @@ def test_mask_contour():
     sc_array = np.array(sc)
     sc_total = sc_array[100:150, 300:400].sum()
 
-    # values were obtained experimentally
-    assert_equal(bk_total, 0)
-    assert_equal(sm_total, 75480)
-    assert_equal(lg_total, 422280)
+    # test `contour_width`
+    assert_greater(lg_total, sm_total)
+
+    # test contour varies with `scale`
     assert_greater(sc_total, sm_total)
+
+    # test `contour_color`
+    assert_true(all(sm_array[100, 300] == [0, 0, 255]))
 
 
 def test_single_color_func():

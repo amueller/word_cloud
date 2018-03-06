@@ -596,12 +596,7 @@ class WordCloud(object):
                    int(position[0] * self.scale))
             draw.text(pos, word, fill=color, font=transposed_font)
 
-        if self.mask is not None and self.contour_width > 0:
-            img = self.draw_contour(img=img, mask=self.mask,
-                                    contour_width=self.contour_width,
-                                    contour_color=self.contour_color)
-
-        return img
+        return self._draw_contour(img=img)
 
     def recolor(self, random_state=None, color_func=None, colormap=None):
         """Recolor existing layout.
@@ -700,9 +695,12 @@ class WordCloud(object):
                                 % str(mask.shape))
         return boolean_mask
 
-    def draw_contour(self, img, mask, contour_width=1, contour_color='black'):
+    def _draw_contour(self, img):
         """Draw mask contour on a pillow image."""
-        mask = self._get_bolean_mask(mask) * 255
+        if self.mask is None or self.contour_width == 0:
+            return img
+
+        mask = self._get_bolean_mask(self.mask) * 255
         contour = Image.fromarray(mask.astype(np.uint8))
         contour = contour.resize(img.size)
         contour = contour.filter(ImageFilter.FIND_EDGES)
@@ -713,7 +711,7 @@ class WordCloud(object):
         contour[:, [0, -1]] = 0
 
         # use gaussian to change width, divide by 10 to give more resolution
-        radius = contour_width / 10
+        radius = self.contour_width / 10
         contour = Image.fromarray(contour)
         contour = contour.filter(ImageFilter.GaussianBlur(radius=radius))
         contour = np.array(contour) > 0
@@ -721,8 +719,8 @@ class WordCloud(object):
 
         # color the contour
         ret = np.array(img) * np.invert(contour)
-        if contour_color != 'black':
-            color = Image.new(img.mode, img.size, contour_color)
+        if self.contour_color != 'black':
+            color = Image.new(img.mode, img.size, self.contour_color)
             ret += np.array(color) * contour
 
         return Image.fromarray(ret)
