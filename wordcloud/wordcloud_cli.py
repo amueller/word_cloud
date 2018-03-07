@@ -6,6 +6,8 @@ Usage::
 
     $ wordcloud_cli.py --text=words.txt --stopwords=stopwords.txt
 """
+from __future__ import absolute_import
+
 import sys
 import io
 import re
@@ -14,7 +16,7 @@ import wordcloud as wc
 import numpy as np
 from PIL import Image
 
-from . import __version__
+from wordcloud import __version__
 
 
 class FileType(object):
