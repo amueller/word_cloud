@@ -13,13 +13,14 @@ The code is Python 2, but Python 3 compatible.
 
 ## Installation
 
-Fast install:
+If you are using conda, you can install from the conda-forge channel:
+
+    conda install -c conda-forge wordcloud
+
+If you don't use conda, you can install via pip, but that will require having a C compiler set up:
 
     pip install wordcloud
 
-If you are using conda, it might be even easier to use anaconda cloud:
-
-    conda install -c https://conda.anaconda.org/amueller wordcloud
 
 For a manual install get this package:
     
