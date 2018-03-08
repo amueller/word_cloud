@@ -16,4 +16,4 @@ env:
     - DISTRIB="conda" PYTHON_VERSION="3.6" NUMPY_VERSION="1.13.1"
 install: source continuous_integration/install.sh
 cache: apt
-script: nosetests
+script: nosetests && test/test_script.sh
