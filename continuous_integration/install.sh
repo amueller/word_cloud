@@ -44,3 +44,4 @@ fi
 python --version
 python -c "import numpy; print('numpy %s' % numpy.__version__)"
 python setup.py build_ext --inplace
+python setup.py install
