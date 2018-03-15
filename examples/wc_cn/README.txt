@@ -11,8 +11,6 @@ According to the copyright law of People's Republic of China, Call to Arms and t
 
 But if you want to use this literary work in other ways, please refer to the copyright law of the People's Republic of China or the relevant laws of the corresponding country.
 
-P.S. Mr. Lu Xun is a spiritual mentor of my life and a good friend of mine. I like him very much.
-
 ---------------------stopwords---------------------
 stopwords: Free to use, without authorization 
 
