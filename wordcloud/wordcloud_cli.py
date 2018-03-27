@@ -114,6 +114,15 @@ def parse_args(arguments):
         '--colormask', metavar='file', type=argparse.FileType('rb'),
         help='color mask to use for image coloring')
     parser.add_argument(
+        '--contour_width', metavar='width', default=0, type=float,
+        dest='contour_width',
+        help='if greater than 0, draw mask contour (default: 0)')
+    parser.add_argument(
+        '--contour_color', metavar='color', default='black', type=str,
+        dest='contour_color',
+        help='use given color as mask contour color -'
+             ' accepts any value from PIL.ImageColor.getcolor')
+    parser.add_argument(
         '--relative_scaling', type=float, default=0,
         metavar='rs', help=' scaling of words by frequency (0 - 1)')
     parser.add_argument(

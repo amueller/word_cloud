@@ -198,6 +198,37 @@ def test_mask():
     assert_greater(wc_array[mask == 0].sum(), 10000)
 
 
+def test_mask_contour():
+    # test mask contour is created, learn more at:
+    # https://github.com/amueller/word_cloud/pull/348#issuecomment-370883873
+    mask = np.zeros((234, 456), dtype=np.int)
+    mask[100:150, 300:400] = 255
+
+    sm = WordCloud(mask=mask, contour_width=1, contour_color='blue')
+    sm.generate(THIS)
+    sm_array = np.array(sm)
+    sm_total = sm_array[100:150, 300:400].sum()
+
+    lg = WordCloud(mask=mask, contour_width=20, contour_color='blue')
+    lg.generate(THIS)
+    lg_array = np.array(lg)
+    lg_total = lg_array[100:150, 300:400].sum()
+
+    sc = WordCloud(mask=mask, contour_width=1, scale=2, contour_color='blue')
+    sc.generate(THIS)
+    sc_array = np.array(sc)
+    sc_total = sc_array[100:150, 300:400].sum()
+
+    # test `contour_width`
+    assert_greater(lg_total, sm_total)
+
+    # test contour varies with `scale`
+    assert_greater(sc_total, sm_total)
+
+    # test `contour_color`
+    assert_true(all(sm_array[100, 300] == [0, 0, 255]))
+
+
 def test_single_color_func():
     # test single color function for different color formats
     random = Random(42)
@@ -271,7 +302,7 @@ def test_unicode_stopwords():
 
     assert_true(words_unicode == words_str)
 
-    
+
 def test_recolor_too_small():
     # check exception is raised when image is too small
     colouring = np.array(Image.new('RGB', size=(20, 20)))
@@ -287,13 +318,13 @@ def test_recolor_too_small_set_default():
     wc = WordCloud(max_words=50, width=30, height=30).generate(THIS)
     image_colors = ImageColorGenerator(colouring, default_color=(0, 0, 0))
     wc.recolor(color_func=image_colors)
-    
-    
+
+
 def test_small_canvas():
     # check font size fallback works on small canvas
     WordCloud(max_words=50, width=20, height=20).generate(THIS)
-    
-    
+
+
 def test_tiny_canvas():
     # check exception if canvas too small for fallback
     w = WordCloud(max_words=50, width=1, height=1)

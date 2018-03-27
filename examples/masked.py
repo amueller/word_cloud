@@ -27,7 +27,8 @@ stopwords = set(STOPWORDS)
 stopwords.add("said")
 
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_mask,
-               stopwords=stopwords)
+               stopwords=stopwords, contour_width=3, contour_color='steelblue')
+
 # generate word cloud
 wc.generate(text)
 
