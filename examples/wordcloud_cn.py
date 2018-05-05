@@ -1,4 +1,4 @@
-# - * - coding: utf - 8 -*-
+# -*- coding: utf-8 -*-
 """
 create wordcloud with chinese
 =======================
@@ -12,17 +12,18 @@ You can use 'PIP install jieba'. To install it. As you can see,
 at the same time using wordcloud with jieba very convenient
 """
 
+import os
+
 import jieba
 jieba.enable_parallel(4)
 # Setting up parallel processes :4 ,but unable to run on Windows
-from os import path
 from scipy.misc import imread
 import matplotlib.pyplot as plt
 # jieba.load_userdict("txt\userdict.txt")
 # add userdict by load_userdict()
 from wordcloud import WordCloud, ImageColorGenerator
 
-d = path.dirname(__file__)
+d = os.path.split(os.path.realpath(__file__))[0]  # absolute path of the file
 
 stopwords_path = d + '/wc_cn/stopwords_cn_en.txt'
 # Chinese fonts must be set
@@ -32,10 +33,11 @@ font_path = d + '/fonts/SourceHanSerif/SourceHanSerifK-Light.otf'
 imgname1 = d + '/wc_cn/LuXun.jpg'
 imgname2 = d + '/wc_cn/LuXun_colored.jpg'
 # read the mask / color image taken from
-back_coloring = imread(path.join(d, d + '/wc_cn/LuXun_color.jpg'))
+back_coloring = imread(d + '/wc_cn/LuXun_color.jpg')
 
 # Read the whole text.
-text = open(path.join(d, d + '/wc_cn/CalltoArms.txt')).read()
+with open(d + '/wc_cn/CalltoArms.txt', encoding='utf-8') as f:
+    text = f.read()
 
 # if you want use wordCloud,you need it
 # add userdict by add_word()
@@ -60,9 +62,10 @@ def jieba_processing_txt(text):
             mywordlist.append(myword)
     return ' '.join(mywordlist)
 
-
+# the return value of 'jieba_processing_txt' function is words, which have been cleaned
+# collocations=False, the parameter is necessary to reduce the possibility of same words appearing several times
 wc = WordCloud(font_path=font_path, background_color="white", max_words=2000, mask=back_coloring,
-               max_font_size=100, random_state=42, width=1000, height=860, margin=2,)
+               max_font_size=100, random_state=42, width=1000, height=860, margin=2, collocations=False)
 
 
 wc.generate(jieba_processing_txt(text))
@@ -77,7 +80,7 @@ plt.axis("off")
 plt.show()
 
 # save wordcloud
-wc.to_file(path.join(d, imgname1))
+wc.to_file(imgname1)
 
 # create coloring from image
 image_colors_byImg = ImageColorGenerator(back_coloring)
@@ -92,4 +95,4 @@ plt.axis("off")
 plt.show()
 
 # save wordcloud
-wc.to_file(path.join(d, imgname2))
+wc.to_file(imgname2)
