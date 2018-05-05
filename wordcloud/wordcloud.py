@@ -426,8 +426,8 @@ class WordCloud(object):
             # select the font size
             rs = self.relative_scaling
             if rs != 0:
-                font_size = int(round((rs * (freq / float(last_freq))
-                                       + (1 - rs)) * font_size))
+                font_size = round((rs * (freq / float(last_freq))
+                                       + (1 - rs)) * font_size)
             if random_state.random() < self.prefer_horizontal:
                 orientation = None
             else:
