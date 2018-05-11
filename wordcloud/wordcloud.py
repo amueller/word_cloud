@@ -7,14 +7,16 @@
 
 from __future__ import division
 
-import warnings
 from random import Random
+from operator import itemgetter
+
+import warnings
 import os
 import re
 import sys
 import colorsys
+
 import numpy as np
-from operator import itemgetter
 
 from PIL import Image
 from PIL import ImageColor
@@ -147,7 +149,7 @@ def get_single_color_func(color):
 
 
 class WordCloud(object):
-    """Word cloud object for generating and drawing.
+    r"""Word cloud object for generating and drawing.
 
     Parameters
     ----------
@@ -355,7 +357,8 @@ class WordCloud(object):
 
         """
         # make sure frequencies are sorted and normalized
-        frequencies = sorted(frequencies.items(), key=itemgetter(1), reverse=True)
+        frequencies = sorted(frequencies.items(), key=itemgetter(1),
+                             reverse=True)
         if len(frequencies) <= 0:
             raise ValueError("We need at least 1 word to plot a word cloud, "
                              "got %d." % len(frequencies))
@@ -511,7 +514,7 @@ class WordCloud(object):
 
         stopwords = set([i.lower() for i in self.stopwords])
 
-        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
+        flags = (re.UNICODE if sys.version < '3' and isinstance(text, unicode)
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
@@ -680,11 +683,12 @@ class WordCloud(object):
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
 
-    def _get_bolean_mask(self, mask):
+    @staticmethod
+    def _get_bolean_mask(mask):
         """Cast to two dimensional boolean mask."""
         if mask.dtype.kind == 'f':
             warnings.warn("mask image should be unsigned byte between 0"
-                            " and 255. Got a float array")
+                          " and 255. Got a float array")
         if mask.ndim == 2:
             boolean_mask = mask == 255
         elif mask.ndim == 3:
@@ -692,7 +696,7 @@ class WordCloud(object):
             boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
         else:
             raise ValueError("Got mask of invalid shape: %s"
-                                % str(mask.shape))
+                             % str(mask.shape))
         return boolean_mask
 
     def _draw_contour(self, img):

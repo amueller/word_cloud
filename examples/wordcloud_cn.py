@@ -12,15 +12,19 @@ You can use 'PIP install jieba'. To install it. As you can see,
 at the same time using wordcloud with jieba very convenient
 """
 
-import jieba
-jieba.enable_parallel(4)
-# Setting up parallel processes :4 ,but unable to run on Windows
 from os import path
+
 from scipy.misc import imread
+
 import matplotlib.pyplot as plt
-# jieba.load_userdict("txt\userdict.txt")
-# add userdict by load_userdict()
+import jieba
+
 from wordcloud import WordCloud, ImageColorGenerator
+
+# Setting up parallel processes: 4, but unable to run on Windows
+jieba.enable_parallel(4)
+# add userdict by load_userdict()
+# jieba.load_userdict("txt\userdict.txt")
 
 d = path.dirname(__file__)
 
@@ -61,9 +65,9 @@ def jieba_processing_txt(text):
     return ' '.join(mywordlist)
 
 
-wc = WordCloud(font_path=font_path, background_color="white", max_words=2000, mask=back_coloring,
-               max_font_size=100, random_state=42, width=1000, height=860, margin=2,)
-
+wc = WordCloud(font_path=font_path, background_color="white", max_words=2000,
+               mask=back_coloring, max_font_size=100, random_state=42,
+               width=1000, height=860, margin=2)
 
 wc.generate(jieba_processing_txt(text))
 

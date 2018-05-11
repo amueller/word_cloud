@@ -1,17 +1,23 @@
-from wordcloud import WordCloud, get_single_color_func, ImageColorGenerator
-import numpy as np
 from random import Random
-from nose.tools import (assert_equal, assert_greater, assert_true, assert_false,
-                        assert_raises, assert_in, assert_not_in)
+from tempfile import NamedTemporaryFile
+
+from numpy.testing import assert_array_equal
+from PIL import Image
+from nose.tools import (assert_equal, assert_greater, assert_true,
+                        assert_false, assert_raises, assert_in, assert_not_in)
+
+import matplotlib
+import numpy as np
+
+from wordcloud import WordCloud, get_single_color_func, ImageColorGenerator
+
+
 try:
     from nose.tools import assert_raises_regex
 except ImportError:
     from nose.tools import assert_raises_regexp as assert_raises_regex
-from numpy.testing import assert_array_equal
-from PIL import Image
 
-from tempfile import NamedTemporaryFile
-import matplotlib
+
 matplotlib.use('Agg')
 
 THIS = """The Zen of Python, by Tim Peters
@@ -308,7 +314,8 @@ def test_recolor_too_small():
     colouring = np.array(Image.new('RGB', size=(20, 20)))
     wc = WordCloud(width=30, height=30).generate(THIS)
     image_colors = ImageColorGenerator(colouring)
-    assert_raises_regex(ValueError, 'ImageColorGenerator is smaller than the canvas',
+    assert_raises_regex(ValueError,
+                        'ImageColorGenerator is smaller than the canvas',
                         wc.recolor, color_func=image_colors)
 
 
