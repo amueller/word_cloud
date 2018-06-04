@@ -292,8 +292,8 @@ class WordCloud(object):
         self.colormap = colormap
         self.collocations = collocations
         self.font_path = font_path
-        self.width = width
-        self.height = height
+        self._width = width
+        self._height = height
         self.margin = margin
         self.prefer_horizontal = prefer_horizontal
         self.mask = mask
@@ -321,6 +321,20 @@ class WordCloud(object):
                           " it had no effect. Look into relative_scaling.",
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
+        
+    @property
+    def height(self):
+        if self.mask is not None:
+            return self.mask.shape[0]
+        else:
+            return self._height
+      
+    @property
+    def width(self):
+        if self.mask is not None:
+            return self.mask.shape[1]
+        else:
+            return self._width
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
