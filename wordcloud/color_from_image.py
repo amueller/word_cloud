@@ -51,7 +51,6 @@ class ImageColorGenerator(object):
         # check if the text is within the bounds of the image
         reshape = patch.reshape(-1, 3)
         if not np.all(reshape.shape):
-            print(reshape.shape)
             if self.default_color is None:
                 raise ValueError('ImageColorGenerator is smaller than the canvas')
             return "rgb(%d, %d, %d)" % tuple(self.default_color)
