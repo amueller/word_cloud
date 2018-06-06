@@ -413,7 +413,10 @@ class WordCloud(object):
                     try:
                         font_size = sizes[0]
                     except IndexError:
-                        raise ValueError('canvas size is too small')
+                        raise ValueError(
+                            "Couldn't find space to draw. Either the Canvas size"
+                            " is too small or too much of the image is masked "
+                            "out.")
         else:
             font_size = max_font_size
 
