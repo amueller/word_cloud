@@ -328,5 +328,5 @@ def test_small_canvas():
 def test_tiny_canvas():
     # check exception if canvas too small for fallback
     w = WordCloud(max_words=50, width=1, height=1)
-    assert_raises_regex(ValueError, 'canvas size is too small',
+    assert_raises_regex(ValueError, "Couldn't find space to draw",
                         w.generate, THIS)
