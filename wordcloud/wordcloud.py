@@ -278,7 +278,7 @@ class WordCloud(object):
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color='black'):
+                 contour_color=None):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -700,7 +700,7 @@ class WordCloud(object):
 
     def _draw_contour(self, img):
         """Draw mask contour on a pillow image."""
-        if self.mask is None or self.contour_width == 0:
+        if self.mask is None or self.contour_color is None or self.contour_width == 0:
             return img
 
         mask = self._get_bolean_mask(self.mask) * 255
@@ -718,12 +718,14 @@ class WordCloud(object):
         contour = Image.fromarray(contour)
         contour = contour.filter(ImageFilter.GaussianBlur(radius=radius))
         contour = np.array(contour) > 0
-        contour = np.dstack((contour, contour, contour))
+        if img.mode == 'RGBA':
+            contour = np.dstack((contour, contour, contour, contour))
+        else:
+            contour = np.dstack((contour, contour, contour))
 
         # color the contour
         ret = np.array(img) * np.invert(contour)
-        if self.contour_color != 'black':
-            color = Image.new(img.mode, img.size, self.contour_color)
-            ret += np.array(color) * contour
+        color = np.array(Image.new(img.mode, img.size, self.contour_color))
+        ret += color * contour
 
         return Image.fromarray(ret)
