@@ -306,7 +306,7 @@ def test_unicode_stopwords():
 def test_recolor_too_small():
     # check exception is raised when image is too small
     colouring = np.array(Image.new('RGB', size=(20, 20)))
-    wc = WordCloud(width=30, height=30).generate(THIS)
+    wc = WordCloud(width=30, height=30, random_state=0, min_font_size=1).generate(THIS)
     image_colors = ImageColorGenerator(colouring)
     assert_raises_regex(ValueError, 'ImageColorGenerator is smaller than the canvas',
                         wc.recolor, color_func=image_colors)
@@ -315,7 +315,7 @@ def test_recolor_too_small():
 def test_recolor_too_small_set_default():
     # check no exception is raised when default colour is used
     colouring = np.array(Image.new('RGB', size=(20, 20)))
-    wc = WordCloud(max_words=50, width=30, height=30).generate(THIS)
+    wc = WordCloud(max_words=50, width=30, height=30, min_font_size=1).generate(THIS)
     image_colors = ImageColorGenerator(colouring, default_color=(0, 0, 0))
     wc.recolor(color_func=image_colors)
 
@@ -330,3 +330,11 @@ def test_tiny_canvas():
     w = WordCloud(max_words=50, width=1, height=1)
     assert_raises_regex(ValueError, "Couldn't find space to draw",
                         w.generate, THIS)
+
+def test_coloring_black_works():
+    # check that using black colors works.
+    mask = np.zeros((50, 50, 3))
+    image_colors = ImageColorGenerator(mask)
+    wc = WordCloud(width=50, height=50, random_state=42,
+                   color_func=image_colors, min_font_size=1)
+    wc.generate(THIS)
