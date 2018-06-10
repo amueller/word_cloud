@@ -27,7 +27,6 @@ from .tokenization import unigrams_and_bigrams, process_tokens
 
 FILE = os.path.dirname(__file__)
 FONT_PATH = os.environ.get('FONT_PATH', os.path.join(FILE, 'DroidSansMono.ttf'))
-STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
 
 
 class IntegralOccupancyMap(object):
@@ -302,7 +301,11 @@ class WordCloud(object):
         self.scale = scale
         self.color_func = color_func or colormap_color_func(colormap)
         self.max_words = max_words
-        self.stopwords = stopwords if stopwords is not None else STOPWORDS
+        if stopwords is None:
+            fname = os.path.join(FILE, 'stopwords')
+            self.stopwords = set(map(str.strip, open(fname).readlines()))
+        else:
+            self.stopwords = stopwords
         self.min_font_size = min_font_size
         self.font_step = font_step
         self.regexp = regexp
