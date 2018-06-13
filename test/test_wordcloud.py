@@ -270,23 +270,6 @@ def test_unicode_stopwords():
     words_str = wc_str.process_text(str(THIS))
 
     assert_true(words_unicode == words_str)
-
-    
-def test_recolor_too_small():
-    # check exception is raised when image is too small
-    colouring = np.array(Image.new('RGB', size=(20, 20)))
-    wc = WordCloud(width=30, height=30).generate(THIS)
-    image_colors = ImageColorGenerator(colouring)
-    assert_raises_regex(ValueError, 'ImageColorGenerator is smaller than the canvas',
-                        wc.recolor, color_func=image_colors)
-
-
-def test_recolor_too_small_set_default():
-    # check no exception is raised when default colour is used
-    colouring = np.array(Image.new('RGB', size=(20, 20)))
-    wc = WordCloud(max_words=50, width=30, height=30).generate(THIS)
-    image_colors = ImageColorGenerator(colouring, default_color=(0, 0, 0))
-    wc.recolor(color_func=image_colors)
     
     
 def test_small_canvas():
