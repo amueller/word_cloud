@@ -212,15 +212,17 @@ class WordCloud(object):
         Transparent background will be generated when mode is "RGBA" and
         background_color is None.
 
-    relative_scaling : float (default=.5)
+    relative_scaling : float (default='auto')
         Importance of relative word frequencies for font-size.  With
         relative_scaling=0, only word-ranks are considered.  With
         relative_scaling=1, a word that is twice as frequent will have twice
         the size.  If you want to consider the word frequencies and not only
         their rank, relative_scaling around .5 often looks good.
+        If 'auto' it will be set to 0.5 unless repeat is true, in which
+        case it will be set to 0.
 
         .. versionchanged: 2.0
-            Default is now 0.5.
+            Default is now 'auto'.
 
     color_func : callable, default=None
         Callable with parameters word, font_size, position, orientation,
@@ -249,6 +251,10 @@ class WordCloud(object):
         is removed and its counts are added to the version without
         trailing 's' -- unless the word ends with 'ss'.
 
+    repeat : bool, default=False
+        Whether to repeat words and phrases until max_words or min_font_size
+        is reached.
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -276,9 +282,9 @@ class WordCloud(object):
                  color_func=None, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
-                 relative_scaling=.5, regexp=None, collocations=True,
+                 relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color='black'):
+                 contour_color='black', repeat=False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -312,6 +318,13 @@ class WordCloud(object):
         self.background_color = background_color
         self.max_font_size = max_font_size
         self.mode = mode
+ 
+        if relative_scaling == "auto":
+            if repeat:
+                relative_scaling = 0
+            else:
+                relative_scaling = .5
+
         if relative_scaling < 0 or relative_scaling > 1:
             raise ValueError("relative_scaling needs to be "
                              "between 0 and 1, got %f." % relative_scaling)
@@ -321,6 +334,7 @@ class WordCloud(object):
                           " it had no effect. Look into relative_scaling.",
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
+        self.repeat = repeat
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -423,6 +437,16 @@ class WordCloud(object):
         # we set self.words_ here because we called generate_from_frequencies
         # above... hurray for good design?
         self.words_ = dict(frequencies)
+
+        if self.repeat and len(frequencies) < self.max_words:
+            # pad frequencies with repeating words.
+            times_extend = int(np.ceil(self.max_words / len(frequencies))) - 1
+            # get smallest frequency
+            frequencies_org = list(frequencies)
+            downweight = frequencies[-1][1]
+            for i in range(times_extend):
+                frequencies.extend([(word, freq * downweight ** (i + 1))
+                                    for word, freq in frequencies_org])
 
         # start drawing grey image
         for word, freq in frequencies:
