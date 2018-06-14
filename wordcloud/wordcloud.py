@@ -249,6 +249,10 @@ class WordCloud(object):
         is removed and its counts are added to the version without
         trailing 's' -- unless the word ends with 'ss'.
 
+    repeat : bool, default=False
+        Whether to repeat words and phrases until max_words or min_font_size
+        is reached.
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -278,7 +282,7 @@ class WordCloud(object):
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling=.5, regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color='black'):
+                 contour_color='black', repeat=True):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -321,6 +325,7 @@ class WordCloud(object):
                           " it had no effect. Look into relative_scaling.",
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
+        self.repeat = repeat
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -366,6 +371,17 @@ class WordCloud(object):
 
         frequencies = [(word, freq / max_frequency)
                        for word, freq in frequencies]
+
+        if self.repeat and len(frequencies) < self.max_words:
+            # pad frequencies with repeating words.
+            times_extend = self.max_words // len(frequencies)
+            # get smallest frequency
+            frequencies_org = frequencies.copy()
+            downweight = frequencies[-1][1]
+            for i in range(times_extend):
+                frequencies.extend([(word, freq * downweight ** (i + 1))
+                                    for word, freq in frequencies_org])
+
 
         if self.random_state is not None:
             random_state = self.random_state
