@@ -442,7 +442,7 @@ class WordCloud(object):
             # pad frequencies with repeating words.
             times_extend = int(np.ceil(self.max_words / len(frequencies))) - 1
             # get smallest frequency
-            frequencies_org = frequencies.copy()
+            frequencies_org = list(frequencies)
             downweight = frequencies[-1][1]
             for i in range(times_extend):
                 frequencies.extend([(word, freq * downweight ** (i + 1))
