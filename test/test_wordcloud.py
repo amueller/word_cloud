@@ -331,6 +331,7 @@ def test_tiny_canvas():
     assert_raises_regex(ValueError, "Couldn't find space to draw",
                         w.generate, THIS)
 
+
 def test_coloring_black_works():
     # check that using black colors works.
     mask = np.zeros((50, 50, 3))
@@ -338,3 +339,31 @@ def test_coloring_black_works():
     wc = WordCloud(width=50, height=50, random_state=42,
                    color_func=image_colors, min_font_size=1)
     wc.generate(THIS)
+
+
+def test_repeat():
+    short_text = "Some short text"
+    wc = WordCloud(stopwords=[]).generate(short_text)
+    assert_equal(len(wc.layout_), 3)
+    wc = WordCloud(max_words=50, stopwords=[], repeat=True).generate(short_text)
+    # multiple of word count larger than max_words
+    assert_equal(len(wc.layout_), 51)
+    # relative scaling doesn't work well with repeat
+    assert_equal(wc.relative_scaling, 0)
+    # all frequencies are 1
+    assert_equal(len(wc.words_), 3)
+    assert_array_equal(list(wc.words_.values()), 1)
+    frequencies = [w[0][1] for w in wc.layout_]
+    assert_array_equal(frequencies, 1)
+    repetition_text = "Some short text with text"
+    wc = WordCloud(max_words=52, stopwords=[], repeat=True)
+    wc.generate(repetition_text)
+    assert_equal(len(wc.words_), 4)
+    # normalized frequencies
+    assert_equal(wc.words_['text'], 1)
+    assert_equal(wc.words_['with'], .5)
+    assert_equal(len(wc.layout_), wc.max_words)
+    frequencies = [w[0][1] for w in wc.layout_]
+    # check that frequencies are sorted
+    assert_true(np.all(np.diff(frequencies) <= 0))
+>>>>>>> add tests, fix off-by-one error

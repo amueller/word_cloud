@@ -381,17 +381,6 @@ class WordCloud(object):
         frequencies = [(word, freq / max_frequency)
                        for word, freq in frequencies]
 
-        if self.repeat and len(frequencies) < self.max_words:
-            # pad frequencies with repeating words.
-            times_extend = self.max_words // len(frequencies)
-            # get smallest frequency
-            frequencies_org = frequencies.copy()
-            downweight = frequencies[-1][1]
-            for i in range(times_extend):
-                frequencies.extend([(word, freq * downweight ** (i + 1))
-                                    for word, freq in frequencies_org])
-
-
         if self.random_state is not None:
             random_state = self.random_state
         else:
@@ -448,6 +437,16 @@ class WordCloud(object):
         # we set self.words_ here because we called generate_from_frequencies
         # above... hurray for good design?
         self.words_ = dict(frequencies)
+
+        if self.repeat and len(frequencies) < self.max_words:
+            # pad frequencies with repeating words.
+            times_extend = int(np.ceil(self.max_words / len(frequencies))) - 1
+            # get smallest frequency
+            frequencies_org = frequencies.copy()
+            downweight = frequencies[-1][1]
+            for i in range(times_extend):
+                frequencies.extend([(word, freq * downweight ** (i + 1))
+                                    for word, freq in frequencies_org])
 
         # start drawing grey image
         for word, freq in frequencies:
