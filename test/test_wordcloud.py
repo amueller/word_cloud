@@ -366,4 +366,3 @@ def test_repeat():
     frequencies = [w[0][1] for w in wc.layout_]
     # check that frequencies are sorted
     assert_true(np.all(np.diff(frequencies) <= 0))
->>>>>>> add tests, fix off-by-one error
