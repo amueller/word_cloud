@@ -199,7 +199,7 @@ class WordCloud(object):
 
     stopwords : set of strings or None
         The words that will be eliminated. If None, the build-in STOPWORDS
-        list will be used.
+        list will be used. Ignored if using generate_from_frequencies.
 
     background_color : color value (default="black")
         Background color for the word cloud image.
@@ -232,10 +232,13 @@ class WordCloud(object):
 
     regexp : string or None (optional)
         Regular expression to split the input text into tokens in process_text.
-        If None is specified, ``r"\w[\w']+"`` is used.
+        If None is specified, ``r"\w[\w']+"`` is used. Ignored if using
+        generate_from_frequencies.
 
     collocations : bool, default=True
-        Whether to include collocations (bigrams) of two words.
+        Whether to include collocations (bigrams) of two words. Ignored if using
+        generate_from_frequencies.
+
 
         .. versionadded: 2.0
 
@@ -249,7 +252,8 @@ class WordCloud(object):
         Whether to remove trailing 's' from words. If True and a word
         appears with and without a trailing 's', the one with trailing 's'
         is removed and its counts are added to the version without
-        trailing 's' -- unless the word ends with 'ss'.
+        trailing 's' -- unless the word ends with 'ss'. Ignored if using
+        generate_from_frequencies.
 
     repeat : bool, default=False
         Whether to repeat words and phrases until max_words or min_font_size
