@@ -212,15 +212,17 @@ class WordCloud(object):
         Transparent background will be generated when mode is "RGBA" and
         background_color is None.
 
-    relative_scaling : float (default=.5)
+    relative_scaling : float (default='auto')
         Importance of relative word frequencies for font-size.  With
         relative_scaling=0, only word-ranks are considered.  With
         relative_scaling=1, a word that is twice as frequent will have twice
         the size.  If you want to consider the word frequencies and not only
         their rank, relative_scaling around .5 often looks good.
+        If 'auto' it will be set to 0.5 unless repeat is true, in which
+        case it will be set to 0.
 
         .. versionchanged: 2.0
-            Default is now 0.5.
+            Default is now 'auto'.
 
     color_func : callable, default=None
         Callable with parameters word, font_size, position, orientation,
@@ -280,9 +282,9 @@ class WordCloud(object):
                  color_func=None, max_words=200, min_font_size=4,
                  stopwords=None, random_state=None, background_color='black',
                  max_font_size=None, font_step=1, mode="RGB",
-                 relative_scaling=.5, regexp=None, collocations=True,
+                 relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color='black', repeat=True):
+                 contour_color='black', repeat=False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -316,6 +318,13 @@ class WordCloud(object):
         self.background_color = background_color
         self.max_font_size = max_font_size
         self.mode = mode
+ 
+        if relative_scaling == "auto":
+            if repeat:
+                relative_scaling = 0
+            else:
+                relative_scaling = .5
+
         if relative_scaling < 0 or relative_scaling > 1:
             raise ValueError("relative_scaling needs to be "
                              "between 0 and 1, got %f." % relative_scaling)
