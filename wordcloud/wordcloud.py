@@ -228,7 +228,11 @@ class WordCloud(object):
         Callable with parameters word, font_size, position, orientation,
         font_path, random_state that returns a PIL color for each word.
         Overwrites "colormap".
-        See colormap for specifying a matplotlib colormap instead.
+        See colormap for specifying a matplotlib colormap instead.  
+        To create a word cloud with a single color, use 
+        ``color_func=lambda *args, **kwargs: "white"``. 
+        The single color can also be specified using RGB code. For example  
+        ``color_func=lambda *args, **kwargs: (255,0,0)`` sets color to red.
 
     regexp : string or None (optional)
         Regular expression to split the input text into tokens in process_text.
