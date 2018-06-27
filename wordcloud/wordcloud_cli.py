@@ -12,11 +12,14 @@ import sys
 import io
 import re
 import argparse
-import wordcloud as wc
-import numpy as np
+
 from PIL import Image
 
+import numpy as np
+
 from wordcloud import __version__
+
+import wordcloud as wc
 
 
 class FileType(object):
@@ -64,16 +67,17 @@ class FileType(object):
 
 
 class RegExpAction(argparse.Action):
-     def __init__(self, option_strings, dest, **kwargs):
-         for option in option_strings:
-             try:
-                 re.compile(option)
-             except re.error as e:
-                 raise argparse.ArgumentError('Invalid regular expression: ' + str(e))
-         super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
+    def __init__(self, option_strings, dest, **kwargs):
+        for option in option_strings:
+            try:
+                re.compile(option)
+            except re.error as e:
+                raise argparse.ArgumentError(
+                    None, 'Invalid regular expression: ' + str(e))
+        super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
 
-     def __call__(self, parser, namespace, values, option_string=None):
-         setattr(namespace, self.dest, values)
+    def __call__(self, parser, namespace, values, option_string=None):
+        setattr(namespace, self.dest, values)
 
 
 def main(args, text, imagefile):
@@ -180,6 +184,7 @@ def parse_args(arguments):
     imagefile = args.pop('imagefile')
 
     return args, text, imagefile
+
 
 if __name__ == '__main__':
     main(*parse_args(sys.argv[1:]))

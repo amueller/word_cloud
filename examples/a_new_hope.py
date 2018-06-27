@@ -6,11 +6,12 @@ Using custom colors
 Using the recolor method and custom coloring functions.
 """
 
-import numpy as np
-from PIL import Image
 from os import path
-import matplotlib.pyplot as plt
 import random
+
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
 
 from wordcloud import WordCloud, STOPWORDS
 
@@ -18,6 +19,7 @@ from wordcloud import WordCloud, STOPWORDS
 def grey_color_func(word, font_size, position, orientation, random_state=None,
                     **kwargs):
     return "hsl(0, 0%%, %d%%)" % random.randint(60, 100)
+
 
 d = path.dirname(__file__)
 

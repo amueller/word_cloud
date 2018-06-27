@@ -34,6 +34,7 @@ ARGUMENT_SPEC_REMAINING = [
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 
+
 def all_arguments():
     arguments = []
     arguments.extend(ARGUMENT_SPEC_TYPED)
