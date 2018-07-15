@@ -1,19 +1,79 @@
+branches:
+ only:
+  - master
+
 language: python
-sudo: false
-addons:
-  apt:
-    packages:
-      # Only used by the DISTRIB="ubuntu" setting
-      - python-numpy
-virtualenv:
-  system_site_packages: true
+
+matrix:
+  include:
+
+#    - os: osx
+#      language: generic
+#      env:
+#        - PYTHON_VERSION=3.7.0
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.6.5
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.5.5
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.4.8
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=2.7.15
+
+cache:
+  directories:
+    - $HOME/.pyenv/versions/3.7.0
+    - $HOME/.pyenv/versions/3.6.5
+    - $HOME/.pyenv/versions/3.5.5
+    - $HOME/.pyenv/versions/3.4.8
+    - $HOME/.pyenv/versions/2.7.15
+    - $HOME/downloads
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; fi
+  - pip install -U scikit-ci scikit-ci-addons
+  - ci_addons --install ../addons
+
+install:
+  - ci install
+
+script:
+  - ci test
+
+after_success:
+  - ci after_test
+
+deploy:
+  # deploy-release
+  - provider: script
+    script: pwd && ls dist;echo "deploy-release" && pip install twine && twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ dist/*
+    skip_cleanup: true
+    on:
+      repo: ${TRAVIS_REPO_SLUG}
+      tags: true
+  # deploy-master
+  - provider: script
+    script: pwd && ls dist;echo "deploy-master" && echo "not implemented"
+    skip_cleanup: true
+    on:
+      repo: ${TRAVIS_REPO_SLUG}
+      branch: master
+
 env:
-  matrix:
-    - DISTRIB="ubuntu" PYTHON_VERSION="2.7"
-    # This environment tests the oldest supported anaconda env
-    - DISTRIB="conda" PYTHON_VERSION="2.7" NUMPY_VERSION="1.11.1"
-    - DISTRIB="conda" PYTHON_VERSION="3.4" NUMPY_VERSION="1.11.1"
-    - DISTRIB="conda" PYTHON_VERSION="3.6" NUMPY_VERSION="1.13.1"
-install: source continuous_integration/install.sh
-cache: apt
-script: nosetests && test/test_script.sh
+  global:
+    # PYPI_USER
+    - secure: "PB/PL0INcMiFDRRQAbmNdrNqXGSHM3fg2eeblXqlHEkk+vPO7DftXoPh7Uc+NT+pVBegq78F0wtAqLttYx0gnCVgzJeaiz7UvD+I1q4S9aUrrmgzNgbeuJOF0Yq7gWmdPWiFgSxs69zinl7klodL2hihGlsJuudRKZKivNqNUNsOO22divvlpIUafmysZgX8CkVNwYA9Rs53Udfq7giqm/4SoD/KziFM0sXz+TuzEPOSwyTG41IW15qsmOwmhdAMRai+y2uuV49iWfS75nDOgxSp6sVrUgHhNuxlVZMpCxF7Ta5knHdWvv7CpFT3yxqGhGPrw8tNAnjAoIV0W9XpeLmeotQweAPKFCq5Dlkv7DJQH0amC7q8PKgNDEyBJ6+UwuUSnr4p2yvUdb6zJxiC6tsAxAkx6dcKcRrvqyYIFkyFD4OHKOLx+6XHw5e043hHhIz6K8XcWxj1wC0fTkiMhyaiUqiw5YImZRRQasVzF8uN6aySv2diMD0I9rvJWJoIy+pIIP5gWwFqiF/90OBBoONFmGMNtcTmgLGu2tZU0oHAWH/NoIhUztf25RRgR6FePisSVoPFk3PPmDUvGAtsSGoUcbLU2xxFY9e5aDavYUSsU43OI506PXnnXlTq9Deh6GUNf+IpVMdoGmusBb07S9BhbV9aEDOvRvXcrPIlXpw="
+    # PYPI_PASSWORD
+    - secure: "EJZF4WXZhbKFVytkjEnv9gqHMCr9ldDox9v+lOIMkb8pprDEbRFuyi9xEQtJCvnRs2FMoonvX0j4hwd646wwQEfKvIQvVUXTAoikLWnQac+qbR/eMeuBAjrszQ6TvwxNM0aLP6Xkn8hwq8kkiA75Rh8Hnom3zKZWbU2p3jqbUV7ep/nP4ncpDxdmYPn/bv82ZYyHVCqJ9Nz5ni30lUxcNCab8zvwQSM7ZrpJCsjM8+hnRtidWLMyykGWJ8Ga1XX6G37VNWEUR5828Hn0Ky77vFrMkITOWqpM4TvtJseAmPpWRlT+pWvXzhLRmRYfmBcW8twqocMFvX8Ryu6NMxgdUq2sy7vJJYjuxBYZWM+N457706p8IE/GT2Ev2bCwjHFmXB1vYzFV93fMo+WzzcGlUSC6Zh33QN8UWVobEtA5YVxrwY0JsTz0h4zegsS7XHbmuntS9U0gpY11Z0YWNL7CFVi74pz62QgPWChrZjkK9iriFfuAsxauHFB5DH9WRntQGepJZWCokr+qbvIokEGZqZwJKVf9h3b3xucJG/gsLkaKXw/8lbcQiw0fXm3sGI3/V1HMmZ64e1vMj7R9IsXOee+fdLKO8iXGPZXtTs4SAeUgIwEmqB1DwXV1Yo9dsa7PCREt8YFV4schRzmdyup+sAX8FXDcPOUcFv84AvASgck="

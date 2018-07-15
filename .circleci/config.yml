@@ -25,6 +25,33 @@ references:
           paths:
             - dist
 
+  ci_miniconda_steps: &ci_miniconda_steps
+    steps:
+      - checkout
+      - run:
+          name: Configure conda
+          command: |
+            conda config --set always_yes yes --set changeps1 no
+            conda config --add channels conda-forge
+      - run:
+          name: Install requirements
+          command: |
+            export PYTHON_VERSION=$(echo ${CIRCLE_JOB} | cut -d"_" -f2)
+            echo "PYTHON_VERSION [${PYTHON_VERSION}]"
+            conda install python=${PYTHON_VERSION}\
+              matplotlib \
+              numpy \
+              python=${PYTHON_VERSION} \
+              mock \
+              nose \
+              pillow \
+              pip
+      - run:
+          name: Run CI
+          command: |
+            pip install -e .
+            nosttests
+
   x64_build_job: &x64_build_job
     working_directory: /work
     docker:
@@ -36,6 +63,12 @@ references:
     docker:
       - image: dockcross/manylinux-x86
     <<: *ci_steps
+
+  miniconda_build_job: &miniconda_build_job
+    working_directory: /work
+    docker:
+      - image: continuumio/miniconda:4.5.4
+    <<: *ci_miniconda_steps
 
   no_filters: &no_filters
     filters:
@@ -72,6 +105,17 @@ jobs:
   #manylinux-x86_cp37-cp37m:
   #  <<: *x86_build_job
 
+  # conda
+  miniconda_2.7:
+    <<: *miniconda_build_job
+  miniconda_3.4:
+    <<: *miniconda_build_job
+  miniconda_3.5:
+    <<: *miniconda_build_job
+  miniconda_3.6:
+    <<: *miniconda_build_job
+
+
   deploy-master:
     docker:
       - image: circleci/python:3.7.0-stretch
@@ -103,6 +147,7 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
+      # x64
       - manylinux-x64_cp27-cp27m:
           <<: *no_filters
       - manylinux-x64_cp27-cp27mu:
@@ -115,6 +160,7 @@ workflows:
           <<: *no_filters
       #- manylinux-x64_cp37-cp37m:
       #    <<: *no_filters
+      # x86
       #- manylinux-x86_cp27-cp27m:
       #    <<: *no_filters
       #- manylinux-x86_cp27-cp27mu:
@@ -127,6 +173,12 @@ workflows:
       #    <<: *no_filters
       #- manylinux-x86_cp37-cp37m:
       #    <<: *no_filters
+      # miniconda
+      - miniconda_2.7
+      - miniconda_3.4
+      - miniconda_3.5
+      - miniconda_3.6
+
       - deploy-master:
           requires:
             # x64
