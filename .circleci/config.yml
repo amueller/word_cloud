@@ -25,22 +25,6 @@ references:
           paths:
             - dist
 
-  ci_miniconda_steps: &ci_miniconda_steps
-    steps:
-      - checkout
-      - run:
-          name: Configure conda
-          command: |
-            conda config --set always_yes yes --set changeps1 no
-            conda config --add channels conda-forge
-      - run:
-          name: Build recipe
-          command: |
-            export PYTHON_VERSION=$(echo ${CIRCLE_JOB} | cut -d"_" -f2)
-            echo "PYTHON_VERSION [${PYTHON_VERSION}]"
-            conda install conda-build
-            conda-build --python ${PYTHON_VERSION} conda.recipe/
-
   x64_build_job: &x64_build_job
     working_directory: /work
     docker:
@@ -52,12 +36,6 @@ references:
     docker:
       - image: dockcross/manylinux-x86
     <<: *ci_steps
-
-  miniconda_build_job: &miniconda_build_job
-    working_directory: /work
-    docker:
-      - image: continuumio/miniconda:4.5.4
-    <<: *ci_miniconda_steps
 
   no_filters: &no_filters
     filters:
@@ -93,16 +71,6 @@ jobs:
   #  <<: *x86_build_job
   #manylinux-x86_cp37-cp37m:
   #  <<: *x86_build_job
-
-  # conda
-  miniconda_2.7:
-    <<: *miniconda_build_job
-  miniconda_3.4:
-    <<: *miniconda_build_job
-  miniconda_3.5:
-    <<: *miniconda_build_job
-  miniconda_3.6:
-    <<: *miniconda_build_job
 
 
   deploy-master:
@@ -162,11 +130,6 @@ workflows:
       #    <<: *no_filters
       #- manylinux-x86_cp37-cp37m:
       #    <<: *no_filters
-      # miniconda
-      - miniconda_2.7
-      - miniconda_3.4
-      - miniconda_3.5
-      - miniconda_3.6
 
       - deploy-master:
           requires:
