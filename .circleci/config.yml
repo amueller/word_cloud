@@ -34,23 +34,12 @@ references:
             conda config --set always_yes yes --set changeps1 no
             conda config --add channels conda-forge
       - run:
-          name: Install requirements
+          name: Build recipe
           command: |
             export PYTHON_VERSION=$(echo ${CIRCLE_JOB} | cut -d"_" -f2)
             echo "PYTHON_VERSION [${PYTHON_VERSION}]"
-            conda install python=${PYTHON_VERSION}\
-              matplotlib \
-              numpy \
-              python=${PYTHON_VERSION} \
-              mock \
-              nose \
-              pillow \
-              pip
-      - run:
-          name: Run CI
-          command: |
-            pip install -e .
-            nosttests
+            conda install conda-build
+            conda-build --python ${PYTHON_VERSION} conda.recipe/
 
   x64_build_job: &x64_build_job
     working_directory: /work
