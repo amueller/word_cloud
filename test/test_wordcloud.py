@@ -1,5 +1,6 @@
 from wordcloud import WordCloud, get_single_color_func, ImageColorGenerator
 import numpy as np
+import os
 from random import Random
 from nose.tools import (assert_equal, assert_greater, assert_true, assert_false,
                         assert_raises, assert_in, assert_not_in)
@@ -123,8 +124,9 @@ def test_stopwords_lowercasing():
 def test_writing_to_file():
     wc = WordCloud()
     wc.generate(THIS)
+
     # check writing to file
-    f = NamedTemporaryFile(suffix=".png")
+    f = NamedTemporaryFile(delete=False, suffix=".png")
     filename = f.name
     wc.to_file(filename)
     loaded_image = Image.open(filename)

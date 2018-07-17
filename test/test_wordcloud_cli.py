@@ -11,7 +11,7 @@ from nose.tools import assert_equal, assert_greater, assert_true, assert_in
 import matplotlib
 matplotlib.use('Agg')
 
-temp = NamedTemporaryFile()
+temp = NamedTemporaryFile(delete=False)
 ArgOption = namedtuple('ArgOption', ['cli_name', 'init_name', 'pass_value', 'fail_value'])
 ARGUMENT_SPEC_TYPED = [
     ArgOption(cli_name='width', init_name='width', pass_value=13, fail_value=1.),
@@ -43,7 +43,7 @@ def all_arguments():
 
 
 def test_main_passes_arguments_through():
-    temp_imagefile = NamedTemporaryFile()
+    temp_imagefile = NamedTemporaryFile(delete=False)
 
     args = argparse.Namespace()
     for option in all_arguments():
@@ -60,22 +60,21 @@ def test_main_passes_arguments_through():
 
 
 def check_argument(name, result_name, value):
-    text = NamedTemporaryFile()
+    text = NamedTemporaryFile(delete=False)
 
     args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name, str(value)])
     assert_in(result_name, args)
 
 
 def check_argument_unary(name, result_name):
-    text = NamedTemporaryFile()
+    text = NamedTemporaryFile(delete=False)
 
     args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name])
     assert_in(result_name, args)
 
 
 def check_argument_type(name, value):
-    text = NamedTemporaryFile()
-
+    text = NamedTemporaryFile(delete=False)
     try:
         with patch('sys.stderr') as mock_stderr:
             args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name, str(value)])
@@ -100,9 +99,8 @@ def test_parse_arg_types():
 
 
 def test_check_duplicate_color_error():
-    color_mask_file = NamedTemporaryFile()
-    text_file = NamedTemporaryFile()
-
+    color_mask_file = NamedTemporaryFile(delete=False)
+    text_file = NamedTemporaryFile(delete=False)
     try:
         cli.parse_args(['--color', 'red', '--colormask', color_mask_file.name, '--text', text_file.name])
         raise AssertionError('parse_args(...) didn\'t raise')
@@ -111,9 +109,9 @@ def test_check_duplicate_color_error():
 
 
 def test_parse_args_defaults_to_random_color():
-    text = NamedTemporaryFile()
+    temp_file = NamedTemporaryFile(delete=False)
 
-    args, text, imagefile = cli.parse_args(['--text', text.name])
+    args, text, imagefile = cli.parse_args(['--text', temp_file.name])
     assert_equal(args['color_func'], wc.random_color_func)
 
 
@@ -125,8 +123,8 @@ def test_unicode_text_file():
 
 def test_cli_writes_image():
     # ensure writting works with all python versions
-    temp_imagefile = NamedTemporaryFile()
-    temp_textfile = NamedTemporaryFile()
+    temp_imagefile = NamedTemporaryFile(delete=False)
+    temp_textfile = NamedTemporaryFile(delete=False)
     temp_textfile.write(b'some text')
     temp_textfile.flush()
 
