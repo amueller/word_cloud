@@ -77,6 +77,6 @@ test:
 
 after_test:
   commands:
-    #- codecov -X gcov --required --file ./tests/coverage.xml
+    #- codecov -X gcov --required --file ./test/coverage.xml
     - python setup.py clean
 

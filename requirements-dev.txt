@@ -1,5 +1,8 @@
+codecov
+coverage
 matplotlib>=1.5.3
 mock
 pytest
+pytest-cov
 pytest-sugar
 wheel
