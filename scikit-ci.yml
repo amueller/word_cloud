@@ -38,9 +38,9 @@ install:
     - pip install -U setuptools
     - $<RUN_ENV> pip install -U -r requirements.txt -r requirements-dev.txt
 
-#before_build:
-#  commands:
-#    - flake8
+before_build:
+  commands:
+    - flake8
 
 build:
   commands:

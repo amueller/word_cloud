@@ -360,7 +360,7 @@ class WordCloud(object):
         """
         return self.generate_from_frequencies(frequencies)
 
-    def generate_from_frequencies(self, frequencies, max_font_size=None):
+    def generate_from_frequencies(self, frequencies, max_font_size=None):  # noqa: C901
         """Create a word_cloud from words and frequencies.
 
         Parameters
@@ -546,7 +546,7 @@ class WordCloud(object):
 
         stopwords = set([i.lower() for i in self.stopwords])
 
-        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
+        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
