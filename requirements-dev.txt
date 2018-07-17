@@ -1,4 +1,5 @@
 matplotlib>=1.5.3
 mock
-nose
+pytest
+pytest-sugar
 wheel

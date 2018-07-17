@@ -72,7 +72,7 @@ build:
 
 test:
   commands:
-    - nosetests
+    - pytest
     # TODO: Update setup.py to use "entry_points" and test execution of wordcloud_cli on all platforms
 
 after_test:
