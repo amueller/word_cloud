@@ -6,7 +6,7 @@ from setuptools.extension import Extension
 __version__ = re.search(
     r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]',  # It excludes inline comment too
     io.open('wordcloud/__init__.py', encoding='utf_8').read()
-    ).group(1)
+).group(1)
 
 
 with io.open('README.md', encoding='utf_8') as fp:
