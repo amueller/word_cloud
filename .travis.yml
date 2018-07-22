@@ -8,10 +8,10 @@ language: python
 matrix:
   include:
 
-#    - os: osx
-#      language: generic
-#      env:
-#        - PYTHON_VERSION=3.7.0
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.7.0
 
     - os: osx
       language: generic
