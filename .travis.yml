@@ -1,6 +1,7 @@
 branches:
  only:
   - master
+  - /^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$/
 
 language: python
 
@@ -42,7 +43,8 @@ cache:
     - $HOME/downloads
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; ln -s $(which python2) $HOME/bin/python; fi
+  - python -m pip install --disable-pip-version-check --upgrade pip
   - pip install -U scikit-ci scikit-ci-addons
   - ci_addons --install ../addons
 
@@ -58,7 +60,7 @@ after_success:
 deploy:
   # deploy-release
   - provider: script
-    script: pwd && ls dist;echo "deploy-release" && pip install twine && twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ dist/*
+    script: pwd && ls dist;echo "deploy-release" && ~/.pyenv/versions/${PYTHON_VERSION}/bin/twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
     skip_cleanup: true
     on:
       repo: ${TRAVIS_REPO_SLUG}

@@ -1,14 +1,13 @@
-
 branches:
- only:
-  - master
+  only:
+    - master
+    - /^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$/
 
 version: "0.0.1.{build}"
 
 environment:
   matrix:
 
-    # Visual Studio (Python 2 & 3, 32 & 64 bit)
 #    - PYTHON_DIR: "C:\\Python27"
 #      PYTHON_VERSION: "2.7.x"
 #      PYTHON_ARCH: "32"
@@ -85,10 +84,10 @@ on_finish:
 
 deploy_script:
   - ps: |
-      if ($env:appveyor_repo_tag -eq $true -and $env:appveyor_repo_tag_name –match "^[0-9]+(\.[0-9]+)*") {
+      if ($env:appveyor_repo_tag -eq $true -and $env:appveyor_repo_tag_name –match "^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$") {
         Write-Host "deploy release"
-        pip install twine
-        twine upload -u %PYPI_USER% -p %PYPI_PASSWORD% --repository-url https://test.pypi.org/legacy/ dist/*
+        $env:PATH="$env:PYTHON_DIR/Scripts/;$env:PATH"
+        twine upload -u $env:PYPI_USER -p $env:PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
       } elseif ($env:appveyor_repo_branch -eq "master") {
          Write-Host "deploy master (not implemented)"
       } else {

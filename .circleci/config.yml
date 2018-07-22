@@ -3,6 +3,7 @@ version: 2
 references:
 
   ci_steps: &ci_steps
+    working_directory: /work
     steps:
       - checkout
       - run:
@@ -26,13 +27,11 @@ references:
             - dist
 
   x64_build_job: &x64_build_job
-    working_directory: /work
     docker:
       - image: dockcross/manylinux-x64
     <<: *ci_steps
 
   x86_build_job: &x86_build_job
-    working_directory: /work
     docker:
       - image: dockcross/manylinux-x86
     <<: *ci_steps
@@ -98,7 +97,7 @@ jobs:
             . ../venv/bin/activate
             pip install twine
             ls dist
-            twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ dist/*
+            twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
 
 workflows:
   version: 2
@@ -168,6 +167,6 @@ workflows:
             #- manylinux-x86_cp37-cp37m
           filters:
             tags:
-              only: /^[0-9]+(\.[0-9]+)*/
+              only: /^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$/
             branches:
               ignore: /.*/
