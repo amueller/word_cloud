@@ -47,8 +47,7 @@ build:
     # Built distribution (wheel)
     - $<RUN_ENV> python setup.py bdist_wheel $<SETUP_BDIST_WHEEL_ARGS>
     # Install locally to support tests
-    - $<RUN_ENV> python setup.py build_ext --inplace
-    - $<RUN_ENV> python setup.py install
+    - $<RUN_ENV> pip install -e .
     # Cleanup
     - python: |
               import glob, os
