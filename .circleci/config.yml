@@ -66,7 +66,7 @@ jobs:
   #  <<: *x86_build_job
   #manylinux-x86_cp35-cp35m:
   #  <<: *x86_build_job
-  #manylinux-x86_cp36-cp36m_upload-sdist:
+  #manylinux-x86_cp36-cp36m:
   #  <<: *x86_build_job
   #manylinux-x86_cp37-cp37m:
   #  <<: *x86_build_job
