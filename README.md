@@ -1,15 +1,25 @@
-[![Build Status](https://travis-ci.org/amueller/word_cloud.png)](https://travis-ci.org/amueller/word_cloud)
 [![licence](http://img.shields.io/badge/licence-MIT-blue.svg?style=flat)](https://github.com/amueller/word_cloud/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/21369/amueller/word_cloud.svg)](https://zenodo.org/badge/latestdoi/21369/amueller/word_cloud)
 
+|      | Linux                                        | macOS                                        | Windows                                      |
+|------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
+| PyPI | [![CircleCI][circleci_image]][circleci_link] | [![TravisCI][travisci_image]][travisci_link] | [![AppVeyor][appveyor_image]][appveyor_link] |
 
+[circleci_link]: https://circleci.com/gh/amueller/word_cloud/tree/master
+[circleci_image]: https://circleci.com/gh/amueller/word_cloud/tree/master.svg?style=svg
+
+[travisci_link]: https://travis-ci.org/amueller/word_cloud
+[travisci_image]: https://travis-ci.org/amueller/word_cloud.svg?branch=master
+
+[appveyor_link]: https://ci.appveyor.com/project/amueller/word-cloud/branch/master
+[appveyor_image]: https://img.shields.io/appveyor/ci/amueller/word-cloud/master.svg
 
 word_cloud
 ==========
 
 A little word cloud generator in Python. Read more about it on the [blog
 post][blog-post] or the [website][website].
-The code is Python 2, but Python 3 compatible.
+The code is tested against Python 2.7, 3.4, 3.5 and 3.6.
 
 ## Installation
 
@@ -17,56 +27,31 @@ If you are using conda, you can install from the conda-forge channel:
 
     conda install -c conda-forge wordcloud
 
-If you don't use conda, you can install via pip, but that will require having a C compiler set up:
+If you don't use conda, you can install via pip:
 
     pip install wordcloud
 
-
-For a manual install get this package:
+For a manual install, follow these steps:
     
+    # Download
     wget https://github.com/amueller/word_cloud/archive/master.zip
     unzip master.zip
     rm master.zip
     cd word_cloud-master
 
-Install the package:
-
-    python setup.py install
+    # Install
+    pip install .
 
 #### Installation notes
 
-worcloud depends on numpy>=1.5.1, pillow and matplotlib.
-To install it via pip, you will also need a C compiler.
+wordcloud depends on `numpy>=1.5.1` and `pillow`.
 
-##### Windows
+To save the wordcloud into a file, `matplotlib` can also be installed. See [examples](#examples) below.
 
-If you're having trouble with pip installation on windows, you can find a .whl file at:
+If there are no wheels available for your version of python, installing the
+package requires having a C compiler set up. Before installing a compiler, report
+an issue describing the version of python and operating system being used.
 
-http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
-
-##### Ubuntu
-
-If the installation of the package fails, due to a missing ``pyconfig.h`` file, you need to install the python-dev package. 
-
-For Python 2.*
-
-	sudo apt-get install python-dev
-	
-For Python 3.*
-
-	sudo apt-get install python3-dev
-	
-##### CentOS / RHEL
-
-If the compilation via gcc of the package fails, due to a missing ``Python.h`` file, you need to install the python-devel package. 
-
-For Python 2.*
-
-	sudo yum install -y python-devel
-	
-For Python 3.*
-
-	sudo yum install -y python34-devel
 
 ## Examples
 

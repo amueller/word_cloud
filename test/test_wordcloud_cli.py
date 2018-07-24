@@ -1,17 +1,21 @@
 import argparse
 import os
 from collections import namedtuple
-from tempfile import NamedTemporaryFile
 
 import wordcloud as wc
 from wordcloud import wordcloud_cli as cli
+
 from mock import patch
-from nose.tools import assert_equal, assert_greater, assert_true, assert_in
+import pytest
 
 import matplotlib
 matplotlib.use('Agg')
 
-temp = NamedTemporaryFile()
+
+class PassFile(object):
+    pass
+
+
 ArgOption = namedtuple('ArgOption', ['cli_name', 'init_name', 'pass_value', 'fail_value'])
 ARGUMENT_SPEC_TYPED = [
     ArgOption(cli_name='width', init_name='width', pass_value=13, fail_value=1.),
@@ -23,16 +27,17 @@ ARGUMENT_SPEC_UNARY = [
     ArgOption(cli_name='no_collocations', init_name='collocations', pass_value=True, fail_value=1)
 ]
 ARGUMENT_SPEC_REMAINING = [
-    ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=temp.name, fail_value=None),
+    ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=PassFile(), fail_value=None),
     ArgOption(cli_name='regexp', init_name='regexp', pass_value=r'\w{2,}', fail_value=r'12('),
-    ArgOption(cli_name='mask', init_name='mask', pass_value=temp.name, fail_value=None),
-    ArgOption(cli_name='fontfile', init_name='font_path', pass_value=temp.name, fail_value=None),
+    ArgOption(cli_name='mask', init_name='mask', pass_value=PassFile(), fail_value=None),
+    ArgOption(cli_name='fontfile', init_name='font_path', pass_value=PassFile(), fail_value=None),
     ArgOption(cli_name='color', init_name='color_func', pass_value='red', fail_value=None),
     ArgOption(cli_name='background', init_name='background_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_color', init_name='contour_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=0.5, fail_value='blue'),
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
+
 
 def all_arguments():
     arguments = []
@@ -42,95 +47,87 @@ def all_arguments():
     return arguments
 
 
-def test_main_passes_arguments_through():
-    temp_imagefile = NamedTemporaryFile()
+def test_main_passes_arguments_through(tmpdir):
+
+    image_filepath = str(tmpdir.join('word_cloud.png'))
 
     args = argparse.Namespace()
     for option in all_arguments():
         setattr(args, option.init_name, option.pass_value)
 
     text = 'some long text'
-    imagefile = open(temp_imagefile.name, 'w')
+    image_file = open(image_filepath, 'w')
     with patch('wordcloud.wordcloud_cli.wc.WordCloud', autospec=True) as mock_word_cloud:
-        cli.main(vars(args), text, imagefile)
+        cli.main(vars(args), text, image_file)
 
     posargs, kwargs = mock_word_cloud.call_args
     for option in all_arguments():
-        assert_in(option.init_name, kwargs)
+        assert option.init_name in kwargs
 
 
-def check_argument(name, result_name, value):
-    text = NamedTemporaryFile()
-
-    args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name, str(value)])
-    assert_in(result_name, args)
+def check_argument(text_filepath, name, result_name, value):
+    args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name, str(value)])
+    assert result_name in args
 
 
-def check_argument_unary(name, result_name):
-    text = NamedTemporaryFile()
-
-    args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name])
-    assert_in(result_name, args)
+def check_argument_unary(text_filepath, name, result_name):
+    args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name])
+    assert result_name in args
 
 
-def check_argument_type(name, value):
-    text = NamedTemporaryFile()
-
-    try:
-        with patch('sys.stderr') as mock_stderr:
-            args, text, imagefile = cli.parse_args(['--text', text.name, '--' + name, str(value)])
-        raise AssertionError('argument "{}" was accepted even though the type did not match'.format(name))
-    except SystemExit:
-        pass
-    except ValueError:
-        pass
+def check_argument_type(text_filepath, name, value):
+    with pytest.raises(
+            (SystemExit, ValueError),
+            message='argument "{}" was accepted even though the type did not match'.format(name)
+    ):
+        args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name, str(value)])
 
 
-def test_parse_args_are_passed_along():
-    for option in all_arguments():
-        if option.cli_name in ARGUMENT_CLI_NAMES_UNARY:
-            yield check_argument_unary, option.cli_name, option.init_name
-        elif option.cli_name != 'mask':
-            yield check_argument, option.cli_name, option.init_name, option.pass_value
+@pytest.mark.parametrize("option", all_arguments())
+def test_parse_args_are_passed_along(option, tmpdir, tmp_text_file):
+    if option.cli_name in ARGUMENT_CLI_NAMES_UNARY:
+        check_argument_unary(str(tmp_text_file), option.cli_name, option.init_name)
+    elif option.cli_name != 'mask':
+        pass_value = option.pass_value
+        if isinstance(option.pass_value, PassFile):
+            input_file = tmpdir.join("%s_file" % option.cli_name)
+            input_file.write(b"")
+            pass_value = str(input_file)
+        check_argument(str(tmp_text_file), option.cli_name, option.init_name, pass_value)
 
 
-def test_parse_arg_types():
-    for option in ARGUMENT_SPEC_TYPED:
-        yield check_argument_type, option.cli_name, option.fail_value
+@pytest.mark.parametrize("option", ARGUMENT_SPEC_TYPED)
+def test_parse_arg_types(option, tmp_text_file):
+    check_argument_type(str(tmp_text_file), option.cli_name, option.fail_value)
 
 
-def test_check_duplicate_color_error():
-    color_mask_file = NamedTemporaryFile()
-    text_file = NamedTemporaryFile()
+def test_check_duplicate_color_error(tmpdir, tmp_text_file):
+    color_mask_file = tmpdir.join("input_color_mask.png")
+    color_mask_file.write(b"")
 
-    try:
-        cli.parse_args(['--color', 'red', '--colormask', color_mask_file.name, '--text', text_file.name])
-        raise AssertionError('parse_args(...) didn\'t raise')
-    except ValueError as e:
-        assert_true('specify either' in str(e), msg='expecting the correct error message, instead got: ' + str(e))
+    with pytest.raises(ValueError, match=r'.*specify either.*'):
+        cli.parse_args(['--color', 'red', '--colormask', str(color_mask_file), '--text', str(tmp_text_file)])
 
 
-def test_parse_args_defaults_to_random_color():
-    text = NamedTemporaryFile()
-
-    args, text, imagefile = cli.parse_args(['--text', text.name])
-    assert_equal(args['color_func'], wc.random_color_func)
+def test_parse_args_defaults_to_random_color(tmp_text_file):
+    args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
+    assert args['color_func'] == wc.random_color_func
 
 
 def test_unicode_text_file():
     unicode_file = os.path.join(os.path.dirname(__file__), "unicode_text.txt")
-    args, text, imagefile = cli.parse_args(['--text', unicode_file])
-    assert_equal(len(text), 16)
+    args, text, image_file = cli.parse_args(['--text', unicode_file])
+    assert len(text) == 16
 
 
-def test_cli_writes_image():
-    # ensure writting works with all python versions
-    temp_imagefile = NamedTemporaryFile()
-    temp_textfile = NamedTemporaryFile()
-    temp_textfile.write(b'some text')
-    temp_textfile.flush()
+def test_cli_writes_image(tmpdir, tmp_text_file):
+    # ensure writing works with all python versions
+    tmp_image_file = tmpdir.join("word_cloud.png")
 
-    args, text, imagefile = cli.parse_args(['--text', temp_textfile.name, '--imagefile', temp_imagefile.name])
-    cli.main(args, text, imagefile)
+    tmp_text_file.write(b'some text')
 
-    assert_greater(os.path.getsize(temp_imagefile.name), 0, msg='expecting image to be written')
+    args, text, image_file = cli.parse_args(['--text', str(tmp_text_file), '--imagefile', str(tmp_image_file)])
+    cli.main(args, text, image_file)
+
+    # expecting image to be written
+    assert tmp_image_file.size() > 0

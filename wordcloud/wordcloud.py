@@ -228,10 +228,10 @@ class WordCloud(object):
         Callable with parameters word, font_size, position, orientation,
         font_path, random_state that returns a PIL color for each word.
         Overwrites "colormap".
-        See colormap for specifying a matplotlib colormap instead.  
-        To create a word cloud with a single color, use 
-        ``color_func=lambda *args, **kwargs: "white"``. 
-        The single color can also be specified using RGB code. For example  
+        See colormap for specifying a matplotlib colormap instead.
+        To create a word cloud with a single color, use
+        ``color_func=lambda *args, **kwargs: "white"``.
+        The single color can also be specified using RGB code. For example
         ``color_func=lambda *args, **kwargs: (255,0,0)`` sets color to red.
 
     regexp : string or None (optional)
@@ -326,7 +326,7 @@ class WordCloud(object):
         self.background_color = background_color
         self.max_font_size = max_font_size
         self.mode = mode
- 
+
         if relative_scaling == "auto":
             if repeat:
                 relative_scaling = 0
@@ -360,7 +360,7 @@ class WordCloud(object):
         """
         return self.generate_from_frequencies(frequencies)
 
-    def generate_from_frequencies(self, frequencies, max_font_size=None):
+    def generate_from_frequencies(self, frequencies, max_font_size=None):  # noqa: C901
         """Create a word_cloud from words and frequencies.
 
         Parameters
@@ -546,7 +546,7 @@ class WordCloud(object):
 
         stopwords = set([i.lower() for i in self.stopwords])
 
-        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode
+        flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
@@ -719,15 +719,14 @@ class WordCloud(object):
         """Cast to two dimensional boolean mask."""
         if mask.dtype.kind == 'f':
             warnings.warn("mask image should be unsigned byte between 0"
-                            " and 255. Got a float array")
+                          " and 255. Got a float array")
         if mask.ndim == 2:
             boolean_mask = mask == 255
         elif mask.ndim == 3:
             # if all channels are white, mask out
             boolean_mask = np.all(mask[:, :, :3] == 255, axis=-1)
         else:
-            raise ValueError("Got mask of invalid shape: %s"
-                                % str(mask.shape))
+            raise ValueError("Got mask of invalid shape: %s" % str(mask.shape))
         return boolean_mask
 
     def _draw_contour(self, img):

@@ -64,16 +64,16 @@ class FileType(object):
 
 
 class RegExpAction(argparse.Action):
-     def __init__(self, option_strings, dest, **kwargs):
-         for option in option_strings:
-             try:
-                 re.compile(option)
-             except re.error as e:
-                 raise argparse.ArgumentError('Invalid regular expression: ' + str(e))
-         super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
+    def __init__(self, option_strings, dest, **kwargs):
+        for option in option_strings:
+            try:
+                re.compile(option)
+            except re.error as e:
+                raise argparse.ArgumentError('Invalid regular expression: ' + str(e))
+        super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
 
-     def __call__(self, parser, namespace, values, option_string=None):
-         setattr(namespace, self.dest, values)
+    def __call__(self, parser, namespace, values, option_string=None):
+        setattr(namespace, self.dest, values)
 
 
 def main(args, text, imagefile):
@@ -147,7 +147,8 @@ def parse_args(arguments):
         '--no_collocations', action='store_false', dest='collocations',
         help='do not add collocations (bigrams) to word cloud '
              '(default: add unigrams and bigrams)')
-    parser.add_argument('--version', action='version',
+    parser.add_argument(
+        '--version', action='version',
         version='%(prog)s {version}'.format(version=__version__))
     args = parser.parse_args(arguments)
 
@@ -181,5 +182,6 @@ def parse_args(arguments):
 
     return args, text, imagefile
 
-if __name__ == '__main__':
+
+if __name__ == '__main__':  # pragma: no cover
     main(*parse_args(sys.argv[1:]))

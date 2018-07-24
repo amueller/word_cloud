@@ -1,0 +1,18 @@
+numpydoc
+sphinx
+sphinx_bootstrap_theme
+sphinx_gallery
+
+#
+# Example requirements
+#
+
+# all examples
+matplotlib
+
+# frequency example
+multidict
+
+# wordcloud_cn example
+jieba
+scipy

@@ -1,0 +1,11 @@
+codecov
+coverage
+flake8
+matplotlib>=1.5.3
+mock
+pytest
+pytest-cov
+pytest-sugar
+setuptools>=28.0.0
+twine
+wheel
