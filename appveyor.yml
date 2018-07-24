@@ -59,9 +59,9 @@ environment:
       BLOCK: "0"
 
   PYPI_USER:
-    secure: FSD2hc+aSqlOLncSKl12Dw==
+    secure: deKM8MvS0hJbOBqZmBym0Q==
   PYPI_PASSWORD:
-    secure: Njw5/Y55cp561BNOqvff/amo5ZeHTMggWoSaVpvE51c=
+    secure: FE4sZ/hIsAVxu408qFzrVw==
 
 init:
   - python -m pip install -U scikit-ci scikit-ci-addons
