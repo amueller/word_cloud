@@ -72,10 +72,3 @@ deploy:
     on:
       repo: ${TRAVIS_REPO_SLUG}
       branch: master
-
-env:
-  global:
-    # PYPI_USER
-    - secure: "TvDSEYePMmeOoYOGSQrVpA+molgOk+ZnV+J45RCG2h9RP6773SBJ7UVKN+otlVV4EuWQiZP1ptDhFQS4HrMBZAR1ERRIYn8z5MqP/r+gd6knZ7v77pIYWeKiNHRIsuuRixDDACD6Zn5lZLLZj0MuJu4pSz7SCNMtrPLv/fC1Upg="
-    # PYPI_PASSWORD
-    - secure: "Bvo8KCBtMUuliB7chzFZTEs00O7dGh9Y7myu6SmbTBxw4ECi7COCWSsz9j2rSsMQefGG6jJmY9nJo8jOXFTNDQ7OZYiOIDCgRY6FXa9dJALi/O7QqPhgjujzrhNbGnoEBJqIG4Ib9PqMfewS65VDMiOzAfNM9qYc9ARBQGl4YZY="
