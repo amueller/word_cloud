@@ -16,6 +16,10 @@ import sys
 import os
 import sphinx_bootstrap_theme
 
+from datetime import date
+
+import wordcloud
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -25,10 +29,14 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx_gallery.gen_gallery', 'sphinx.ext.autodoc',
-              'sphinx.ext.autosummary', 'sphinx.ext.doctest',
-              'sphinx.ext.viewcode',
-              'numpydoc']
+extensions = [
+    'sphinx_gallery.gen_gallery',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.doctest',
+    'sphinx.ext.viewcode',
+    'numpydoc'
+]
 
 autosummary_generate = True
 
@@ -52,23 +60,30 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'wordcloud'
-copyright = u'2017, Andreas Mueller'
+copyright = u'%s, Andreas Mueller' % date.today().year
 
 sphinx_gallery_conf = {
+    'backreferences_dir': 'gen_modules/backreferences',
     # path to your examples scripts
     'examples_dirs': '../examples',
     # path where to save gallery generated examples
     'gallery_dirs': 'auto_examples',
-    'filename_pattern': '/\w+'}
+    'filename_pattern': '/\w+',
+    'doc_module': ('wordcloud',),
+    'reference_url': {
+        # The module you locally document uses None
+        'wordcloud': None,
+    }
+}
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '1.3'
+version = wordcloud.__version__
 # The full version, including alpha/beta/rc tags.
-release = '1.3'
+release = wordcloud.__version__
 
 
 # List of patterns, relative to source directory, that match files and
@@ -89,9 +104,12 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 html_theme = 'bootstrap'
 
-
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+
+
+def setup(app):
+    app.add_stylesheet('theme_override.css')
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".

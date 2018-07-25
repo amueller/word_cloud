@@ -43,6 +43,7 @@ help:
 clean:
 	-rm -rf $(BUILDDIR)/*
 	-rm -rf auto_examples
+	-rm -rf gen_modules
 	-rm -rf generated
 
 html:
