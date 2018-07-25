@@ -19,32 +19,23 @@ word_cloud
 
 A little word cloud generator in Python. Read more about it on the [blog
 post][blog-post] or the [website][website].
-The code is tested against Python 2.7, 3.4, 3.5 and 3.6.
+
+The code is tested against Python 2.7, 3.4, 3.5, 3.6 and 3.7.
 
 ## Installation
 
-If you are using conda, you can install from the conda-forge channel:
-
-    conda install -c conda-forge wordcloud
-
-If you don't use conda, you can install via pip:
+If you are using pip:
 
     pip install wordcloud
 
-For a manual install, follow these steps:
-    
-    # Download
-    wget https://github.com/amueller/word_cloud/archive/master.zip
-    unzip master.zip
-    rm master.zip
-    cd word_cloud-master
+If you are using conda, you can install from the `conda-forge` channel:
 
-    # Install
-    pip install .
+    conda install -c conda-forge wordcloud
+
 
 #### Installation notes
 
-wordcloud depends on `numpy>=1.5.1` and `pillow`.
+wordcloud depends on `numpy` and `pillow`.
 
 To save the wordcloud into a file, `matplotlib` can also be installed. See [examples](#examples) below.
 
