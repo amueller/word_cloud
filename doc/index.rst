@@ -18,7 +18,6 @@ The code of the project is on Github: `word_cloud <https://github.com/amueller/w
      :target: auto_examples/a_new_hope.html
      :align: center
 
-
 .. toctree::
     :hidden:
     
