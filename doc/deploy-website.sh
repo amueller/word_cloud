@@ -48,10 +48,11 @@ ENDHELP
 #-------------------------------------------------------------------------------
 if [[ -z $GITHUB_TOKEN ]]; then
   err "skipping because GITHUB_TOKEN env. variable is not set"
-  exit 0
+  help
+  exit 1
 fi
 
-if [[ $# != 2 ]]; then
+if [[ $# -lt 2 ]]; then
   err "Missing org/name and source_sha parameters"
   help
   exit 1

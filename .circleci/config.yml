@@ -96,6 +96,7 @@ jobs:
     docker:
       - image: circleci/python:3.7.0-stretch
     steps:
+      - checkout
       - attach_workspace:
           at: ./
       - run:
@@ -106,7 +107,8 @@ jobs:
           name: Deploy website
           command: |
             source_sha=$(cat doc/_build/html/.buildinfo | grep sha | cut -d: -f2)
-            doc/deploy-website.sh $CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_USERNAME $source_sha --html-dir doc/_build/html
+            repo_slug=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+            doc/deploy-website.sh $repo_slug $source_sha --html-dir doc/_build/html
 
   deploy-release:
     docker:
