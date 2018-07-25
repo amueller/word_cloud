@@ -34,7 +34,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
     'sphinx.ext.viewcode',
-    'sphinxarg.ext'
+    'sphinxarg.ext',
     'numpydoc'
 ]
 

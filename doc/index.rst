@@ -23,4 +23,5 @@ The code of the project is on Github: `word_cloud <https://github.com/amueller/w
     :hidden:
     
     references
+    cli
     auto_examples/index
