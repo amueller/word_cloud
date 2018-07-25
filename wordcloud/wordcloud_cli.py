@@ -151,6 +151,7 @@ def make_parser():
         version='%(prog)s {version}'.format(version=__version__))
     return parser
 
+
 def parse_args(arguments):
     # prog = 'python wordcloud_cli.py'
     parser = make_parser()
