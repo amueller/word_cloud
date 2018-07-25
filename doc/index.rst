@@ -27,7 +27,7 @@
           </div>
           <div class="col-xs-3 col-md-3">
             <a href="auto_examples/colored.html" class="thumbnail">
-              <img src="_images/sphx_glr_colored_002.png" alt="...">
+              <img src="_images/sphx_glr_colored_001.png" alt="...">
             </a>
           </div>
           <div class="col-xs-3 col-md-3">
@@ -46,5 +46,5 @@
 .. toctree::
     :hidden:
 
+    references
     auto_examples/index
-    references.rst
