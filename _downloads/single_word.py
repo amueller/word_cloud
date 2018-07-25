@@ -17,9 +17,9 @@ mask = (x - 150) ** 2 + (y - 150) ** 2 > 130 ** 2
 mask = 255 * mask.astype(int)
 
 
-wc = WordCloud(repeat=True, mask=mask).generate(text)
+wc = WordCloud(background_color="white", repeat=True, mask=mask)
+wc.generate(text)
 
-plt.imshow(wc)
-plt.figure()
-plt.imshow(mask)
+plt.axis("off")
+plt.imshow(wc, interpolation="bilinear")
 plt.show()

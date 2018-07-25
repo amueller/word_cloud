@@ -41,14 +41,12 @@ wc.generate(text)
 image_colors = ImageColorGenerator(alice_coloring)
 
 # show
-plt.imshow(wc, interpolation="bilinear")
-plt.axis("off")
-plt.figure()
+fig, axes = plt.subplots(1, 3)
+axes[0].imshow(wc, interpolation="bilinear")
 # recolor wordcloud and show
 # we could also give color_func=image_colors directly in the constructor
-plt.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
-plt.axis("off")
-plt.figure()
-plt.imshow(alice_coloring, cmap=plt.cm.gray, interpolation="bilinear")
-plt.axis("off")
+axes[1].imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
+axes[2].imshow(alice_coloring, cmap=plt.cm.gray, interpolation="bilinear")
+for ax in axes:
+    ax.set_axis_off()
 plt.show()
