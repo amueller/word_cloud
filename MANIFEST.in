@@ -1,0 +1,2 @@
+include versioneer.py
+include wordcloud/_version.py

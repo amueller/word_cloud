@@ -1,13 +1,7 @@
-import re
 import io
 from setuptools import setup
 from setuptools.extension import Extension
-
-__version__ = re.search(
-    r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]',  # It excludes inline comment too
-    io.open('wordcloud/__init__.py', encoding='utf_8').read()
-).group(1)
-
+import versioneer
 
 with io.open('README.md', encoding='utf_8') as fp:
     readme = fp.read()
@@ -16,7 +10,8 @@ setup(
     author="Andreas Mueller",
     author_email="t3kcit+wordcloud@gmail.com",
     name='wordcloud',
-    version=__version__,
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     url='https://github.com/amueller/word_cloud',
     description='A little word cloud generator',
     long_description=readme,
