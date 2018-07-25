@@ -1,38 +1,24 @@
 
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>wordcloud.wordcloud &#8212; wordcloud 1.3 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <title>wordcloud.wordcloud &#8212; wordcloud 1.4.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/theme_override.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/main.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1.3',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -41,8 +27,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
-  </head>
-  <body role="document">
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -55,7 +40,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           Wordcloud</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.3</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>1.4.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -74,10 +59,14 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/single_word.html">Single Word</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/simple.html">Minimal Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/masked.html">Masked wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/frequency.html">Using frequency</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/emoji.html">Emoji Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/wordcloud_cn.html">create wordcloud with chinese</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/colored_by_group.html">Colored by Group Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../generated/wordcloud.WordCloud.html">wordcloud.WordCloud</a></li>
@@ -149,17 +138,15 @@
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageColor</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageDraw</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageFilter</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageFont</span>
 
 <span class="kn">from</span> <span class="nn">.query_integral_image</span> <span class="k">import</span> <span class="n">query_integral_image</span>
 <span class="kn">from</span> <span class="nn">.tokenization</span> <span class="k">import</span> <span class="n">unigrams_and_bigrams</span><span class="p">,</span> <span class="n">process_tokens</span>
 
-<span class="n">item1</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">FONT_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FONT_PATH&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span>
-                                                     <span class="s2">&quot;DroidSansMono.ttf&quot;</span><span class="p">))</span>
-<span class="n">STOPWORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;stopwords&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)])</span>
+<span class="n">FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">FONT_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FONT_PATH&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="s1">&#39;DroidSansMono.ttf&#39;</span><span class="p">))</span>
+<span class="n">STOPWORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="s1">&#39;stopwords&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">readlines</span><span class="p">()))</span>
 
 
 <span class="k">class</span> <span class="nc">IntegralOccupancyMap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -236,7 +223,8 @@
                  <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">random_state</span> <span class="o">=</span> <span class="n">Random</span><span class="p">()</span>
-        <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">(</span><span class="n">random_state</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">(</span>
+            <span class="n">random_state</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))))</span>
         <span class="k">return</span> <span class="s2">&quot;rgb(</span><span class="si">{:.0f}</span><span class="s2">, </span><span class="si">{:.0f}</span><span class="s2">, </span><span class="si">{:.0f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
 
@@ -296,8 +284,8 @@
 <span class="sd">    prefer_horizontal : float (default=0.90)</span>
 <span class="sd">        The ratio of times to try horizontal fitting as opposed to vertical.</span>
 <span class="sd">        If prefer_horizontal &lt; 1, the algorithm will try rotating the word</span>
-<span class="sd">        if it doesn&#39;t fit. (There is currently no built-in way to get only vertical</span>
-<span class="sd">        words.)</span>
+<span class="sd">        if it doesn&#39;t fit. (There is currently no built-in way to get only</span>
+<span class="sd">        vertical words.)</span>
 
 <span class="sd">    mask : nd-array or None (default=None)</span>
 <span class="sd">        If not None, gives a binary mask on where to draw words. If mask is not</span>
@@ -305,6 +293,12 @@
 <span class="sd">        used instead. All white (#FF or #FFFFFF) entries will be considerd</span>
 <span class="sd">        &quot;masked out&quot; while other entries will be free to draw on. [This</span>
 <span class="sd">        changed in the most recent version!]</span>
+
+<span class="sd">    contour_width: float (default=0)</span>
+<span class="sd">        If mask is not None and contour_width &gt; 0, draw the mask contour.</span>
+
+<span class="sd">    contour_color: color value (default=&quot;black&quot;)</span>
+<span class="sd">        Mask contour color.</span>
 
 <span class="sd">    scale : float (default=1)</span>
 <span class="sd">        Scaling between computation and drawing. For large word-cloud images,</span>
@@ -324,7 +318,7 @@
 
 <span class="sd">    stopwords : set of strings or None</span>
 <span class="sd">        The words that will be eliminated. If None, the build-in STOPWORDS</span>
-<span class="sd">        list will be used.</span>
+<span class="sd">        list will be used. Ignored if using generate_from_frequencies.</span>
 
 <span class="sd">    background_color : color value (default=&quot;black&quot;)</span>
 <span class="sd">        Background color for the word cloud image.</span>
@@ -337,28 +331,37 @@
 <span class="sd">        Transparent background will be generated when mode is &quot;RGBA&quot; and</span>
 <span class="sd">        background_color is None.</span>
 
-<span class="sd">    relative_scaling : float (default=.5)</span>
+<span class="sd">    relative_scaling : float (default=&#39;auto&#39;)</span>
 <span class="sd">        Importance of relative word frequencies for font-size.  With</span>
 <span class="sd">        relative_scaling=0, only word-ranks are considered.  With</span>
 <span class="sd">        relative_scaling=1, a word that is twice as frequent will have twice</span>
 <span class="sd">        the size.  If you want to consider the word frequencies and not only</span>
 <span class="sd">        their rank, relative_scaling around .5 often looks good.</span>
+<span class="sd">        If &#39;auto&#39; it will be set to 0.5 unless repeat is true, in which</span>
+<span class="sd">        case it will be set to 0.</span>
 
 <span class="sd">        .. versionchanged: 2.0</span>
-<span class="sd">            Default is now 0.5.</span>
+<span class="sd">            Default is now &#39;auto&#39;.</span>
 
 <span class="sd">    color_func : callable, default=None</span>
 <span class="sd">        Callable with parameters word, font_size, position, orientation,</span>
 <span class="sd">        font_path, random_state that returns a PIL color for each word.</span>
 <span class="sd">        Overwrites &quot;colormap&quot;.</span>
 <span class="sd">        See colormap for specifying a matplotlib colormap instead.</span>
+<span class="sd">        To create a word cloud with a single color, use</span>
+<span class="sd">        ``color_func=lambda *args, **kwargs: &quot;white&quot;``.</span>
+<span class="sd">        The single color can also be specified using RGB code. For example</span>
+<span class="sd">        ``color_func=lambda *args, **kwargs: (255,0,0)`` sets color to red.</span>
 
 <span class="sd">    regexp : string or None (optional)</span>
 <span class="sd">        Regular expression to split the input text into tokens in process_text.</span>
-<span class="sd">        If None is specified, ``r&quot;\w[\w&#39;]+&quot;`` is used.</span>
+<span class="sd">        If None is specified, ``r&quot;\w[\w&#39;]+&quot;`` is used. Ignored if using</span>
+<span class="sd">        generate_from_frequencies.</span>
 
 <span class="sd">    collocations : bool, default=True</span>
-<span class="sd">        Whether to include collocations (bigrams) of two words.</span>
+<span class="sd">        Whether to include collocations (bigrams) of two words. Ignored if using</span>
+<span class="sd">        generate_from_frequencies.</span>
+
 
 <span class="sd">        .. versionadded: 2.0</span>
 
@@ -372,7 +375,12 @@
 <span class="sd">        Whether to remove trailing &#39;s&#39; from words. If True and a word</span>
 <span class="sd">        appears with and without a trailing &#39;s&#39;, the one with trailing &#39;s&#39;</span>
 <span class="sd">        is removed and its counts are added to the version without</span>
-<span class="sd">        trailing &#39;s&#39; -- unless the word ends with &#39;ss&#39;.</span>
+<span class="sd">        trailing &#39;s&#39; -- unless the word ends with &#39;ss&#39;. Ignored if using</span>
+<span class="sd">        generate_from_frequencies.</span>
+
+<span class="sd">    repeat : bool, default=False</span>
+<span class="sd">        Whether to repeat words and phrases until max_words or min_font_size</span>
+<span class="sd">        is reached.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -401,8 +409,9 @@
                  <span class="n">color_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">min_font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                  <span class="n">stopwords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
                  <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">font_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span>
-                 <span class="n">relative_scaling</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">regexp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collocations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize_plurals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                 <span class="n">relative_scaling</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">regexp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collocations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize_plurals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">contour_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">contour_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">font_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">font_path</span> <span class="o">=</span> <span class="n">FONT_PATH</span>
         <span class="k">if</span> <span class="n">color_func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -421,6 +430,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="o">=</span> <span class="n">margin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefer_horizontal</span> <span class="o">=</span> <span class="n">prefer_horizontal</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contour_color</span> <span class="o">=</span> <span class="n">contour_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contour_width</span> <span class="o">=</span> <span class="n">contour_width</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_func</span> <span class="o">=</span> <span class="n">color_func</span> <span class="ow">or</span> <span class="n">colormap_color_func</span><span class="p">(</span><span class="n">colormap</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_words</span> <span class="o">=</span> <span class="n">max_words</span>
@@ -434,6 +445,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span> <span class="o">=</span> <span class="n">background_color</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_font_size</span> <span class="o">=</span> <span class="n">max_font_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+
+        <span class="k">if</span> <span class="n">relative_scaling</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">repeat</span><span class="p">:</span>
+                <span class="n">relative_scaling</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">relative_scaling</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+
         <span class="k">if</span> <span class="n">relative_scaling</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">relative_scaling</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;relative_scaling needs to be &quot;</span>
                              <span class="s2">&quot;between 0 and 1, got </span><span class="si">%f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">relative_scaling</span><span class="p">)</span>
@@ -442,7 +460,8 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;ranks_only is deprecated and will be removed as&quot;</span>
                           <span class="s2">&quot; it had no effect. Look into relative_scaling.&quot;</span><span class="p">,</span>
                           <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_plurals</span> <span class="o">=</span> <span class="n">normalize_plurals</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_plurals</span> <span class="o">=</span> <span class="n">normalize_plurals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="n">repeat</span></div>
 
 <div class="viewcode-block" id="WordCloud.fit_words"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.fit_words">[docs]</a>    <span class="k">def</span> <span class="nf">fit_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a word_cloud from words and frequencies.</span>
@@ -451,8 +470,8 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        frequencies : array of tuples</span>
-<span class="sd">            A tuple contains the word and its frequency.</span>
+<span class="sd">        frequencies : dict from string to float</span>
+<span class="sd">            A contains words and associated frequency.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -460,7 +479,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="WordCloud.generate_from_frequencies"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate_from_frequencies">[docs]</a>    <span class="k">def</span> <span class="nf">generate_from_frequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="WordCloud.generate_from_frequencies"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate_from_frequencies">[docs]</a>    <span class="k">def</span> <span class="nf">generate_from_frequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
         <span class="sd">&quot;&quot;&quot;Create a word_cloud from words and frequencies.</span>
 
 <span class="sd">        Parameters</span>
@@ -477,8 +496,12 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># make sure frequencies are sorted and normalized</span>
-        <span class="n">frequencies</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">frequencies</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">item1</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">frequencies</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">frequencies</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;We need at least 1 word to plot a word cloud, &quot;</span>
+                             <span class="s2">&quot;got </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">))</span>
         <span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">max_words</span><span class="p">]</span>
+
         <span class="c1"># largest entry will be 1</span>
         <span class="n">max_frequency</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">frequencies</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 
@@ -490,25 +513,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">random_state</span> <span class="o">=</span> <span class="n">Random</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We need at least 1 word to plot a word cloud, got </span><span class="si">%d</span><span class="s2">.&quot;</span>
-                  <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">))</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span>
-            <span class="n">width</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">height</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mask image should be unsigned byte between 0&quot;</span>
-                              <span class="s2">&quot; and 255. Got a float array&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">boolean_mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">==</span> <span class="mi">255</span>
-            <span class="k">elif</span> <span class="n">mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="c1"># if all channels are white, mask out</span>
-                <span class="n">boolean_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">255</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Got mask of invalid shape: </span><span class="si">%s</span><span class="s2">&quot;</span>
-                                 <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+            <span class="n">boolean_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bolean_mask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">)</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">boolean_mask</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
@@ -537,13 +545,35 @@
                                                <span class="n">max_font_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
                 <span class="c1"># find font sizes</span>
                 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_</span><span class="p">]</span>
-                <span class="n">font_size</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">font_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                                    <span class="o">/</span> <span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="c1"># quick fix for if self.layout_ contains less than 2 values</span>
+                <span class="c1"># on very small images it can be empty</span>
+                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">font_size</span> <span class="o">=</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="s2">&quot;Couldn&#39;t find space to draw. Either the Canvas size&quot;</span>
+                            <span class="s2">&quot; is too small or too much of the image is masked &quot;</span>
+                            <span class="s2">&quot;out.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">font_size</span> <span class="o">=</span> <span class="n">max_font_size</span>
 
         <span class="c1"># we set self.words_ here because we called generate_from_frequencies</span>
         <span class="c1"># above... hurray for good design?</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">words_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_words</span><span class="p">:</span>
+            <span class="c1"># pad frequencies with repeating words.</span>
+            <span class="n">times_extend</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_words</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)))</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="c1"># get smallest frequency</span>
+            <span class="n">frequencies_org</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+            <span class="n">downweight</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_extend</span><span class="p">):</span>
+                <span class="n">frequencies</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">word</span><span class="p">,</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">downweight</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                                    <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequencies_org</span><span class="p">])</span>
 
         <span class="c1"># start drawing grey image</span>
         <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">:</span>
@@ -633,11 +663,11 @@
 <span class="sd">        include all those things.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stopwords</span><span class="p">))</span>
+        <span class="n">stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stopwords</span><span class="p">])</span>
 
-        <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span> <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span> <span class="o">&lt;</span> <span class="s1">&#39;3&#39;</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">is</span> <span class="n">unicode</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span> <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span> <span class="o">&lt;</span> <span class="s1">&#39;3&#39;</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">is</span> <span class="n">unicode</span>  <span class="c1"># noqa: F821</span>
                  <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">regexp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">r&quot;\w[\w&#39;]+&quot;</span>
+        <span class="n">regexp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">r</span><span class="s2">&quot;\w[\w&#39;]+&quot;</span>
 
         <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
         <span class="c1"># remove stopwords</span>
@@ -658,6 +688,10 @@
 <div class="viewcode-block" id="WordCloud.generate_from_text"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate_from_text">[docs]</a>    <span class="k">def</span> <span class="nf">generate_from_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate wordcloud from text.</span>
 
+<span class="sd">        The input &quot;text&quot; is expected to be a natural text. If you pass a sorted</span>
+<span class="sd">        list of words, words will appear in your output twice. To remove this</span>
+<span class="sd">        duplication, set ``collocations=False``.</span>
+
 <span class="sd">        Calls process_text and generate_from_frequencies.</span>
 
 <span class="sd">        ..versionchanged:: 1.2.2</span>
@@ -674,6 +708,10 @@
 
 <div class="viewcode-block" id="WordCloud.generate"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate wordcloud from text.</span>
+
+<span class="sd">        The input &quot;text&quot; is expected to be a natural text. If you pass a sorted</span>
+<span class="sd">        list of words, words will appear in your output twice. To remove this</span>
+<span class="sd">        duplication, set ``collocations=False``.</span>
 
 <span class="sd">        Alias to generate_from_text.</span>
 
@@ -711,7 +749,8 @@
             <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">),</span>
                    <span class="nb">int</span><span class="p">(</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">))</span>
             <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">transposed_font</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">img</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_draw_contour</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
 
 <div class="viewcode-block" id="WordCloud.recolor"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.recolor">[docs]</a>    <span class="k">def</span> <span class="nf">recolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Recolor existing layout.</span>
@@ -769,7 +808,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span>
-        <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="WordCloud.to_array"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.to_array">[docs]</a>    <span class="k">def</span> <span class="nf">to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -793,7 +832,51 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">to_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;FIXME!!!&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;FIXME!!!&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_bolean_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cast to two dimensional boolean mask.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;mask image should be unsigned byte between 0&quot;</span>
+                          <span class="s2">&quot; and 255. Got a float array&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">boolean_mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">==</span> <span class="mi">255</span>
+        <span class="k">elif</span> <span class="n">mask</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c1"># if all channels are white, mask out</span>
+            <span class="n">boolean_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">255</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Got mask of invalid shape: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">boolean_mask</span>
+
+    <span class="k">def</span> <span class="nf">_draw_contour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw mask contour on a pillow image.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">contour_width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bolean_mask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">contour</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">contour</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">FIND_EDGES</span><span class="p">)</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+
+        <span class="c1"># make sure borders are not drawn before changing width</span>
+        <span class="n">contour</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">contour</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># use gaussian to change width, divide by 10 to give more resolution</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contour_width</span> <span class="o">/</span> <span class="mi">10</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">contour</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">))</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">contour</span><span class="p">,</span> <span class="n">contour</span><span class="p">,</span> <span class="n">contour</span><span class="p">))</span>
+
+        <span class="c1"># color the contour</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contour_color</span> <span class="o">!=</span> <span class="s1">&#39;black&#39;</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">contour_color</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="o">*</span> <span class="n">contour</span>
+
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span></div>
 </pre></div>
 
 </div>
@@ -804,8 +887,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2017, Andreas Mueller.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.<br/>
+        &copy; Copyright 2018, Andreas Mueller.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.<br/>
     </p>
   </div>
 </footer>

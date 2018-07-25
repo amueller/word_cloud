@@ -1,0 +1,7 @@
+div[class^="highlight"] a {
+    background-color: #E6E6E6;
+}
+
+div[class^="highlight"] a:hover {
+    background-color: #ABECFC;
+}

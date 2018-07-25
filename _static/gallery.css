@@ -108,9 +108,13 @@ div.sphx-glr-footer {
     text-align: center;
 }
 
+div.binder-badge {
+  margin: 1em auto;
+  vertical-align: middle;
+}
+
 div.sphx-glr-download {
-  display: inline-block;
-  margin: 1em auto 1ex 2ex;
+  margin: 1em auto;
   vertical-align: middle;
 }
 
@@ -121,36 +125,10 @@ div.sphx-glr-download a {
   border: 1px solid #c2c22d;
   color: #000;
   display: inline-block;
-  /* Not valid in old browser, hence we keep the line above to override */
-  display: table-caption;
   font-weight: bold;
   padding: 1ex;
   text-align: center;
 }
-
-/* The last child of a download button is the file name */
-div.sphx-glr-download a span:last-child {
-    font-size: smaller;
-}
-
-@media (min-width: 20em) {
-    div.sphx-glr-download a {
-	min-width: 10em;
-    }
-}
-
-@media (min-width: 30em) {
-    div.sphx-glr-download a {
-	min-width: 13em;
-    }
-}
-
-@media (min-width: 40em) {
-    div.sphx-glr-download a {
-	min-width: 16em;
-    }
-}
-
 
 div.sphx-glr-download code.download {
   display: inline-block;
@@ -169,6 +147,14 @@ div.sphx-glr-download a:hover {
   background-color: #d5d57e;
 }
 
+.sphx-glr-example-title > :target::before {
+  display: block;
+  content: "";
+  margin-top: -50px;
+  height: 50px;
+  visibility: hidden;
+}
+
 ul.sphx-glr-horizontal {
   list-style: none;
   padding: 0;
@@ -178,6 +164,17 @@ ul.sphx-glr-horizontal li {
 }
 ul.sphx-glr-horizontal img {
   height: auto !important;
+}
+
+.sphx-glr-single-img {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+}
+
+.sphx-glr-multi-img {
+  max-width: 42%;
+  height: auto;
 }
 
 p.sphx-glr-signature a.reference.external {
