@@ -63,11 +63,18 @@ project = u'wordcloud'
 copyright = u'%s, Andreas Mueller' % date.today().year
 
 sphinx_gallery_conf = {
+    'backreferences_dir': 'gen_modules/backreferences',
     # path to your examples scripts
     'examples_dirs': '../examples',
     # path where to save gallery generated examples
     'gallery_dirs': 'auto_examples',
-    'filename_pattern': '/\w+'}
+    'filename_pattern': '/\w+',
+    'doc_module': ('wordcloud',),
+    'reference_url': {
+        # The module you locally document uses None
+        'wordcloud': None,
+    }
+}
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -97,9 +104,12 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 html_theme = 'bootstrap'
 
-
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+
+
+def setup(app):
+    app.add_stylesheet('theme_override.css')
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
