@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command Line Interface &mdash; wordcloud 1.4.1.post75+gd4f14d2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Gallery of Examples" href="auto_examples/index.html" />
+    <link rel="prev" title="wordcloud.random_color_func" href="generated/wordcloud.random_color_func.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> wordcloud
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.1.post75+gd4f14d2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="references.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Named Arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributor Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_a_release.html">Making a release</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">wordcloud</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Command Line Interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>A simple command line interface for wordcloud module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">wordcloud_cli</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">text</span> <span class="n">file</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">regexp</span> <span class="n">regexp</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">stopwords</span> <span class="n">file</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">imagefile</span> <span class="n">file</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">fontfile</span> <span class="n">path</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">mask</span> <span class="n">file</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">colormask</span> <span class="n">file</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">contour_width</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">contour_color</span> <span class="n">color</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">relative_scaling</span> <span class="n">rs</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">margin</span> <span class="n">width</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">width</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">height</span> <span class="n">height</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">color</span> <span class="n">color</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">background</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no_collocations</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="Named Arguments">
+<h2>Named Arguments<a class="headerlink" href="#Named Arguments" title="Permalink to this headline">¶</a></h2>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd>--text</kbd></td>
+<td><p class="first">specify file of words to build the word cloud (default: stdin)</p>
+<p class="last">Default: -</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--regexp</kbd></td>
+<td>override the regular expression defining what constitutes a word</td></tr>
+<tr><td class="option-group">
+<kbd>--stopwords</kbd></td>
+<td>specify file of stopwords (containing one word per line) to remove from the given text after parsing</td></tr>
+<tr><td class="option-group">
+<kbd>--imagefile</kbd></td>
+<td><p class="first">file the completed PNG image should be written to (default: stdout)</p>
+<p class="last">Default: -</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--fontfile</kbd></td>
+<td>path to font file you wish to use (default: DroidSansMono)</td></tr>
+<tr><td class="option-group">
+<kbd>--mask</kbd></td>
+<td>mask to use for the image form</td></tr>
+<tr><td class="option-group">
+<kbd>--colormask</kbd></td>
+<td>color mask to use for image coloring</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--contour_width</kbd></td>
+</tr>
+<tr><td>&#160;</td><td><p class="first">if greater than 0, draw mask contour (default: 0)</p>
+<p class="last">Default: 0</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--contour_color</kbd></td>
+</tr>
+<tr><td>&#160;</td><td><p class="first">use given color as mask contour color - accepts any value from PIL.ImageColor.getcolor</p>
+<p class="last">Default: “black”</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--relative_scaling</kbd></td>
+</tr>
+<tr><td>&#160;</td><td><blockquote class="first">
+<div>scaling of words by frequency (0 - 1)</div></blockquote>
+<p class="last">Default: 0</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--margin</kbd></td>
+<td><p class="first">spacing to leave around words</p>
+<p class="last">Default: 2</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--width</kbd></td>
+<td><p class="first">define output image width</p>
+<p class="last">Default: 400</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--height</kbd></td>
+<td><p class="first">define output image height</p>
+<p class="last">Default: 200</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--color</kbd></td>
+<td>use given color as coloring for the image - accepts any value from PIL.ImageColor.getcolor</td></tr>
+<tr><td class="option-group">
+<kbd>--background</kbd></td>
+<td><p class="first">use given color as background color for the image - accepts any value from PIL.ImageColor.getcolor</p>
+<p class="last">Default: “black”</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--no_collocations</kbd></td>
+</tr>
+<tr><td>&#160;</td><td><p class="first">do not add collocations (bigrams) to word cloud (default: add unigrams and bigrams)</p>
+<p class="last">Default: True</p>
+</td></tr>
+<tr><td class="option-group">
+<kbd>--version</kbd></td>
+<td>show program’s version number and exit</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auto_examples/index.html" class="btn btn-neutral float-right" title="Gallery of Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="generated/wordcloud.random_color_func.html" class="btn btn-neutral" title="wordcloud.random_color_func" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Andreas Mueller.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4.1.post75+gd4f14d2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
