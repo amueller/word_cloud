@@ -3,6 +3,7 @@ sphinx
 sphinx_rtd_theme
 sphinx_gallery
 sphinx-argparse
+sphinx-issues
 
 #
 # Example requirements

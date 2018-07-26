@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx_gallery.gen_gallery',
+    'sphinx_issues',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
@@ -61,6 +62,8 @@ master_doc = 'index'
 # General information about the project.
 project = u'wordcloud'
 copyright = u'%s, Andreas Mueller' % date.today().year
+
+issues_github_path = 'amueller/word_cloud'
 
 sphinx_gallery_conf = {
     'backreferences_dir': 'gen_modules/backreferences',
