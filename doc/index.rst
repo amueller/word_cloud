@@ -20,7 +20,14 @@ The code of the project is on Github: `word_cloud <https://github.com/amueller/w
 
 .. toctree::
     :hidden:
+    :caption: User Documentation
     
     references
     cli
     auto_examples/index
+
+.. toctree::
+    :hidden:
+    :caption: Contributor Documentation
+
+    make_a_release
