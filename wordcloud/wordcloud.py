@@ -147,7 +147,7 @@ def get_single_color_func(color):
 
 
 class WordCloud(object):
-    """Word cloud object for generating and drawing.
+    r"""Word cloud object for generating and drawing.
 
     Parameters
     ----------
