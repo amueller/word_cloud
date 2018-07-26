@@ -139,7 +139,7 @@ def test_cli_regexp(tmp_text_file):
 
 def test_cli_regexp_invalid(tmp_text_file, capsys):
     with pytest.raises(SystemExit):
-        cli.parse_args(['--regexp', r"['q@", '--text', str(tmp_text_file)])
+        cli.parse_args(['--regexp', r"invalid[", '--text', str(tmp_text_file)])
 
     _, err = capsys.readouterr()
     assert "Invalid regular expression" in err
