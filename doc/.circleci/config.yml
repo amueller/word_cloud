@@ -4,3 +4,8 @@ jobs:
     branches:
       ignore:
         - gh-pages
+    docker:
+      - image: rwgrim/docker-noop
+    steps:
+      - run:
+          command: false
