@@ -65,14 +65,13 @@ class FileType(object):
 
 class RegExpAction(argparse.Action):
     def __init__(self, option_strings, dest, **kwargs):
-        for option in option_strings:
-            try:
-                re.compile(option)
-            except re.error as e:
-                raise argparse.ArgumentError('Invalid regular expression: ' + str(e))
         super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
 
     def __call__(self, parser, namespace, values, option_string=None):
+        try:
+            re.compile(values)
+        except re.error as e:
+            raise argparse.ArgumentError(self, 'Invalid regular expression: ' + str(e))
         setattr(namespace, self.dest, values)
 
 
