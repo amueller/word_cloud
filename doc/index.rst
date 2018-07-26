@@ -25,6 +25,7 @@ The code of the project is on Github: `word_cloud <https://github.com/amueller/w
     references
     cli
     auto_examples/index
+    changelog
 
 .. toctree::
     :hidden:
