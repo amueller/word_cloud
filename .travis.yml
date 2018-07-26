@@ -60,7 +60,7 @@ after_success:
 deploy:
   # deploy-release
   - provider: script
-    script: pwd && ls dist;echo "deploy-release" && ~/.pyenv/versions/${PYTHON_VERSION}/bin/twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+    script: pwd && ls dist;echo "deploy-release" && ~/.pyenv/versions/${PYTHON_VERSION}/bin/twine upload -u $PYPI_USER -p $PYPI_PASSWORD --skip-existing dist/*
     skip_cleanup: true
     on:
       repo: ${TRAVIS_REPO_SLUG}

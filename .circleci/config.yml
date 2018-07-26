@@ -127,7 +127,7 @@ jobs:
             . ../venv/bin/activate
             pip install twine
             ls dist
-            twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+            twine upload -u $PYPI_USER -p $PYPI_PASSWORD --skip-existing dist/*
       - run:
           <<: *deploy_website_command
 
