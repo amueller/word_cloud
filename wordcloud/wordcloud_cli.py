@@ -1,14 +1,23 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-r"""Command-line tool to generate word clouds
-Usage::
-    $ cat word.txt | wordcloud_cli.py
-
-    $ wordcloud_cli.py --text=words.txt --stopwords=stopwords.txt
+"""Command-line tool interface to generate word clouds.
 """
 from __future__ import absolute_import
 
 import sys
+import textwrap
+
+if __name__ == '__main__':  # pragma: no cover
+    sys.exit(textwrap.dedent(
+        """
+        To execute the CLI, instead consider running:
+
+          wordcloud_cli --help
+
+        or
+
+          python -m wordcloud --help
+        """))
+
 import io
 import re
 import argparse
@@ -16,7 +25,7 @@ import wordcloud as wc
 import numpy as np
 from PIL import Image
 
-from wordcloud import __version__
+from . import __version__
 
 
 class FileType(object):
@@ -185,7 +194,3 @@ def parse_args(arguments):
     imagefile = args.pop('imagefile')
 
     return args, text, imagefile
-
-
-if __name__ == '__main__':  # pragma: no cover
-    main(*parse_args(sys.argv[1:]))
