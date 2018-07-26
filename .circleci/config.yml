@@ -36,6 +36,13 @@ references:
       - image: dockcross/manylinux-x86
     <<: *ci_steps
 
+  deploy_website_command: &deploy_website_command
+    name: Deploy website
+    command: |
+      source_sha=$(cat doc/_build/html/.buildinfo | grep sha | cut -d: -f2)
+      repo_slug=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+      doc/deploy-website.sh $repo_slug $source_sha --html-dir doc/_build/html
+
   no_filters: &no_filters
     filters:
       tags:
@@ -104,11 +111,7 @@ jobs:
           command: |
             echo "Deploy master (not implemented)"
       - run:
-          name: Deploy website
-          command: |
-            source_sha=$(cat doc/_build/html/.buildinfo | grep sha | cut -d: -f2)
-            repo_slug=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-            doc/deploy-website.sh $repo_slug $source_sha --html-dir doc/_build/html
+          <<: *deploy_website_command
 
   deploy-release:
     docker:
@@ -125,6 +128,8 @@ jobs:
             pip install twine
             ls dist
             twine upload -u $PYPI_USER -p $PYPI_PASSWORD --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+      - run:
+          <<: *deploy_website_command
 
 workflows:
   version: 2
@@ -199,6 +204,8 @@ workflows:
             #- manylinux-x86_cp35-cp35m
             #- manylinux-x86_cp36-cp36m
             #- manylinux-x86_cp37-cp37m
+            # misc
+            - build-website_cp37-cp37m
           filters:
             tags:
               only: /^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$/
