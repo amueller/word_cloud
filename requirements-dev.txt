@@ -1,5 +1,6 @@
 # build-system
 cmake
+cython
 ninja
 scikit-build
 setuptools>=28.0.0
