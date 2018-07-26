@@ -66,7 +66,7 @@ Generating a square wordcloud from the US constitution using default arguments.
     # image = wordcloud.to_image()
     # image.show()
 
-**Total running time of the script:** ( 0 minutes  0.987 seconds)
+**Total running time of the script:** ( 0 minutes  0.917 seconds)
 
 
 .. _sphx_glr_download_auto_examples_simple.py:

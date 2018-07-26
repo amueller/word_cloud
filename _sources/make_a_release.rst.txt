@@ -5,8 +5,8 @@ Making a release
 This document guides a contributor through creating a release of the wordcloud
 python packages.
 
-A core developer should use the following steps to create a release of
-**wordcloud**.
+A core developer should follow these steps to trigger the creation and upload of
+release packages of **wordcloud** on `PyPI`_.
 
 1. Make sure that all CI tests are passing: `AppVeyor`_, `CircleCI`_ and `Travis CI`_.
 
@@ -14,6 +14,11 @@ A core developer should use the following steps to create a release of
 
     release=X.Y.Z
     git tag -s -m "wordcloud ${release}" ${release} origin/master
+
+  .. warning::
+
+      To ensure the packages are uploaded on `PyPI`_, tags must match this regular
+      expression: ``^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$``.
 
 3. Push the tag::
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Making a release &mdash; wordcloud 1.4.1.post77+gd01847f documentation</title>
+  <title>Making a release &mdash; wordcloud 1.4.1.post82+gc286a10 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.4.1.post77+gd01847f
+                1.4.1.post82+gc286a10
               </div>
             
           
@@ -159,8 +159,8 @@
 <h1>Making a release<a class="headerlink" href="#making-a-release" title="Permalink to this headline">¶</a></h1>
 <p>This document guides a contributor through creating a release of the wordcloud
 python packages.</p>
-<p>A core developer should use the following steps to create a release of
-<strong>wordcloud</strong>.</p>
+<p>A core developer should follow these steps to trigger the creation and upload of
+release packages of <strong>wordcloud</strong> on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
 <ol class="arabic">
 <li><p class="first">Make sure that all CI tests are passing: <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</p>
 </li>
@@ -170,6 +170,15 @@ git tag -s -m &quot;wordcloud ${release}&quot; ${release} origin/master
 </pre></div>
 </div>
 </li>
+</ol>
+<blockquote>
+<div><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">To ensure the packages are uploaded on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>, tags must match this regular
+expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$</span></code>.</p>
+</div>
+</div></blockquote>
+<ol class="arabic" start="3">
 <li><p class="first">Push the tag:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git push origin ${release}
 </pre></div>
@@ -239,7 +248,7 @@ git tag -s -m &quot;wordcloud ${release}&quot; ${release} origin/master
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.1.post77+gd01847f',
+            VERSION:'1.4.1.post82+gc286a10',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
