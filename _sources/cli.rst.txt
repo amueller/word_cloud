@@ -1,3 +1,5 @@
+.. _wordcloud_cli:
+
 Command Line Interface
 ======================
 

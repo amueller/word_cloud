@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Making a release &mdash; wordcloud 1.4.1.post82+gc286a10 documentation</title>
+  <title>Making a release &mdash; wordcloud 1.4.1.post84+gd31a673 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Colored by Group Example" href="auto_examples/colored_by_group.html" /> 
+    <link rel="prev" title="Changelog" href="changelog.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.4.1.post82+gc286a10
+                1.4.1.post84+gd31a673
               </div>
             
           
@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="references.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributor Documentation</span></p>
 <ul class="current">
@@ -156,17 +157,20 @@
            <div itemprop="articleBody">
             
   <div class="section" id="making-a-release">
-<h1>Making a release<a class="headerlink" href="#making-a-release" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Making a release<a class="headerlink" href="#making-a-release" title="Permalink to this headline">¶</a></h1>
 <p>This document guides a contributor through creating a release of the wordcloud
 python packages.</p>
 <p>A core developer should follow these steps to trigger the creation and upload of
-release packages of <strong>wordcloud</strong> on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
+a release <cite>X.Y.Z</cite> of <strong>wordcloud</strong> on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
 <ol class="arabic">
 <li><p class="first">Make sure that all CI tests are passing: <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</p>
 </li>
-<li><p class="first">Tag the release. For version <em>X.Y.Z</em>:</p>
+<li><p class="first">In <cite>doc/changelog.rst</cite> change <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section header with
+<code class="docutils literal notranslate"><span class="pre">WordCloud</span> <span class="pre">X.Y.Z</span></code> and commit the changes using the same title.</p>
+</li>
+<li><p class="first">Tag the release:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>release=X.Y.Z
-git tag -s -m &quot;wordcloud ${release}&quot; ${release} origin/master
+git tag --sign -m &quot;WordCloud ${release}&quot; ${release} origin/master
 </pre></div>
 </div>
 </li>
@@ -177,8 +181,12 @@ git tag -s -m &quot;wordcloud ${release}&quot; ${release} origin/master
 <p class="last">To ensure the packages are uploaded on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>, tags must match this regular
 expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$</span></code>.</p>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We recommend using a GPG key to sign the tag.</p>
+</div>
 </div></blockquote>
-<ol class="arabic" start="3">
+<ol class="arabic" start="4">
 <li><p class="first">Push the tag:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git push origin ${release}
 </pre></div>
@@ -191,7 +199,7 @@ expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+
 <p class="last">This will trigger builds on each CI services and automatically upload the wheels and source distribution on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
 </div>
 </div></blockquote>
-<ol class="arabic" start="4">
+<ol class="arabic" start="5">
 <li><p class="first">Check the status of the builds on <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</p>
 </li>
 <li><p class="first">Once the builds are completed, check that the distributions are available on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
@@ -205,6 +213,9 @@ expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+
 </pre></div>
 </div>
 </li>
+<li><p class="first">Add a <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section back in <cite>doc/changelog.rst</cite>, merge the result
+and push local changes.</p>
+</li>
 </ol>
 </div>
 
@@ -217,7 +228,7 @@ expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="auto_examples/colored_by_group.html" class="btn btn-neutral" title="Colored by Group Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="changelog.html" class="btn btn-neutral" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -248,7 +259,7 @@ expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.1.post82+gc286a10',
+            VERSION:'1.4.1.post84+gd31a673',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
