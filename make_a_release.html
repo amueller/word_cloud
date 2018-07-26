@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Making a release &mdash; wordcloud 1.4.1.post90+g88e9085 documentation</title>
+  <title>Making a release &mdash; wordcloud 1.4.1.post93+gcf430fe documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.4.1.post90+g88e9085
+                1.4.1.post93+gcf430fe
               </div>
             
           
@@ -166,11 +166,16 @@ a release <cite>X.Y.Z</cite> of <strong>wordcloud</strong> on <a class="referenc
 <li><p class="first">Make sure that all CI tests are passing: <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</p>
 </li>
 <li><p class="first">In <cite>doc/changelog.rst</cite> change <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section header with
-<code class="docutils literal notranslate"><span class="pre">WordCloud</span> <span class="pre">X.Y.Z</span></code> and commit the changes using the same title.</p>
+<code class="docutils literal notranslate"><span class="pre">WordCloud</span> <span class="pre">X.Y.Z</span></code> and commit the changes using the same title:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">release</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">doc</span><span class="o">/</span><span class="n">changelog</span><span class="o">.</span><span class="n">rst</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;WordCloud $release&quot;</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">Tag the release:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>release=X.Y.Z
-git tag --sign -m &quot;WordCloud ${release}&quot; ${release} origin/master
+git tag --sign -m &quot;WordCloud ${release}&quot; ${release} master
 </pre></div>
 </div>
 </li>
@@ -259,7 +264,7 @@ and push local changes.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.1.post90+g88e9085',
+            VERSION:'1.4.1.post93+gcf430fe',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

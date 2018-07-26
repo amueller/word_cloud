@@ -13,12 +13,16 @@ a release `X.Y.Z` of **wordcloud** on `PyPI`_.
 1. Make sure that all CI tests are passing: `AppVeyor`_, `CircleCI`_ and `Travis CI`_.
 
 2. In `doc/changelog.rst` change ``Next Release`` section header with
-   ``WordCloud X.Y.Z`` and commit the changes using the same title.
+   ``WordCloud X.Y.Z`` and commit the changes using the same title::
+
+    release=X.Y.Z
+    git add doc/changelog.rst
+    git commit -m "WordCloud $release"
 
 3. Tag the release::
 
     release=X.Y.Z
-    git tag --sign -m "WordCloud ${release}" ${release} origin/master
+    git tag --sign -m "WordCloud ${release}" ${release} master
 
   .. warning::
 
