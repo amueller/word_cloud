@@ -85,8 +85,7 @@ def main(args, text, imagefile):
         image.save(imagefile, format='png', optimize=True)
 
 
-def parse_args(arguments):
-    # prog = 'python wordcloud_cli.py'
+def make_parser():
     description = ('A simple command line interface for wordcloud module.')
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
@@ -150,6 +149,12 @@ def parse_args(arguments):
     parser.add_argument(
         '--version', action='version',
         version='%(prog)s {version}'.format(version=__version__))
+    return parser
+
+
+def parse_args(arguments):
+    # prog = 'python wordcloud_cli.py'
+    parser = make_parser()
     args = parser.parse_args(arguments)
 
     if args.colormask and args.color:
