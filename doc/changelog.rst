@@ -10,6 +10,16 @@ details, see the commit logs at https://github.com/amueller/word_cloud
 Next Release
 ============
 
+Examples
+--------
+
+* Add :ref:`sphx_glr_auto_examples_frequency.py` example for understanding how
+  to generate a wordcloud using a dictionary of word frequency.
+  Contributed by :user:`yoonsubKim`.
+
+* Add :ref:`sphx_glr_auto_examples_wordcloud_cn.py` example.
+  Contributed by :user:`FontTian` and improved by :user:`duohappy`.
+
 Features
 --------
 
@@ -55,9 +65,15 @@ Wheels
 Bug fixes
 ---------
 
-* Fix coloring with black image. Contributed by :user:`amueller`.
+* :class:`wordcloud.WordCloud` API
 
-* Improve error message when there is no space on canvas. Contributed by  :user:`amueller`.
+  * Fix coloring with black image. Contributed by :user:`amueller`.
+
+  * Improve error message when there is no space on canvas. Contributed by  :user:`amueller`.
+
+* :ref:`wordcloud_cli`
+
+  * Fix handling of invalid `regexp` parameter. Contributed by :user:`jcfr`.
 
 Documentation
 -------------
@@ -68,6 +84,8 @@ Documentation
 
 * Simplify and improve `README <https://github.com/amueller/word_cloud#readme>`_.
   Contributed by :user:`amueller`.
+
+* Add :ref:`wordcloud_cli` document. Contributed by :user:`amueller`.
 
 * Add :ref:`making_a_release` and :ref:`changelog` documents. Contributed by :user:`jcfr`.
 
@@ -81,16 +99,6 @@ Website
 
 * Update `website <https://amueller.github.io/word_cloud>`_ to use `Read the Docs Sphinx Theme`.
   Contributed by :user:`amueller`.
-
-Examples
---------
-
-* Add :ref:`sphx_glr_auto_examples_frequency.py` example for understanding how
-  to generate a wordcloud using a dictionary of word frequency.
-  Contributed by :user:`yoonsubKim`.
-
-* Add :ref:`sphx_glr_auto_examples_wordcloud_cn.py` example.
-  Contributed by :user:`FontTian` and improved by :user:`duohappy`.
 
 Test
 ----
