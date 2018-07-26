@@ -116,6 +116,8 @@ git add --all
 git commit -m "Website update based of $repo_slug@${source_sha}
 
 It was automatically generated and published using the script '${PROG}'
+
+[ci skip]
 "
 
 # publish
