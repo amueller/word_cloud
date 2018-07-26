@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; wordcloud 1.4.1.post84+gd31a673 documentation</title>
+  <title>Changelog &mdash; wordcloud 1.4.1.post88+g801869a documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.4.1.post84+gd31a673
+                1.4.1.post88+g801869a
               </div>
             
           
@@ -90,12 +90,12 @@
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#next-release">Next Release</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wheels">Wheels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#website">Website</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test">Test</a></li>
 </ul>
 </li>
@@ -185,6 +185,16 @@
 details, see the commit logs at <a class="reference external" href="https://github.com/amueller/word_cloud">https://github.com/amueller/word_cloud</a></p>
 <div class="section" id="next-release">
 <h2>Next Release<a class="headerlink" href="#next-release" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Add <a class="reference internal" href="auto_examples/frequency.html#sphx-glr-auto-examples-frequency-py"><span class="std std-ref">Using frequency</span></a> example for understanding how
+to generate a wordcloud using a dictionary of word frequency.
+Contributed by <a class="reference external" href="https://github.com/yoonsubKim">&#64;yoonsubKim</a>.</li>
+<li>Add <a class="reference internal" href="auto_examples/wordcloud_cn.html#sphx-glr-auto-examples-wordcloud-cn-py"><span class="std std-ref">create wordcloud with chinese</span></a> example.
+Contributed by <a class="reference external" href="https://github.com/FontTian">&#64;FontTian</a> and improved by <a class="reference external" href="https://github.com/duohappy">&#64;duohappy</a>.</li>
+</ul>
+</div>
 <div class="section" id="features">
 <h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -221,8 +231,15 @@ tagging a release, there is no need to manually update version in <code class="d
 <div class="section" id="bug-fixes">
 <h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li><a class="reference internal" href="generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud"><code class="xref py py-class docutils literal notranslate"><span class="pre">wordcloud.WordCloud</span></code></a> API<ul>
 <li>Fix coloring with black image. Contributed by <a class="reference external" href="https://github.com/amueller">&#64;amueller</a>.</li>
 <li>Improve error message when there is no space on canvas. Contributed by  <a class="reference external" href="https://github.com/amueller">&#64;amueller</a>.</li>
+</ul>
+</li>
+<li><a class="reference internal" href="cli.html#wordcloud-cli"><span class="std std-ref">Command Line Interface</span></a><ul>
+<li>Fix handling of invalid <cite>regexp</cite> parameter. Contributed by <a class="reference external" href="https://github.com/jcfr">&#64;jcfr</a>.</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="documentation">
@@ -233,6 +250,7 @@ explaining how to create single color word cloud.
 Fix <a class="reference external" href="https://github.com/amueller/word_cloud/issues/185">#185</a>. Contributed by <a class="reference external" href="https://github.com/maifeng">&#64;maifeng</a>.</li>
 <li>Simplify and improve <a class="reference external" href="https://github.com/amueller/word_cloud#readme">README</a>.
 Contributed by <a class="reference external" href="https://github.com/amueller">&#64;amueller</a>.</li>
+<li>Add <a class="reference internal" href="cli.html#wordcloud-cli"><span class="std std-ref">Command Line Interface</span></a> document. Contributed by <a class="reference external" href="https://github.com/amueller">&#64;amueller</a>.</li>
 <li>Add <a class="reference internal" href="make_a_release.html#making-a-release"><span class="std std-ref">Making a release</span></a> and <a class="reference internal" href="#changelog"><span class="std std-ref">Changelog</span></a> documents. Contributed by <a class="reference external" href="https://github.com/jcfr">&#64;jcfr</a>.</li>
 <li>Improve sphinx gallery integration. Contributed by <a class="reference external" href="https://github.com/jcfr">&#64;jcfr</a>.</li>
 </ul>
@@ -244,16 +262,6 @@ Contributed by <a class="reference external" href="https://github.com/amueller">
 Contributed by <a class="reference external" href="https://github.com/jcfr">&#64;jcfr</a>.</li>
 <li>Update <a class="reference external" href="https://amueller.github.io/word_cloud">website</a> to use <cite>Read the Docs Sphinx Theme</cite>.
 Contributed by <a class="reference external" href="https://github.com/amueller">&#64;amueller</a>.</li>
-</ul>
-</div>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Add <a class="reference internal" href="auto_examples/frequency.html#sphx-glr-auto-examples-frequency-py"><span class="std std-ref">Using frequency</span></a> example for understanding how
-to generate a wordcloud using a dictionary of word frequency.
-Contributed by <a class="reference external" href="https://github.com/yoonsubKim">&#64;yoonsubKim</a>.</li>
-<li>Add <a class="reference internal" href="auto_examples/wordcloud_cn.html#sphx-glr-auto-examples-wordcloud-cn-py"><span class="std std-ref">create wordcloud with chinese</span></a> example.
-Contributed by <a class="reference external" href="https://github.com/FontTian">&#64;FontTian</a> and improved by <a class="reference external" href="https://github.com/duohappy">&#64;duohappy</a>.</li>
 </ul>
 </div>
 <div class="section" id="test">
@@ -350,7 +358,7 @@ opening <code class="docutils literal notranslate"><span class="pre">htmlcov/ind
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.1.post84+gd31a673',
+            VERSION:'1.4.1.post88+g801869a',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
