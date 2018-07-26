@@ -1,6 +1,5 @@
 import io
-from setuptools import setup
-from setuptools.extension import Extension
+from skbuild import setup
 import versioneer
 
 with io.open('README.md', encoding='utf_8') as fp:
@@ -19,9 +18,9 @@ setup(
     license='MIT',
     install_requires=['numpy>=1.6.1', 'pillow'],
     test_requires=['matplotlib'],
-    ext_modules=[Extension("wordcloud.query_integral_image",
-                           ["wordcloud/query_integral_image.c"])],
     entry_points={'console_scripts': ['wordcloud_cli=wordcloud.__main__:main']},
     packages=['wordcloud'],
-    package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
+    package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']},
+    cmake_languages=('C',),
+    cmake_source_dir='wordcloud'
 )
