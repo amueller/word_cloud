@@ -1,5 +1,6 @@
 import argparse
 import os
+import subprocess
 from collections import namedtuple
 
 import wordcloud as wc
@@ -143,3 +144,26 @@ def test_cli_regexp_invalid(tmp_text_file, capsys):
 
     _, err = capsys.readouterr()
     assert "Invalid regular expression" in err
+
+
+@pytest.mark.parametrize("command,expected_output, expected_exit_code", [
+    ("wordcloud_cli --help", "usage: wordcloud_cli", 0),
+    ("python -m wordcloud --help", "usage: __main__", 0),
+    ("python %s/../wordcloud/wordcloud_cli.py --help" % os.path.dirname(__file__), "To execute the CLI", 1),
+])
+def test_cli_as_executable(command, expected_output, expected_exit_code, tmpdir, capfd, no_cover_compat):
+
+    ret_code = 0
+    try:
+        subprocess.check_call(
+            command,
+            shell=True,
+            cwd=str(tmpdir)
+        )
+    except subprocess.CalledProcessError as excinfo:
+        ret_code = excinfo.returncode
+
+    out, err = capfd.readouterr()
+    assert expected_output in out if ret_code == 0 else err
+
+    assert ret_code == expected_exit_code

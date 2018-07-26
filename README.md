@@ -60,17 +60,17 @@ Getting fancy with some colors:
 
 ## Command-line usage
 
-The `wordcloud_cli.py` tool can be used to generate word clouds directly from the command-line:
+The `wordcloud_cli` tool can be used to generate word clouds directly from the command-line:
 
-	$ wordcloud_cli.py --text mytext.txt --imagefile wordcloud.png
+	$ wordcloud_cli --text mytext.txt --imagefile wordcloud.png
 
 If you're dealing with PDF files, then `pdftotext`, included by default with many Linux distribution, comes in handy:
 
-	$ pdftotext mydocument.pdf - | wordcloud_cli.py --imagefile wordcloud.png
+	$ pdftotext mydocument.pdf - | wordcloud_cli --imagefile wordcloud.png
 
 In the previous example, the `-` argument orders `pdftotext` to write the resulting text to stdout, which is then piped to the stdin of `wordcloud_cli.py`.
 
-Use `wordcloud_cli.py --help` so see all available options.
+Use `wordcloud_cli --help` so see all available options.
 
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [website]: http://amueller.github.io/word_cloud/

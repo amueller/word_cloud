@@ -21,7 +21,7 @@ setup(
     test_requires=['matplotlib'],
     ext_modules=[Extension("wordcloud.query_integral_image",
                            ["wordcloud/query_integral_image.c"])],
-    scripts=['wordcloud/wordcloud_cli.py'],
+    entry_points={'console_scripts': ['wordcloud_cli=wordcloud.__main__:main']},
     packages=['wordcloud'],
     package_data={'wordcloud': ['stopwords', 'DroidSansMono.ttf']}
 )

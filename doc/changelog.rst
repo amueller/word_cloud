@@ -55,12 +55,16 @@ Wheels
 
   * Remove use of miniconda and instead use `manylinux`_ docker images.
 
+* Fix installation of the cli on all platforms leveraging `entry_points`_.
+  See :issue:`420`. Contributed by :user:`jcfr`.
+
 .. _manylinux: https://www.python.org/dev/peps/pep-0571/
 .. _PyPI: https://pypi.org/project/wordcloud
 .. _scikit-ci: http://scikit-ci.readthedocs.io
 .. _scikit-ci-addons: http://scikit-ci-addons.readthedocs.io
 .. _scikit-ci.yml: https://github.com/amueller/word_cloud/blob/master/scikit-ci.yml
 .. _versioneer: https://github.com/warner/python-versioneer/
+.. _entry_points: https://setuptools.readthedocs.io/en/latest/setuptools.html#automatic-script-creation
 
 Bug fixes
 ---------
