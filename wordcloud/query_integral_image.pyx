@@ -53,4 +53,3 @@ def test_c_search_for_space(unsigned int[:, :] integral_image, int size_x, int s
 def test_c_iterate_for_coordinates(unsigned int[:, :] integral_image, int size_x, int size_y, int goal, int[:] coordinates_array):
     return c_iterate_for_coordinates(integral_image, size_x, size_y, goal, coordinates_array)
 
-    
