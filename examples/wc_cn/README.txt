@@ -7,11 +7,7 @@ LuXun_black : Thousand pointing fingers, willing ox bow (Zhao Yannian's Woodcut 
 LuXun_color : Thousand pointing fingers, willing ox bow (Yin Shoushi's Chinese Ink 1973)(after image processing)
 
 
-According to the copyright law of People's Republic of China, Call to Arms and two works of Artcan be used as a scientific research and personal study, a small amount of copying and translation.
-
-But if you want to use this literary work in other ways, please refer to the copyright law of the People's Republic of China or the relevant laws of the corresponding country.
-
-P.S. Mr. Lu Xun is a spiritual mentor of my life and a good friend of mine. I like him very much.
+According to the copyright law of People's Republic of China, the use of the above three works of art in scientific research and study is allowed.Because it is out of copyright in the copyright law of the Republic of People's Republic of China, so Chinese law is no longer on the "Call to Arms" for copyright protection.But if you want to use two pieces of art in business, because the time limit for copyright is not over, you have to get the consent of the artist.
 
 ---------------------stopwords---------------------
 stopwords: Free to use, without authorization 
