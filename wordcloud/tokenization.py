@@ -5,7 +5,7 @@ from collections import defaultdict
 from math import log
 
 
-def l(k, n, x):
+def l(k, n, x):  # noqa: E743
     # dunning's likelihood ratio with notation from
     # http://nlp.stanford.edu/fsnlp/promo/colloc.pdf p162
     return log(max(x, 1e-10)) * k + log(max(1 - x, 1e-10)) * (n - k)
@@ -40,8 +40,6 @@ def unigrams_and_bigrams(words, normalize_plurals=True):
     n_words = len(words)
     # make tuples of two words following each other
     bigrams = list(pairwise(words))
-    counts_unigrams = defaultdict(int)
-    counts_bigrams = defaultdict(int)
     counts_unigrams, standard_form = process_tokens(
         words, normalize_plurals=normalize_plurals)
     counts_bigrams, standard_form_bigrams = process_tokens(

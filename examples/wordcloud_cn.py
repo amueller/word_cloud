@@ -1,7 +1,7 @@
 # - * - coding: utf - 8 -*-
 """
 create wordcloud with chinese
-=======================
+=============================
 
 Wordcloud is a very good tools, but if you want to create
 Chinese wordcloud only wordcloud is not enough. The file
@@ -18,11 +18,13 @@ jieba.enable_parallel(4)
 from os import path
 from scipy.misc import imread
 import matplotlib.pyplot as plt
+import os
 # jieba.load_userdict("txt\userdict.txt")
 # add userdict by load_userdict()
 from wordcloud import WordCloud, ImageColorGenerator
 
-d = path.dirname(__file__)
+# get data directory (using getcwd() is needed to support running example in generated IPython notebook)
+d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 stopwords_path = d + '/wc_cn/stopwords_cn_en.txt'
 # Chinese fonts must be set
@@ -53,7 +55,7 @@ def jieba_processing_txt(text):
 
     with open(stopwords_path, encoding='utf-8') as f_stop:
         f_stop_text = f_stop.read()
-        f_stop_seg_list = f_stop_text.split('\n')
+        f_stop_seg_list = f_stop_text.splitlines()
 
     for myword in liststr.split('/'):
         if not (myword.strip() in f_stop_seg_list) and len(myword.strip()) > 1:

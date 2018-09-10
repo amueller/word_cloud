@@ -77,7 +77,7 @@ def pyhanlp_processing_txt(text,isUseStopwordsByHanLP = True):
     return ' '.join(mywordlist)
 
 
-wc = WordCloud(font_path=font_path, background_color="white", max_words=2000, mask=back_coloring,
+wc = WordCloud(font_path=font_path, background_color="white", max_words=4000, mask=back_coloring,
                max_font_size=100, random_state=42, width=1000, height=860, margin=2,)
 
 pyhanlp_processing_txt = pyhanlp_processing_txt(text)

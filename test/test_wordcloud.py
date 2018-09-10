@@ -1,16 +1,12 @@
 from wordcloud import WordCloud, get_single_color_func, ImageColorGenerator
+
 import numpy as np
+import pytest
+
 from random import Random
-from nose.tools import (assert_equal, assert_greater, assert_true, assert_false,
-                        assert_raises, assert_in, assert_not_in)
-try:
-    from nose.tools import assert_raises_regex
-except ImportError:
-    from nose.tools import assert_raises_regexp as assert_raises_regex
 from numpy.testing import assert_array_equal
 from PIL import Image
 
-from tempfile import NamedTemporaryFile
 import matplotlib
 matplotlib.use('Agg')
 
@@ -45,48 +41,50 @@ def test_collocations():
     wc2 = WordCloud(collocations=True, stopwords=[])
     wc2.generate(THIS)
 
-    assert_in("is better", wc2.words_)
-    assert_not_in("is better", wc.words_)
-    assert_not_in("way may", wc2.words_)
+    assert "is better" in wc2.words_
+    assert "is better" not in wc.words_
+    assert "way may" not in wc2.words_
 
 
 def test_plurals_numbers():
     text = THIS + "\n" + "1 idea 2 ideas three ideas although many Ideas"
     wc = WordCloud(stopwords=[]).generate(text)
     # not capitalized usually
-    assert_not_in("Ideas", wc.words_)
+    assert "Ideas" not in wc.words_
     # plural removed
-    assert_not_in("ideas", wc.words_)
+    assert "ideas" not in wc.words_
     # usually capitalized
-    assert_not_in("although", wc.words_)
-    assert_in("idea", wc.words_)
-    assert_in("Although", wc.words_)
-    assert_in("better than", wc.words_)
+    assert "although" not in wc.words_
+    assert "idea" in wc.words_
+    assert "Although" in wc.words_
+    assert "better than" in wc.words_
 
 
 def test_multiple_s():
     text = 'flo flos floss flosss'
     wc = WordCloud(stopwords=[]).generate(text)
-    assert_in("flo", wc.words_)
-    assert_not_in("flos", wc.words_)
-    assert_in("floss", wc.words_)
-    assert_in("flosss", wc.words_)
+    assert "flo" in wc.words_
+    assert "flos" not in wc.words_
+    assert "floss" in wc.words_
+    assert "flosss" in wc.words_
     # not normalizing means that the one with just one s is kept
     wc = WordCloud(stopwords=[], normalize_plurals=False).generate(text)
-    assert_in("flo", wc.words_)
-    assert_in("flos", wc.words_)
-    assert_in("floss", wc.words_)
-    assert_in("flosss", wc.words_)
+    assert "flo" in wc.words_
+    assert "flos" in wc.words_
+    assert "floss" in wc.words_
+    assert "flosss" in wc.words_
 
 
 def test_empty_text():
     # test originally empty text raises an exception
     wc = WordCloud(stopwords=[])
-    assert_raises(ValueError, wc.generate, '')
+    with pytest.raises(ValueError):
+        wc.generate('')
 
     # test empty-after-filtering text raises an exception
     wc = WordCloud(stopwords=['a', 'b'])
-    assert_raises(ValueError, wc.generate, 'a b a')
+    with pytest.raises(ValueError):
+        wc.generate('a b a')
 
 
 def test_default():
@@ -95,21 +93,21 @@ def test_default():
     wc.generate(THIS)
 
     # check for proper word extraction
-    assert_equal(len(wc.words_), wc.max_words)
+    assert len(wc.words_) == wc.max_words
 
     # check that we got enough words
-    assert_equal(len(wc.layout_), wc.max_words)
+    assert len(wc.layout_) == wc.max_words
 
     # check image export
     wc_image = wc.to_image()
-    assert_equal(wc_image.size, (wc.width, wc.height))
+    assert wc_image.size == (wc.width, wc.height)
 
     # check that numpy conversion works
     wc_array = np.array(wc)
     assert_array_equal(wc_array, wc.to_array())
 
     # check size
-    assert_equal(wc_array.shape, (wc.height, wc.width, 3))
+    assert wc_array.shape == (wc.height, wc.width, 3)
 
 
 def test_stopwords_lowercasing():
@@ -117,35 +115,36 @@ def test_stopwords_lowercasing():
     wc = WordCloud(stopwords=["Beautiful"])
     processed = wc.process_text(THIS)
     words = [count[0] for count in processed]
-    assert_true("Beautiful" not in words)
+    assert "Beautiful" not in words
 
 
-def test_writing_to_file():
+def test_writing_to_file(tmpdir):
     wc = WordCloud()
     wc.generate(THIS)
+
     # check writing to file
-    f = NamedTemporaryFile(suffix=".png")
-    filename = f.name
+    filename = str(tmpdir.join("word_cloud.png"))
     wc.to_file(filename)
     loaded_image = Image.open(filename)
-    assert_equal(loaded_image.size, (wc.width, wc.height))
+    assert loaded_image.size == (wc.width, wc.height)
 
 
 def test_check_errors():
     wc = WordCloud()
-    assert_raises(NotImplementedError, wc.to_html)
+    with pytest.raises(NotImplementedError):
+        wc.to_html()
 
     try:
         np.array(wc)
         raise AssertionError("np.array(wc) didn't raise")
     except ValueError as e:
-        assert_true("call generate" in str(e))
+        assert "call generate" in str(e)
 
     try:
         wc.recolor()
         raise AssertionError("wc.recolor didn't raise")
     except ValueError as e:
-        assert_true("call generate" in str(e))
+        assert "call generate" in str(e)
 
 
 def test_recolor():
@@ -158,7 +157,7 @@ def test_recolor():
     assert_array_equal(array_before.sum(axis=-1) != 0,
                        array_after.sum(axis=-1) != 0)
     # check that they are not the same
-    assert_greater(np.abs(array_before - array_after).sum(), 10000)
+    assert np.abs(array_before - array_after).sum() > 10000
 
     # check that recoloring is deterministic
     wc.recolor(random_state=10)
@@ -193,9 +192,40 @@ def test_mask():
     wc = WordCloud(mask=mask)
     wc.generate(THIS)
     wc_array = np.array(wc)
-    assert_equal(mask.shape, wc_array.shape[:2])
+    assert mask.shape == wc_array.shape[:2]
     assert_array_equal(wc_array[mask != 0], 0)
-    assert_greater(wc_array[mask == 0].sum(), 10000)
+    assert wc_array[mask == 0].sum() > 10000
+
+
+def test_mask_contour():
+    # test mask contour is created, learn more at:
+    # https://github.com/amueller/word_cloud/pull/348#issuecomment-370883873
+    mask = np.zeros((234, 456), dtype=np.int)
+    mask[100:150, 300:400] = 255
+
+    sm = WordCloud(mask=mask, contour_width=1, contour_color='blue')
+    sm.generate(THIS)
+    sm_array = np.array(sm)
+    sm_total = sm_array[100:150, 300:400].sum()
+
+    lg = WordCloud(mask=mask, contour_width=20, contour_color='blue')
+    lg.generate(THIS)
+    lg_array = np.array(lg)
+    lg_total = lg_array[100:150, 300:400].sum()
+
+    sc = WordCloud(mask=mask, contour_width=1, scale=2, contour_color='blue')
+    sc.generate(THIS)
+    sc_array = np.array(sc)
+    sc_total = sc_array[100:150, 300:400].sum()
+
+    # test `contour_width`
+    assert lg_total > sm_total
+
+    # test contour varies with `scale`
+    assert sc_total > sm_total
+
+    # test `contour_color`
+    assert all(sm_array[100, 300] == [0, 0, 255])
 
 
 def test_single_color_func():
@@ -203,19 +233,19 @@ def test_single_color_func():
     random = Random(42)
 
     red_function = get_single_color_func('red')
-    assert_equal(red_function(random_state=random), 'rgb(181, 0, 0)')
+    assert red_function(random_state=random) == 'rgb(181, 0, 0)'
 
     hex_function = get_single_color_func('#00b4d2')
-    assert_equal(hex_function(random_state=random), 'rgb(0, 48, 56)')
+    assert hex_function(random_state=random) == 'rgb(0, 48, 56)'
 
     rgb_function = get_single_color_func('rgb(0,255,0)')
-    assert_equal(rgb_function(random_state=random), 'rgb(0, 107, 0)')
+    assert rgb_function(random_state=random) == 'rgb(0, 107, 0)'
 
     rgb_perc_fun = get_single_color_func('rgb(80%,60%,40%)')
-    assert_equal(rgb_perc_fun(random_state=random), 'rgb(97, 72, 48)')
+    assert rgb_perc_fun(random_state=random) == 'rgb(97, 72, 48)'
 
     hsl_function = get_single_color_func('hsl(0,100%,50%)')
-    assert_equal(hsl_function(random_state=random), 'rgb(201, 0, 0)')
+    assert hsl_function(random_state=random) == 'rgb(201, 0, 0)'
 
 
 def test_single_color_func_grey():
@@ -223,8 +253,8 @@ def test_single_color_func_grey():
     random = Random(42)
 
     red_function = get_single_color_func('darkgrey')
-    assert_equal(red_function(random_state=random), 'rgb(181, 181, 181)')
-    assert_equal(red_function(random_state=random), 'rgb(56, 56, 56)')
+    assert red_function(random_state=random) == 'rgb(181, 181, 181)'
+    assert red_function(random_state=random) == 'rgb(56, 56, 56)'
 
 
 def test_process_text():
@@ -233,7 +263,7 @@ def test_process_text():
     result = wc.process_text(THIS)
 
     # check for proper return type
-    assert_true(isinstance(result, dict))
+    assert isinstance(result, dict)
 
 
 def test_process_text_regexp_parameter():
@@ -241,7 +271,7 @@ def test_process_text_regexp_parameter():
     wc = WordCloud(max_words=50, regexp=r'\w{5}')
     words = wc.process_text(THIS)
 
-    assert_false('than' in words)
+    assert 'than' not in words
 
 
 def test_generate_from_frequencies():
@@ -250,7 +280,7 @@ def test_generate_from_frequencies():
     words = wc.process_text(THIS)
     result = wc.generate_from_frequencies(words)
 
-    assert_true(isinstance(result, WordCloud))
+    assert isinstance(result, WordCloud)
 
 
 def test_relative_scaling_zero():
@@ -269,33 +299,69 @@ def test_unicode_stopwords():
     wc_str = WordCloud(stopwords=['Beautiful'])
     words_str = wc_str.process_text(str(THIS))
 
-    assert_true(words_unicode == words_str)
+    assert words_unicode == words_str
 
-    
+
 def test_recolor_too_small():
     # check exception is raised when image is too small
     colouring = np.array(Image.new('RGB', size=(20, 20)))
-    wc = WordCloud(width=30, height=30).generate(THIS)
+    wc = WordCloud(width=30, height=30, random_state=0, min_font_size=1).generate(THIS)
     image_colors = ImageColorGenerator(colouring)
-    assert_raises_regex(ValueError, 'ImageColorGenerator is smaller than the canvas',
-                        wc.recolor, color_func=image_colors)
+    with pytest.raises(ValueError, match='ImageColorGenerator is smaller than the canvas'):
+        wc.recolor(color_func=image_colors)
 
 
 def test_recolor_too_small_set_default():
     # check no exception is raised when default colour is used
     colouring = np.array(Image.new('RGB', size=(20, 20)))
-    wc = WordCloud(max_words=50, width=30, height=30).generate(THIS)
+    wc = WordCloud(max_words=50, width=30, height=30, min_font_size=1).generate(THIS)
     image_colors = ImageColorGenerator(colouring, default_color=(0, 0, 0))
     wc.recolor(color_func=image_colors)
-    
-    
+
+
 def test_small_canvas():
     # check font size fallback works on small canvas
     WordCloud(max_words=50, width=20, height=20).generate(THIS)
-    
-    
+
+
 def test_tiny_canvas():
     # check exception if canvas too small for fallback
     w = WordCloud(max_words=50, width=1, height=1)
-    assert_raises_regex(ValueError, 'canvas size is too small',
-                        w.generate, THIS)
+    with pytest.raises(ValueError, match="Couldn't find space to draw"):
+        w.generate(THIS)
+
+
+def test_coloring_black_works():
+    # check that using black colors works.
+    mask = np.zeros((50, 50, 3))
+    image_colors = ImageColorGenerator(mask)
+    wc = WordCloud(width=50, height=50, random_state=42,
+                   color_func=image_colors, min_font_size=1)
+    wc.generate(THIS)
+
+
+def test_repeat():
+    short_text = "Some short text"
+    wc = WordCloud(stopwords=[]).generate(short_text)
+    assert len(wc.layout_) == 3
+    wc = WordCloud(max_words=50, stopwords=[], repeat=True).generate(short_text)
+    # multiple of word count larger than max_words
+    assert len(wc.layout_) == 51
+    # relative scaling doesn't work well with repeat
+    assert wc.relative_scaling == 0
+    # all frequencies are 1
+    assert len(wc.words_) == 3
+    assert_array_equal(list(wc.words_.values()), 1)
+    frequencies = [w[0][1] for w in wc.layout_]
+    assert_array_equal(frequencies, 1)
+    repetition_text = "Some short text with text"
+    wc = WordCloud(max_words=52, stopwords=[], repeat=True)
+    wc.generate(repetition_text)
+    assert len(wc.words_) == 4
+    # normalized frequencies
+    assert wc.words_['text'] == 1
+    assert wc.words_['with'] == .5
+    assert len(wc.layout_), wc.max_words
+    frequencies = [w[0][1] for w in wc.layout_]
+    # check that frequencies are sorted
+    assert np.all(np.diff(frequencies) <= 0)
