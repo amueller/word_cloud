@@ -53,7 +53,7 @@ def jieba_processing_txt(text):
 
     with open(stopwords_path, encoding='utf-8') as f_stop:
         f_stop_text = f_stop.read()
-        f_stop_seg_list = f_stop_text.split('\n')
+        f_stop_seg_list = f_stop_text..splitlines()
 
     for myword in liststr.split('/'):
         if not (myword.strip() in f_stop_seg_list) and len(myword.strip()) > 1:
