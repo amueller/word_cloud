@@ -1,19 +1,74 @@
+branches:
+ only:
+  - master
+  - /^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$/
+
 language: python
-sudo: false
-addons:
-  apt:
-    packages:
-      # Only used by the DISTRIB="ubuntu" setting
-      - python-numpy
-virtualenv:
-  system_site_packages: true
-env:
-  matrix:
-    - DISTRIB="ubuntu" PYTHON_VERSION="2.7"
-    # This environment tests the oldest supported anaconda env
-    - DISTRIB="conda" PYTHON_VERSION="2.7" NUMPY_VERSION="1.11.1"
-    - DISTRIB="conda" PYTHON_VERSION="3.4" NUMPY_VERSION="1.11.1"
-    - DISTRIB="conda" PYTHON_VERSION="3.6" NUMPY_VERSION="1.13.1"
-install: source continuous_integration/install.sh
-cache: apt
-script: nosetests
+
+matrix:
+  include:
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.7.0
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.6.5
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.5.5
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=3.4.8
+
+    - os: osx
+      language: generic
+      env:
+        - PYTHON_VERSION=2.7.15
+
+cache:
+  directories:
+    - $HOME/.pyenv/versions/3.7.0
+    - $HOME/.pyenv/versions/3.6.5
+    - $HOME/.pyenv/versions/3.5.5
+    - $HOME/.pyenv/versions/3.4.8
+    - $HOME/.pyenv/versions/2.7.15
+    - $HOME/downloads
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; ln -s $(which python2) $HOME/bin/python; fi
+  - python -m pip install --disable-pip-version-check --upgrade pip
+  - pip install -U scikit-ci scikit-ci-addons
+  - ci_addons --install ../addons
+
+install:
+  - ci install
+
+script:
+  - ci test
+
+after_success:
+  - ci after_test
+
+deploy:
+  # deploy-release
+  - provider: script
+    script: pwd && ls dist;echo "deploy-release" && ~/.pyenv/versions/${PYTHON_VERSION}/bin/twine upload -u $PYPI_USER -p $PYPI_PASSWORD --skip-existing dist/*
+    skip_cleanup: true
+    on:
+      repo: ${TRAVIS_REPO_SLUG}
+      tags: true
+  # deploy-master
+  - provider: script
+    script: pwd && ls dist;echo "deploy-master" && echo "not implemented"
+    skip_cleanup: true
+    on:
+      repo: ${TRAVIS_REPO_SLUG}
+      branch: master

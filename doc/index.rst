@@ -1,50 +1,34 @@
-.. raw:: html
+WordCloud for Python documentation
+==================================
 
-    <div class="jumbotron">
-      <div class="container">
-        <h1>More word-clouds!</h1>
-        <p>Here you find instructions on how to create wordclouds with my Python wordcloud project. With the new and revamped interface, this is easier than ever.
-        Compared to other wordclouds, my algorithm has the advantage of
-        <ul>
-            <li>filling all available space.
-            <li>being able to use arbitraty masks.
-            <li>having a stupid simple algorithm (with an efficient implementation) that can be easily modified.
-            <li>being in Python ;)
-        </ul>
-        You can see some examples below.
-        </p>
-        <p><a href="https://github.com/amueller/word_cloud" class="btn btn-primary btn-lg" role="button">Github repository</a></p>
-      </div>
-    </div>
+Here you find instructions on how to create wordclouds with my Python wordcloud project. 
+Compared to other wordclouds, my algorithm has the advantage of
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-          <div class="col-xs-3 col-md-3">
-            <a href="auto_examples/masked.html" class="thumbnail">
-              <img src="_images/sphx_glr_masked_001.png" alt="...">
-            </a>
-          </div>
-          <div class="col-xs-3 col-md-3">
-            <a href="auto_examples/colored.html" class="thumbnail">
-              <img src="_images/sphx_glr_colored_002.png" alt="...">
-            </a>
-          </div>
-          <div class="col-xs-3 col-md-3">
-            <a href="auto_examples/a_new_hope.html" class="thumbnail">
-              <img src="_images/sphx_glr_a_new_hope_001.png" alt="...">
-            </a>
-          </div>
-          <div class="col-xs-3 col-md-3">
-            <a href="auto_examples/simple.html" class="thumbnail">
-              <img src="_images/sphx_glr_simple_001.png" alt="...">
-            </a>
-          </div>
-      </div>
-     </div>
+* filling all available space.
+* being able to use arbitraty masks.
+* having a stupid simple algorithm (with an efficient implementation) that can be easily modified.
+* being in Python
+
+Check out the :ref:`example_gallery`.
+
+The code of the project is on Github: `word_cloud <https://github.com/amueller/word_cloud>`_
+
+  .. figure:: images/a_new_hope.png
+     :width: 300px
+     :target: auto_examples/a_new_hope.html
+     :align: center
 
 .. toctree::
     :hidden:
-
+    :caption: User Documentation
+    
+    references
+    cli
     auto_examples/index
-    references.rst
+    changelog
+
+.. toctree::
+    :hidden:
+    :caption: Contributor Documentation
+
+    make_a_release

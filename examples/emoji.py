@@ -15,11 +15,13 @@ it from functioning correctly on OS X (https://github.com/python-pillow/Pillow/i
 on ubuntu if you are having problems.
 """
 import io
+import os
 import string
 from os import path
 from wordcloud import WordCloud
 
-d = path.dirname(__file__)
+# get data directory (using getcwd() is needed to support running example in generated IPython notebook)
+d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 # It is important to use io.open to correctly load the file as UTF-8
 text = io.open(path.join(d, 'happy-emoji.txt')).read()

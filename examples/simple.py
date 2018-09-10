@@ -6,10 +6,13 @@ Minimal Example
 Generating a square wordcloud from the US constitution using default arguments.
 """
 
+import os
+
 from os import path
 from wordcloud import WordCloud
 
-d = path.dirname(__file__)
+# get data directory (using getcwd() is needed to support running example in generated IPython notebook)
+d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 # Read the whole text.
 text = open(path.join(d, 'constitution.txt')).read()

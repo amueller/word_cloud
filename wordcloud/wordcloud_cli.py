@@ -1,12 +1,23 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-r"""Command-line tool to generate word clouds
-Usage::
-    $ cat word.txt | wordcloud_cli.py
-
-    $ wordcloud_cli.py --text=words.txt --stopwords=stopwords.txt
+"""Command-line tool interface to generate word clouds.
 """
+from __future__ import absolute_import
+
 import sys
+import textwrap
+
+if __name__ == '__main__':  # pragma: no cover
+    sys.exit(textwrap.dedent(
+        """
+        To execute the CLI, instead consider running:
+
+          wordcloud_cli --help
+
+        or
+
+          python -m wordcloud --help
+        """))
+
 import io
 import re
 import argparse
@@ -62,16 +73,15 @@ class FileType(object):
 
 
 class RegExpAction(argparse.Action):
-     def __init__(self, option_strings, dest, **kwargs):
-         for option in option_strings:
-             try:
-                 re.compile(option)
-             except re.error as e:
-                 raise argparse.ArgumentError('Invalid regular expression: ' + str(e))
-         super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
+    def __init__(self, option_strings, dest, **kwargs):
+        super(RegExpAction, self).__init__(option_strings, dest, **kwargs)
 
-     def __call__(self, parser, namespace, values, option_string=None):
-         setattr(namespace, self.dest, values)
+    def __call__(self, parser, namespace, values, option_string=None):
+        try:
+            re.compile(values)
+        except re.error as e:
+            raise argparse.ArgumentError(self, 'Invalid regular expression: ' + str(e))
+        setattr(namespace, self.dest, values)
 
 
 def main(args, text, imagefile):
@@ -80,12 +90,11 @@ def main(args, text, imagefile):
     image = wordcloud.to_image()
 
     with imagefile:
-        image.save(imagefile, format='png')
+        image.save(imagefile, format='png', optimize=True)
 
 
-def parse_args(arguments):
-    # prog = 'python wordcloud_cli.py'
-    description = ('A simple command line interface for wordcloud module.')
+def make_parser():
+    description = 'A simple command line interface for wordcloud module.'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
         '--text', metavar='file', type=FileType(), default='-',
@@ -112,6 +121,15 @@ def parse_args(arguments):
         '--colormask', metavar='file', type=argparse.FileType('rb'),
         help='color mask to use for image coloring')
     parser.add_argument(
+        '--contour_width', metavar='width', default=0, type=float,
+        dest='contour_width',
+        help='if greater than 0, draw mask contour (default: 0)')
+    parser.add_argument(
+        '--contour_color', metavar='color', default='black', type=str,
+        dest='contour_color',
+        help='use given color as mask contour color -'
+             ' accepts any value from PIL.ImageColor.getcolor')
+    parser.add_argument(
         '--relative_scaling', type=float, default=0,
         metavar='rs', help=' scaling of words by frequency (0 - 1)')
     parser.add_argument(
@@ -136,8 +154,15 @@ def parse_args(arguments):
         '--no_collocations', action='store_false', dest='collocations',
         help='do not add collocations (bigrams) to word cloud '
              '(default: add unigrams and bigrams)')
-    parser.add_argument('--version', action='version',
+    parser.add_argument(
+        '--version', action='version',
         version='%(prog)s {version}'.format(version=__version__))
+    return parser
+
+
+def parse_args(arguments):
+    # prog = 'python wordcloud_cli.py'
+    parser = make_parser()
     args = parser.parse_args(arguments)
 
     if args.colormask and args.color:
@@ -169,6 +194,3 @@ def parse_args(arguments):
     imagefile = args.pop('imagefile')
 
     return args, text, imagefile
-
-if __name__ == '__main__':
-    main(*parse_args(sys.argv[1:]))

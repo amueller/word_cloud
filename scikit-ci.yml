@@ -1,0 +1,77 @@
+schema_version: "0.5.0"
+
+#
+# $<RUN_ENV> wrapper
+#
+# Steps expecting to compile some code must be wrapped using $<RUN_ENV>, doing so
+# ensures the environment is properly set (e.g path to visual studio, ...)
+#
+
+before_install:
+
+  appveyor:
+    environment:
+      PATH: $<PYTHON_DIR>;$<PYTHON_DIR>\\Scripts;$<PATH>
+      RUN_ENV: .\\..\\addons\\appveyor\\run-with-visual-studio.cmd
+    commands:
+      - python ../addons/appveyor/patch_vs2008.py
+
+  circle:
+    environment:
+      PATH: /opt/python/$<MANYLINUX_PYTHON>/bin:$<PATH>
+
+  travis:
+    osx:
+      environment:
+        PATH: $<HOME>/.pyenv/versions/$<PYTHON_VERSION>/bin:$<PATH>
+        SETUP_BDIST_WHEEL_ARGS: --plat-name macosx-10.6-x86_64
+      commands:
+        - python ../addons/travis/install_pyenv.py
+
+install:
+  commands:
+    - python --version
+    - python -m pip install --disable-pip-version-check --upgrade pip
+    - $<RUN_ENV> pip install -U -r requirements.txt -r requirements-dev.txt
+
+before_build:
+  commands:
+    - flake8
+
+build:
+  commands:
+    - python --version
+    - python -c "import numpy; print('numpy %s' % numpy.__version__)"
+    # Source distribution
+    - python setup.py sdist
+    # Built distribution (wheel)
+    - $<RUN_ENV> python setup.py bdist_wheel $<SETUP_BDIST_WHEEL_ARGS>
+    # Install locally to support tests
+    - $<RUN_ENV> pip install -e .
+    # Cleanup
+    - python: |
+              import glob, os
+              if os.environ.get("UPLOAD_SDIST", "") == "":
+                  sdist=(glob.glob("dist/*.tar.gz") + glob.glob("dist/*.zip"))[0]
+                  print("Deleting [%s]" % sdist)
+                  os.remove(sdist)
+
+  circle:
+    commands:
+      - |
+        # Since there are no external shared libraries to bundle into the wheels
+        # this step will fixup the wheel switching from 'linux' to 'manylinux1' tag
+        for whl in dist/*$(python -c "import wheel.pep425tags as w; print(w.get_platform())").whl; do
+            auditwheel repair $whl -w ./dist/
+            rm $whl
+        done
+
+test:
+  commands:
+    - pytest
+    # TODO: Update setup.py to use "entry_points" and test execution of wordcloud_cli on all platforms
+
+#after_test:
+#  commands:
+#    - codecov -X gcov --required --file ./test/coverage.xml
+

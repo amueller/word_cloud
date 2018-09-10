@@ -14,7 +14,10 @@
 
 import sys
 import os
-import sphinx_bootstrap_theme
+
+from datetime import date
+
+import wordcloud
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -25,10 +28,16 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx_gallery.gen_gallery', 'sphinx.ext.autodoc',
-              'sphinx.ext.autosummary', 'sphinx.ext.doctest',
-              'sphinx.ext.viewcode',
-              'numpydoc']
+extensions = [
+    'sphinx_gallery.gen_gallery',
+    'sphinx_issues',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.doctest',
+    'sphinx.ext.viewcode',
+    'sphinxarg.ext',
+    'numpydoc'
+]
 
 autosummary_generate = True
 
@@ -52,23 +61,32 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'wordcloud'
-copyright = u'2017, Andreas Mueller'
+copyright = u'%s, Andreas Mueller' % date.today().year
+
+issues_github_path = 'amueller/word_cloud'
 
 sphinx_gallery_conf = {
+    'backreferences_dir': 'gen_modules/backreferences',
     # path to your examples scripts
     'examples_dirs': '../examples',
     # path where to save gallery generated examples
     'gallery_dirs': 'auto_examples',
-    'filename_pattern': '/\w+'}
+    'filename_pattern': r'/\w+',
+    'doc_module': ('wordcloud',),
+    'reference_url': {
+        # The module you locally document uses None
+        'wordcloud': None,
+    }
+}
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '1.3'
+version = wordcloud.__version__
 # The full version, including alpha/beta/rc tags.
-release = '1.3'
+release = wordcloud.__version__
 
 
 # List of patterns, relative to source directory, that match files and
@@ -87,11 +105,10 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'bootstrap'
-
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+# html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -112,7 +129,7 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -235,49 +252,4 @@ texinfo_documents = [
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.
 html_theme_options = {
-    # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "Wordcloud",
-
-    # Tab name for entire site. (Default: "Site")
-    # 'navbar_site_name': "Site",
-
-    # A list of tuples containting pages to link to.  The value should
-    # be in the form [(name, page), ..]
-    'navbar_links': [
-        ('Examples', 'auto_examples/index'),
-        ('References', 'references'),
-    ],
-
-    # Global TOC depth for "site" navbar tab. (Default: 1)
-    # Switching to -1 shows all levels.
-    'globaltoc_depth': 0,
-
-    # Include hidden TOCs in Site navbar?
-    #
-    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
-    # non-hidden ``toctree`` directives in the same page, or else the build
-    # will break.
-    #
-    # Values: "true" (default) or "false"
-    'globaltoc_includehidden': "true",
-
-    # HTML navbar class (Default: "navbar") to attach to <div> element.
-    # For black navbar, do "navbar navbar-inverse"
-    'navbar_class': "navbar",
-
-    # Fix navigation bar to top of page?
-    # Values: "true" (default) or "false"
-    'navbar_fixed_top': "true",
-
-    # Location of link to source.
-    # Options are "nav" (default), "footer" or anything else to exclude.
-    'source_link_position': "None",
-
-    # Bootswatch (http://bootswatch.com/) theme.
-    #
-    # Options are nothing with "" (default) or the name of a valid theme
-    # such as "amelia" or "cosmo".
-    #
-    # Note that this is served off CDN, so won't be available offline.
-    # 'bootswatch_theme': "united",
 }
