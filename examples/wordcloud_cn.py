@@ -8,9 +8,14 @@ Chinese wordcloud only wordcloud is not enough. The file
 shows how to use wordcloud with Chinese. First, you need a
 Chinese word segmentation library jieba or HanLp.You can
 use 'PIP install jieba' or 'PIP install pyhanlp' or to
-install it.As you can see,at the same time using wordcloud
-with jieba or HanLP very convenient.While jieba is lighter,
-hanlp requires more downloads, but is more powerfulHanLP's
+install it.But yhanlp provides a python interface for hanlp.
+Hanlp is currently the best-performing open source Chinese
+natural language processing class library, but because it is
+implemented in Java, so we must use the jpype to call Java
+classes.So we have to use "pip install jpype1" to install
+it.As you can see,at the same time using wordcloud with
+jieba or pyhanlp very convenient.While jieba is lighter,
+hanlp requires more downloads, but is more powerful HanLP's
 level of identity of named entity,word segmentation was
 better than jieba,and has more ways to do it.You'll save
 a lot of time when you use it.
