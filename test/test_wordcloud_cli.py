@@ -120,11 +120,13 @@ def test_unicode_text_file():
     args, text, image_file = cli.parse_args(['--text', unicode_file])
     assert len(text) == 16
 
+
 def test_unicode_with_stopwords():
     unicode_file = os.path.join(os.path.dirname(__file__), "unicode_text.txt")
     stopwords_file = os.path.join(os.path.dirname(__file__), "unicode_stopwords.txt")
     args, text, image_file = cli.parse_args(['--text', unicode_file, '--stopwords', stopwords_file])
     assert u'\u304D' in args['stopwords']
+
 
 def test_cli_writes_image(tmpdir, tmp_text_file):
     # ensure writing works with all python versions
