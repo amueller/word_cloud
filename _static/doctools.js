@@ -150,7 +150,9 @@ var Documentation = {
     this.fixFirefoxAnchorBug();
     this.highlightSearchWords();
     this.initIndexTable();
-    
+    if (DOCUMENTATION_OPTIONS.NAVIGATION_WITH_KEYS) {
+      this.initOnKeyListeners();
+    }
   },
 
   /**
