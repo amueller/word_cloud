@@ -235,7 +235,7 @@ def test_mask_contour_transparent():
     w = WordCloud(mode='RGBA', background_color=None, contour_color='blue', contour_width=2, mask=mask,
                   max_words=50, width=800, height=800)
     w.generate(THIS)
-    img = w.to_image()
+    w.to_image()
 
 
 def test_single_color_func():
