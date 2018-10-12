@@ -125,7 +125,7 @@ def make_parser():
         dest='contour_width',
         help='if greater than 0, draw mask contour (default: 0)')
     parser.add_argument(
-        '--contour_color', metavar='color', default='black', type=str,
+        '--contour_color', metavar='color', default=None, type=str,
         dest='contour_color',
         help='use given color as mask contour color -'
              ' accepts any value from PIL.ImageColor.getcolor')
