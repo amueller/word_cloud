@@ -226,8 +226,8 @@ def test_mask_contour():
 
     # test `contour_color`
     assert all(sm_array[100, 300] == [0, 0, 255])
-    
-    
+
+
 def test_mask_contour_transparent():
     # test if mask contour can be drawn on a transparent background
     # https://github.com/amueller/word_cloud/pull/389
@@ -237,7 +237,7 @@ def test_mask_contour_transparent():
                   max_words=50, width=800, height=800)
     w.generate(THIS)
     w.to_image()
-    
+
 
 def test_single_color_func():
     # test single color function for different color formats
