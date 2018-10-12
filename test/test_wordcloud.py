@@ -226,6 +226,16 @@ def test_mask_contour():
 
     # test `contour_color`
     assert all(sm_array[100, 300] == [0, 0, 255])
+    
+def test_mask_contour_transparent():
+    # test if mask contour can be drawn on a transparent background
+    # https://github.com/amueller/word_cloud/pull/389
+    mask = np.ones((600, 600, 3), dtype='ubyte')
+    mask[:, -10:] = 0
+    w = WordCloud(mode='RGBA', background_color=None, contour_color='blue', contour_width=2, mask=mask,
+                  max_words=50, width=800, height=800)
+    w.generate(THIS)
+    img = w.to_image()
 
 
 def test_single_color_func():
