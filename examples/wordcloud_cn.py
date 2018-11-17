@@ -102,7 +102,7 @@ def pyhanlp_processing_txt(text, isUseStopwordsOfHanLP=True):
 
 
 result_text = ''
-if isUseJieba == True:
+if isUseJieba:
     import jieba
 
     jieba.enable_parallel(4)
