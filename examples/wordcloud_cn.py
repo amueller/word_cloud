@@ -49,7 +49,7 @@ isUseJieba = True
 
 # use HanLP
 # You can use the stop word feature to improve performance, or disable it to increase speed
-isUseStopwordsByHanLP = True
+isUseStopwordsByHanLP = False
 
 
 # The function for processing text with Jieba
