@@ -112,6 +112,7 @@ if isUseJieba == True:
     result_text = jieba_processing_txt(text)
 else:
     from pyhanlp import *
+    from jpype import JClass, startJVM, getDefaultJVMPath, isThreadAttachedToJVM, attachThreadToJVM
 
     result_text = pyhanlp_processing_txt(text, isUseStopwordsOfHanLP=True)
 
