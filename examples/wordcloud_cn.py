@@ -73,7 +73,7 @@ def jieba_processing_txt(text):
 
 # The function for processing text with HaanLP
 def pyhanlp_processing_txt(text, isUseStopwordsOfHanLP=True):
-    CustomDictionary = JClass("com.hankcs.hanlp.dictionary.CustomDictionary")
+    CustomDictionary = SafeJClass("com.hankcs.hanlp.dictionary.CustomDictionary")
     for word in userdict_list:
         CustomDictionary.add(word)
 
@@ -82,8 +82,8 @@ def pyhanlp_processing_txt(text, isUseStopwordsOfHanLP=True):
     CRFnewSegment = HanLP.newSegment("viterbi")
 
     fianlText = []
-    if isUseStopwordsByHanLP == True:
-        CoreStopWordDictionary = JClass("com.hankcs.hanlp.dictionary.stopword.CoreStopWordDictionary")
+    if isUseStopwordsByHanLP:
+        CoreStopWordDictionary = SafeJClass("com.hankcs.hanlp.dictionary.stopword.CoreStopWordDictionary")
         text_list = CRFnewSegment.seg(text)
         CoreStopWordDictionary.apply(text_list)
         fianlText = [i.word for i in text_list]
@@ -102,6 +102,8 @@ def pyhanlp_processing_txt(text, isUseStopwordsOfHanLP=True):
 
 
 result_text = ''
+
+
 if isUseJieba:
     import jieba
 
@@ -111,9 +113,7 @@ if isUseJieba:
     # add userdict by load_userdict()
     result_text = jieba_processing_txt(text)
 else:
-    from pyhanlp import *
-    from jpype import JClass, startJVM, getDefaultJVMPath, isThreadAttachedToJVM, attachThreadToJVM
-
+    from pyhanlp import SafeJClass, HanLP
     result_text = pyhanlp_processing_txt(text, isUseStopwordsOfHanLP=True)
 
 wc = WordCloud(font_path=font_path, background_color="white", max_words=2000, mask=back_coloring,
