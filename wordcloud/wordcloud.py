@@ -262,10 +262,10 @@ class WordCloud(object):
     repeat : bool, default=False
         Whether to repeat words and phrases until max_words or min_font_size
         is reached.
-        
+
     incldue_numbers : bool, default=False
         Whether to include numbers as phrases or not.
-        
+
     min_word_length : int, default=0
         Minimum number of letters a word must have to be included.
 
@@ -571,7 +571,7 @@ class WordCloud(object):
         # remove short words
         if self.min_word_length:
             words = [word for word in words if len(word) >= self.min_word_length]
-            
+
         if self.collocations:
             word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
         else:

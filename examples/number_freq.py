@@ -4,7 +4,6 @@ Using number frequency parameter
 
 """
 
-import numpy as np
 from os import path, getcwd
 
 from wordcloud import WordCloud
@@ -16,14 +15,10 @@ d = path.dirname(__file__) if "__file__" in locals() else getcwd()
 text = open(path.join(d, 'numbers.txt'), encoding='utf-8')
 text = text.read()
 
-# create cloud
-wc = WordCloud(background_color="white", max_words=1000, include_numbers=True)
-# generate word cloud
-wordcloud = wc.generate(text)
+# create & generate cloud
+wc = WordCloud(background_color="white", max_words=1000, include_numbers=True).generate(text)
+wc.to_file(path.join(d, 'number_freq'))
 
-fig, ax = plt.subplots(1,1)
-ax.imshow(wordcloud)
-ax.axis("off")
-fig.show()
-fig.tight_layout()
-fig.savefig(path.join(d, 'number_freq'))
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
