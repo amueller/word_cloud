@@ -265,6 +265,9 @@ class WordCloud(object):
         
     incldue_numbers : bool, default=False
         Whether to include numbers as phrases or not.
+        
+    min_word_length : int, default=0
+        Minimum number of letters a word must have to be included.
 
     Attributes
     ----------
@@ -296,7 +299,7 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False):
+                 include_numbers=False, min_word_length=0):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -348,6 +351,7 @@ class WordCloud(object):
         self.normalize_plurals = normalize_plurals
         self.repeat = repeat
         self.include_numbers = include_numbers
+        self.min_word_length = min_word_length
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -564,7 +568,10 @@ class WordCloud(object):
         # remove numbers
         if not self.include_numbers:
             words = [word for word in words if not word.isdigit()]
-
+        # remove short words
+        if self.min_word_length:
+            words = [word for word in words if len(word) >= self.min_word_length]
+            
         if self.collocations:
             word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
         else:
