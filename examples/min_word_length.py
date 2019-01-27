@@ -19,7 +19,7 @@ text = open(path.join(d, 'a_new_hope.txt')).read()
 
 wc = WordCloud(max_words=1000, margin=10,
                random_state=1, min_word_length=5).generate(text)
-#wc.to_file("min_word_length_a_new_hope.png")
+
 plt.imshow(wc)
 plt.axis("off")
 plt.show()
