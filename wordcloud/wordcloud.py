@@ -262,6 +262,9 @@ class WordCloud(object):
     repeat : bool, default=False
         Whether to repeat words and phrases until max_words or min_font_size
         is reached.
+        
+    incldue_numbers : bool, default=False
+        Whether to include numbers as phrases or not.
 
     Attributes
     ----------
@@ -292,7 +295,8 @@ class WordCloud(object):
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color='black', repeat=False):
+                 contour_color='black', repeat=False,
+                 include_numbers=False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -343,6 +347,7 @@ class WordCloud(object):
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
         self.repeat = repeat
+        self.include_numbers = include_numbers
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -557,7 +562,8 @@ class WordCloud(object):
         words = [word[:-2] if word.lower().endswith("'s") else word
                  for word in words]
         # remove numbers
-        words = [word for word in words if not word.isdigit()]
+        if not self.include_numbers:
+            words = [word for word in words if not word.isdigit()]
 
         if self.collocations:
             word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
