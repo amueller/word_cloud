@@ -17,7 +17,7 @@ text = text.read()
 
 # create & generate cloud
 wc = WordCloud(background_color="white", max_words=1000, include_numbers=True).generate(text)
-wc.to_file(path.join(d, 'number_freq'))
+#wc.to_file(path.join(d, 'number_freq'))
 
 plt.imshow(wc)
 plt.axis("off")
