@@ -39,11 +39,11 @@ regexp = r"{normal_word}|{ascii_art}|{emoji}".format(normal_word=normal_word, as
 # Generate a word cloud image
 # The Symbola font includes most emoji
 font_path = path.join(d, 'fonts', 'Symbola', 'Symbola.ttf')
-wordcloud = WordCloud(font_path=font_path, regexp=regexp).generate(text)
+wc = WordCloud(font_path=font_path, regexp=regexp).generate(text)
 
 # Display the generated image:
 # the matplotlib way:
 import matplotlib.pyplot as plt
-plt.imshow(wordcloud)
+plt.imshow(wc)
 plt.axis("off")
 plt.show()

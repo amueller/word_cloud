@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Emoji Example &mdash; wordcloud 1.5.0.post10+gb79b3d6 documentation</title>
+  <title>Emoji Example &mdash; wordcloud 1.5.0.post12+gd674088 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.5.0.post10+gb79b3d6
+                1.5.0.post12+gd674088
               </div>
             
           
@@ -212,17 +212,17 @@ on ubuntu if you are having problems.</p>
 <span class="c1"># Generate a word cloud image</span>
 <span class="c1"># The Symbola font includes most emoji</span>
 <span class="n">font_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;fonts&#39;</span><span class="p">,</span> <span class="s1">&#39;Symbola&#39;</span><span class="p">,</span> <span class="s1">&#39;Symbola.ttf&#39;</span><span class="p">)</span>
-<span class="n">wordcloud</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="n">font_path</span><span class="p">,</span> <span class="n">regexp</span><span class="o">=</span><span class="n">regexp</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">wc</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="n">font_path</span><span class="p">,</span> <span class="n">regexp</span><span class="o">=</span><span class="n">regexp</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
 <span class="c1"># Display the generated image:</span>
 <span class="c1"># the matplotlib way:</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.336 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.370 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-emoji-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/e6f098adebccc5619b49554f3bd78ef3/emoji.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">emoji.py</span></code></a></div>
@@ -252,7 +252,7 @@ on ubuntu if you are having problems.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Andreas Mueller
+        &copy; Copyright 2019, Andreas Mueller
 
     </p>
   </div>
@@ -277,7 +277,7 @@ on ubuntu if you are having problems.</p>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
 
   
