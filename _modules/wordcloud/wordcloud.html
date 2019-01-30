@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.5.0.post12+gd674088 documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.5.0.post14+g4f6a3f3 documentation</title>
   
 
   
@@ -57,7 +57,7 @@
             
             
               <div class="version">
-                1.5.0.post12+gd674088
+                1.5.0.post14+g4f6a3f3
               </div>
             
           
@@ -169,6 +169,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">colorsys</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
 
@@ -452,8 +453,6 @@
         <span class="k">if</span> <span class="n">font_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">font_path</span> <span class="o">=</span> <span class="n">FONT_PATH</span>
         <span class="k">if</span> <span class="n">color_func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># we need a color map</span>
-            <span class="kn">import</span> <span class="nn">matplotlib</span>
             <span class="n">version</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span>
             <span class="k">if</span> <span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s2">&quot;2&quot;</span> <span class="ow">and</span> <span class="n">version</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span>
                 <span class="n">colormap</span> <span class="o">=</span> <span class="s2">&quot;hsv&quot;</span>
