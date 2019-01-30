@@ -13,6 +13,7 @@ import os
 import re
 import sys
 import colorsys
+import matplotlib
 import numpy as np
 from operator import itemgetter
 
@@ -296,8 +297,6 @@ class WordCloud(object):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
-            # we need a color map
-            import matplotlib
             version = matplotlib.__version__
             if version[0] < "2" and version[2] < "5":
                 colormap = "hsv"
