@@ -155,6 +155,20 @@ def make_parser():
         help='do not add collocations (bigrams) to word cloud '
              '(default: add unigrams and bigrams)')
     parser.add_argument(
+        '--include_numbers', 
+        type=bool,
+        default=False,
+        metavar='include_numbers',
+        dest='include_numbers',
+        help='include numbers in wordcloud?')
+    parser.add_argument(
+        '--min_word_length', 
+        type=int, 
+        default=0, 
+        metavar='min_word_length',
+        dest='min_word_length',
+        help='only include words with more than X letters')
+    parser.add_argument(
         '--version', action='version',
         version='%(prog)s {version}'.format(version=__version__))
     return parser

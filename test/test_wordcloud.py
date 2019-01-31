@@ -310,7 +310,7 @@ def test_unicode_stopwords():
 
 
 def test_include_numbers():
-    wc_numbers = WordCloud(inclue_numbers=True)
+    wc_numbers = WordCloud(include_numbers=True)
     wc = wc_numbers.process_text(THIS)
 
     assert '3' in wc.keys()
