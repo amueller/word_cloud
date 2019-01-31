@@ -1,12 +1,7 @@
-doc/_build
-doc/auto_examples
-doc/gen_modules
-doc/generated
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 
-### PyCharm ###
-.idea/
-
-# Created by https://www.gitignore.io/api/python
+# Created by https://www.gitignore.io/api/python,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=python,visualstudiocode
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -31,6 +26,7 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -49,6 +45,7 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
@@ -83,6 +80,10 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# IPython
+profile_default/
+ipython_config.py
+
 # pyenv
 .python-version
 
@@ -113,12 +114,27 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
 
 ### Python Patch ###
 .venv/
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# End of https://www.gitignore.io/api/python
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
 
+# End of https://www.gitignore.io/api/python,visualstudiocode
 
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
