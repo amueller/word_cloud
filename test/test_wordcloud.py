@@ -316,6 +316,14 @@ def test_include_numbers():
     assert '3' in wc.keys()
 
 
+def test_min_word_length():
+    wc_numbers = WordCloud(min_word_length=5)
+    wc = wc_numbers.process_text(THIS)
+    word_lengths = [len(word) for word in wc.keys()]
+
+    assert min(word_lengths) == 5
+
+
 def test_recolor_too_small():
     # check exception is raised when image is too small
     colouring = np.array(Image.new('RGB', size=(20, 20)))
