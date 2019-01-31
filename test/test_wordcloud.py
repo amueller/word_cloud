@@ -32,12 +32,12 @@ If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 
-3 . 1 4 1 5 9   2 6 5 3 5   8 9 7 9 3   2 3 8 4 6   2 6 4 3 3
-    8 3 2 7 9   5 0 2 8 8   4 1 9 7 1   6 9 3 9 9   3 7 5 1 0
-    5 8 2 0 9   7 4 9 4 4   5 9 2 3 0   7 8 1 6 4   0 6 2 8 6
-    2 0 8 9 9   8 6 2 8 0   3 4 8 2 5   3 4 2 1 1   7 0 6 7 9
-    8 2 1 4 8   0 8 6 5 1   3 2 8 2 3   0 6 6 4 7   0 9 3 8 4
-    4 6 0 9 5   5 0 5 8 2   2 3 1 7 2   5 3 5 9 4   0 8 1 2 8
+3 . 14 15 92 65 35   89 79 32 38 46   26 433
+    83 27 95 02 88   41 97 16 93 99   37 510
+    58 20 97 49 44   59 23 07 81 64   06 286
+    20 89 98 62 80   34 82 53 42 11   70 679
+    82 14 80 86 51   32 82 30 66 47   09 384
+    46 09 55 05 82   23 17 25 35 94   08 128
 """
 
 
@@ -313,7 +313,7 @@ def test_include_numbers():
     wc_numbers = WordCloud(include_numbers=True)
     wc = wc_numbers.process_text(THIS)
 
-    assert '3' in wc.keys()
+    assert '14' in wc.keys()
 
 
 def test_min_word_length():
