@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command Line Interface &mdash; wordcloud 1.5.0.post14+g4f6a3f3 documentation</title>
+  <title>Command Line Interface &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
   
 
   
@@ -17,13 +17,20 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
@@ -31,21 +38,16 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Gallery of Examples" href="auto_examples/index.html" />
     <link rel="prev" title="wordcloud.random_color_func" href="generated/wordcloud.random_color_func.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -59,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post14+g4f6a3f3
+                1.5.0.post34+g64ff55e
               </div>
             
           
@@ -169,7 +171,8 @@
                      <span class="p">[</span><span class="o">--</span><span class="n">contour_color</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">relative_scaling</span> <span class="n">rs</span><span class="p">]</span>
                      <span class="p">[</span><span class="o">--</span><span class="n">margin</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">width</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">height</span> <span class="n">height</span><span class="p">]</span>
                      <span class="p">[</span><span class="o">--</span><span class="n">color</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">background</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no_collocations</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">include_numbers</span> <span class="n">include_numbers</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">min_word_length</span> <span class="n">min_word_length</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="Named Arguments">
@@ -251,6 +254,18 @@
 <tr><td>&#160;</td><td><p class="first">do not add collocations (bigrams) to word cloud (default: add unigrams and bigrams)</p>
 <p class="last">Default: True</p>
 </td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--include_numbers</kbd></td>
+</tr>
+<tr><td>&#160;</td><td><p class="first">include numbers in wordcloud?</p>
+<p class="last">Default: False</p>
+</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd>--min_word_length</kbd></td>
+</tr>
+<tr><td>&#160;</td><td><p class="first">only include words with more than X letters</p>
+<p class="last">Default: 0</p>
+</td></tr>
 <tr><td class="option-group">
 <kbd>--version</kbd></td>
 <td>show program’s version number and exit</td></tr>
@@ -270,7 +285,7 @@
         <a href="auto_examples/index.html" class="btn btn-neutral float-right" title="Gallery of Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/wordcloud.random_color_func.html" class="btn btn-neutral" title="wordcloud.random_color_func" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/wordcloud.random_color_func.html" class="btn btn-neutral float-left" title="wordcloud.random_color_func" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -296,26 +311,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

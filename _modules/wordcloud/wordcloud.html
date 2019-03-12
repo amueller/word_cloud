@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.5.0.post14+g4f6a3f3 documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
   
 
   
@@ -17,33 +17,35 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +59,7 @@
             
             
               <div class="version">
-                1.5.0.post14+g4f6a3f3
+                1.5.0.post34+g64ff55e
               </div>
             
           
@@ -420,6 +422,12 @@
 <span class="sd">        Whether to repeat words and phrases until max_words or min_font_size</span>
 <span class="sd">        is reached.</span>
 
+<span class="sd">    incldue_numbers : bool, default=False</span>
+<span class="sd">        Whether to include numbers as phrases or not.</span>
+
+<span class="sd">    min_word_length : int, default=0</span>
+<span class="sd">        Minimum number of letters a word must have to be included.</span>
+
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    ``words_`` : dict of string to float</span>
@@ -449,7 +457,8 @@
                  <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">font_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span>
                  <span class="n">relative_scaling</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">regexp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">collocations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize_plurals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">contour_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                 <span class="n">contour_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                 <span class="n">contour_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">include_numbers</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">min_word_length</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">font_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">font_path</span> <span class="o">=</span> <span class="n">FONT_PATH</span>
         <span class="k">if</span> <span class="n">color_func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -497,7 +506,9 @@
                           <span class="s2">&quot; it had no effect. Look into relative_scaling.&quot;</span><span class="p">,</span>
                           <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">normalize_plurals</span> <span class="o">=</span> <span class="n">normalize_plurals</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="n">repeat</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span> <span class="o">=</span> <span class="n">repeat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">include_numbers</span> <span class="o">=</span> <span class="n">include_numbers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_word_length</span> <span class="o">=</span> <span class="n">min_word_length</span></div>
 
 <div class="viewcode-block" id="WordCloud.fit_words"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.fit_words">[docs]</a>    <span class="k">def</span> <span class="nf">fit_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a word_cloud from words and frequencies.</span>
@@ -712,7 +723,11 @@
         <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;&#39;s&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">word</span>
                  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
         <span class="c1"># remove numbers</span>
-        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_numbers</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">word</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()]</span>
+        <span class="c1"># remove short words</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_word_length</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_word_length</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collocations</span><span class="p">:</span>
             <span class="n">word_counts</span> <span class="o">=</span> <span class="n">unigrams_and_bigrams</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_plurals</span><span class="p">)</span>
@@ -942,26 +957,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

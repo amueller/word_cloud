@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.WordCloud &mdash; wordcloud 1.5.0.post14+g4f6a3f3 documentation</title>
+  <title>wordcloud.WordCloud &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
   
 
   
@@ -17,13 +17,20 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
@@ -31,21 +38,16 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="wordcloud.ImageColorGenerator" href="wordcloud.ImageColorGenerator.html" />
     <link rel="prev" title="API Reference" href="../references.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -59,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post14+g4f6a3f3
+                1.5.0.post34+g64ff55e
               </div>
             
           
@@ -168,7 +170,7 @@
 <h1>wordcloud.WordCloud<a class="headerlink" href="#wordcloud-wordcloud" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="wordcloud.WordCloud">
-<em class="property">class </em><code class="descclassname">wordcloud.</code><code class="descname">WordCloud</code><span class="sig-paren">(</span><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=2</em>, <em>ranks_only=None</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=None</em>, <em>max_words=200</em>, <em>min_font_size=4</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em>, <em>font_step=1</em>, <em>mode='RGB'</em>, <em>relative_scaling='auto'</em>, <em>regexp=None</em>, <em>collocations=True</em>, <em>colormap=None</em>, <em>normalize_plurals=True</em>, <em>contour_width=0</em>, <em>contour_color='black'</em>, <em>repeat=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">wordcloud.</code><code class="descname">WordCloud</code><span class="sig-paren">(</span><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=2</em>, <em>ranks_only=None</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=None</em>, <em>max_words=200</em>, <em>min_font_size=4</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em>, <em>font_step=1</em>, <em>mode='RGB'</em>, <em>relative_scaling='auto'</em>, <em>regexp=None</em>, <em>collocations=True</em>, <em>colormap=None</em>, <em>normalize_plurals=True</em>, <em>contour_width=0</em>, <em>contour_color='black'</em>, <em>repeat=False</em>, <em>include_numbers=False</em>, <em>min_word_length=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
 <dd><p>Word cloud object for generating and drawing.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -279,6 +281,12 @@ generate_from_frequencies.</p>
 <dd><p class="first last">Whether to repeat words and phrases until max_words or min_font_size
 is reached.</p>
 </dd>
+<dt><strong>incldue_numbers</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default=False</span></dt>
+<dd><p class="first last">Whether to include numbers as phrases or not.</p>
+</dd>
+<dt><strong>min_word_length</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default=0</span></dt>
+<dd><p class="first last">Minimum number of letters a word must have to be included.</p>
+</dd>
 </dl>
 </td>
 </tr>
@@ -356,7 +364,7 @@ size, position, orientation and color.</p>
 </table>
 <dl class="method">
 <dt id="wordcloud.WordCloud.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=2</em>, <em>ranks_only=None</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=None</em>, <em>max_words=200</em>, <em>min_font_size=4</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em>, <em>font_step=1</em>, <em>mode='RGB'</em>, <em>relative_scaling='auto'</em>, <em>regexp=None</em>, <em>collocations=True</em>, <em>colormap=None</em>, <em>normalize_plurals=True</em>, <em>contour_width=0</em>, <em>contour_color='black'</em>, <em>repeat=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>font_path=None</em>, <em>width=400</em>, <em>height=200</em>, <em>margin=2</em>, <em>ranks_only=None</em>, <em>prefer_horizontal=0.9</em>, <em>mask=None</em>, <em>scale=1</em>, <em>color_func=None</em>, <em>max_words=200</em>, <em>min_font_size=4</em>, <em>stopwords=None</em>, <em>random_state=None</em>, <em>background_color='black'</em>, <em>max_font_size=None</em>, <em>font_step=1</em>, <em>mode='RGB'</em>, <em>relative_scaling='auto'</em>, <em>regexp=None</em>, <em>collocations=True</em>, <em>colormap=None</em>, <em>normalize_plurals=True</em>, <em>contour_width=0</em>, <em>contour_color='black'</em>, <em>repeat=False</em>, <em>include_numbers=False</em>, <em>min_word_length=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -591,7 +599,7 @@ is specified. If None, self.color_func (or self.color_map) is used.</p>
         <a href="wordcloud.ImageColorGenerator.html" class="btn btn-neutral float-right" title="wordcloud.ImageColorGenerator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../references.html" class="btn btn-neutral" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../references.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -617,26 +625,16 @@ is specified. If None, self.color_func (or self.color_map) is used.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
