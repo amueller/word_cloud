@@ -31,6 +31,13 @@ Although never is often better than *right* now.
 If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
+
+3 . 14 15 92 65 35   89 79 32 38 46   26 433
+    83 27 95 02 88   41 97 16 93 99   37 510
+    58 20 97 49 44   59 23 07 81 64   06 286
+    20 89 98 62 80   34 82 53 42 11   70 679
+    82 14 80 86 51   32 82 30 66 47   09 384
+    46 09 55 05 82   23 17 25 35 94   08 128
 """
 
 
@@ -300,6 +307,21 @@ def test_unicode_stopwords():
     words_str = wc_str.process_text(str(THIS))
 
     assert words_unicode == words_str
+
+
+def test_include_numbers():
+    wc_numbers = WordCloud(include_numbers=True)
+    wc = wc_numbers.process_text(THIS)
+
+    assert '14' in wc.keys()
+
+
+def test_min_word_length():
+    wc_numbers = WordCloud(min_word_length=5)
+    wc = wc_numbers.process_text(THIS)
+    word_lengths = [len(word) for word in wc.keys()]
+
+    assert min(word_lengths) == 5
 
 
 def test_recolor_too_small():
