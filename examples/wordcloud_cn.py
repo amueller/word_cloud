@@ -3,7 +3,7 @@
 create wordcloud with chinese
 =============================
 
-Wordcloud is a very good tools, but if you want to create
+Wordcloud is a very good tool, but if you want to create
 Chinese wordcloud only wordcloud is not enough. The file
 shows how to use wordcloud with Chinese. First, you need a
 Chinese word segmentation library jieba, jieba is now the
