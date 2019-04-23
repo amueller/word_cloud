@@ -264,7 +264,7 @@ class WordCloud(object):
         Whether to repeat words and phrases until max_words or min_font_size
         is reached.
 
-    incldue_numbers : bool, default=False
+    include_numbers : bool, default=False
         Whether to include numbers as phrases or not.
 
     min_word_length : int, default=0
