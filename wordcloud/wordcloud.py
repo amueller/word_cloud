@@ -466,6 +466,8 @@ class WordCloud(object):
 
         # start drawing grey image
         for word, freq in frequencies:
+            if freq == 0:
+                continue
             # select the font size
             rs = self.relative_scaling
             if rs != 0:
