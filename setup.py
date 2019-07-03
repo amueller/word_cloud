@@ -12,7 +12,7 @@ setup(
     name='wordcloud',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    url='https://github.com/amueller/word_cloud',
+    url='https://github.com/kalpit181/word_cloud/tree/patch-1',
     description='A little word cloud generator',
     long_description=readme,
     long_description_content_type='text/markdown; charset=UTF-8',
