@@ -642,6 +642,7 @@ class WordCloud(object):
                                     int(height * self.scale)),
                         self.background_color)
         draw = ImageDraw.Draw(img)
+
         for (word, count), font_size, position, orientation, bounding_box, color in self.layout_:
             scaled_font_size = int(font_size * self.scale)
             font = ImageFont.truetype(self.font_path,
@@ -650,13 +651,11 @@ class WordCloud(object):
                 font, orientation=orientation)
             pos = (int(position[1] * self.scale),
                    int(position[0] * self.scale))
-
-            scaled_bounding_box = [(int(bounding_box[0][0] * self.scale), int(bounding_box[0][1] * self.scale)), 
-                ((int(bounding_box[0][0] * self.scale) + (int(bounding_box[1][0] * self.scale) - int(bounding_box[0][0] * self.scale))), 
-                (int(bounding_box[0][1] * self.scale) + (int(bounding_box[1][1] * self.scale) - int(bounding_box[0][1] * self.scale))))]
+            
+            area = tuple(np.subtract(bounding_box[1], bounding_box[0]))
+            scaled_bounding_box = [pos, tuple(np.add(pos, np.multiply(area, self.scale)))]
             
             if self.scale_method == "bounding_box":
-                
                 scaled_box_size = tuple(np.subtract(scaled_bounding_box[1], scaled_bounding_box[0]))
                 
                 rescaled_font_size = scaled_font_size
