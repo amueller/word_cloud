@@ -187,10 +187,10 @@ class WordCloud(object):
         using scale instead of larger canvas size is significantly faster, but
         might lead to a coarser fit for the words.
 
-    scale_method: string (default="quick")
-        The method used to implement scaling an image. 
-        Use "bounding_box" to rescale within bounding box
+    bounding_box_scale: bool (default=False)
+        Whether to scale using bounding boxes 
         
+        .. versionchanged: 2.x
 
     min_font_size : int (default=4)
         Smallest font size to use. Will stop when there is no more room in this
@@ -275,8 +275,10 @@ class WordCloud(object):
     min_word_length : int, default=0
         Minimum number of letters a word must have to be included.
 
-    bounding_box : bool, default=False
+    show_bounding_boxes : bool, default=False
         Whether to display bounding boxes around words
+
+        .. versionadded: 2.x
 
     Attributes
     ----------
@@ -308,7 +310,7 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False, min_word_length=0, scale_method = "quick", bounding_box = False):
+                 include_numbers=False, min_word_length=0, bounding_box_scale = False, show_bounding_boxes = False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -328,8 +330,8 @@ class WordCloud(object):
         self.contour_color = contour_color
         self.contour_width = contour_width
         self.scale = scale
-        self.scale_method = scale_method
-        self.bounding_box = bounding_box
+        self.bounding_box_scale = bounding_box_scale
+        self.show_bounding_boxes = show_bounding_boxes
         self.color_func = color_func or colormap_color_func(colormap)
         self.max_words = max_words
         self.stopwords = stopwords if stopwords is not None else STOPWORDS
@@ -663,7 +665,7 @@ class WordCloud(object):
             area = tuple(np.subtract(bounding_box[1], bounding_box[0]))
             scaled_bounding_box = [pos, tuple(np.add(pos, np.multiply(area, self.scale)))]
             
-            if self.scale_method == "bounding_box":
+            if self.bounding_box_scale:
                 scaled_box_size = tuple(np.subtract(scaled_bounding_box[1], scaled_bounding_box[0]))
                 
                 rescaled_font_size = scaled_font_size
@@ -684,7 +686,7 @@ class WordCloud(object):
             else:
                 draw.text(pos, word, fill=color, font=transposed_font)
 
-            if(self.bounding_box):
+            if(self.show_bounding_boxes):
                 draw.rectangle(scaled_bounding_box, outline=color)
         return self._draw_contour(img=img)
 
