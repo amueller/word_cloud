@@ -278,7 +278,7 @@ class WordCloud(object):
         .. versionchanged: 2.0
             ``words_`` is now a dictionary
 
-    ``layout_`` : list of tuples (string, int, (int, int), int, color))
+    ``layout_`` : list of tuples (string, int, (int, int), int, [(int, int), (int, int)] color))
         Encodes the fitted word cloud. Encodes for each word the string, font
         size, position, orientation and color.
 
@@ -300,7 +300,7 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False, min_word_length=0):
+                 include_numbers=False, min_word_length=0, scale_method = "quick", bounding_box = False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -320,6 +320,8 @@ class WordCloud(object):
         self.contour_color = contour_color
         self.contour_width = contour_width
         self.scale = scale
+        self.scale_method = scale_method
+        self.bounding_box = bounding_box
         self.color_func = color_func or colormap_color_func(colormap)
         self.max_words = max_words
         self.stopwords = stopwords if stopwords is not None else STOPWORDS
@@ -415,7 +417,7 @@ class WordCloud(object):
         img_grey = Image.new("L", (width, height))
         draw = ImageDraw.Draw(img_grey)
         img_array = np.asarray(img_grey)
-        font_sizes, positions, orientations, colors = [], [], [], []
+        font_sizes, positions, orientations, colors, bounding_boxes = [], [], [], [], []
 
         last_freq = 1.
 
@@ -478,6 +480,8 @@ class WordCloud(object):
             else:
                 orientation = Image.ROTATE_90
             tried_other_orientation = False
+
+            final_box_size = [0, 0]
             while True:
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
@@ -486,6 +490,7 @@ class WordCloud(object):
                     font, orientation=orientation)
                 # get size of resulting text
                 box_size = draw.textsize(word, font=transposed_font)
+                final_box_size = box_size
                 # find possible places using integral image:
                 result = occupancy.sample_position(box_size[1] + self.margin,
                                                    box_size[0] + self.margin,
@@ -513,6 +518,7 @@ class WordCloud(object):
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
+            bounding_boxes.append([(y,x), (y+final_box_size[0], x+final_box_size[1])])
             colors.append(self.color_func(word, font_size=font_size,
                                           position=(x, y),
                                           orientation=orientation,
@@ -529,7 +535,7 @@ class WordCloud(object):
             last_freq = freq
 
         self.layout_ = list(zip(frequencies, font_sizes, positions,
-                                orientations, colors))
+                                orientations, bounding_boxes, colors))
         return self
 
     def process_text(self, text):
@@ -636,15 +642,42 @@ class WordCloud(object):
                                     int(height * self.scale)),
                         self.background_color)
         draw = ImageDraw.Draw(img)
-        for (word, count), font_size, position, orientation, color in self.layout_:
+
+        for (word, count), font_size, position, orientation, bounding_box, color in self.layout_:
+            scaled_font_size = int(font_size * self.scale)
             font = ImageFont.truetype(self.font_path,
-                                      int(font_size * self.scale))
+                                      scaled_font_size)
             transposed_font = ImageFont.TransposedFont(
                 font, orientation=orientation)
             pos = (int(position[1] * self.scale),
                    int(position[0] * self.scale))
-            draw.text(pos, word, fill=color, font=transposed_font)
+            
+            area = tuple(np.subtract(bounding_box[1], bounding_box[0]))
+            scaled_bounding_box = [pos, tuple(np.add(pos, np.multiply(area, self.scale)))]
+            
+            if self.scale_method == "bounding_box":
+                scaled_box_size = tuple(np.subtract(scaled_bounding_box[1], scaled_bounding_box[0]))
+                
+                rescaled_font_size = scaled_font_size
+                rescaled_font = ImageFont.truetype(self.font_path,
+                                        rescaled_font_size)
+                rescaled_transposed_font = ImageFont.TransposedFont(
+                    rescaled_font, orientation=orientation)
+                rescaled_font_box_size = draw.textsize(word, font=rescaled_transposed_font)
+                # Scale down while font is larger than bounding box in any dimension
+                while rescaled_font_box_size[0] > scaled_box_size[0] or rescaled_font_box_size[1] > scaled_box_size[1]:
+                    rescaled_font_size -= self.font_step
+                    rescaled_font = ImageFont.truetype(self.font_path,
+                                        rescaled_font_size)
+                    rescaled_transposed_font = ImageFont.TransposedFont(
+                    rescaled_font, orientation=orientation)
+                    rescaled_font_box_size = draw.textsize(word, font=rescaled_transposed_font)
+                draw.text(pos, word, fill=color, font=rescaled_transposed_font)
+            else:
+                draw.text(pos, word, fill=color, font=transposed_font)
 
+            if(self.bounding_box):
+                draw.rectangle(scaled_bounding_box, outline=color)
         return self._draw_contour(img=img)
 
     def recolor(self, random_state=None, color_func=None, colormap=None):
@@ -680,12 +713,12 @@ class WordCloud(object):
                 color_func = self.color_func
             else:
                 color_func = colormap_color_func(colormap)
-        self.layout_ = [(word_freq, font_size, position, orientation,
+        self.layout_ = [(word_freq, font_size, position, orientation, bounding_box,
                          color_func(word=word_freq[0], font_size=font_size,
                                     position=position, orientation=orientation,
                                     random_state=random_state,
                                     font_path=self.font_path))
-                        for word_freq, font_size, position, orientation, _
+                        for word_freq, font_size, position, orientation, bounding_box, _
                         in self.layout_]
         return self
 
