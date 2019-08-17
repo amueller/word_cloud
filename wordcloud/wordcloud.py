@@ -187,6 +187,11 @@ class WordCloud(object):
         using scale instead of larger canvas size is significantly faster, but
         might lead to a coarser fit for the words.
 
+    scale_method: string (default="quick")
+        The method used to implement scaling an image. 
+        Use "bounding_box" to rescale within bounding box
+        
+
     min_font_size : int (default=4)
         Smallest font size to use. Will stop when there is no more room in this
         size.
@@ -269,6 +274,9 @@ class WordCloud(object):
 
     min_word_length : int, default=0
         Minimum number of letters a word must have to be included.
+
+    bounding_box : bool, default=False
+        Whether to display bounding boxes around words
 
     Attributes
     ----------
