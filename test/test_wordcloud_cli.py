@@ -38,6 +38,8 @@ ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=0.5, fail_value='blue'),
     ArgOption(cli_name='include_numbers', init_name='include_numbers', pass_value=True, fail_value=None),
     ArgOption(cli_name='min_word_length', init_name='min_word_length', pass_value=5, fail_value='blue'),
+    ArgOption(cli_name='bounding_box_scale', init_name='bounding_box_scale', pass_value=True, fail_value=None),
+    ArgOption(cli_name='show_bounding_boxes', init_name='show_bounding_boxes', pass_value=True, fail_value=None),
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 

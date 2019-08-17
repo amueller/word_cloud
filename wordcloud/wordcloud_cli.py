@@ -169,6 +169,20 @@ def make_parser():
         dest='min_word_length',
         help='only include words with more than X letters')
     parser.add_argument(
+        '--bounding_box_scale',
+        type=bool,
+        default=False,
+        metavar='bounding_box_scale',
+        dest='bounding_box_scale',
+        help='use bounding box scale method?')
+    parser.add_argument(
+        '--show_bounding_boxes',
+        type=bool,
+        default=False,
+        metavar='show_bounding_boxes',
+        dest='show_bounding_boxes',
+        help='show bounding boxes?')
+    parser.add_argument(
         '--version', action='version',
         version='%(prog)s {version}'.format(version=__version__))
     return parser
