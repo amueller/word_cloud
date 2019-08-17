@@ -300,7 +300,7 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False, min_word_length=0):
+                 include_numbers=False, min_word_length=0, scale_method = "quick", bounding_box = False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -320,6 +320,8 @@ class WordCloud(object):
         self.contour_color = contour_color
         self.contour_width = contour_width
         self.scale = scale
+        self.scale_method = scale_method
+        self.bounding_box = bounding_box
         self.color_func = color_func or colormap_color_func(colormap)
         self.max_words = max_words
         self.stopwords = stopwords if stopwords is not None else STOPWORDS
@@ -641,17 +643,42 @@ class WordCloud(object):
                         self.background_color)
         draw = ImageDraw.Draw(img)
         for (word, count), font_size, position, orientation, bounding_box, color in self.layout_:
+            scaled_font_size = int(font_size * self.scale)
             font = ImageFont.truetype(self.font_path,
-                                      int(font_size * self.scale))
+                                      scaled_font_size)
             transposed_font = ImageFont.TransposedFont(
                 font, orientation=orientation)
             pos = (int(position[1] * self.scale),
                    int(position[0] * self.scale))
-            draw.text(pos, word, fill=color, font=transposed_font)
+
             scaled_bounding_box = [(int(bounding_box[0][0] * self.scale), int(bounding_box[0][1] * self.scale)), 
-            ((int(bounding_box[0][0] * self.scale) + (int(bounding_box[1][0] * self.scale)- int(bounding_box[0][0] * self.scale))), 
-            (int(bounding_box[0][1] * self.scale) + (int(bounding_box[1][1] * self.scale)- int(bounding_box[0][1] * self.scale))))]
-            draw.rectangle(scaled_bounding_box, outline=color)
+                ((int(bounding_box[0][0] * self.scale) + (int(bounding_box[1][0] * self.scale) - int(bounding_box[0][0] * self.scale))), 
+                (int(bounding_box[0][1] * self.scale) + (int(bounding_box[1][1] * self.scale) - int(bounding_box[0][1] * self.scale))))]
+            
+            if self.scale_method == "bounding_box":
+                
+                scaled_box_size = tuple(np.subtract(scaled_bounding_box[1], scaled_bounding_box[0]))
+                
+                rescaled_font_size = scaled_font_size
+                rescaled_font = ImageFont.truetype(self.font_path,
+                                        rescaled_font_size)
+                rescaled_transposed_font = ImageFont.TransposedFont(
+                    rescaled_font, orientation=orientation)
+                rescaled_font_box_size = draw.textsize(word, font=rescaled_transposed_font)
+                # Scale down while font is larger than bounding box in any dimension
+                while rescaled_font_box_size[0] > scaled_box_size[0] or rescaled_font_box_size[1] > scaled_box_size[1]:
+                    rescaled_font_size -= self.font_step
+                    rescaled_font = ImageFont.truetype(self.font_path,
+                                        rescaled_font_size)
+                    rescaled_transposed_font = ImageFont.TransposedFont(
+                    rescaled_font, orientation=orientation)
+                    rescaled_font_box_size = draw.textsize(word, font=rescaled_transposed_font)
+                draw.text(pos, word, fill=color, font=rescaled_transposed_font)
+            else:
+                draw.text(pos, word, fill=color, font=transposed_font)
+
+            if(self.bounding_box):
+                draw.rectangle(scaled_bounding_box, outline=color)
         return self._draw_contour(img=img)
 
     def recolor(self, random_state=None, color_func=None, colormap=None):
