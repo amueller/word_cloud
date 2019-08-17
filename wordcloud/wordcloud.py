@@ -188,8 +188,8 @@ class WordCloud(object):
         might lead to a coarser fit for the words.
 
     bounding_box_scale: bool (default=False)
-        Whether to scale using bounding boxes 
-        
+        Whether to scale using bounding boxes
+
         .. versionchanged: 2.x
 
     min_font_size : int (default=4)
@@ -310,7 +310,8 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False, min_word_length=0, bounding_box_scale = False, show_bounding_boxes = False):
+                 include_numbers=False, min_word_length=0, bounding_box_scale=False,
+                 show_bounding_boxes=False):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -528,7 +529,8 @@ class WordCloud(object):
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
-            bounding_boxes.append([(y,x), (y+final_box_size[0], x+final_box_size[1])])
+            bounding_boxes.append([(y, x),
+                                  (y + final_box_size[0], x + final_box_size[1])])
             colors.append(self.color_func(word, font_size=font_size,
                                           position=(x, y),
                                           orientation=orientation,
@@ -661,27 +663,34 @@ class WordCloud(object):
                 font, orientation=orientation)
             pos = (int(position[1] * self.scale),
                    int(position[0] * self.scale))
-            
+
             area = tuple(np.subtract(bounding_box[1], bounding_box[0]))
-            scaled_bounding_box = [pos, tuple(np.add(pos, np.multiply(area, self.scale)))]
-            
+            scaled_bounding_box = [pos, tuple(
+                np.add(pos, np.multiply(area, self.scale)))]
+
             if self.bounding_box_scale:
-                scaled_box_size = tuple(np.subtract(scaled_bounding_box[1], scaled_bounding_box[0]))
-                
+                scaled_box_size = tuple(
+                    np.subtract(scaled_bounding_box[1], scaled_bounding_box[0]))
+
                 rescaled_font_size = scaled_font_size
-                rescaled_font = ImageFont.truetype(self.font_path,
-                                        rescaled_font_size)
+                rescaled_font = ImageFont.truetype(
+                    self.font_path, rescaled_font_size)
                 rescaled_transposed_font = ImageFont.TransposedFont(
                     rescaled_font, orientation=orientation)
-                rescaled_font_box_size = draw.textsize(word, font=rescaled_transposed_font)
+
+                rescaled_font_box_size = draw.textsize(
+                    word, font=rescaled_transposed_font)
                 # Scale down while font is larger than bounding box in any dimension
-                while rescaled_font_box_size[0] > scaled_box_size[0] or rescaled_font_box_size[1] > scaled_box_size[1]:
+                while (rescaled_font_box_size[0] > scaled_box_size[0]
+                       or rescaled_font_box_size[1] > scaled_box_size[1]):
                     rescaled_font_size -= self.font_step
-                    rescaled_font = ImageFont.truetype(self.font_path,
-                                        rescaled_font_size)
+                    rescaled_font = ImageFont.truetype(
+                        self.font_path, rescaled_font_size)
                     rescaled_transposed_font = ImageFont.TransposedFont(
-                    rescaled_font, orientation=orientation)
-                    rescaled_font_box_size = draw.textsize(word, font=rescaled_transposed_font)
+                        rescaled_font, orientation=orientation)
+
+                    rescaled_font_box_size = draw.textsize(
+                        word, font=rescaled_transposed_font)
                 draw.text(pos, word, fill=color, font=rescaled_transposed_font)
             else:
                 draw.text(pos, word, fill=color, font=transposed_font)
