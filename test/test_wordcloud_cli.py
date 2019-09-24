@@ -79,10 +79,7 @@ def check_argument_unary(text_filepath, name, result_name):
 
 
 def check_argument_type(text_filepath, name, value):
-    with pytest.raises(
-            (SystemExit, ValueError),
-            message='argument "{}" was accepted even though the type did not match'.format(name)
-    ):
+    with pytest.raises((SystemExit, ValueError),):
         args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name, str(value)])
 
 
