@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.ImageColorGenerator &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>wordcloud.ImageColorGenerator &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -170,45 +170,39 @@
 <h1>wordcloud.ImageColorGenerator<a class="headerlink" href="#wordcloud-imagecolorgenerator" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="wordcloud.ImageColorGenerator">
-<em class="property">class </em><code class="descclassname">wordcloud.</code><code class="descname">ImageColorGenerator</code><span class="sig-paren">(</span><em>image</em>, <em>default_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/color_from_image.html#ImageColorGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.ImageColorGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">wordcloud.</code><code class="sig-name descname">ImageColorGenerator</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">default_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/color_from_image.html#ImageColorGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.ImageColorGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Color generator based on a color image.</p>
 <p>Generates colors based on an RGB image. A word will be colored using
 the mean color of the enclosing rectangle in the color image.</p>
 <p>After construction, the object acts as a callable that can be passed as
 color_func to the word cloud constructor or to the recolor method.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>image</strong> <span class="classifier-delimiter">:</span> <span class="classifier">nd-array, shape (height, width, 3)</span></dt>
-<dd><p class="first last">Image to use to generate word colors. Alpha channels are ignored.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>image</strong><span class="classifier">nd-array, shape (height, width, 3)</span></dt><dd><p>Image to use to generate word colors. Alpha channels are ignored.
 This should be the same size as the canvas. for the wordcloud.</p>
 </dd>
-<dt><strong>default_color</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple or None, default=None</span></dt>
-<dd><p class="first last">Fallback colour to use if the canvas is larger than the image,
+<dt><strong>default_color</strong><span class="classifier">tuple or None, default=None</span></dt><dd><p>Fallback colour to use if the canvas is larger than the image,
 in the format (r, g, b). If None, raise ValueError instead.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(word,&nbsp;font_size,&nbsp;font_path,&nbsp;…)</td>
-<td>Generate a color for a given word using a fixed image.</td>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(self, word, font_size, font_path, …)</p></td>
+<td><p>Generate a color for a given word using a fixed image.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="wordcloud.ImageColorGenerator.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>image</em>, <em>default_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/color_from_image.html#ImageColorGenerator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.ImageColorGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">image</em>, <em class="sig-param">default_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/color_from_image.html#ImageColorGenerator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.ImageColorGenerator.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

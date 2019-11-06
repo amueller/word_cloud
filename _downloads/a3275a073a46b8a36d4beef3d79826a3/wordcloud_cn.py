@@ -3,7 +3,7 @@
 create wordcloud with chinese
 =============================
 
-Wordcloud is a very good tools, but if you want to create
+Wordcloud is a very good tool, but if you want to create
 Chinese wordcloud only wordcloud is not enough. The file
 shows how to use wordcloud with Chinese. First, you need a
 Chinese word segmentation library jieba, jieba is now the
@@ -16,7 +16,7 @@ import jieba
 jieba.enable_parallel(4)
 # Setting up parallel processes :4 ,but unable to run on Windows
 from os import path
-from scipy.misc import imread
+from imageio import imread
 import matplotlib.pyplot as plt
 import os
 # jieba.load_userdict("txt\userdict.txt")

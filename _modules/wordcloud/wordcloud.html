@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -422,7 +422,7 @@
 <span class="sd">        Whether to repeat words and phrases until max_words or min_font_size</span>
 <span class="sd">        is reached.</span>
 
-<span class="sd">    incldue_numbers : bool, default=False</span>
+<span class="sd">    include_numbers : bool, default=False</span>
 <span class="sd">        Whether to include numbers as phrases or not.</span>
 
 <span class="sd">    min_word_length : int, default=0</span>
@@ -624,6 +624,8 @@
 
         <span class="c1"># start drawing grey image</span>
         <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
             <span class="c1"># select the font size</span>
             <span class="n">rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_scaling</span>
             <span class="k">if</span> <span class="n">rs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>

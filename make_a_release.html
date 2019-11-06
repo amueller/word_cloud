@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Making a release &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>Making a release &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -182,11 +182,9 @@ Hello
 <div class="section" id="setting-up-environment">
 <h2>Setting up environment<a class="headerlink" href="#setting-up-environment" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">First, <a class="reference external" href="https://pypi.org">register for an account on PyPI</a>.</p>
-</li>
-<li><p class="first">If not already the case, ask to be added as a <code class="docutils literal notranslate"><span class="pre">Package</span> <span class="pre">Index</span> <span class="pre">Maintainer</span></code>.</p>
-</li>
-<li><p class="first">Create a <code class="docutils literal notranslate"><span class="pre">~/.pypirc</span></code> file with your login credentials:</p>
+<li><p>First, <a class="reference external" href="https://pypi.org">register for an account on PyPI</a>.</p></li>
+<li><p>If not already the case, ask to be added as a <code class="docutils literal notranslate"><span class="pre">Package</span> <span class="pre">Index</span> <span class="pre">Maintainer</span></code>.</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">~/.pypirc</span></code> file with your login credentials:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">distutils</span><span class="p">]</span>
 <span class="n">index</span><span class="o">-</span><span class="n">servers</span> <span class="o">=</span>
   <span class="n">pypi</span>
@@ -205,103 +203,104 @@ Hello
 </li>
 </ol>
 <blockquote>
-<div>where <code class="docutils literal notranslate"><span class="pre">&lt;your-username&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;your-password&gt;</span></code> correspond to your PyPI account.</div></blockquote>
+<div><p>where <code class="docutils literal notranslate"><span class="pre">&lt;your-username&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;your-password&gt;</span></code> correspond to your PyPI account.</p>
+</div></blockquote>
 </div>
 <div class="section" id="pypi-step-by-step">
 <h2><a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>: Step-by-step<a class="headerlink" href="#pypi-step-by-step" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Make sure that all CI tests are passing: <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</li>
-<li>List all tags sorted by version</li>
+<li><p>Make sure that all CI tests are passing: <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</p></li>
+<li><p>List all tags sorted by version</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ git tag -l | sort -V
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git tag -l | sort -V
 </pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Choose the next release version number</li>
+<li><p>Choose the next release version number</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">release</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">release</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">To ensure the packages are uploaded on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>, tags must match this regular
+<p class="admonition-title">Warning</p>
+<p>To ensure the packages are uploaded on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>, tags must match this regular
 expression: <code class="docutils literal notranslate"><span class="pre">^[0-9]+(\.[0-9]+)*(\.post[0-9]+)?$</span></code>.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="4">
-<li>Download latest sources</li>
+<li><p>Download latest sources</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">amueller</span><span class="o">/</span><span class="n">word_cloud</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">word_cloud</span>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">amueller</span><span class="o">/</span><span class="n">word_cloud</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">word_cloud</span>
 </pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="5">
-<li>In <cite>doc/changelog.rst</cite> change <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section header with
-<code class="docutils literal notranslate"><span class="pre">WordCloud</span> <span class="pre">X.Y.Z</span></code> and commit the changes using the same title</li>
+<li><p>In <cite>doc/changelog.rst</cite> change <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section header with
+<code class="docutils literal notranslate"><span class="pre">WordCloud</span> <span class="pre">X.Y.Z</span></code> and commit the changes using the same title</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add doc/changelog.rst
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add doc/changelog.rst
 $ git commit -m &quot;WordCloud ${release}&quot;
 </pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="6">
-<li>Tag the release</li>
+<li><p>Tag the release</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ git tag --sign -m &quot;WordCloud ${release}&quot; ${release} master
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git tag --sign -m &quot;WordCloud ${release}&quot; ${release} master
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We recommend using a GPG key to sign the tag.</p>
+<p class="admonition-title">Note</p>
+<p>We recommend using a GPG key to sign the tag.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="7">
-<li>Publish the tag</li>
+<li><p>Publish the tag</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin ${release}
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin ${release}
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This will trigger builds on each CI services and automatically upload the wheels and source distribution on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
+<p class="admonition-title">Note</p>
+<p>This will trigger builds on each CI services and automatically upload the wheels and source distribution on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="8">
-<li>Check the status of the builds on <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</li>
-<li>Once the builds are completed, check that the distributions are available on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</li>
-<li>Create a clean testing environment to test the installation</li>
+<li><p>Check the status of the builds on <a class="reference external" href="https://ci.appveyor.com/project/amueller/word-cloud/history">AppVeyor</a>, <a class="reference external" href="https://circleci.com/gh/amueller/word_cloud">CircleCI</a> and <a class="reference external" href="https://travis-ci.org/amueller/word_cloud/pull_requests">Travis CI</a>.</p></li>
+<li><p>Once the builds are completed, check that the distributions are available on <a class="reference external" href="https://pypi.org/project/wordcloud">PyPI</a>.</p></li>
+<li><p>Create a clean testing environment to test the installation</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkvirtualenv wordcloud-${release}-install-test &amp;&amp; \
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkvirtualenv wordcloud-${release}-install-test &amp;&amp; \
   pip install wordcloud &amp;&amp; \
   python -c &quot;import wordcloud;print(wordcloud.__version__)&quot;
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the <code class="docutils literal notranslate"><span class="pre">mkvirtualenv</span></code> is not available, this means you do not have <a class="reference external" href="https://virtualenvwrapper.readthedocs.io/">virtualenvwrapper</a>
+<p class="admonition-title">Note</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">mkvirtualenv</span></code> is not available, this means you do not have <a class="reference external" href="https://virtualenvwrapper.readthedocs.io/">virtualenvwrapper</a>
 installed, in that case, you could either install it or directly use <a class="reference external" href="http://virtualenv.readthedocs.io">virtualenv</a> or <a class="reference external" href="https://docs.python.org/3/library/venv.html">venv</a>.</p>
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="11">
-<li>Cleanup</li>
+<li><p>Cleanup</p></li>
 </ol>
 <blockquote>
-<div><div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ deactivate  &amp;&amp; \
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ deactivate  &amp;&amp; \
   rm -rf dist/* &amp;&amp; \
   rmvirtualenv wordcloud-${release}-install-test
 </pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic" start="12">
-<li><p class="first">Add a <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section back in <cite>doc/changelog.rst</cite>, merge the result
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Release</span></code> section back in <cite>doc/changelog.rst</cite>, merge the result
 and push local changes:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin master
 </pre></div>

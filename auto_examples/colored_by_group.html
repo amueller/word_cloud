@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Colored by Group Example &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>Colored by Group Example &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -173,16 +173,16 @@
            <div itemprop="articleBody">
             
   <div class="sphx-glr-download-link-note admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-colored-by-group-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-colored-by-group-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="colored-by-group-example">
 <span id="sphx-glr-auto-examples-colored-by-group-py"></span><h1>Colored by Group Example<a class="headerlink" href="#colored-by-group-example" title="Permalink to this headline">¶</a></h1>
 <p>Generating a word cloud that assigns colors to words based on
 a predefined mapping from colors to words</p>
 <img alt="../_images/sphx_glr_colored_by_group_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_colored_by_group_001.png" />
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
 <span class="k">class</span> <span class="nc">SimpleGroupedColorFunc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -199,14 +199,14 @@ a predefined mapping from colors to words</p>
 <span class="sd">         of any value from color_to_words.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">word_to_color</span> <span class="o">=</span> <span class="p">{</span><span class="n">word</span><span class="p">:</span> <span class="n">color</span>
                               <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                               <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span> <span class="o">=</span> <span class="n">default_color</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_to_color</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span><span class="p">)</span>
 
 
@@ -226,7 +226,7 @@ a predefined mapping from colors to words</p>
 <span class="sd">         of any value from color_to_words.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_func_to_words</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">(</span><span class="n">get_single_color_func</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
             <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
@@ -244,7 +244,7 @@ a predefined mapping from colors to words</p>
 
         <span class="k">return</span> <span class="n">color_func</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color_func</span><span class="p">(</span><span class="n">word</span><span class="p">)(</span><span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
@@ -270,7 +270,7 @@ a predefined mapping from colors to words</p>
 <span class="s2">Namespaces are one honking great idea -- let&#39;s do more of those!&quot;&quot;&quot;</span>
 
 <span class="c1"># Since the text is small collocations are turned off and text is lower-cased</span>
-<span class="n">wc</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">collocations</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="n">wc</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">collocations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 
 <span class="n">color_to_words</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># words below will be colored with a green single color function</span>
@@ -303,14 +303,16 @@ a predefined mapping from colors to words</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.197 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.279 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-colored-by-group-py">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/5672b2f0e5d269e3b9d00f9062e66f74/colored_by_group.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored_by_group.py</span></code></a></div>
-<div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/13ec86abd37a50a7c9ed3550b66488a2/colored_by_group.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">colored_by_group.ipynb</span></code></a></div>
+<p><a class="reference download internal" download="" href="../_downloads/140fcdad2a9d0b8d6625c5d86b3970d5/colored_by_group.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored_by_group.py</span></code></a></p>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/1233d99b0b2a55eb9d2ed9af0fa516db/colored_by_group.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">colored_by_group.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 

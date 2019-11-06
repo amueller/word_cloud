@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Emoji Example &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>Emoji Example &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -173,8 +173,8 @@
            <div itemprop="articleBody">
             
   <div class="sphx-glr-download-link-note admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-emoji-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-emoji-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="emoji-example">
 <span id="sphx-glr-auto-examples-emoji-py"></span><h1>Emoji Example<a class="headerlink" href="#emoji-example" title="Permalink to this headline">¶</a></h1>
@@ -189,11 +189,11 @@ white outlines for most emoji.  There are currently issues with the PIL/Pillow l
 it from functioning correctly on OS X (<a class="reference external" href="https://github.com/python-pillow/Pillow/issues/1774">https://github.com/python-pillow/Pillow/issues/1774</a>), so try this
 on ubuntu if you are having problems.</p>
 <img alt="../_images/sphx_glr_emoji_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_emoji_001.png" />
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">string</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a>
+<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a>
 
 <span class="c1"># get data directory (using getcwd() is needed to support running example in generated IPython notebook)</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -205,10 +205,10 @@ on ubuntu if you are having problems.</p>
 <span class="c1"># 2+ consecutive letters (also include apostrophes), e.x It&#39;s</span>
 <span class="n">normal_word</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:\w[\w&#39;]+)&quot;</span>
 <span class="c1"># 2+ consecutive punctuations, e.x. :)</span>
-<span class="n">ascii_art</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:[{punctuation}][{punctuation}]+)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">punctuation</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+<span class="n">ascii_art</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:[</span><span class="si">{punctuation}</span><span class="s2">][</span><span class="si">{punctuation}</span><span class="s2">]+)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">punctuation</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
 <span class="c1"># a single character that is not alpha_numeric or other ascii printable</span>
-<span class="n">emoji</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:[^\s])(?&lt;![\w{ascii_printable}])&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ascii_printable</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">printable</span><span class="p">)</span>
-<span class="n">regexp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;{normal_word}|{ascii_art}|{emoji}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">normal_word</span><span class="o">=</span><span class="n">normal_word</span><span class="p">,</span> <span class="n">ascii_art</span><span class="o">=</span><span class="n">ascii_art</span><span class="p">,</span>
+<span class="n">emoji</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:[^\s])(?&lt;![\w</span><span class="si">{ascii_printable}</span><span class="s2">])&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ascii_printable</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">printable</span><span class="p">)</span>
+<span class="n">regexp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">{normal_word}</span><span class="s2">|</span><span class="si">{ascii_art}</span><span class="s2">|</span><span class="si">{emoji}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">normal_word</span><span class="o">=</span><span class="n">normal_word</span><span class="p">,</span> <span class="n">ascii_art</span><span class="o">=</span><span class="n">ascii_art</span><span class="p">,</span>
                                                      <span class="n">emoji</span><span class="o">=</span><span class="n">emoji</span><span class="p">)</span>
 
 <span class="c1"># Generate a word cloud image</span>
@@ -218,20 +218,22 @@ on ubuntu if you are having problems.</p>
 
 <span class="c1"># Display the generated image:</span>
 <span class="c1"># the matplotlib way:</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.332 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.416 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-emoji-py">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/e6f098adebccc5619b49554f3bd78ef3/emoji.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">emoji.py</span></code></a></div>
-<div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/5eea90e3e82b25bb7446987ff8fb3326/emoji.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">emoji.ipynb</span></code></a></div>
+<p><a class="reference download internal" download="" href="../_downloads/99790443978ec620c06db932735e4e93/emoji.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">emoji.py</span></code></a></p>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/4dc3728f2e1acff2e37c6046c9aaab1d/emoji.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">emoji.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 

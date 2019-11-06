@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image-colored wordcloud &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>Image-colored wordcloud &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -173,8 +173,8 @@
            <div itemprop="articleBody">
             
   <div class="sphx-glr-download-link-note admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-colored-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-colored-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="image-colored-wordcloud">
 <span id="sphx-glr-auto-examples-colored-py"></span><h1>Image-colored wordcloud<a class="headerlink" href="#image-colored-wordcloud" title="Permalink to this headline">¶</a></h1>
@@ -186,13 +186,13 @@ passed as mask.
 If you want white as a legal color, you can just pass a different image to
 “mask”, but make sure the image shapes line up.</p>
 <img alt="../_images/sphx_glr_colored_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_colored_001.png" />
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
 
 <span class="c1"># get data directory (using getcwd() is needed to support running example in generated IPython notebook)</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -226,14 +226,16 @@ If you want white as a legal color, you can just pass a different image to
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  2.209 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.088 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-colored-py">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/fec2b7248974a5524bb3063a4a64d057/colored.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored.py</span></code></a></div>
-<div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/b7c1f7c1453d6c2e0cb1bf6f7af92a5b/colored.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">colored.ipynb</span></code></a></div>
+<p><a class="reference download internal" download="" href="../_downloads/582a7a10d025ebcb4f69a6d14355b2da/colored.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored.py</span></code></a></p>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/461846ab98e5f81a8828ec2553f41f11/colored.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">colored.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 

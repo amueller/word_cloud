@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Using custom colors &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>Using custom colors &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -173,29 +173,29 @@
            <div itemprop="articleBody">
             
   <div class="sphx-glr-download-link-note admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-a-new-hope-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-a-new-hope-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="using-custom-colors">
 <span id="sphx-glr-auto-examples-a-new-hope-py"></span><h1>Using custom colors<a class="headerlink" href="#using-custom-colors" title="Permalink to this headline">¶</a></h1>
 <p>Using the recolor method and custom coloring functions.</p>
 <ul class="sphx-glr-horizontal">
-<li><img alt="../_images/sphx_glr_a_new_hope_001.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_a_new_hope_001.png" />
+<li><img alt="../_images/sphx_glr_a_new_hope_001.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_a_new_hope_001.png" />
 </li>
-<li><img alt="../_images/sphx_glr_a_new_hope_002.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_a_new_hope_002.png" />
+<li><img alt="../_images/sphx_glr_a_new_hope_002.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_a_new_hope_002.png" />
 </li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span>
 
 
-<span class="k">def</span> <span class="nf">grey_color_func</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="k">def</span> <span class="nf">grey_color_func</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;hsl(0, 0</span><span class="si">%%</span><span class="s2">, </span><span class="si">%d%%</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
@@ -237,14 +237,16 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  5.588 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.272 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-a-new-hope-py">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/989127c94740340728a1990c878f1516/a_new_hope.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">a_new_hope.py</span></code></a></div>
-<div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/e6301896f656d7cbcd602d40197971d7/a_new_hope.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">a_new_hope.ipynb</span></code></a></div>
+<p><a class="reference download internal" download="" href="../_downloads/918ae0f24d4c0b66a72ecdc0f266e55a/a_new_hope.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">a_new_hope.py</span></code></a></p>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/a307a900484446165769295aaa9dd538/a_new_hope.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">a_new_hope.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 

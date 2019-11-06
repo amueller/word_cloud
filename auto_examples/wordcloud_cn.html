@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>create wordcloud with chinese &mdash; wordcloud 1.5.0.post34+g64ff55e documentation</title>
+  <title>create wordcloud with chinese &mdash; wordcloud 1.5.0.post45+g48d8265 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post34+g64ff55e
+                1.5.0.post45+g48d8265
               </div>
             
           
@@ -173,12 +173,12 @@
            <div itemprop="articleBody">
             
   <div class="sphx-glr-download-link-note admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-wordcloud-cn-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-wordcloud-cn-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="create-wordcloud-with-chinese">
 <span id="sphx-glr-auto-examples-wordcloud-cn-py"></span><h1>create wordcloud with chinese<a class="headerlink" href="#create-wordcloud-with-chinese" title="Permalink to this headline">¶</a></h1>
-<p>Wordcloud is a very good tools, but if you want to create
+<p>Wordcloud is a very good tool, but if you want to create
 Chinese wordcloud only wordcloud is not enough. The file
 shows how to use wordcloud with Chinese. First, you need a
 Chinese word segmentation library jieba, jieba is now the
@@ -186,21 +186,31 @@ most elegant the most popular Chinese word segmentation tool in python.
 You can use ‘PIP install jieba’. To install it. As you can see,
 at the same time using wordcloud with jieba very convenient</p>
 <ul class="sphx-glr-horizontal">
-<li><img alt="../_images/sphx_glr_wordcloud_cn_001.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_wordcloud_cn_001.png" />
+<li><img alt="../_images/sphx_glr_wordcloud_cn_001.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_wordcloud_cn_001.png" />
 </li>
-<li><img alt="../_images/sphx_glr_wordcloud_cn_002.png" class="sphx-glr-multi-img first" src="../_images/sphx_glr_wordcloud_cn_002.png" />
+<li><img alt="../_images/sphx_glr_wordcloud_cn_002.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_wordcloud_cn_002.png" />
 </li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.869 seconds.
+Prefix dict has been built succesfully.
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
 <span class="n">jieba</span><span class="o">.</span><span class="n">enable_parallel</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="c1"># Setting up parallel processes :4 ,but unable to run on Windows</span>
-<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
-<span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">imread</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">imageio</span> <span class="k">import</span> <span class="n">imread</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="c1"># jieba.load_userdict(&quot;txt\userdict.txt&quot;)</span>
 <span class="c1"># add userdict by load_userdict()</span>
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
 
 <span class="c1"># get data directory (using getcwd() is needed to support running example in generated IPython notebook)</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -229,7 +239,7 @@ at the same time using wordcloud with jieba very convenient</p>
         <span class="n">jieba</span><span class="o">.</span><span class="n">add_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
     <span class="n">mywordlist</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">seg_list</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">seg_list</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">liststr</span> <span class="o">=</span> <span class="s2">&quot;/ &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seg_list</span><span class="p">)</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stopwords_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_stop</span><span class="p">:</span>
@@ -276,14 +286,16 @@ at the same time using wordcloud with jieba very convenient</p>
 <span class="n">wc</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">imgname2</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  8.413 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  8.833 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-wordcloud-cn-py">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/1fdfdbe7e54cddbb22d75c7de4d59ae3/wordcloud_cn.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">wordcloud_cn.py</span></code></a></div>
-<div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../_downloads/cc4d1a6e50f4b5b362f2671ae041f5de/wordcloud_cn.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">wordcloud_cn.ipynb</span></code></a></div>
+<p><a class="reference download internal" download="" href="../_downloads/a3275a073a46b8a36d4beef3d79826a3/wordcloud_cn.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">wordcloud_cn.py</span></code></a></p>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/33e9162504d7de3e9cfe155cf2cc58b4/wordcloud_cn.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">wordcloud_cn.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 
