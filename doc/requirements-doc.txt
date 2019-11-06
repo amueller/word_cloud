@@ -1,4 +1,5 @@
 numpydoc
+imageio
 sphinx
 sphinx_rtd_theme
 sphinx_gallery
