@@ -36,6 +36,8 @@ ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='background', init_name='background_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_color', init_name='contour_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=0.5, fail_value='blue'),
+    ArgOption(cli_name='include_numbers', init_name='include_numbers', pass_value=True, fail_value=None),
+    ArgOption(cli_name='min_word_length', init_name='min_word_length', pass_value=5, fail_value='blue'),
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 
@@ -77,10 +79,7 @@ def check_argument_unary(text_filepath, name, result_name):
 
 
 def check_argument_type(text_filepath, name, value):
-    with pytest.raises(
-            (SystemExit, ValueError),
-            message='argument "{}" was accepted even though the type did not match'.format(name)
-    ):
+    with pytest.raises((SystemExit, ValueError),):
         args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name, str(value)])
 
 

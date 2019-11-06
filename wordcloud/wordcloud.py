@@ -13,6 +13,7 @@ import os
 import re
 import sys
 import colorsys
+import matplotlib
 import numpy as np
 from operator import itemgetter
 
@@ -263,6 +264,12 @@ class WordCloud(object):
         Whether to repeat words and phrases until max_words or min_font_size
         is reached.
 
+    include_numbers : bool, default=False
+        Whether to include numbers as phrases or not.
+
+    min_word_length : int, default=0
+        Minimum number of letters a word must have to be included.
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -292,12 +299,11 @@ class WordCloud(object):
                  max_font_size=None, font_step=1, mode="RGB",
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color=None, repeat=False):
+                 contour_color=None, repeat=False,
+                 include_numbers=False, min_word_length=0):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
-            # we need a color map
-            import matplotlib
             version = matplotlib.__version__
             if version[0] < "2" and version[2] < "5":
                 colormap = "hsv"
@@ -343,6 +349,8 @@ class WordCloud(object):
                           DeprecationWarning)
         self.normalize_plurals = normalize_plurals
         self.repeat = repeat
+        self.include_numbers = include_numbers
+        self.min_word_length = min_word_length
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -458,6 +466,8 @@ class WordCloud(object):
 
         # start drawing grey image
         for word, freq in frequencies:
+            if freq == 0:
+                continue
             # select the font size
             rs = self.relative_scaling
             if rs != 0:
@@ -557,7 +567,11 @@ class WordCloud(object):
         words = [word[:-2] if word.lower().endswith("'s") else word
                  for word in words]
         # remove numbers
-        words = [word for word in words if not word.isdigit()]
+        if not self.include_numbers:
+            words = [word for word in words if not word.isdigit()]
+        # remove short words
+        if self.min_word_length:
+            words = [word for word in words if len(word) >= self.min_word_length]
 
         if self.collocations:
             word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
