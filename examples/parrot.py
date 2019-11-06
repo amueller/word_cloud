@@ -13,8 +13,8 @@ d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 # load wikipedia text on rainbow
 text = open(path.join(d, 'wiki_rainbow.txt')).read()
 
-# load image
-parrot_color = np.array(Image.open(path.join(d, "parrot-3-2.jpg")))
+# load image. This has been modified in gimp to be brighter and have more saturation.
+parrot_color = np.array(Image.open(path.join(d, "parrot-by-jose-mari-gimenez2.jpg")))
 # subsample by factor of 3. Very lossy but for a wordcloud we don't really care.
 parrot_color = parrot_color[::3, ::3]
 
