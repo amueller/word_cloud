@@ -153,6 +153,26 @@ Gallery of Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Image">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_parrot_thumb.png
+
+        :ref:`sphx_glr_auto_examples_parrot.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/parrot
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Wordcloud is a very good tool, but if you want to create Chinese wordcloud only wordcloud is no...">
 
 .. only:: html

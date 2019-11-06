@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image-colored wordcloud with boundary map &mdash; wordcloud 1.5.0.post52+gf288fd5 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="create wordcloud with chinese" href="wordcloud_cn.html" />
+    <link rel="prev" title="Using custom colors" href="a_new_hope.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> wordcloud
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.5.0.post52+gf288fd5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../references.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gallery of Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="single_word.html">Single Word</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple.html">Minimal Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frequency.html">Using frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colored.html">Image-colored wordcloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emoji.html">Emoji Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a_new_hope.html">Using custom colors</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Image-colored wordcloud with boundary map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wordcloud_cn.html">create wordcloud with chinese</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colored_by_group.html">Colored by Group Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributor Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../make_a_release.html">Making a release</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wordcloud</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Gallery of Examples</a> &raquo;</li>
+        
+      <li>Image-colored wordcloud with boundary map</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/auto_examples/parrot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-parrot-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="image-colored-wordcloud-with-boundary-map">
+<span id="sphx-glr-auto-examples-parrot-py"></span><h1>Image-colored wordcloud with boundary map<a class="headerlink" href="#image-colored-wordcloud-with-boundary-map" title="Permalink to this headline">¶</a></h1>
+<p>A slightly more elaborate version of an image-colored wordcloud
+that also takes edges in the image into account.
+Recreating an image similar to the parrot example.</p>
+<ul class="sphx-glr-horizontal">
+<li><img alt="../_images/sphx_glr_parrot_001.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_parrot_001.png" />
+</li>
+<li><img alt="../_images/sphx_glr_parrot_002.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_parrot_002.png" />
+</li>
+<li><img alt="../_images/sphx_glr_parrot_003.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_parrot_003.png" />
+</li>
+<li><img alt="../_images/sphx_glr_parrot_004.png" class="sphx-glr-multi-img" src="../_images/sphx_glr_parrot_004.png" />
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="k">import</span> <span class="n">gaussian_gradient_magnitude</span>
+
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
+
+<span class="c1"># get data directory (using getcwd() is needed to support running example in generated IPython notebook)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+<span class="c1"># load wikipedia text on rainbow</span>
+<span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;wiki_rainbow.txt&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># load image. This has been modified in gimp to be brighter and have more saturation.</span>
+<span class="n">parrot_color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;parrot-by-jose-mari-gimenez2.jpg&quot;</span><span class="p">)))</span>
+<span class="c1"># subsample by factor of 3. Very lossy but for a wordcloud we don&#39;t really care.</span>
+<span class="n">parrot_color</span> <span class="o">=</span> <span class="n">parrot_color</span><span class="p">[::</span><span class="mi">3</span><span class="p">,</span> <span class="p">::</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># create mask  white is &quot;masked out&quot;</span>
+<span class="n">parrot_mask</span> <span class="o">=</span> <span class="n">parrot_color</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">parrot_mask</span><span class="p">[</span><span class="n">parrot_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+
+<span class="c1"># some finesse: we enforce boundaries between colors so they get less washed out.</span>
+<span class="c1"># For that we do some edge detection in the image</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">gaussian_gradient_magnitude</span><span class="p">(</span><span class="n">parrot_color</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">parrot_mask</span><span class="p">[</span><span class="n">edges</span> <span class="o">&gt;</span> <span class="o">.</span><span class="mi">08</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+
+<span class="c1"># create wordcloud. A bit sluggish, you can subsample more strongly for quicker rendering</span>
+<span class="c1"># relative_scaling=0 means the frequencies in the data are reflected less</span>
+<span class="c1"># acurately but it makes a better picture</span>
+<span class="n">wc</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">parrot_mask</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">relative_scaling</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># generate word cloud</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
+
+<span class="c1"># create coloring from image</span>
+<span class="n">image_colors</span> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">parrot_color</span><span class="p">)</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">image_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;parrot_new.png&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original Image&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">parrot_color</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Edge map&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  22.476 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-parrot-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/432cc2a783906adc6de39425331180db/parrot.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">parrot.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/e9ce6e94965d7d68581a230c699d1792/parrot.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">parrot.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wordcloud_cn.html" class="btn btn-neutral float-right" title="create wordcloud with chinese" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="a_new_hope.html" class="btn btn-neutral float-left" title="Using custom colors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Andreas Mueller
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
