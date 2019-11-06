@@ -1,0 +1,645 @@
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 1/19
+Rainbow
+A rainbow is a meteorological phenomenon that is
+caused by reflection, refraction and dispersion of
+light in water droplets resulting in a spectrum of light
+appearing in the sky. It takes the form of a
+multicoloured circular arc. Rainbows caused by
+sunlight always appear in the section of sky directly
+opposite the sun.
+Rainbows can be full circles. However, the observer
+normally sees only an arc formed by illuminated
+droplets above the ground,
+[1] and centered on a line
+from the sun to the observer's eye.
+In a primary rainbow, the arc shows red on the outer
+part and violet on the inner side. This rainbow is
+caused by light being refracted when entering a
+droplet of water, then reflected inside on the back of the droplet and refracted again when leaving it.
+In a double rainbow, a second arc is seen outside the primary arc, and has the order of its colours reversed, with red on the inner side
+of the arc. This is caused by the light being reflected twice on the inside of the droplet before leaving it.
+Overview
+Visibility
+Number of colours in spectrum or rainbow
+Explanation
+Mathematical derivation
+Variations
+Double rainbows
+Twinned rainbow
+Full-circle rainbow
+Supernumerary rainbows
+Reflected rainbow, reflection rainbow
+Monochrome rainbow
+Higher-order rainbows
+Rainbows under moonlight
+Fogbow
+Circumhorizontal and circumzenithal arcs
+Rainbows on Titan
+Rainbows with different materials
+Double rainbow and supernumerary rainbows on the inside of the
+primary arc. The shadow of the photographer's head on the bottom
+marks the centre of the rainbow circle (antisolar point).
+Contents
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 2/19
+Scientific history
+Experiments
+Culture
+See also
+Notes
+References
+External links
+A rainbow is not located at a specific distance from the observer, but comes from an optical
+illusion caused by any water droplets viewed from a certain angle relative to a light source.
+Thus, a rainbow is not an object and cannot be physically approached. Indeed, it is impossible
+for an observer to see a rainbow from water droplets at any angle other than the customary one
+of 42 degrees from the direction opposite the light source. Even if an observer sees another
+observer who seems "under" or "at the end of" a rainbow, the second observer will see a
+different rainbow—farther off—at the same angle as seen by the first observer.
+Rainbows span a continuous spectrum of colours. Any distinct bands perceived are an artefact
+of human colour vision, and no banding of any type is seen in a black-and-white photo of a
+rainbow, only a smooth gradation of intensity to a maximum, then fading towards the other side.
+For colours seen by the human eye, the most commonly cited and remembered sequence is
+Newton's sevenfold red, orange, yellow, green, blue, indigo and violet,
+[2][3]
+remembered by the
+mnemonic Richard Of York Gave Battle In Vain (ROYGBIV).
+Rainbows can be caused by many forms of airborne water. These include not only rain, but also
+mist, spray, and airborne dew.
+Rainbows can be observed whenever there are water drops in the air and sunlight shining from behind the observer at a low altitude
+angle. Because of this, rainbows are usually seen in the western sky during the morning and in the eastern sky during the early
+evening. The most spectacular rainbow displays happen when half the sky is still dark with raining clouds and the observer is at a spot
+with clear sky in the direction of the sun. The result is a luminous rainbow that contrasts with the darkened background. During such
+good visibility conditions, the larger but fainter secondary rainbow is often visible. It appears about 10° outside of the primary
+rainbow, with inverse order of colours.
+The rainbow effect is also commonly seen near waterfalls or fountains. In addition, the effect can be artificially created by dispersing
+water droplets into the air during a sunny day. Rarely, a moonbow, lunar rainbow or nighttime rainbow, can be seen on strongly
+moonlit nights. As human visual perception for colour is poor in low light, moonbows are often perceived to be white.
+[4]
+It is difficult to photograph the complete semicircle of a rainbow in one frame, as this would require an angle of view of 84°. For a
+35 mm camera, a wide-angle lens with a focal length of 19 mm or less would be required. Now that software for stitching several
+images into a panorama is available, images of the entire arc and even secondary arcs can be created fairly easily from a series of
+overlapping frames.
+Overview
+Image of the end of a
+rainbow at Jasper National
+Park
+Visibility
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 3/19
+From above the earth such as in an aeroplane, it is sometimes possible to see a
+rainbow as a full circle. This phenomenon can be confused with the glory
+phenomenon, but a glory is usually much smaller, covering only 5–20°.
+The sky inside a primary rainbow is brighter than the sky outside of the bow. This is
+because each raindrop is a sphere and it scatters light over an entire circular disc in the
+sky. The radius of the disc depends on the wavelength of light, with red light being
+scattered over a larger angle than blue light. Over most of the disc, scattered light at all
+wavelengths overlaps, resulting in white light which brightens the sky. At the edge, the
+wavelength dependence of the scattering gives rise to the rainbow.
+[5]
+Light of primary rainbow arc is 96% polarised tangential to the arch.
+[6] Light of
+second arc is 90% polarised.
+A spectrum obtained using a glass prism and a point source is a continuum of
+wavelengths without bands. The number of colours that the human eye is able to
+distinguish in a spectrum is in the order of 100.
+[7] Accordingly, the Munsell colour
+system (a 20th-century system for numerically describing colours, based on equal
+steps for human visual perception) distinguishes 100 hues. The apparent discreteness
+of main colours is an artefact of human perception and the exact number of main
+colours is a somewhat arbitrary choice.
+Red Orange Yellow Green Blue Indigo Violet
+
+Newton, who admitted his eyes were not very critical in distinguishing colours,
+[8]
+originally (1672) divided the spectrum into five main colours: red, yellow, green, blue
+and violet. Later he included orange and indigo, giving seven main colours by analogy
+to the number of notes in a musical scale.
+[2][9] Newton chose to divide the visible
+spectrum into seven colours out of a belief derived from the beliefs of the ancient
+Greek sophists, who thought there was a connection between the colours, the musical
+notes, the known objects in the Solar System, and the days of the week.
+[10][11][12]
+Scholars have noted that what Newton regarded at the time as "blue" would today be
+regarded as cyan, and what Newton called "indigo" would today be considered blue.
+[3]
+Red Orange Yellow Green Cyan Blue Violet
+
+According to Isaac Asimov, "It is customary to list indigo as a colour lying between blue and violet, but it has never seemed to me that
+indigo is worth the dignity of being considered a separate colour. To my eyes it seems merely deep blue."
+[13]
+The colour pattern of a rainbow is different from a spectrum, and the colours are less saturated. There is spectral smearing in a
+rainbow owing to the fact that for any particular wavelength, there is a distribution of exit angles, rather than a single unvarying
+angle.
+[14]
+In addition, a rainbow is a blurred version of the bow obtained from a point source, because the disk diameter of the sun
+(0.5°) cannot be neglected compared to the width of a rainbow (2°). Further red of the first supplementary rainbow overlaps the violet
+of the primary rainbow, so rather than the final colour being a variant of spectral violet, it is actually a purple. The number of colour
+Rainbows can form in the spray of a
+waterfall (called spray bows).
+Rainbows may form in the spray
+created by waves.
+Eruption of Castle Geyser,
+Yellowstone National Park, with
+double rainbow seen in the mist
+Number of colours in spectrum or rainbow
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 4/19
+bands of a rainbow may therefore be different from the number of bands in a spectrum,
+especially if the droplets are particularly large or small. Therefore, the number of
+colours of a rainbow is variable. If, however, the word rainbow is used inaccurately to
+mean spectrum, it is the number of main colours in the spectrum.
+The question of whether everyone sees seven colours in a rainbow is related to the idea
+of linguistic relativity. Suggestions have been made that there is universality in the
+way that a rainbow is perceived.
+[15][16] However, more recent research suggests that
+the number of distinct colours observed and what these are called depend on the
+language that one uses, with people whose language has fewer colour words seeing
+fewer discrete colour bands.
+[17]
+When sunlight encounters a raindrop, part of the light is reflected and the rest enters the raindrop. The light is refracted at the surface
+of the raindrop. When this light hits the back of the raindrop, some of it is reflected off the back. When the internally reflected light
+reaches the surface again, once more some is internally reflected and some is refracted as it exits the drop. (The light that reflects off
+the drop, exits from the back, or continues to bounce around inside the drop after the second encounter with the surface, is not relevant
+to the formation of the primary rainbow.) The overall effect is that part of the incoming light is reflected back over the range of 0° to
+42°, with the most intense light at 42°.
+[18] This angle is independent of the size of the drop, but does depend on its refractive index.
+Seawater has a higher refractive index than rain water, so the radius of a "rainbow" in sea spray is smaller than a true rainbow. This is
+visible to the naked eye by a misalignment of these bows.
+[19]
+The reason the returning light is most intense at about 42° is that this is a turning point – light hitting the outermost ring of the drop
+gets returned at less than 42°, as does the light hitting the drop nearer to its centre. There is a circular band of light that all gets
+returned right around 42°. If the sun were a laser emitting parallel, monochromatic rays, then the luminance (brightness) of the bow
+would tend toward infinity at this angle (ignoring interference effects). (See Caustic (optics).) But since the sun's luminance is finite
+and its rays are not all parallel (it covers about half a degree of the sky) the luminance does not go to infinity. Furthermore, the amount
+by which light is refracted depends upon its wavelength, and hence its colour. This effect is called dispersion. Blue light (shorter
+wavelength) is refracted at a greater angle than red light, but due to the reflection of light rays from the back of the droplet, the blue
+light emerges from the droplet at a smaller angle to the original incident white light ray than the red light. Due to this angle, blue is
+seen on the inside of the arc of the primary rainbow, and red on the outside. The result of this is not only to give different colours to
+different parts of the rainbow, but also to diminish the brightness. (A "rainbow" formed by droplets of a liquid with no dispersion
+would be white, but brighter than a normal rainbow.)
+The light at the back of the raindrop does not undergo total internal reflection, and some light does emerge from the back. However,
+light coming out the back of the raindrop does not create a rainbow between the observer and the sun because spectra emitted from the
+back of the raindrop do not have a maximum of intensity, as the other visible rainbows do, and thus the colours blend together rather
+than forming a rainbow.
+[20]
+A rainbow does not exist at one particular location. Many rainbows exist; however, only one can be seen depending on the particular
+observer's viewpoint as droplets of light illuminated by the sun. All raindrops refract and reflect the sunlight in the same way, but only
+the light from some raindrops reaches the observer's eye. This light is what constitutes the rainbow for that observer. The whole
+system composed by the sun's rays, the observer's head, and the (spherical) water drops has an axial symmetry around the axis through
+the observer's head and parallel to the sun's rays. The rainbow is curved because the set of all the raindrops that have the right angle
+between the observer, the drop, and the sun, lie on a cone pointing at the sun with the observer at the tip. The base of the cone forms a
+circle at an angle of 40–42° to the line between the observer's head and their shadow but 50% or more of the circle is below the
+horizon, unless the observer is sufficiently far above the earth's surface to see it all, for example in an aeroplane (see above).
+[21][22]
+Rainbow (middle: real, bottom:
+computed) compared to true
+spectrum (top): unsaturated colours
+and different colour profile
+Explanation
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 5/19
+Alternatively, an observer with the right vantage point may see the full circle in a
+fountain or waterfall spray.
+[23]
+It is possible to determine the perceived angle which the rainbow subtends as
+follows.
+[24]
+Given a spherical raindrop, and defining the perceived angle of the rainbow as 2φ,
+and the angle of the internal reflection as 2β, then the angle of incidence of the sun's
+rays with respect to the drop's surface normal is 2β − φ. Since the angle of refraction
+is β, Snell's law gives us
+sin(2β − φ) = n sin β,
+where n = 1.333 is the refractive index of water. Solving for φ, we get
+φ = 2β − arcsin(n sin β).
+The rainbow will occur where the angle φ is maximum with respect to the angle β.
+Therefore, from calculus, we can set dφ/dβ = 0, and solve for β, which yields
+.
+Substituting back into the earlier equation for φ yields 2φmax ≈ 42° as the radius
+angle of the rainbow.
+The term double rainbow is used when both the primary and secondary rainbows are
+visible. In theory, all rainbows are double rainbows, but since the secondary bow is
+always fainter than the primary, it may be too weak to spot in practice.
+Secondary rainbows are caused by a double reflection of sunlight inside the water
+droplets. Technically the secondary bow is centred on the sun itself, but since its
+angular size is more than 90° (about 127° for violet to 130° for red), it is seen on the
+same side of the sky as the primary rainbow, about 10° outside it at an apparent angle
+of 50–53°. As a result of the "inside" of the secondary bow being "up" to the observer,
+the colours appear reversed compared to those of the primary bow.
+The secondary rainbow is fainter than the primary because more light escapes from
+two reflections compared to one and because the rainbow itself is spread over a greater
+area of the sky. Each rainbow reflects white light inside its coloured bands, but that is
+"down" for the primary and "up" for the secondary.
+[26] The dark area of unlit sky lying
+between the primary and secondary bows is called Alexander's band, after Alexander
+Light rays enter a raindrop from one
+direction (typically a straight line
+from the sun), reflect off the back of
+the raindrop, and fan out as they
+leave the raindrop. The light leaving
+the rainbow is spread over a wide
+angle, with a maximum intensity at
+the angles 40.89–42°. (Note:
+Between 2 and 100% of the light is
+reflected at each of the three
+surfaces encountered, depending
+on the angle of incidence. This
+diagram only shows the paths
+relevant to the rainbow.)
+White light separates into different
+colours on entering the raindrop due
+to dispersion, causing red light to be
+refracted less than blue light.
+Mathematical derivation
+Mathematical derivation
+Variations
+Double rainbows
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 6/19
+of Aphrodisias who first described it.
+[27]
+Unlike a double rainbow that consists of two separate and concentric rainbow arcs,
+the very rare twinned rainbow appears as two rainbow arcs that split from a single
+base.
+[28] The colours in the second bow, rather than reversing as in a secondary
+rainbow, appear in the same order as the primary rainbow. A "normal" secondary
+rainbow may be present as well. Twinned rainbows can look similar to, but should
+not be confused with supernumerary bands. The two phenomena may be told apart
+by their difference in colour profile: supernumerary bands consist of subdued
+pastel hues (mainly pink, purple and green), while the twinned rainbow shows the
+same spectrum as a regular rainbow. The cause of a twinned rainbow is the
+combination of different sizes of water drops falling from the sky. Due to air
+resistance, raindrops flatten as they fall, and flattening is more prominent in larger
+water drops. When two rain showers with different-sized raindrops combine, they
+each produce slightly different rainbows which may combine and form a twinned
+rainbow.
+[29] A numerical ray tracing study showed that a twinned rainbow on a
+photo could be explained by a mixture of 0.40 and 0.45 mm droplets. That small
+difference in droplet size resulted in a small difference in flattening of the droplet
+shape, and a large difference in flattening of the rainbow top.
+[30]
+Meanwhile, the even rarer case of a rainbow split into three branches was observed
+and photographed in nature.
+[31]
+In theory, every rainbow is a circle, but from the ground, usually only its upper half
+can be seen. Since the rainbow's centre is diametrically opposed to the sun's
+position in the sky, more of the circle comes into view as the sun approaches the horizon,
+meaning that the largest section of the circle normally seen is about 50% during sunset or
+sunrise. Viewing the rainbow's lower half requires the presence of water droplets below the
+observer's horizon, as well as sunlight that is able to reach them. These requirements are not
+usually met when the viewer is at ground level, either because droplets are absent in the required
+position, or because the sunlight is obstructed by the landscape behind the observer. From a high
+viewpoint such as a high building or an aircraft, however, the requirements can be met and the
+full-circle rainbow can be seen.
+[32][33] Like a partial rainbow, the circular rainbow can have a
+secondary bow or supernumerary bows as well.
+[34]
+It is possible to produce the full circle when
+standing on the ground, for example by spraying a water mist from a garden hose while facing
+away from the sun.
+[35]
+A circular rainbow should not be confused with the glory, which is much smaller in diameter
+and is created by different optical processes. In the right circumstances, a glory and a (circular)
+rainbow or fog bow can occur together. Another atmospheric phenomenon that may be mistaken
+for a "circular rainbow" is the 22° halo, which is caused by ice crystals rather than liquid water
+droplets, and is located around the sun (or moon), not opposite it.
+Double rainbow with Alexander's band
+visible between the primary and
+secondary bows. Also note the
+pronounced supernumerary bows
+inside the primary bow.
+Physics of a primary and secondary
+rainbow and Alexander's dark band
+[25]
+(The image of the sun in the picture is
+only conventional; all rays are parallel
+to the axis of the rainbow's cone)
+Twinned rainbow
+Circular rainbow
+Full-circle rainbow
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 7/19
+In certain circumstances, one or several narrow, faintly coloured bands can be seen
+bordering the violet edge of a rainbow; i.e., inside the primary bow or, much more
+rarely, outside the secondary. These extra bands are called supernumerary rainbows or
+supernumerary bands; together with the rainbow itself the phenomenon is also known
+as a stacker rainbow. The supernumerary bows are slightly detached from the main
+bow, become successively fainter along with their distance from it, and have pastel
+colours (consisting mainly of pink, purple and green hues) rather than the usual
+spectrum pattern.
+[36] The effect becomes apparent when water droplets are involved
+that have a diameter of about 1 mm or less; the smaller the droplets are, the broader the
+supernumerary bands become, and the less saturated their colours.
+[37] Due to their
+origin in small droplets, supernumerary bands tend to be particularly prominent in
+fogbows.
+[38]
+Supernumerary rainbows cannot be explained using classical geometric optics. The
+alternating faint bands are caused by interference between rays of light following
+slightly different paths with slightly varying lengths within the raindrops. Some rays are in phase, reinforcing each other through
+constructive interference, creating a bright band; others are out of phase by up to half a wavelength, cancelling each other out through
+destructive interference, and creating a gap. Given the different angles of refraction for rays of different colours, the patterns of
+interference are slightly different for rays of different colours, so each bright band is differentiated in colour, creating a miniature
+rainbow. Supernumerary rainbows are clearest when raindrops are small and of uniform size. The very existence of supernumerary
+rainbows was historically a first indication of the wave nature of light, and the first explanation was provided by Thomas Young in
+1804.
+[39]
+When a rainbow appears above a body of water, two complementary mirror bows may
+be seen below and above the horizon, originating from different light paths. Their
+names are slightly different.
+A reflected rainbow may appear in the water surface below the horizon.
+[40] The
+sunlight is first deflected by the raindrops, and then reflected off the body of water,
+before reaching the observer. The reflected rainbow is frequently visible, at least
+partially, even in small puddles.
+A reflection rainbow may be produced where sunlight reflects off a body of water
+before reaching the raindrops), if the water body is large, quiet over its entire surface,
+and close to the rain curtain. The reflection rainbow appears above the horizon. It intersects the normal rainbow at the horizon, and its
+arc reaches higher in the sky, with its centre as high above the horizon as the normal rainbow's centre is below it. Due to the
+combination of requirements, a reflection rainbow is rarely visible.
+Up to eight separate bows may be distinguished if the reflected and reflection rainbows happen to occur simultaneously: The normal
+(non-reflection) primary and secondary bows above the horizon (1, 2) with their reflected counterparts below it (3, 4), and the
+reflection primary and secondary bows above the horizon (5, 6) with their reflected counterparts below it (7, 8).
+[41][42]
+Supernumerary rainbows
+Contrast-enhanced photograph of a
+rainbow with additional
+supernumerary bands inside the
+primary bow
+Reflected rainbow, reflection rainbow
+Reflected rainbow
+Monochrome rainbow
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 8/19
+Occasionally a shower may happen at sunrise or
+sunset, where the shorter wavelengths like blue
+and green have been scattered and essentially
+removed from the spectrum. Further scattering
+may occur due to the rain, and the result can be
+the rare and dramatic monochrome or red
+rainbow.
+[43]
+In addition to the common primary and
+secondary rainbows, it is also possible for rainbows of higher orders to form. The order of a
+rainbow is determined by the number of light reflections inside the water droplets that create it:
+One reflection results in the first-order or primary rainbow; two reflections create the secondorder or secondary rainbow. More internal reflections cause bows of higher orders—
+theoretically unto infinity.
+[44] As more and more light is lost with each internal reflection,
+however, each subsequent bow becomes progressively dimmer and therefore increasingly harder
+to spot. An additional challenge in observing the third-order (or tertiary) and fourth-order (quaternary) rainbows is their location in
+the direction of the sun (about 40° and 45° from the sun, respectively), causing them to become drowned in its glare.
+[45]
+For these reasons, naturally occurring rainbows of an order higher than 2 are rarely visible to the naked eye. Nevertheless, sightings of
+the third-order bow in nature have been reported, and in 2011 it was photographed definitively for the first time.
+[46][47] Shortly after,
+the fourth-order rainbow was photographed as well,
+[48][49] and in 2014 the first ever pictures of the fifth-order (or quinary) rainbow,
+located in between the primary and secondary bows, were published.
+[50]
+In a laboratory setting, it is possible to create bows of much higher orders. Felix Billet (1808–1882) depicted angular positions up to
+the 19th-order rainbow, a pattern he called a "rose of rainbows".
+[51][52][53]
+In the laboratory, it is possible to observe higher-order
+rainbows by using extremely bright and well collimated light produced by lasers. Up to the 200th-order rainbow was reported by Ng et
+al. in 1998 using a similar method but an argon ion laser beam.
+[54]
+Tertiary and quaternary rainbows should not be confused with "triple" and "quadruple" rainbows—terms sometimes erroneously used
+to refer to the—much more common—supernumerary bows and reflection rainbows.
+Like most atmospheric optical phenomena, rainbows can be caused by light from the Sun, but also from the Moon. In case of the
+latter, the rainbow is referred to as a lunar rainbow or moonbow. They are much dimmer and rarer than solar rainbows, requiring the
+Moon to be near-full in order for them to be seen. For the same reason, moonbows are often perceived as white and may be thought of
+as monochrome. The full spectrum is present, however, but the human eye is not normally sensitive enough to see the colours. Long
+exposure photographs will sometimes show the colour in this type of rainbow.
+[55]
+Fogbows form in the same way as rainbows, but they are formed by much smaller cloud and fog droplets that diffract light
+extensively. They are almost white with faint reds on the outside and blues inside; often one or more broad supernumerary bands can
+be discerned inside the inner edge. The colours are dim because the bow in each colour is very broad and the colours overlap.
+Fogbows are commonly seen over water when air in contact with the cooler water is chilled, but they can be found anywhere if the fog
+is thin enough for the sun to shine through and the sun is fairly bright. They are very large—almost as big as a rainbow and much
+Reflection rainbow (top)
+and normal rainbow
+(bottom) at sunset
+Unenhanced photo of a red
+(monochrome) rainbow Higher-order rainbows
+Rainbows under moonlight
+Fogbow
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 9/19
+broader. They sometimes appear with a
+glory at the bow's centre.
+[56]
+Fog bows should not be confused with
+ice halos, which are very common
+around the world and visible much
+more often than rainbows (of any
+order),
+[57] yet are unrelated to
+rainbows.
+The circumzenithal and circumhorizontal arcs are two related optical phenomena
+similar in appearance to a rainbow, but unlike the latter, their origin lies in light
+refraction through hexagonal ice crystals rather than liquid water droplets. This means
+that they are not rainbows, but members of the large family of halos.
+Both arcs are brightly coloured ring segments centred on the zenith, but in different
+positions in the sky: The circumzenithal arc is notably curved and located high above
+the Sun (or Moon) with its convex side pointing downwards (creating the impression
+of an "upside down rainbow"); the circumhorizontal arc runs much closer to the
+horizon, is more straight and located at a significant distance below the Sun (or Moon).
+Both arcs have their red side pointing towards the sun and their violet part away from
+it, meaning the circumzenithal arc is red on the bottom, while the circumhorizontal arc
+is red on top.
+[58][59]
+The circumhorizontal arc is sometimes referred to by the misnomer "fire rainbow". In order to
+view it, the Sun or Moon must be at least 58° above the horizon, making it a rare occurrence at
+higher latitudes. The circumzenithal arc, visible only at a solar or lunar elevation of less than
+32°, is much more common, but often missed since it occurs almost directly overhead.
+It has been suggested that rainbows might exist on Saturn's moon Titan, as it has a wet surface
+and humid clouds. The radius of a Titan rainbow would be about 49° instead of 42°, because the
+fluid in that cold environment is methane instead of water. Although visible rainbows may be
+rare due to Titan's hazy skies, infrared rainbows may be more common, but an observer would
+need infrared night vision goggles to see them.
+[60]
+Droplets (or spheres) composed of materials with different refractive indices than plain water produce rainbows with different radius
+angles. Since salt water has a higher refractive index, a sea spray bow doesn't perfectly align with the ordinary rainbow, if seen at the
+same spot.
+[61] Tiny plastic or glass marbles may be used in road marking as a reflectors to enhance its visibility by drivers at night.
+Due to a much higher refractive index, rainbows observed on such marbles have a noticeably smaller radius.
+[62] One can easily
+reproduce such phenomena by sprinkling liquids of different refractive indices in the air, as illustrated in the photo.
+Spray moonbow at the Lower
+Yosemite Fall
+Fogbow and glory.
+Circumhorizontal and circumzenithal arcs
+A circumhorizontal arc (bottom),
+below a circumscribed halo
+Circumzenithal arc
+Rainbows on Titan
+Rainbows with different materials
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 10/19
+The displacement of the rainbow due to different refractive indices can be pushed to a peculiar
+limit. For a material with a refractive index larger than 2, there is no angle fulfilling the
+requirements for the first order rainbow. For example, the index of refraction of diamond is
+about 2.4, so diamond spheres would produce rainbows starting from the second order, omitting
+the first order. In general, as the refractive index exceeds a number n+1, where n is a natural
+number, the critical incidence angle for n times internally reflected rays escapes the domain
+. This results in a rainbow of the n-th order shrinking to the antisolar point and vanishing.
+The classical Greek scholar Aristotle (384–322 BC) was first to devote serious attention to the
+rainbow.
+[63] According to Raymond L. Lee and Alistair B. Fraser, "Despite its many flaws and
+its appeal to Pythagorean numerology, Aristotle's qualitative explanation showed an
+inventiveness and relative consistency that was unmatched for centuries. After Aristotle's death,
+much rainbow theory consisted of reaction to his work, although not all of this was
+uncritical."
+[64]
+In Book I of Naturales Quaestiones (c. 65 AD), the Roman philosopher Seneca the Younger discusses various theories of the
+formation of rainbows extensively, including those of Aristotle. He notices that rainbows appear always opposite to the sun, that they
+appear in water sprayed by a rower, in the water spat by a fuller on clothes stretched on pegs or by water sprayed through a small hole
+in a burst pipe. He even speaks of rainbows produced by small rods (virgulae) of glass, anticipating Newton's experiences with prisms.
+He takes into account two theories: one, that the rainbow is produced by the sun reflecting in each water drop, the other, that it is
+produced by the sun reflected in a cloud shaped like a concave mirror; he favours the latter. He also discusses other phenomena related
+to rainbows: the mysterious "virgae" (rods), halos and parhelia.
+[65]
+According to Hüseyin Gazi Topdemir, the Arab physicist and polymath Ibn al-Haytham (Alhazen; 965–1039), attempted to provide a
+scientific explanation for the rainbow phenomenon. In his Maqala fi al-Hala wa Qaws Quzah (On the Rainbow and Halo), alHaytham "explained the formation of rainbow as an image, which forms at a concave mirror. If the rays of light coming from a farther
+light source reflect to any point on axis of the concave mirror, they form concentric circles in that point. When it is supposed that the
+sun as a farther light source, the eye of viewer as a point on the axis of mirror and a cloud as a reflecting surface, then it can be
+observed the concentric circles are forming on the axis."
+[66] He was not able to verify this because his theory that "light from the sun is
+reflected by a cloud before reaching the eye" did not allow for a possible experimental verification.
+[67] This explanation was repeated
+by Averroes,
+[66] and, though incorrect, provided the groundwork for the correct explanations later given by Kamāl al-Dīn al-Fārisī in
+1309 and, independently, by Theodoric of Freiberg (c. 1250–c. 1311)
+[68]—both having studied al-Haytham's Book of Optics.
+[69]
+Ibn al-Haytham's contemporary, the Persian philosopher and polymath Ibn Sīnā (Avicenna; 980–1037), provided an alternative
+explanation, writing "that the bow is not formed in the dark cloud but rather in the very thin mist lying between the cloud and the sun
+or observer. The cloud, he thought, serves simply as the background of this thin substance, much as a quicksilver lining is placed upon
+the rear surface of the glass in a mirror. Ibn Sīnā would change the place not only of the bow, but also of the colour formation, holding
+the iridescence to be merely a subjective sensation in the eye."
+[70] This explanation, however, was also incorrect.
+[66]
+Ibn Sīnā's account
+accepts many of Aristotle's arguments on the rainbow.
+[71]
+In Song Dynasty China (960–1279), a polymath scholar-official named Shen Kuo (1031–1095) hypothesised—as a certain Sun Sikong
+(1015–1076) did before him—that rainbows were formed by a phenomenon of sunlight encountering droplets of rain in the air.
+[72]
+Paul Dong writes that Shen's explanation of the rainbow as a phenomenon of atmospheric refraction "is basically in accord with
+modern scientific principles."
+[73]
+A first order rainbow from
+water (left) and a sugar
+solution (right).
+Scientific history
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 11/19
+According to Nader El-Bizri, the Persian astronomer, Qutb al-Din al-Shirazi (1236–1311), gave a fairly accurate explanation for the
+rainbow phenomenon. This was elaborated on by his student, Kamāl al-Dīn al-Fārisī (1267–1319), who gave a more mathematically
+satisfactory explanation of the rainbow. He "proposed a model where the ray of light from the sun was refracted twice by a water
+droplet, one or more reflections occurring between the two refractions." An experiment with a water-filled glass sphere was conducted
+and al-Farisi showed the additional refractions due to the glass could be ignored in his model.
+[67] As he noted in his Kitab Tanqih alManazir (The Revision of the Optics), al-Farisi used a large clear vessel of glass in the shape of a sphere, which was filled with water,
+in order to have an experimental large-scale model of a rain drop. He then placed this model within a camera obscura that has a
+controlled aperture for the introduction of light. He projected light unto the sphere and ultimately deduced through several trials and
+detailed observations of reflections and refractions of light that the colours of the rainbow are phenomena of the decomposition of
+light.
+In Europe, Ibn al-Haytham's Book of Optics was translated into Latin and studied by Robert Grosseteste. His work on light was
+continued by Roger Bacon, who wrote in his Opus Majus of 1268 about experiments with light shining through crystals and water
+droplets showing the colours of the rainbow.
+[74]
+In addition, Bacon was the first to calculate the angular size of the rainbow. He stated
+that the rainbow summit can not appear higher than 42° above the horizon.
+[75] Theodoric of Freiberg is known to have given an
+accurate theoretical explanation of both the primary and secondary rainbows in 1307. He explained the primary rainbow, noting that
+"when sunlight falls on individual drops of moisture, the rays undergo two refractions (upon ingress and egress) and one reflection (at
+the back of the drop) before transmission into the eye of the observer."
+[76][77] He explained the secondary rainbow through a similar
+analysis involving two refractions and two reflections.
+Descartes' 1637 treatise, Discourse on Method, further advanced this explanation.
+Knowing that the size of raindrops did not appear to affect the observed rainbow, he
+experimented with passing rays of light through a large glass sphere filled with water.
+By measuring the angles that the rays emerged, he concluded that the primary bow was
+caused by a single internal reflection inside the raindrop and that a secondary bow
+could be caused by two internal reflections. He supported this conclusion with a
+derivation of the law of refraction (subsequently to, but independently of, Snell) and
+correctly calculated the angles for both bows. His explanation of the colours, however,
+was based on a mechanical version of the traditional theory that colours were produced
+by a modification of white light.
+[78][79]
+Isaac Newton demonstrated that white light was composed of the light of all the
+colours of the rainbow, which a glass prism could separate into the full spectrum of
+colours, rejecting the theory that the colours were produced by a modification of white
+light. He also showed that red light is refracted less than blue light, which led to the
+first scientific explanation of the major features of the rainbow.
+[80] Newton's corpuscular theory of light was unable to explain
+supernumerary rainbows, and a satisfactory explanation was not found until Thomas Young realised that light behaves as a wave under
+certain conditions, and can interfere with itself.
+Young's work was refined in the 1820s by George Biddell Airy, who explained the dependence of the strength of the colours of the
+rainbow on the size of the water droplets.
+[81] Modern physical descriptions of the rainbow are based on Mie scattering, work published
+by Gustav Mie in 1908.
+[82] Advances in computational methods and optical theory continue to lead to a fuller understanding of
+rainbows. For example, Nussenzveig provides a modern overview.
+[83]
+René Descartes' sketch of how
+primary and secondary rainbows are
+formed
+Experiments
+11/5/2019 Rainbow - Wikipedia
+https://en.wikipedia.org/wiki/Rainbow 12/19
+Experiments on the rainbow phenomenon using artificial raindrops, i.e. water-filled
+spherical flasks, go back at least to Theodoric of Freiberg in the 14th century. Later,
+also Descartes studied the phenomenon using a Florence flask. A flask experiment
+known as Florence's rainbow is still often used today as an imposing and intuitively
+accessible demonstration experiment of the rainbow phenomenon.
+[84][85][86]
+It consists
+in illuminating (with parallel white light) a water-filled spherical flask through a hole
+in a screen. A rainbow will then appear thrown back / projected on the screen,
+provided the screen is large enough. Due to the finite wall thickness and the
+macroscopic character of the artificial raindrop, several subtle differences exist as
+compared to the natural phenomenon,
+[87][88]
+including slightly changed rainbow
+angles and a splitting of the rainbow orders.
+A very similar experiment consists in using a cylindrical glass vessel filled with water
+or a solid transparent cylinder and illuminated either parallel to the circular base (i.e.
+light rays remaining at a fixed height while they transit the cylinder)
+[89][90] or under an
+angle to the base. Under these latter conditions the rainbow angles change relative to
+the natural phenomenon since the effective index of refraction of water changes (Bravais' index of refraction for inclined rays
+applies).
+[87][88]
+Other experiments use small liquid drops,
+[52][53] see text above.
+Rainbows occur frequently in mythology, and have been used in the arts. One of the
+earliest literary occurrences of a rainbow is in the Book of Genesis chapter 9, as part of
+the flood story of Noah, where it is a sign of God's covenant to never destroy all life on
+earth with a global flood again. In Norse mythology, the rainbow bridge Bifröst
+connects the world of men (Midgard) and the realm of the gods (Asgard). Cuchavira
+was the god of the rainbow for the Muisca in present-day Colombia and when the
+regular rains on the Bogotá savanna were over, the people thanked him offering gold,
+snails and small emeralds. The Irish leprechaun's secret hiding place for his pot of gold
+is usually said to be at the end of the rainbow. This place is appropriately impossible to
+reach, because the rainbow is an optical effect which cannot be approached.
+Rainbows appear in heraldry - in heraldry the rainbow proper consists of 4 bands of
+color (Or, Gules, Vert, Argent) with the ends resting on clouds.
+[91] Generalised
+examples in coat of arms include those of the towns of Regen or Pfreimd, both in Bavaria, Germany; and of Bouffémont, France; and
+of the 69th Infantry Regiment (New York) of the Army National Guard (USA).
+Rainbow flags have been used for centuries. It was a symbol of the Cooperative movement in the German Peasants' War in the 16th
+century, of peace in Italy, and of gay pride and LGBT social movements since the 1970s. In 1994, Archbishop Desmond Tutu and
+President Nelson Mandela described newly democratic post-apartheid South Africa as the rainbow nation. The rainbow has also been
+used in technology product logos, including the Apple computer logo. Many political alliances spanning multiple political parties have
+called themselves a "Rainbow Coalition".
+Atmospheric optics
+Round bottom flask rainbow
+demonstration experiment -
+Johnson 1882
+Culture
+Depiction of the rainbow in the Book
+of Genesis
+See also
+
