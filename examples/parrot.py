@@ -1,4 +1,4 @@
-from os import path
+import os
 from PIL import Image
 
 import numpy as np
@@ -8,13 +8,13 @@ from scipy.ndimage import gaussian_gradient_magnitude
 from wordcloud import WordCloud, ImageColorGenerator
 
 # get data directory (using getcwd() is needed to support running example in generated IPython notebook)
-d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 # load wikipedia text on rainbow
-text = open(path.join(d, 'wiki_rainbow.txt')).read()
+text = open(os.path.join(d, 'wiki_rainbow.txt')).read()
 
 # load image. This has been modified in gimp to be brighter and have more saturation.
-parrot_color = np.array(Image.open(path.join(d, "parrot-by-jose-mari-gimenez2.jpg")))
+parrot_color = np.array(Image.open(os.path.join(d, "parrot-by-jose-mari-gimenez2.jpg")))
 # subsample by factor of 3. Very lossy but for a wordcloud we don't really care.
 parrot_color = parrot_color[::3, ::3]
 
