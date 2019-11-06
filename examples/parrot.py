@@ -1,3 +1,11 @@
+"""
+Image-colored wordcloud with boundary map
+=========================================
+A slightly more elaborate version of an image-colored wordcloud
+that also takes edges in the image into account.
+Recreating an image similar to the parrot example.
+"""
+
 import os
 from PIL import Image
 
