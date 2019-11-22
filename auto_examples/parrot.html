@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image-colored wordcloud with boundary map &mdash; wordcloud 1.5.0.post52+gf288fd5 documentation</title>
+  <title>Image-colored wordcloud with boundary map &mdash; wordcloud 1.6.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.5.0.post52+gf288fd5
+                1.6.0
               </div>
             
           
@@ -224,18 +224,18 @@ Recreating an image similar to the parrot example.</p>
 <span class="c1"># create wordcloud. A bit sluggish, you can subsample more strongly for quicker rendering</span>
 <span class="c1"># relative_scaling=0 means the frequencies in the data are reflected less</span>
 <span class="c1"># acurately but it makes a better picture</span>
-<span class="n">wc</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">parrot_mask</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">relative_scaling</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">parrot_mask</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">relative_scaling</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># generate word cloud</span>
-<span class="n">wc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="p">)</span>
 
 <span class="c1"># create coloring from image</span>
-<span class="n">image_colors</span> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">parrot_color</span><span class="p">)</span>
-<span class="n">wc</span><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">image_colors</span><span class="p">)</span>
+<a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">image_colors</span></a> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">parrot_color</span><span class="p">)</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">image_colors</span></a><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
-<span class="n">wc</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;parrot_new.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;parrot_new.png&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original Image&quot;</span><span class="p">)</span>
@@ -247,7 +247,7 @@ Recreating an image similar to the parrot example.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  22.476 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  17.431 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-parrot-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/432cc2a783906adc6de39425331180db/parrot.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">parrot.py</span></code></a></p>

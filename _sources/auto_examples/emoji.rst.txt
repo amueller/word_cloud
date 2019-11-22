@@ -30,6 +30,7 @@ on ubuntu if you are having problems.
 
 
 
+
 .. code-block:: default
 
     import io
@@ -69,7 +70,7 @@ on ubuntu if you are having problems.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.423 seconds)
+   **Total running time of the script:** ( 0 minutes  0.392 seconds)
 
 
 .. _sphx_glr_download_auto_examples_emoji.py:

@@ -42,6 +42,7 @@ Recreating an image similar to the parrot example.
 
 
 
+
 .. code-block:: default
 
 
@@ -102,7 +103,7 @@ Recreating an image similar to the parrot example.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  22.476 seconds)
+   **Total running time of the script:** ( 0 minutes  17.431 seconds)
 
 
 .. _sphx_glr_download_auto_examples_parrot.py:

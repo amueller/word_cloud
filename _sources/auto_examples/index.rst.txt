@@ -17,9 +17,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_single_word_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_single_word_thumb.png
 
-        :ref:`sphx_glr_auto_examples_single_word.py`
+     :ref:`sphx_glr_auto_examples_single_word.py`
 
 .. raw:: html
 
@@ -37,9 +37,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_simple_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_simple_thumb.png
 
-        :ref:`sphx_glr_auto_examples_simple.py`
+     :ref:`sphx_glr_auto_examples_simple.py`
 
 .. raw:: html
 
@@ -57,9 +57,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_masked_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_masked_thumb.png
 
-        :ref:`sphx_glr_auto_examples_masked.py`
+     :ref:`sphx_glr_auto_examples_masked.py`
 
 .. raw:: html
 
@@ -77,9 +77,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_frequency_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_frequency_thumb.png
 
-        :ref:`sphx_glr_auto_examples_frequency.py`
+     :ref:`sphx_glr_auto_examples_frequency.py`
 
 .. raw:: html
 
@@ -97,9 +97,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_colored_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_colored_thumb.png
 
-        :ref:`sphx_glr_auto_examples_colored.py`
+     :ref:`sphx_glr_auto_examples_colored.py`
 
 .. raw:: html
 
@@ -117,9 +117,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_emoji_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_emoji_thumb.png
 
-        :ref:`sphx_glr_auto_examples_emoji.py`
+     :ref:`sphx_glr_auto_examples_emoji.py`
 
 .. raw:: html
 
@@ -137,9 +137,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_a_new_hope_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_a_new_hope_thumb.png
 
-        :ref:`sphx_glr_auto_examples_a_new_hope.py`
+     :ref:`sphx_glr_auto_examples_a_new_hope.py`
 
 .. raw:: html
 
@@ -153,13 +153,13 @@ Gallery of Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Image">
+    <div class="sphx-glr-thumbcontainer" tooltip="Image-colored wordcloud with boundary map">
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_parrot_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_parrot_thumb.png
 
-        :ref:`sphx_glr_auto_examples_parrot.py`
+     :ref:`sphx_glr_auto_examples_parrot.py`
 
 .. raw:: html
 
@@ -177,9 +177,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_wordcloud_cn_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_wordcloud_cn_thumb.png
 
-        :ref:`sphx_glr_auto_examples_wordcloud_cn.py`
+     :ref:`sphx_glr_auto_examples_wordcloud_cn.py`
 
 .. raw:: html
 
@@ -197,9 +197,9 @@ Gallery of Examples
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_colored_by_group_thumb.png
+ .. figure:: /auto_examples/images/thumb/sphx_glr_colored_by_group_thumb.png
 
-        :ref:`sphx_glr_auto_examples_colored_by_group.py`
+     :ref:`sphx_glr_auto_examples_colored_by_group.py`
 
 .. raw:: html
 
@@ -212,7 +212,7 @@ Gallery of Examples
    /auto_examples/colored_by_group
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
