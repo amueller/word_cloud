@@ -7,6 +7,9 @@ Changelog
 This is the list of changes to wordcloud between each release. For full
 details, see the commit logs at https://github.com/amueller/word_cloud
 
+Next Release
+==============
+
 WordCloud 1.6.0
 ===============
 
