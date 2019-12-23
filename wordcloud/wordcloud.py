@@ -742,67 +742,37 @@ class WordCloud(object):
         self._check_generated()
 
         # Get output size, in pixels
+        # TODO check self.scale
         if self.mask is not None:
             width = self.mask.shape[1]
             height = self.mask.shape[0]
         else:
             height, width = self.height, self.width
-
-        # Import locally, to make this dependency optional
-        # TODO try to use Pillow's bindings instead, to avoid additional dependency
-        import freetype
-
-        # Use FreeType to analyze font
-        face = freetype.Face(self.font_path)
-
-        # Compute text bounding box
-        # TODO maybe promote this as a full-fledged internal method
-        def compute_box(text):
-            previous_char = 0
-            pen_x, pen_y = 0, 0
-            min_x, min_y = 0, 0
-            max_x, max_y = 0, 0
-            for char in text:
-                face.load_char(char, freetype.FT_LOAD_RENDER)
-                kerning = face.get_kerning(previous_char, char)
-                previous_char = char
-
-                # Get raw bitmap
-                width  = face.glyph.bitmap.width
-                rows   = face.glyph.bitmap.rows
-                top    = face.glyph.bitmap_top
-                left   = face.glyph.bitmap_left
-
-                # Apply character bounding box
-                pen_x += kerning.x
-                x0 = (pen_x >> 6) + left
-                x1 = x0 + width
-                y0 = (pen_y >> 6) - (rows - top)
-                y1 = y0 + rows
-
-                # Update global bounding box
-                min_x, max_x = min(min_x, x0), max(max_x, x1)
-                min_y, max_y = min(min_y, y0), max(max_y, y1)
-
-                # Move pointer
-                pen_x += face.glyph.advance.x
-                pen_y += face.glyph.advance.y
-
-            return min_x, min_y, max_x, max_y
+        
+        # Get max font size
+        if self.max_font_size is None:
+            max_font_size = max(w[1] for w in self.layout_)
+        else:
+            max_font_size = self.max_font_size
 
         # Text buffer
         result = []
 
         # Prepare global style
         style = {}
+        font = ImageFont.truetype(self.font_path, int(max_font_size))
+        font_family, font_style = font.getname()
         # TODO properly escape/quote this
         # TODO should add option to specify URL for font (i.e. WOFF file)
         # TODO should maybe add option to embed font in SVG file
-        style['font-family'] = repr(face.family_name.decode('utf-8'))
-        if face.style_flags & freetype.FT_STYLE_FLAG_BOLD:
+        style['font-family'] = repr(font_family)
+        font_style = font_style.lower()
+        if 'bold' in font_style:
             style['font-weight'] = 'bold'
-        if face.style_flags & freetype.FT_STYLE_FLAG_ITALIC:
-            style['font-weight'] = 'italic'
+        if 'italic' in font_style:
+            style['font-style'] = 'italic'
+        elif 'oblique' in font_style:
+            style['font-style'] = 'oblique'
         style = ';'.join(':'.join(pair) for pair in style.items())
 
         # Add header
@@ -831,9 +801,16 @@ class WordCloud(object):
         # For each word in layout
         for (word, count), font_size, (y, x), orientation, color in self.layout_:
 
+            # Get text metrics
+            font = ImageFont.truetype(self.font_path, int(font_size))
+            (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
+            ascent, descent = font.getmetrics()
+            
             # Compute text bounding box
-            face.set_char_size(font_size * 64)
-            min_x, min_y, max_x, max_y = compute_box(word)
+            min_x = offset_x
+            max_x = size_x - offset_x
+            min_y = ascent - size_y
+            max_y = ascent - offset_y
 
             # Compute text attributes
             attributes = {}
