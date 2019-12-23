@@ -728,6 +728,133 @@ class WordCloud(object):
 
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
+    
+    def to_svg(self):
+        """Export to SVG.
+
+        Returns
+        -------
+        content : string
+            Word cloud image as SVG string
+        """
+
+        # Make sure layout is generated
+        self._check_generated()
+
+        # Get output size, in pixels
+        if self.mask is not None:
+            width = self.mask.shape[1]
+            height = self.mask.shape[0]
+        else:
+            height, width = self.height, self.width
+
+        # Import locally, to make this dependency optional
+        # TODO try to use Pillow's bindings instead, to avoid additional dependency
+        import freetype
+
+        # Use FreeType to analyze font
+        face = freetype.Face(self.font_path)
+
+        # Compute text bounding box
+        # TODO maybe promote this as a full-fledged internal method
+        def compute_box(text):
+            previous_char = 0
+            pen_x, pen_y = 0, 0
+            min_x, min_y = 0, 0
+            max_x, max_y = 0, 0
+            for char in text:
+                face.load_char(char, freetype.FT_LOAD_RENDER)
+                kerning = face.get_kerning(previous_char, char)
+                previous_char = char
+
+                # Get raw bitmap
+                width  = face.glyph.bitmap.width
+                rows   = face.glyph.bitmap.rows
+                top    = face.glyph.bitmap_top
+                left   = face.glyph.bitmap_left
+
+                # Apply character bounding box
+                pen_x += kerning.x
+                x0 = (pen_x >> 6) + left
+                x1 = x0 + width
+                y0 = (pen_y >> 6) - (rows - top)
+                y1 = y0 + rows
+
+                # Update global bounding box
+                min_x, max_x = min(min_x, x0), max(max_x, x1)
+                min_y, max_y = min(min_y, y0), max(max_y, y1)
+
+                # Move pointer
+                pen_x += face.glyph.advance.x
+                pen_y += face.glyph.advance.y
+
+            return min_x, min_y, max_x, max_y
+
+        # Text buffer
+        result = []
+
+        # Prepare global style
+        style = {}
+        # TODO properly escape/quote this
+        # TODO should add option to specify URL for font (i.e. WOFF file)
+        # TODO should maybe add option to embed font in SVG file
+        style['font-family'] = repr(face.family_name.decode('utf-8'))
+        if face.style_flags & freetype.FT_STYLE_FLAG_BOLD:
+            style['font-weight'] = 'bold'
+        if face.style_flags & freetype.FT_STYLE_FLAG_ITALIC:
+            style['font-weight'] = 'italic'
+        style = ';'.join(':'.join(pair) for pair in style.items())
+
+        # Add header
+        result.append(
+            '<svg'
+            ' xmlns="http://www.w3.org/2000/svg"'
+            ' width="{}"'
+            ' height="{}"'
+            ' style="{}"'
+            '>'
+            .format(width, height, style)
+        )
+
+        # Add background
+        if self.background_color is not None:
+            result.append(
+                '<rect'
+                ' width="100%"'
+                ' height="100%"'
+                ' style="fill:{}"'
+                '>'
+                '</rect>'
+                .format(self.background_color)
+            )
+
+        # For each word in layout
+        for (word, count), font_size, (y, x), orientation, color in self.layout_:
+
+            # Compute text bounding box
+            face.set_char_size(font_size * 64)
+            min_x, min_y, max_x, max_y = compute_box(word)
+
+            # Compute text attributes
+            attributes = {}
+            if orientation == Image.ROTATE_90:
+                x += max_y
+                y += max_x - min_x
+                attributes['transform'] = 'translate({},{}) rotate(-90)'.format(x, y)
+            else:
+                x += min_x
+                y += max_y
+                attributes['transform'] = 'translate({},{})'.format(x, y)
+            attributes['font-size'] = '{}'.format(font_size)
+            attributes['style'] = 'fill:{}'.format(color)
+
+            # Create node
+            attributes = ' '.join('{}="{}"'.format(k, v) for k, v in attributes.items())
+            result.append('<text {}>{}</text>'.format(attributes, word))
+
+        # Complete SVG file
+        result.append('</svg>')
+        return '\n'.join(result)
 
     def _get_bolean_mask(self, mask):
         """Cast to two dimensional boolean mask."""
