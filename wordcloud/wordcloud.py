@@ -742,13 +742,12 @@ class WordCloud(object):
         self._check_generated()
 
         # Get output size, in pixels
-        # TODO check self.scale
         if self.mask is not None:
             width = self.mask.shape[1]
             height = self.mask.shape[0]
         else:
             height, width = self.height, self.width
-        
+
         # Get max font size
         if self.max_font_size is None:
             max_font_size = max(w[1] for w in self.layout_)
@@ -760,7 +759,7 @@ class WordCloud(object):
 
         # Prepare global style
         style = {}
-        font = ImageFont.truetype(self.font_path, int(max_font_size))
+        font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
         font_family, font_style = font.getname()
         # TODO properly escape/quote this
         # TODO should add option to specify URL for font (i.e. WOFF file)
@@ -783,7 +782,7 @@ class WordCloud(object):
             ' height="{}"'
             ' style="{}"'
             '>'
-            .format(width, height, style)
+            .format(width * self.scale, height * self.scale, style)
         )
 
         # Add background
@@ -800,12 +799,14 @@ class WordCloud(object):
 
         # For each word in layout
         for (word, count), font_size, (y, x), orientation, color in self.layout_:
+            x *= self.scale
+            y *= self.scale
 
             # Get text metrics
-            font = ImageFont.truetype(self.font_path, int(font_size))
+            font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
             (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
             ascent, descent = font.getmetrics()
-            
+
             # Compute text bounding box
             min_x = offset_x
             max_x = size_x - offset_x
@@ -822,7 +823,7 @@ class WordCloud(object):
                 x += min_x
                 y += max_y
                 attributes['transform'] = 'translate({},{})'.format(x, y)
-            attributes['font-size'] = '{}'.format(font_size)
+            attributes['font-size'] = '{}'.format(font_size * self.scale)
             attributes['style'] = 'fill:{}'.format(color)
 
             # Create node
