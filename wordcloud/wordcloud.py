@@ -9,8 +9,10 @@ from __future__ import division
 
 import warnings
 from random import Random
+import io
 import os
 import re
+import base64
 import sys
 import colorsys
 import matplotlib
@@ -729,7 +731,7 @@ class WordCloud(object):
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
     
-    def to_svg(self):
+    def to_svg(self, embed_image=False):
         """Export to SVG.
 
         Returns
@@ -796,6 +798,21 @@ class WordCloud(object):
                 '>'
                 '</rect>'
                 .format(self.background_color)
+            )
+        
+        # Embed image, useful for debug purpose
+        if embed_image:
+            image = self.to_image()
+            data = io.BytesIO()
+            image.save(data, format='JPEG')
+            data = base64.b64encode(data.getbuffer()).decode('ascii')
+            result.append(
+                '<image'
+                ' width="100%"'
+                ' height="100%"'
+                ' href="data:image/jpg;base64,{}"'
+                '/>'
+                .format(data)
             )
 
         # For each word in layout
