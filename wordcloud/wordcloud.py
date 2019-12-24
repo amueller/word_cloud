@@ -761,9 +761,10 @@ class WordCloud(object):
         style = {}
         font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
         font_family, font_style = font.getname()
-        # TODO properly escape/quote this
+        # TODO properly escape/quote this name
         # TODO should add option to specify URL for font (i.e. WOFF file)
         # TODO should maybe add option to embed font in SVG file
+        # TODO when embedding, we should try to embed only a subset
         style['font-family'] = repr(font_family)
         font_style = font_style.lower()
         if 'bold' in font_style:
@@ -801,14 +802,15 @@ class WordCloud(object):
         for (word, count), font_size, (y, x), orientation, color in self.layout_:
             x *= self.scale
             y *= self.scale
-
+            
             # Get text metrics
             font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
             (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
             ascent, descent = font.getmetrics()
 
             # Compute text bounding box
-            min_x = offset_x
+            # TODO some browser do not render glyphs the same way (e.g. Segoe Script in Chrome is different, while in Internet Explorer it matches to_image)
+            min_x = -offset_x
             max_x = size_x - offset_x
             min_y = ascent - size_y
             max_y = ascent - offset_y
@@ -829,6 +831,8 @@ class WordCloud(object):
             # Create node
             attributes = ' '.join('{}="{}"'.format(k, v) for k, v in attributes.items())
             result.append('<text {}>{}</text>'.format(attributes, word))
+
+        # TODO draw contour
 
         # Complete SVG file
         result.append('</svg>')
