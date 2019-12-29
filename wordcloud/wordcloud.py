@@ -730,9 +730,23 @@ class WordCloud(object):
 
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
-    
+
     def to_svg(self, embed_image=False):
         """Export to SVG.
+
+        Font is assumed to be available to the SVG reader. Otherwise, text
+        coordinates may produce artifacts when rendered with replacement font.
+
+        Note that some renderers do not handle glyphs the same way, and may
+        differ from `to_image` result. In particular, handwriting-like fonts
+        (e.g. Segoe Script) ligatures might not be properly rendered, which
+        could introduce discrepancies in tight layouts.
+
+        Parameters
+        ----------
+        embed_image : bool, default=False
+            Whether to include rasterized image inside resulting SVG file.
+            Useful for debugging.
 
         Returns
         -------
@@ -799,7 +813,7 @@ class WordCloud(object):
                 '</rect>'
                 .format(self.background_color)
             )
-        
+
         # Embed image, useful for debug purpose
         if embed_image:
             image = self.to_image()
@@ -819,17 +833,15 @@ class WordCloud(object):
         for (word, count), font_size, (y, x), orientation, color in self.layout_:
             x *= self.scale
             y *= self.scale
-            
+
             # Get text metrics
             font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
             (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
             ascent, descent = font.getmetrics()
 
             # Compute text bounding box
-            # TODO some browser do not render glyphs the same way (e.g. Segoe Script in Chrome is different, while in Internet Explorer it matches to_image)
             min_x = -offset_x
             max_x = size_x - offset_x
-            min_y = ascent - size_y
             max_y = ascent - offset_y
 
             # Compute text attributes
