@@ -18,6 +18,7 @@ import colorsys
 import matplotlib
 import numpy as np
 from operator import itemgetter
+from xml.sax import saxutils
 
 from PIL import Image
 from PIL import ImageColor
@@ -754,6 +755,10 @@ class WordCloud(object):
             Word cloud image as SVG string
         """
 
+        # TODO should add option to specify URL for font (i.e. WOFF file)
+        # TODO should maybe add option to embed font in SVG file
+        # TODO when embedding, we should try to embed only a subset
+
         # Make sure layout is generated
         self._check_generated()
 
@@ -778,9 +783,6 @@ class WordCloud(object):
         font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
         font_family, font_style = font.getname()
         # TODO properly escape/quote this name
-        # TODO should add option to specify URL for font (i.e. WOFF file)
-        # TODO should maybe add option to embed font in SVG file
-        # TODO when embedding, we should try to embed only a subset
         style['font-family'] = repr(font_family)
         font_style = font_style.lower()
         if 'bold' in font_style:
@@ -797,9 +799,13 @@ class WordCloud(object):
             ' xmlns="http://www.w3.org/2000/svg"'
             ' width="{}"'
             ' height="{}"'
-            ' style="{}"'
+            ' style={}'
             '>'
-            .format(width * self.scale, height * self.scale, style)
+            .format(
+                width * self.scale,
+                height * self.scale,
+                saxutils.quoteattr(style)
+            )
         )
 
         # Add background
@@ -849,17 +855,29 @@ class WordCloud(object):
             if orientation == Image.ROTATE_90:
                 x += max_y
                 y += max_x - min_x
-                attributes['transform'] = 'translate({},{}) rotate(-90)'.format(x, y)
+                transform = 'translate({},{}) rotate(-90)'.format(x, y)
             else:
                 x += min_x
                 y += max_y
-                attributes['transform'] = 'translate({},{})'.format(x, y)
-            attributes['font-size'] = '{}'.format(font_size * self.scale)
-            attributes['style'] = 'fill:{}'.format(color)
+                transform = 'translate({},{})'.format(x, y)
 
             # Create node
             attributes = ' '.join('{}="{}"'.format(k, v) for k, v in attributes.items())
-            result.append('<text {}>{}</text>'.format(attributes, word))
+            result.append(
+                '<text'
+                ' transform="{}"'
+                ' font-size="{}"'
+                ' style="fill:{}"'
+                '>'
+                '{}'
+                '</text>'
+                .format(
+                    transform,
+                    font_size * self.scale,
+                    color,
+                    saxutils.escape(word)
+                )
+            )
 
         # TODO draw contour
 
