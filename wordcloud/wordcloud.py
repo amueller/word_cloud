@@ -732,11 +732,13 @@ class WordCloud(object):
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
 
-    def to_svg(self, embed_image=False):
+    def to_svg(self, embed_image=False, embed_font=False):
         """Export to SVG.
 
         Font is assumed to be available to the SVG reader. Otherwise, text
         coordinates may produce artifacts when rendered with replacement font.
+        It is also possible to include the original font in WOFF format using
+        `embed_font`.
 
         Note that some renderers do not handle glyphs the same way, and may
         differ from `to_image` result. In particular, handwriting-like fonts
@@ -749,6 +751,9 @@ class WordCloud(object):
             Whether to include rasterized image inside resulting SVG file.
             Useful for debugging.
 
+        embed_font : bool, default=False
+            Whether to include font inside resulting SVG file.
+
         Returns
         -------
         content : string
@@ -756,7 +761,6 @@ class WordCloud(object):
         """
 
         # TODO should add option to specify URL for font (i.e. WOFF file)
-        # TODO should maybe add option to embed font in SVG file
         # TODO when embedding, we should try to embed only a subset
 
         # Make sure layout is generated
@@ -778,20 +782,22 @@ class WordCloud(object):
         # Text buffer
         result = []
 
-        # Prepare global style
-        style = {}
+        # Get font information
         font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
-        font_family, font_style = font.getname()
+        raw_font_family, raw_font_style = font.getname()
         # TODO properly escape/quote this name
-        style['font-family'] = repr(font_family)
-        font_style = font_style.lower()
-        if 'bold' in font_style:
-            style['font-weight'] = 'bold'
-        if 'italic' in font_style:
-            style['font-style'] = 'italic'
-        elif 'oblique' in font_style:
-            style['font-style'] = 'oblique'
-        style = ';'.join(':'.join(pair) for pair in style.items())
+        font_family = repr(raw_font_family)
+        raw_font_style = raw_font_style.lower()
+        if 'bold' in raw_font_style:
+            font_weight = 'bold'
+        else:
+            font_weight = 'normal'
+        if 'italic' in raw_font_style:
+            font_style = 'italic'
+        elif 'oblique' in raw_font_style:
+            font_style = 'oblique'
+        else:
+            font_style = 'normal'
 
         # Add header
         result.append(
@@ -799,12 +805,68 @@ class WordCloud(object):
             ' xmlns="http://www.w3.org/2000/svg"'
             ' width="{}"'
             ' height="{}"'
-            ' style={}'
             '>'
             .format(
                 width * self.scale,
-                height * self.scale,
-                saxutils.quoteattr(style)
+                height * self.scale
+            )
+        )
+
+        # Embed font, if requested
+        if embed_font:
+
+            # Import here, to avoid hard dependency on fonttools
+            import fontTools
+            import fontTools.subset as subset
+
+            # Load and subset font
+            options = subset.Options()
+            ttf = subset.load_font(self.font_path, options)
+            # TODO do subset
+
+            # Export as WOFF
+            # TODO is there a better method, i.e. directly export to WOFF?
+            buffer = io.BytesIO()
+            ttf.saveXML(buffer)
+            buffer.seek(0)
+            woff = fontTools.ttLib.TTFont(flavor='woff')
+            woff.importXML(buffer)
+
+            # Create stylesheet with embedded font face
+            buffer = io.BytesIO()
+            woff.save(buffer)
+            data = base64.b64encode(buffer.getbuffer()).decode('ascii')
+            url = 'data:application/font-woff;charset=utf-8;base64,' + data
+            result.append(
+                '<style>'
+                '@font-face{{'
+                'font-family:{};'
+                'font-weight:{};'
+                'font-style:{};'
+                'src:url("{}")format("woff");'
+                '}}'
+                '</style>'
+                .format(
+                    font_family,
+                    font_weight,
+                    font_style,
+                    url
+                )
+            )
+
+        # Select global style
+        result.append(
+            '<style>'
+            'text{{'
+            'font-family:{};'
+            'font-weight:{};'
+            'font-style:{};'
+            '}}'
+            '</style>'
+            .format(
+                font_family,
+                font_weight,
+                font_style
             )
         )
 
