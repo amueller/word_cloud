@@ -732,7 +732,7 @@ class WordCloud(object):
     def to_html(self):
         raise NotImplementedError("FIXME!!!")
 
-    def to_svg(self, embed_image=False, embed_font=False):
+    def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.
 
         Font is assumed to be available to the SVG reader. Otherwise, text
@@ -749,12 +749,17 @@ class WordCloud(object):
 
         Parameters
         ----------
+        embed_font : bool, default=False
+            Whether to include font inside resulting SVG file.
+
+        optimize_embedded_font : bool, default=True
+            Whether to be aggressive when embedding a font, to reduce size. In
+            particular, hinting tables are dropped, which may introduces slight
+            changes to character shapes (w.r.t. `to_image` baseline).
+
         embed_image : bool, default=False
             Whether to include rasterized image inside resulting SVG file.
             Useful for debugging.
-
-        embed_font : bool, default=False
-            Whether to include font inside resulting SVG file.
 
         Returns
         -------
@@ -825,10 +830,10 @@ class WordCloud(object):
             options = fontTools.subset.Options(
 
                 # Small impact on character shapes, but reduce size a lot
-                hinting=False,
+                hinting=not optimize_embedded_font,
 
                 # On small subsets, can improve size
-                desubroutinize=True,
+                desubroutinize=optimize_embedded_font,
 
                 # Try to be lenient
                 ignore_missing_glyphs=True,
