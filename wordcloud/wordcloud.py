@@ -737,13 +737,15 @@ class WordCloud(object):
 
         Font is assumed to be available to the SVG reader. Otherwise, text
         coordinates may produce artifacts when rendered with replacement font.
-        It is also possible to include the original font in WOFF format using
-        `embed_font`.
+        It is also possible to include a subset of the original font in WOFF
+        format using `embed_font` (requires `fontTools`).
 
         Note that some renderers do not handle glyphs the same way, and may
         differ from `to_image` result. In particular, handwriting-like fonts
         (e.g. Segoe Script) ligatures might not be properly rendered, which
         could introduce discrepancies in tight layouts.
+
+        Contour drawing is not supported.
 
         Parameters
         ----------
@@ -761,7 +763,6 @@ class WordCloud(object):
         """
 
         # TODO should add option to specify URL for font (i.e. WOFF file)
-        # TODO when embedding, we should try to embed only a subset
 
         # Make sure layout is generated
         self._check_generated()
@@ -785,8 +786,9 @@ class WordCloud(object):
         # Get font information
         font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
         raw_font_family, raw_font_style = font.getname()
-        # TODO properly escape/quote this name
+        # TODO properly escape/quote this name?
         font_family = repr(raw_font_family)
+        # TODO better support for uncommon font styles/weights?
         raw_font_style = raw_font_style.lower()
         if 'bold' in raw_font_style:
             font_weight = 'bold'
@@ -817,12 +819,28 @@ class WordCloud(object):
 
             # Import here, to avoid hard dependency on fonttools
             import fontTools
-            import fontTools.subset as subset
+            import fontTools.subset
+
+            # Subset options
+            options = fontTools.subset.Options(
+
+                # Small impact on character shapes, but reduce size a lot
+                hinting=False,
+
+                # On small subsets, can improve size
+                desubroutinize=True,
+
+                # Try to be lenient
+                ignore_missing_glyphs=True,
+            )
 
             # Load and subset font
-            options = subset.Options()
-            ttf = subset.load_font(self.font_path, options)
-            # TODO do subset
+            ttf = fontTools.subset.load_font(self.font_path, options)
+            subsetter = fontTools.subset.Subsetter(options)
+            characters = {c for item in self.layout_ for c in item[0][0]}
+            text = ''.join(characters)
+            subsetter.populate(text=text)
+            subsetter.subset(ttf)
 
             # Export as WOFF
             # TODO is there a better method, i.e. directly export to WOFF?
