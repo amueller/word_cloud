@@ -738,12 +738,22 @@ class WordCloud(object):
         Font is assumed to be available to the SVG reader. Otherwise, text
         coordinates may produce artifacts when rendered with replacement font.
         It is also possible to include a subset of the original font in WOFF
-        format using `embed_font` (requires `fontTools`).
+        format using ``embed_font`` (requires `fontTools`).
 
         Note that some renderers do not handle glyphs the same way, and may
-        differ from `to_image` result. In particular, handwriting-like fonts
-        (e.g. Segoe Script) ligatures might not be properly rendered, which
-        could introduce discrepancies in tight layouts.
+        differ from ``to_image`` result. In particular, Complex Text Layout may
+        not be supported. In this typesetting, the shape or positioning of a
+        grapheme depends on its relation to other graphemes.
+
+        Pillow, since version 4.2.0, supports CTL using ``libraqm``. However,
+        due to dependencies, this feature is not always enabled. Hence, the
+        same rendering differences may appear in ``to_image``. As this
+        rasterized output is used to compute the layout, this also affects the
+        layout generation. Use ``PIL.features.check`` to test availability of
+        ``raqm``.
+
+        Consistant rendering is therefore expected if both Pillow and the SVG
+        renderer have the same support of CTL.
 
         Contour drawing is not supported.
 
@@ -754,7 +764,7 @@ class WordCloud(object):
 
         optimize_embedded_font : bool, default=True
             Whether to be aggressive when embedding a font, to reduce size. In
-            particular, hinting tables are dropped, which may introduces slight
+            particular, hinting tables are dropped, which may introduce slight
             changes to character shapes (w.r.t. `to_image` baseline).
 
         embed_image : bool, default=False
