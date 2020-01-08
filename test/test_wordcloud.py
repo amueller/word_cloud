@@ -6,6 +6,7 @@ import pytest
 from random import Random
 from numpy.testing import assert_array_equal
 from PIL import Image
+import xml.etree.ElementTree as ET
 
 import matplotlib
 matplotlib.use('Agg')
@@ -152,6 +153,13 @@ def test_check_errors():
         raise AssertionError("wc.recolor didn't raise")
     except ValueError as e:
         assert "call generate" in str(e)
+
+
+def test_svg_syntax():
+    wc = WordCloud()
+    wc.generate(THIS)
+    svg = wc.to_svg()
+    ET.fromstring(svg)
 
 
 def test_recolor():
