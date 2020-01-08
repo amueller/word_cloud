@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.WordCloud &mdash; wordcloud 1.6.0.post1+g8217e20 documentation</title>
+  <title>wordcloud.WordCloud &mdash; wordcloud 1.6.0.post14+g1fc6868 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.6.0.post1+g8217e20
+                1.6.0.post14+g1fc6868
               </div>
             
           
@@ -312,6 +312,9 @@ size, position, orientation and color.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#wordcloud.WordCloud.to_file" title="wordcloud.WordCloud.to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code></a>(self, filename)</p></td>
 <td><p>Export to image file.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#wordcloud.WordCloud.to_svg" title="wordcloud.WordCloud.to_svg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_svg</span></code></a>(self[, embed_font, …])</p></td>
+<td><p>Export to SVG.</p></td>
+</tr>
 </tbody>
 </table>
 <table class="docutils align-default">
@@ -501,6 +504,50 @@ is specified. If None, self.color_func (or self.color_map) is used.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="wordcloud.WordCloud.to_svg">
+<code class="sig-name descname">to_svg</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">embed_font=False</em>, <em class="sig-param">optimize_embedded_font=True</em>, <em class="sig-param">embed_image=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.to_svg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.to_svg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export to SVG.</p>
+<p>Font is assumed to be available to the SVG reader. Otherwise, text
+coordinates may produce artifacts when rendered with replacement font.
+It is also possible to include a subset of the original font in WOFF
+format using <code class="docutils literal notranslate"><span class="pre">embed_font</span></code> (requires <cite>fontTools</cite>).</p>
+<p>Note that some renderers do not handle glyphs the same way, and may
+differ from <code class="docutils literal notranslate"><span class="pre">to_image</span></code> result. In particular, Complex Text Layout may
+not be supported. In this typesetting, the shape or positioning of a
+grapheme depends on its relation to other graphemes.</p>
+<p>Pillow, since version 4.2.0, supports CTL using <code class="docutils literal notranslate"><span class="pre">libraqm</span></code>. However,
+due to dependencies, this feature is not always enabled. Hence, the
+same rendering differences may appear in <code class="docutils literal notranslate"><span class="pre">to_image</span></code>. As this
+rasterized output is used to compute the layout, this also affects the
+layout generation. Use <code class="docutils literal notranslate"><span class="pre">PIL.features.check</span></code> to test availability of
+<code class="docutils literal notranslate"><span class="pre">raqm</span></code>.</p>
+<p>Consistant rendering is therefore expected if both Pillow and the SVG
+renderer have the same support of CTL.</p>
+<p>Contour drawing is not supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>embed_font</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether to include font inside resulting SVG file.</p>
+</dd>
+<dt><strong>optimize_embedded_font</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether to be aggressive when embedding a font, to reduce size. In
+particular, hinting tables are dropped, which may introduce slight
+changes to character shapes (w.r.t. <cite>to_image</cite> baseline).</p>
+</dd>
+<dt><strong>embed_image</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether to include rasterized image inside resulting SVG file.
+Useful for debugging.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>content</strong><span class="classifier">string</span></dt><dd><p>Word cloud image as SVG string</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -525,7 +572,7 @@ is specified. If None, self.color_func (or self.color_map) is used.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Andreas Mueller
+        &copy; Copyright 2020, Andreas Mueller
 
     </p>
   </div>

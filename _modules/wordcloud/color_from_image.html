@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.color_from_image &mdash; wordcloud 1.6.0.post1+g8217e20 documentation</title>
+  <title>wordcloud.color_from_image &mdash; wordcloud 1.6.0.post14+g1fc6868 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.6.0.post1+g8217e20
+                1.6.0.post14+g1fc6868
               </div>
             
           
@@ -157,7 +157,7 @@
             
   <h1>Source code for wordcloud.color_from_image</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageFont</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFont</span>
 
 
 <div class="viewcode-block" id="ImageColorGenerator"><a class="viewcode-back" href="../../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator">[docs]</a><span class="k">class</span> <span class="nc">ImageColorGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -179,7 +179,7 @@
 <span class="sd">        in the format (r, g, b). If None, raise ValueError instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># returns the average color of the image in that region</span>
-<div class="viewcode-block" id="ImageColorGenerator.__init__"><a class="viewcode-back" href="../../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">default_color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageColorGenerator.__init__"><a class="viewcode-back" href="../../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">default_color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ImageColorGenerator needs an image with ndim 2 or&quot;</span>
                              <span class="s2">&quot; 3, got </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
@@ -189,7 +189,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span> <span class="o">=</span> <span class="n">default_color</span></div>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">font_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">font_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate a color for a given word using a fixed image.&quot;&quot;&quot;</span>
         <span class="c1"># get the font to get the box size</span>
         <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">font_path</span><span class="p">,</span> <span class="n">font_size</span><span class="p">)</span>
@@ -226,7 +226,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Andreas Mueller
+        &copy; Copyright 2020, Andreas Mueller
 
     </p>
   </div>

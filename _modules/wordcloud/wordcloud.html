@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.6.0.post1+g8217e20 documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.6.0.post14+g1fc6868 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.6.0.post1+g8217e20
+                1.6.0.post14+g1fc6868
               </div>
             
           
@@ -163,26 +163,29 @@
 <span class="c1">#</span>
 <span class="c1"># License: MIT</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">Random</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">base64</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">colorsys</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+<span class="kn">from</span> <span class="nn">xml.sax</span> <span class="kn">import</span> <span class="n">saxutils</span>
 
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageColor</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageDraw</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageFilter</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">ImageFont</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageColor</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageDraw</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFilter</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFont</span>
 
-<span class="kn">from</span> <span class="nn">.query_integral_image</span> <span class="k">import</span> <span class="n">query_integral_image</span>
-<span class="kn">from</span> <span class="nn">.tokenization</span> <span class="k">import</span> <span class="n">unigrams_and_bigrams</span><span class="p">,</span> <span class="n">process_tokens</span>
+<span class="kn">from</span> <span class="nn">.query_integral_image</span> <span class="kn">import</span> <span class="n">query_integral_image</span>
+<span class="kn">from</span> <span class="nn">.tokenization</span> <span class="kn">import</span> <span class="n">unigrams_and_bigrams</span><span class="p">,</span> <span class="n">process_tokens</span>
 
 <span class="n">FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="n">FONT_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FONT_PATH&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="s1">&#39;DroidSansMono.ttf&#39;</span><span class="p">))</span>
@@ -190,7 +193,7 @@
 
 
 <span class="k">class</span> <span class="nc">IntegralOccupancyMap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
         <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -255,11 +258,11 @@
 <span class="sd">    &gt;&gt;&gt; WordCloud(color_func=colormap_color_func(&quot;magma&quot;))</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colormap</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colormap</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">colormap</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span>
                  <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">random_state</span> <span class="o">=</span> <span class="n">Random</span><span class="p">()</span>
@@ -450,7 +453,7 @@
 <span class="sd">    scaling heuristic.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="WordCloud.__init__"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">font_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<div class="viewcode-block" id="WordCloud.__init__"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">font_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">ranks_only</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefer_horizontal</span><span class="o">=.</span><span class="mi">9</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">color_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">min_font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                  <span class="n">stopwords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
@@ -887,6 +890,254 @@
     <span class="k">def</span> <span class="nf">to_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;FIXME!!!&quot;</span><span class="p">)</span>
 
+<div class="viewcode-block" id="WordCloud.to_svg"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.to_svg">[docs]</a>    <span class="k">def</span> <span class="nf">to_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed_font</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">optimize_embedded_font</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">embed_image</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export to SVG.</span>
+
+<span class="sd">        Font is assumed to be available to the SVG reader. Otherwise, text</span>
+<span class="sd">        coordinates may produce artifacts when rendered with replacement font.</span>
+<span class="sd">        It is also possible to include a subset of the original font in WOFF</span>
+<span class="sd">        format using ``embed_font`` (requires `fontTools`).</span>
+
+<span class="sd">        Note that some renderers do not handle glyphs the same way, and may</span>
+<span class="sd">        differ from ``to_image`` result. In particular, Complex Text Layout may</span>
+<span class="sd">        not be supported. In this typesetting, the shape or positioning of a</span>
+<span class="sd">        grapheme depends on its relation to other graphemes.</span>
+
+<span class="sd">        Pillow, since version 4.2.0, supports CTL using ``libraqm``. However,</span>
+<span class="sd">        due to dependencies, this feature is not always enabled. Hence, the</span>
+<span class="sd">        same rendering differences may appear in ``to_image``. As this</span>
+<span class="sd">        rasterized output is used to compute the layout, this also affects the</span>
+<span class="sd">        layout generation. Use ``PIL.features.check`` to test availability of</span>
+<span class="sd">        ``raqm``.</span>
+
+<span class="sd">        Consistant rendering is therefore expected if both Pillow and the SVG</span>
+<span class="sd">        renderer have the same support of CTL.</span>
+
+<span class="sd">        Contour drawing is not supported.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        embed_font : bool, default=False</span>
+<span class="sd">            Whether to include font inside resulting SVG file.</span>
+
+<span class="sd">        optimize_embedded_font : bool, default=True</span>
+<span class="sd">            Whether to be aggressive when embedding a font, to reduce size. In</span>
+<span class="sd">            particular, hinting tables are dropped, which may introduce slight</span>
+<span class="sd">            changes to character shapes (w.r.t. `to_image` baseline).</span>
+
+<span class="sd">        embed_image : bool, default=False</span>
+<span class="sd">            Whether to include rasterized image inside resulting SVG file.</span>
+<span class="sd">            Useful for debugging.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        content : string</span>
+<span class="sd">            Word cloud image as SVG string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># TODO should add option to specify URL for font (i.e. WOFF file)</span>
+
+        <span class="c1"># Make sure layout is generated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_generated</span><span class="p">()</span>
+
+        <span class="c1"># Get output size, in pixels</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+
+        <span class="c1"># Get max font size</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_font_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_font_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">max_font_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_font_size</span>
+
+        <span class="c1"># Text buffer</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Get font information</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_path</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_font_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">))</span>
+        <span class="n">raw_font_family</span><span class="p">,</span> <span class="n">raw_font_style</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getname</span><span class="p">()</span>
+        <span class="c1"># TODO properly escape/quote this name?</span>
+        <span class="n">font_family</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">raw_font_family</span><span class="p">)</span>
+        <span class="c1"># TODO better support for uncommon font styles/weights?</span>
+        <span class="n">raw_font_style</span> <span class="o">=</span> <span class="n">raw_font_style</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;bold&#39;</span> <span class="ow">in</span> <span class="n">raw_font_style</span><span class="p">:</span>
+            <span class="n">font_weight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">font_weight</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;italic&#39;</span> <span class="ow">in</span> <span class="n">raw_font_style</span><span class="p">:</span>
+            <span class="n">font_style</span> <span class="o">=</span> <span class="s1">&#39;italic&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;oblique&#39;</span> <span class="ow">in</span> <span class="n">raw_font_style</span><span class="p">:</span>
+            <span class="n">font_style</span> <span class="o">=</span> <span class="s1">&#39;oblique&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">font_style</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
+
+        <span class="c1"># Add header</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="s1">&#39;&lt;svg&#39;</span>
+            <span class="s1">&#39; xmlns=&quot;http://www.w3.org/2000/svg&quot;&#39;</span>
+            <span class="s1">&#39; width=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+            <span class="s1">&#39; height=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+            <span class="s1">&#39;&gt;&#39;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">width</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span>
+                <span class="n">height</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Embed font, if requested</span>
+        <span class="k">if</span> <span class="n">embed_font</span><span class="p">:</span>
+
+            <span class="c1"># Import here, to avoid hard dependency on fonttools</span>
+            <span class="kn">import</span> <span class="nn">fontTools</span>
+            <span class="kn">import</span> <span class="nn">fontTools.subset</span>
+
+            <span class="c1"># Subset options</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">fontTools</span><span class="o">.</span><span class="n">subset</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+
+                <span class="c1"># Small impact on character shapes, but reduce size a lot</span>
+                <span class="n">hinting</span><span class="o">=</span><span class="ow">not</span> <span class="n">optimize_embedded_font</span><span class="p">,</span>
+
+                <span class="c1"># On small subsets, can improve size</span>
+                <span class="n">desubroutinize</span><span class="o">=</span><span class="n">optimize_embedded_font</span><span class="p">,</span>
+
+                <span class="c1"># Try to be lenient</span>
+                <span class="n">ignore_missing_glyphs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Load and subset font</span>
+            <span class="n">ttf</span> <span class="o">=</span> <span class="n">fontTools</span><span class="o">.</span><span class="n">subset</span><span class="o">.</span><span class="n">load_font</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_path</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+            <span class="n">subsetter</span> <span class="o">=</span> <span class="n">fontTools</span><span class="o">.</span><span class="n">subset</span><span class="o">.</span><span class="n">Subsetter</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+            <span class="n">characters</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]}</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+            <span class="n">subsetter</span><span class="o">.</span><span class="n">populate</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">subsetter</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">ttf</span><span class="p">)</span>
+
+            <span class="c1"># Export as WOFF</span>
+            <span class="c1"># TODO is there a better method, i.e. directly export to WOFF?</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+            <span class="n">ttf</span><span class="o">.</span><span class="n">saveXML</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="n">buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">woff</span> <span class="o">=</span> <span class="n">fontTools</span><span class="o">.</span><span class="n">ttLib</span><span class="o">.</span><span class="n">TTFont</span><span class="p">(</span><span class="n">flavor</span><span class="o">=</span><span class="s1">&#39;woff&#39;</span><span class="p">)</span>
+            <span class="n">woff</span><span class="o">.</span><span class="n">importXML</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+
+            <span class="c1"># Create stylesheet with embedded font face</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+            <span class="n">woff</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">buffer</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;data:application/font-woff;charset=utf-8;base64,&#39;</span> <span class="o">+</span> <span class="n">data</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s1">&#39;&lt;style&gt;&#39;</span>
+                <span class="s1">&#39;@font-face{{&#39;</span>
+                <span class="s1">&#39;font-family:</span><span class="si">{}</span><span class="s1">;&#39;</span>
+                <span class="s1">&#39;font-weight:</span><span class="si">{}</span><span class="s1">;&#39;</span>
+                <span class="s1">&#39;font-style:</span><span class="si">{}</span><span class="s1">;&#39;</span>
+                <span class="s1">&#39;src:url(&quot;</span><span class="si">{}</span><span class="s1">&quot;)format(&quot;woff&quot;);&#39;</span>
+                <span class="s1">&#39;}}&#39;</span>
+                <span class="s1">&#39;&lt;/style&gt;&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">font_family</span><span class="p">,</span>
+                    <span class="n">font_weight</span><span class="p">,</span>
+                    <span class="n">font_style</span><span class="p">,</span>
+                    <span class="n">url</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Select global style</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="s1">&#39;&lt;style&gt;&#39;</span>
+            <span class="s1">&#39;text{{&#39;</span>
+            <span class="s1">&#39;font-family:</span><span class="si">{}</span><span class="s1">;&#39;</span>
+            <span class="s1">&#39;font-weight:</span><span class="si">{}</span><span class="s1">;&#39;</span>
+            <span class="s1">&#39;font-style:</span><span class="si">{}</span><span class="s1">;&#39;</span>
+            <span class="s1">&#39;}}&#39;</span>
+            <span class="s1">&#39;&lt;/style&gt;&#39;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">font_family</span><span class="p">,</span>
+                <span class="n">font_weight</span><span class="p">,</span>
+                <span class="n">font_style</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add background</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s1">&#39;&lt;rect&#39;</span>
+                <span class="s1">&#39; width=&quot;100%&quot;&#39;</span>
+                <span class="s1">&#39; height=&quot;100%&quot;&#39;</span>
+                <span class="s1">&#39; style=&quot;fill:</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+                <span class="s1">&#39;&gt;&#39;</span>
+                <span class="s1">&#39;&lt;/rect&gt;&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Embed image, useful for debug purpose</span>
+        <span class="k">if</span> <span class="n">embed_image</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+            <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;JPEG&#39;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s1">&#39;&lt;image&#39;</span>
+                <span class="s1">&#39; width=&quot;100%&quot;&#39;</span>
+                <span class="s1">&#39; height=&quot;100%&quot;&#39;</span>
+                <span class="s1">&#39; href=&quot;data:image/jpg;base64,</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+                <span class="s1">&#39;/&gt;&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># For each word in layout</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">count</span><span class="p">),</span> <span class="n">font_size</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+            <span class="n">y</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+
+            <span class="c1"># Get text metrics</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_path</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">font_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">))</span>
+            <span class="p">(</span><span class="n">size_x</span><span class="p">,</span> <span class="n">size_y</span><span class="p">),</span> <span class="p">(</span><span class="n">offset_x</span><span class="p">,</span> <span class="n">offset_y</span><span class="p">)</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="n">ascent</span><span class="p">,</span> <span class="n">descent</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getmetrics</span><span class="p">()</span>
+
+            <span class="c1"># Compute text bounding box</span>
+            <span class="n">min_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">offset_x</span>
+            <span class="n">max_x</span> <span class="o">=</span> <span class="n">size_x</span> <span class="o">-</span> <span class="n">offset_x</span>
+            <span class="n">max_y</span> <span class="o">=</span> <span class="n">ascent</span> <span class="o">-</span> <span class="n">offset_y</span>
+
+            <span class="c1"># Compute text attributes</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_90</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">+=</span> <span class="n">max_y</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="n">max_x</span> <span class="o">-</span> <span class="n">min_x</span>
+                <span class="n">transform</span> <span class="o">=</span> <span class="s1">&#39;translate(</span><span class="si">{}</span><span class="s1">,</span><span class="si">{}</span><span class="s1">) rotate(-90)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">+=</span> <span class="n">min_x</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="n">max_y</span>
+                <span class="n">transform</span> <span class="o">=</span> <span class="s1">&#39;translate(</span><span class="si">{}</span><span class="s1">,</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+            <span class="c1"># Create node</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s1">&#39;&lt;text&#39;</span>
+                <span class="s1">&#39; transform=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+                <span class="s1">&#39; font-size=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+                <span class="s1">&#39; style=&quot;fill:</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+                <span class="s1">&#39;&gt;&#39;</span>
+                <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span>
+                <span class="s1">&#39;&lt;/text&gt;&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">transform</span><span class="p">,</span>
+                    <span class="n">font_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span>
+                    <span class="n">color</span><span class="p">,</span>
+                    <span class="n">saxutils</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># TODO draw contour</span>
+
+        <span class="c1"># Complete SVG file</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&lt;/svg&gt;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">_get_bolean_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Cast to two dimensional boolean mask.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
@@ -942,7 +1193,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Andreas Mueller
+        &copy; Copyright 2020, Andreas Mueller
 
     </p>
   </div>

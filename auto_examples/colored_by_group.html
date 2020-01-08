@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Colored by Group Example &mdash; wordcloud 1.6.0.post1+g8217e20 documentation</title>
+  <title>Colored by Group Example &mdash; wordcloud 1.6.0.post14+g1fc6868 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.6.0.post1+g8217e20
+                1.6.0.post14+g1fc6868
               </div>
             
           
@@ -182,7 +182,7 @@
 <p>Generating a word cloud that assigns colors to words based on
 a predefined mapping from colors to words</p>
 <img alt="../_images/sphx_glr_colored_by_group_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_colored_by_group_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="k">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
@@ -200,14 +200,14 @@ a predefined mapping from colors to words</p>
 <span class="sd">         of any value from color_to_words.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">word_to_color</span> <span class="o">=</span> <span class="p">{</span><span class="n">word</span><span class="p">:</span> <span class="n">color</span>
                               <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                               <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span> <span class="o">=</span> <span class="n">default_color</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_to_color</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_color</span><span class="p">)</span>
 
 
@@ -227,7 +227,7 @@ a predefined mapping from colors to words</p>
 <span class="sd">         of any value from color_to_words.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_func_to_words</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">(</span><span class="n">get_single_color_func</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
             <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
@@ -245,7 +245,7 @@ a predefined mapping from colors to words</p>
 
         <span class="k">return</span> <span class="n">color_func</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color_func</span><span class="p">(</span><span class="n">word</span><span class="p">)(</span><span class="n">word</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
@@ -304,7 +304,7 @@ a predefined mapping from colors to words</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.247 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.236 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-colored-by-group-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/140fcdad2a9d0b8d6625c5d86b3970d5/colored_by_group.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored_by_group.py</span></code></a></p>
@@ -336,7 +336,7 @@ a predefined mapping from colors to words</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Andreas Mueller
+        &copy; Copyright 2020, Andreas Mueller
 
     </p>
   </div>
