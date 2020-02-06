@@ -7,6 +7,23 @@ Changelog
 This is the list of changes to wordcloud between each release. For full
 details, see the commit logs at https://github.com/amueller/word_cloud
 
+Next Release
+==============
+
+WordCloud 1.6.0
+===============
+
+Features
+--------
+
+* Add support to render numbers and single letters using the
+  ``include_numbers`` and ``min_word_length`` arguments.
+
+Examples
+--------
+* Add :ref:`phx_glr_auto_examples_parrot.py` example showing another example of
+  image-based coloring and masks.
+
 WordCloud 1.5.0
 ===============
 
