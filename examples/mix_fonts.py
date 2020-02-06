@@ -1,10 +1,21 @@
 #!/usr/bin/env python
+"""
+Mix Fonts
+=========
+
+English, CJK, and emoji are mixed both across different words and
+within each word. Fonts are aligned at their baselines.
+
+"""
+import os
 import random
 
 import emoji
 import matplotlib.pyplot as plt
 import regex as re
 from fontTools.ttLib import TTFont
+
+from wordcloud import MixedFontPattern
 from wordcloud import WordCloud
 
 
@@ -25,16 +36,14 @@ def get_supported_chars(font_path):
 
 font_emoji = "fonts/Symbola/Symbola.ttf"
 font_cjk = "fonts/SourceHanSerif/SourceHanSerifK-Light.otf"
-extra_font_paths = [
-    (re.compile(pattern), path) for pattern, path in [
-        (r"\p{Emoji=Yes}+", font_emoji),
-        (r"\p{Emoji_Presentation=Yes}+", font_emoji),
-        (r"\p{Han}+", font_cjk),
-        (r"\p{Katakana}+", font_cjk),
-        (r"\p{Hiragana}+", font_cjk),
+font_paths = [
+    MixedFontPattern(re.compile(pattern), path) for pattern, path in [
+        (r"[\p{Emoji=Yes}\p{Emoji_Presentation=Yes}]+", font_emoji),
+        (r"[\p{Han}\p{Katakana}\p{Hiragana}]+", font_cjk),
     ]
 ]
 
+# construct word frequency dict.
 wordfreq = {}
 supported = get_supported_chars(font_emoji)
 emojis = list(v for v in emoji.EMOJI_UNICODE.values() if v in supported)
@@ -60,16 +69,20 @@ wordfreq.update({
     }.items()
 })
 
-word_cloud = WordCloud(width=600,
-                       height=600,
-                       scale=1.5,
-                       relative_scaling=0.6,
-                       repeat=False,
-                       max_words=len(wordfreq),
-                       extra_font_paths=extra_font_paths)
-image = word_cloud.generate_from_frequencies(wordfreq)
+wc = WordCloud(width=600,
+               height=600,
+               scale=1.5,
+               relative_scaling=0.6,
+               repeat=False,
+               max_words=len(wordfreq),
+               font_path=font_paths)
+wc.generate_from_frequencies(wordfreq)
+
+# generate an svg outout.
+with open(os.path.splitext(os.path.basename(__file__))[0] + ".svg", 'w') as f:
+    f.write(wc.to_svg(embed_font=True))
 
 plt.figure(figsize=(8, 8))
-plt.imshow(image, interpolation="bilinear")
+plt.imshow(wc, interpolation="bilinear")
 plt.axis("off")
 plt.show()

@@ -6,7 +6,10 @@ from collections import namedtuple
 import wordcloud as wc
 from wordcloud import wordcloud_cli as cli
 
-from mock import patch
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 import pytest
 
 import matplotlib
