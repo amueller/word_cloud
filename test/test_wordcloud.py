@@ -361,7 +361,7 @@ def test_tiny_canvas():
     w = WordCloud(max_words=50, width=1, height=1)
     with pytest.raises(ValueError, match="Couldn't find space to draw"):
         w.generate(THIS)
-        assert len(w.layout_) == 0
+    assert len(w.layout_) == 0
 
 
 def test_coloring_black_works():
