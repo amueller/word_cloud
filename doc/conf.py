@@ -253,3 +253,7 @@ texinfo_documents = [
 # theme further.
 html_theme_options = {
 }
+
+def setup(app):
+    # a copy button to copy snippet of code from the documentation
+    app.add_stylesheet("basic.css")
