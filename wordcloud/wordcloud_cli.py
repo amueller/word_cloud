@@ -206,11 +206,11 @@ def make_parser():
         help='random seed')
     parser.add_argument(
         '--normalize_plurals',
-        type=bool, default=True,
+        type=bool, default=True, dest='normalize_plurals',
         help='whether to remove trailing \'s\' from words')
     parser.add_argument(
         '--repeat',
-        type=bool, default=False,
+        type=bool, default=False, dest='repeat',
         help='whether to repeat words and phrases')
     parser.add_argument(
         '--version', action='version',
