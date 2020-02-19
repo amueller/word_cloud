@@ -157,7 +157,6 @@ def make_parser():
     parser.add_argument(
         '--include_numbers',
         action='store_true',
-        metavar='include_numbers',
         dest='include_numbers',
         help='include numbers in wordcloud?')
     parser.add_argument(
@@ -207,13 +206,11 @@ def make_parser():
         '--no_normalize_plurals',
         action='store_false',
         dest='normalize_plurals',
-        metavar='normalize',
         help='whether to remove trailing \'s\' from words')
     parser.add_argument(
         '--repeat',
         action='store_true',
         dest='repeat',
-        metavar='repeat',
         help='whether to repeat words and phrases')
     parser.add_argument(
         '--version', action='version',
