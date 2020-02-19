@@ -170,47 +170,49 @@ def make_parser():
         help='only include words with more than X letters')
     parser.add_argument(
         '--prefer_horizontal',
-        type=float, default=.9,
+        type=float, default=.9, metavar='ratio',
         help='ratio of times to try horizontal fitting as opposed to vertical')
     parser.add_argument(
         '--scale',
-        type=float, default=1,
+        type=float, default=1, metavar='scale',
         help='scaling between computation and drawing')
     parser.add_argument(
         '--colormap',
-        type=str, default='viridis',
+        type=str, default='viridis', metavar='map',
         help='matplotlib colormap name')
     parser.add_argument(
         '--mode',
-        type=str, default='RGB',
+        type=str, default='RGB', metavar='mode',
         help='use RGB or RGBA for trasparent background')
     parser.add_argument(
         '--max_words',
-        type=int, default=200,
+        type=int, default=200, metavar='N',
         help='maximum number of words')
     parser.add_argument(
         '--min_font_size',
-        type=int, default=4,
+        type=int, default=4, metavar='size',
         help='smallest font size to use')
     parser.add_argument(
         '--max_font_size',
-        type=int, default=None,
+        type=int, default=None, metavar='size',
         help='maximum font size for the largest word')
     parser.add_argument(
         '--font_step',
-        type=int, default=1,
+        type=int, default=1, metavar='step',
         help='step size for the font')
     parser.add_argument(
         '--random_state',
-        type=int, default=None,
+        type=int, default=None, metavar='seed',
         help='random seed')
     parser.add_argument(
         '--normalize_plurals',
         type=bool, default=True, dest='normalize_plurals',
+        metavar='normalize',
         help='whether to remove trailing \'s\' from words')
     parser.add_argument(
         '--repeat',
         type=bool, default=False, dest='repeat',
+        metavar='repeat',
         help='whether to repeat words and phrases')
     parser.add_argument(
         '--version', action='version',
