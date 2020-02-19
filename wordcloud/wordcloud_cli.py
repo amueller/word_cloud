@@ -156,8 +156,7 @@ def make_parser():
              '(default: add unigrams and bigrams)')
     parser.add_argument(
         '--include_numbers',
-        type=bool,
-        default=False,
+        action='store_true',
         metavar='include_numbers',
         dest='include_numbers',
         help='include numbers in wordcloud?')
@@ -205,13 +204,15 @@ def make_parser():
         type=int, default=None, metavar='seed',
         help='random seed')
     parser.add_argument(
-        '--normalize_plurals',
-        type=bool, default=True, dest='normalize_plurals',
+        '--no_normalize_plurals',
+        action='store_false',
+        dest='normalize_plurals',
         metavar='normalize',
         help='whether to remove trailing \'s\' from words')
     parser.add_argument(
         '--repeat',
-        type=bool, default=False, dest='repeat',
+        action='store_true',
+        dest='repeat',
         metavar='repeat',
         help='whether to repeat words and phrases')
     parser.add_argument(
