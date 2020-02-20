@@ -156,9 +156,7 @@ def make_parser():
              '(default: add unigrams and bigrams)')
     parser.add_argument(
         '--include_numbers',
-        type=bool,
-        default=False,
-        metavar='include_numbers',
+        action='store_true',
         dest='include_numbers',
         help='include numbers in wordcloud?')
     parser.add_argument(
@@ -168,6 +166,52 @@ def make_parser():
         metavar='min_word_length',
         dest='min_word_length',
         help='only include words with more than X letters')
+    parser.add_argument(
+        '--prefer_horizontal',
+        type=float, default=.9, metavar='ratio',
+        help='ratio of times to try horizontal fitting as opposed to vertical')
+    parser.add_argument(
+        '--scale',
+        type=float, default=1, metavar='scale',
+        help='scaling between computation and drawing')
+    parser.add_argument(
+        '--colormap',
+        type=str, default='viridis', metavar='map',
+        help='matplotlib colormap name')
+    parser.add_argument(
+        '--mode',
+        type=str, default='RGB', metavar='mode',
+        help='use RGB or RGBA for trasparent background')
+    parser.add_argument(
+        '--max_words',
+        type=int, default=200, metavar='N',
+        help='maximum number of words')
+    parser.add_argument(
+        '--min_font_size',
+        type=int, default=4, metavar='size',
+        help='smallest font size to use')
+    parser.add_argument(
+        '--max_font_size',
+        type=int, default=None, metavar='size',
+        help='maximum font size for the largest word')
+    parser.add_argument(
+        '--font_step',
+        type=int, default=1, metavar='step',
+        help='step size for the font')
+    parser.add_argument(
+        '--random_state',
+        type=int, default=None, metavar='seed',
+        help='random seed')
+    parser.add_argument(
+        '--no_normalize_plurals',
+        action='store_false',
+        dest='normalize_plurals',
+        help='whether to remove trailing \'s\' from words')
+    parser.add_argument(
+        '--repeat',
+        action='store_true',
+        dest='repeat',
+        help='whether to repeat words and phrases')
     parser.add_argument(
         '--version', action='version',
         version='%(prog)s {version}'.format(version=__version__))
