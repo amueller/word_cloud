@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command Line Interface &mdash; wordcloud 1.6.0.post16+gfe0b6ff documentation</title>
+  <title>Command Line Interface &mdash; wordcloud 1.6.0.post24+g18f0403 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.6.0.post16+gfe0b6ff
+                1.6.0.post24+g18f0403
               </div>
             
           
@@ -172,8 +172,12 @@
                      <span class="p">[</span><span class="o">--</span><span class="n">contour_color</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">relative_scaling</span> <span class="n">rs</span><span class="p">]</span>
                      <span class="p">[</span><span class="o">--</span><span class="n">margin</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">width</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">height</span> <span class="n">height</span><span class="p">]</span>
                      <span class="p">[</span><span class="o">--</span><span class="n">color</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">background</span> <span class="n">color</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no_collocations</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">include_numbers</span> <span class="n">include_numbers</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">min_word_length</span> <span class="n">min_word_length</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">include_numbers</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">min_word_length</span> <span class="n">min_word_length</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">prefer_horizontal</span> <span class="n">ratio</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">scale</span> <span class="n">scale</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">colormap</span> <span class="nb">map</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">mode</span> <span class="n">mode</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">max_words</span> <span class="n">N</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">min_font_size</span> <span class="n">size</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">max_font_size</span> <span class="n">size</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">font_step</span> <span class="n">step</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">random_state</span> <span class="n">seed</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">no_normalize_plurals</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">repeat</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">version</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="Named Arguments">
@@ -246,6 +250,48 @@
 <dt><kbd>--min_word_length</kbd></dt>
 <dd><p>only include words with more than X letters</p>
 <p>Default: 0</p>
+</dd>
+<dt><kbd>--prefer_horizontal</kbd></dt>
+<dd><p>ratio of times to try horizontal fitting as opposed to vertical</p>
+<p>Default: 0.9</p>
+</dd>
+<dt><kbd>--scale</kbd></dt>
+<dd><p>scaling between computation and drawing</p>
+<p>Default: 1</p>
+</dd>
+<dt><kbd>--colormap</kbd></dt>
+<dd><p>matplotlib colormap name</p>
+<p>Default: “viridis”</p>
+</dd>
+<dt><kbd>--mode</kbd></dt>
+<dd><p>use RGB or RGBA for trasparent background</p>
+<p>Default: “RGB”</p>
+</dd>
+<dt><kbd>--max_words</kbd></dt>
+<dd><p>maximum number of words</p>
+<p>Default: 200</p>
+</dd>
+<dt><kbd>--min_font_size</kbd></dt>
+<dd><p>smallest font size to use</p>
+<p>Default: 4</p>
+</dd>
+<dt><kbd>--max_font_size</kbd></dt>
+<dd><p>maximum font size for the largest word</p>
+</dd>
+<dt><kbd>--font_step</kbd></dt>
+<dd><p>step size for the font</p>
+<p>Default: 1</p>
+</dd>
+<dt><kbd>--random_state</kbd></dt>
+<dd><p>random seed</p>
+</dd>
+<dt><kbd>--no_normalize_plurals</kbd></dt>
+<dd><p>whether to remove trailing ‘s’ from words</p>
+<p>Default: True</p>
+</dd>
+<dt><kbd>--repeat</kbd></dt>
+<dd><p>whether to repeat words and phrases</p>
+<p>Default: False</p>
 </dd>
 <dt><kbd>--version</kbd></dt>
 <dd><p>show program’s version number and exit</p>
