@@ -27,6 +27,8 @@ ARGUMENT_SPEC_TYPED = [
 ARGUMENT_SPEC_UNARY = [
     ArgOption(cli_name='no_collocations', init_name='collocations', pass_value=True, fail_value=1),
     ArgOption(cli_name='include_numbers', init_name='include_numbers', pass_value=True, fail_value=2),
+    ArgOption(cli_name='no_normalize_plurals', init_name='normalize_plurals', pass_value=True, fail_value=3),
+    ArgOption(cli_name='repeat', init_name='repeat', pass_value=True, fail_value=4),
 ]
 ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=PassFile(), fail_value=None),
@@ -38,6 +40,15 @@ ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='contour_color', init_name='contour_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=0.5, fail_value='blue'),
     ArgOption(cli_name='min_word_length', init_name='min_word_length', pass_value=5, fail_value='blue'),
+    ArgOption(cli_name='prefer_horizontal', init_name='prefer_horizontal', pass_value=.1, fail_value='blue'),
+    ArgOption(cli_name='scale', init_name='scale', pass_value=1., fail_value='blue'),
+    ArgOption(cli_name='colormap', init_name='colormap', pass_value='Greens', fail_value=1),
+    ArgOption(cli_name='mode', init_name='mode', pass_value='RGBA', fail_value=2),
+    ArgOption(cli_name='max_words', init_name='max_words', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='min_font_size', init_name='min_font_size', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='max_font_size', init_name='max_font_size', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='font_step', init_name='font_step', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='random_state', init_name='random_state', pass_value=100, fail_value='blue'),
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 
