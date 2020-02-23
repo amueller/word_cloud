@@ -557,15 +557,11 @@ class WordCloud(object):
         include all those things.
         """
 
-        stopwords = set([i.lower() for i in self.stopwords])
-
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
         words = re.findall(regexp, text, flags)
-        # remove stopwords
-        words = [word for word in words if word.lower() not in stopwords]
         # remove 's
         words = [word[:-2] if word.lower().endswith("'s") else word
                  for word in words]
@@ -576,9 +572,12 @@ class WordCloud(object):
         if self.min_word_length:
             words = [word for word in words if len(word) >= self.min_word_length]
 
+        stopwords = set([i.lower() for i in self.stopwords])
         if self.collocations:
-            word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
+            word_counts = unigrams_and_bigrams(words, stopwords, self.normalize_plurals)
         else:
+            # remove stopwords
+            words = [word for word in words if word.lower() not in stopwords]
             word_counts, _ = process_tokens(words, self.normalize_plurals)
 
         return word_counts
