@@ -19,7 +19,9 @@ python --version
 
 ### Install all dependencies
 
+```
 pip install -U -r requirements.txt -r requirements-dev.txt
+```
 
 ### Ensure that files are correctly formatted
 
