@@ -1,3 +1,4 @@
+# coding=utf-8
 # Author: Andreas Christian Mueller <t3kcit@gmail.com>
 #
 # (c) 2012
