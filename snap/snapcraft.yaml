@@ -1,0 +1,22 @@
+name: wordcloud_cli
+summary: Word cloud generator
+description: |
+  A little word cloud generator in Python. Compared to other word clouds, this
+  algorithm has the advantage of filling all available space, being able to use
+  arbitrary masks, having a stupid simple algorithm (with an efficient
+  implementation) that can be easily modified, and being in Python.
+
+base: core18
+grade: stable
+confinement: strict
+license: MIT
+version: git
+
+parts:
+  wordcloud_cli:
+    source: .
+    plugin: python
+
+apps:
+  wordcloud_cli:
+    command: wordcloud_cli
