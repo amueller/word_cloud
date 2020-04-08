@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_colored.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_colored.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_colored.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_colored.py:
 
 
 Image-colored wordcloud
@@ -73,7 +75,7 @@ If you want white as a legal color, you can just pass a different image to
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.157 seconds)
+   **Total running time of the script:** ( 0 minutes  2.466 seconds)
 
 
 .. _sphx_glr_download_auto_examples_colored.py:
@@ -86,13 +88,13 @@ If you want white as a legal color, you can just pass a different image to
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: colored.py <colored.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: colored.ipynb <colored.ipynb>`
 

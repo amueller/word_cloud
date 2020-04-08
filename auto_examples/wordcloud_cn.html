@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>create wordcloud with chinese &mdash; wordcloud 1.6.0.post27+g260c20f documentation</title>
+  <title>create wordcloud with chinese &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
   
 
   
@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Colored by Group Example" href="colored_by_group.html" />
@@ -61,7 +63,7 @@
             
             
               <div class="version">
-                1.6.0.post27+g260c20f
+                1.6.0.post33+gfe89bfd
               </div>
             
           
@@ -175,7 +177,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-wordcloud-cn-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-wordcloud-cn-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="create-wordcloud-with-chinese">
 <span id="sphx-glr-auto-examples-wordcloud-cn-py"></span><h1>create wordcloud with chinese<a class="headerlink" href="#create-wordcloud-with-chinese" title="Permalink to this headline">¶</a></h1>
@@ -195,10 +197,10 @@ at the same time using wordcloud with jieba very convenient</p>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Building prefix dict from the default dictionary ...
 Dumping model to file cache /tmp/jieba.cache
-Loading model cost 1.043 seconds.
+Loading model cost 0.942 seconds.
 Prefix dict has been built successfully.
 
-&lt;wordcloud.wordcloud.WordCloud object at 0x7f1cbd73e5f8&gt;
+&lt;wordcloud.wordcloud.WordCloud object at 0x7f9308471a90&gt;
 </pre></div>
 </div>
 <div class="line-block">
@@ -213,7 +215,7 @@ Prefix dict has been built successfully.
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="c1"># jieba.load_userdict(&quot;txt\userdict.txt&quot;)</span>
 <span class="c1"># add userdict by load_userdict()</span>
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">,</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="wordcloud.ImageColorGenerator" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">ImageColorGenerator</span></a>
 
 <span class="c1"># get data directory (using getcwd() is needed to support running example in generated IPython notebook)</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -255,30 +257,30 @@ Prefix dict has been built successfully.
     <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mywordlist</span><span class="p">)</span>
 
 
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="n">font_path</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">back_coloring</span><span class="p">,</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="n">font_path</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">back_coloring</span><span class="p">,</span>
                <span class="n">max_font_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">860</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">2</span><span class="p">,)</span>
 
 
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">jieba_processing_txt</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">jieba_processing_txt</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 
 <span class="c1"># create coloring from image</span>
-<a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">image_colors_default</span></a> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">back_coloring</span><span class="p">)</span>
+<a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="wordcloud.ImageColorGenerator" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">image_colors_default</span></a> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="wordcloud.ImageColorGenerator" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">back_coloring</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="c1"># recolor wordcloud and show</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># save wordcloud</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">imgname1</span><span class="p">))</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">imgname1</span><span class="p">))</span>
 
 <span class="c1"># create coloring from image</span>
-<a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">image_colors_byImg</span></a> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">back_coloring</span><span class="p">)</span>
+<a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="wordcloud.ImageColorGenerator" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">image_colors_byImg</span></a> <span class="o">=</span> <a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="wordcloud.ImageColorGenerator" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">ImageColorGenerator</span></a><span class="p">(</span><span class="n">back_coloring</span><span class="p">)</span>
 
 <span class="c1"># show</span>
 <span class="c1"># we could also give color_func=image_colors directly in the constructor</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="View documentation for wordcloud.ImageColorGenerator"><span class="n">image_colors_byImg</span></a><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><a href="../generated/wordcloud.ImageColorGenerator.html#wordcloud.ImageColorGenerator" title="wordcloud.ImageColorGenerator" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">image_colors_byImg</span></a><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">back_coloring</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
@@ -286,15 +288,15 @@ Prefix dict has been built successfully.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># save wordcloud</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">imgname2</span><span class="p">))</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">imgname2</span><span class="p">))</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  9.880 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  9.451 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-wordcloud-cn-py">
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/a3275a073a46b8a36d4beef3d79826a3/wordcloud_cn.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">wordcloud_cn.py</span></code></a></p>
 </div>
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/33e9162504d7de3e9cfe155cf2cc58b4/wordcloud_cn.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">wordcloud_cn.ipynb</span></code></a></p>
 </div>
 </div>

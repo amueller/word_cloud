@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Colored by Group Example &mdash; wordcloud 1.6.0.post27+g260c20f documentation</title>
+  <title>Colored by Group Example &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
   
 
   
@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Changelog" href="../changelog.html" />
@@ -61,7 +63,7 @@
             
             
               <div class="version">
-                1.6.0.post27+g260c20f
+                1.6.0.post33+gfe89bfd
               </div>
             
           
@@ -175,14 +177,14 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-colored-by-group-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-colored-by-group-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="colored-by-group-example">
 <span id="sphx-glr-auto-examples-colored-by-group-py"></span><h1>Colored by Group Example<a class="headerlink" href="#colored-by-group-example" title="Permalink to this headline">¶</a></h1>
 <p>Generating a word cloud that assigns colors to words based on
 a predefined mapping from colors to words</p>
 <img alt="../_images/sphx_glr_colored_by_group_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_colored_by_group_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
@@ -271,7 +273,7 @@ a predefined mapping from colors to words</p>
 <span class="s2">Namespaces are one honking great idea -- let&#39;s do more of those!&quot;&quot;&quot;</span>
 
 <span class="c1"># Since the text is small collocations are turned off and text is lower-cased</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">collocations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">collocations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 
 <span class="n">color_to_words</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># words below will be colored with a green single color function</span>
@@ -295,21 +297,21 @@ a predefined mapping from colors to words</p>
 <span class="n">grouped_color_func</span> <span class="o">=</span> <span class="n">GroupedColorFunc</span><span class="p">(</span><span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">)</span>
 
 <span class="c1"># Apply our color function</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">grouped_color_func</span><span class="p">)</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">grouped_color_func</span><span class="p">)</span>
 
 <span class="c1"># Plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.223 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-colored-by-group-py">
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/140fcdad2a9d0b8d6625c5d86b3970d5/colored_by_group.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored_by_group.py</span></code></a></p>
 </div>
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/1233d99b0b2a55eb9d2ed9af0fa516db/colored_by_group.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">colored_by_group.ipynb</span></code></a></p>
 </div>
 </div>

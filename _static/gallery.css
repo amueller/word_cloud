@@ -44,8 +44,8 @@ thumbnail with its default link Background color */
 }
 .sphx-glr-thumbcontainer img {
   display: inline;
-  max-height: 160px;
-  width: 160px;
+  max-height: 112px;
+  max-width: 160px;
 }
 .sphx-glr-thumbcontainer[tooltip]:hover:after {
   background: rgba(0, 0, 0, 0.8);
@@ -70,13 +70,6 @@ thumbnail with its default link Background color */
   left: 85%;
   position: absolute;
   z-index: 99;
-}
-
-.highlight-pytb pre {
-  background-color: #ffe4e4;
-  border: 1px solid #f66;
-  margin-top: 10px;
-  padding: 7px;
 }
 
 .sphx-glr-script-out {
@@ -106,14 +99,16 @@ p.sphx-glr-script-out {
 blockquote.sphx-glr-script-out {
   margin-left: 0pt;
 }
+.sphx-glr-script-out.highlight-pytb .highlight pre {
+  color: #000;
+  background-color: #ffe4e4;
+  border: 1px solid #f66;
+  margin-top: 10px;
+  padding: 7px;
+}
 
 div.sphx-glr-footer {
     text-align: center;
-}
-
-div.binder-badge {
-  margin: 1em auto;
-  vertical-align: middle;
 }
 
 div.sphx-glr-download {
@@ -193,4 +188,8 @@ p.sphx-glr-signature a.reference.external {
 
 .sphx-glr-clear{
   clear: both;
+}
+
+a.sphx-glr-backref-instance {
+  text-decoration: none;
 }

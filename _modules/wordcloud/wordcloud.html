@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.6.0.post27+g260c20f documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
   
 
   
@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -59,7 +61,7 @@
             
             
               <div class="version">
-                1.6.0.post27+g260c20f
+                1.6.0.post33+gfe89bfd
               </div>
             
           
@@ -513,7 +515,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">include_numbers</span> <span class="o">=</span> <span class="n">include_numbers</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_word_length</span> <span class="o">=</span> <span class="n">min_word_length</span></div>
 
-<div class="viewcode-block" id="WordCloud.fit_words"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.fit_words">[docs]</a>    <span class="k">def</span> <span class="nf">fit_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fit_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a word_cloud from words and frequencies.</span>
 
 <span class="sd">        Alias to generate_from_frequencies.</span>
@@ -527,9 +529,9 @@
 <span class="sd">        -------</span>
 <span class="sd">        self</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
 
-<div class="viewcode-block" id="WordCloud.generate_from_frequencies"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate_from_frequencies">[docs]</a>    <span class="k">def</span> <span class="nf">generate_from_frequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+    <span class="k">def</span> <span class="nf">generate_from_frequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
         <span class="sd">&quot;&quot;&quot;Create a word_cloud from words and frequencies.</span>
 
 <span class="sd">        Parameters</span>
@@ -691,9 +693,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">font_sizes</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span>
                                 <span class="n">orientations</span><span class="p">,</span> <span class="n">colors</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="k">return</span> <span class="bp">self</span>
 
-<div class="viewcode-block" id="WordCloud.process_text"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.process_text">[docs]</a>    <span class="k">def</span> <span class="nf">process_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">process_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Splits a long text into words, eliminates the stopwords.</span>
 
 <span class="sd">        Parameters</span>
@@ -739,9 +741,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">word_counts</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">process_tokens</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_plurals</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">word_counts</span></div>
+        <span class="k">return</span> <span class="n">word_counts</span>
 
-<div class="viewcode-block" id="WordCloud.generate_from_text"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate_from_text">[docs]</a>    <span class="k">def</span> <span class="nf">generate_from_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate_from_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate wordcloud from text.</span>
 
 <span class="sd">        The input &quot;text&quot; is expected to be a natural text. If you pass a sorted</span>
@@ -760,9 +762,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="k">return</span> <span class="bp">self</span>
 
-<div class="viewcode-block" id="WordCloud.generate"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generate wordcloud from text.</span>
 
 <span class="sd">        The input &quot;text&quot; is expected to be a natural text. If you pass a sorted</span>
@@ -777,7 +779,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        self</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_from_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_from_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_check_generated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if ``layout_`` was computed, otherwise raise error.&quot;&quot;&quot;</span>
@@ -808,7 +810,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_draw_contour</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
 
-<div class="viewcode-block" id="WordCloud.recolor"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.recolor">[docs]</a>    <span class="k">def</span> <span class="nf">recolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">recolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Recolor existing layout.</span>
 
 <span class="sd">        Applying a new coloring is much faster than generating the whole</span>
@@ -848,9 +850,9 @@
                                     <span class="n">font_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">font_path</span><span class="p">))</span>
                         <span class="k">for</span> <span class="n">word_freq</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">_</span>
                         <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="k">return</span> <span class="bp">self</span>
 
-<div class="viewcode-block" id="WordCloud.to_file"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.to_file">[docs]</a>    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Export to image file.</span>
 
 <span class="sd">        Parameters</span>
@@ -865,9 +867,9 @@
 
         <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span>
         <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="k">return</span> <span class="bp">self</span>
 
-<div class="viewcode-block" id="WordCloud.to_array"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.to_array">[docs]</a>    <span class="k">def</span> <span class="nf">to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert to numpy array.</span>
 
 <span class="sd">        Returns</span>
@@ -875,7 +877,7 @@
 <span class="sd">        image : nd-array size (width, height, 3)</span>
 <span class="sd">            Word cloud image as numpy matrix.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_image</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_image</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">__array__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert to numpy array.</span>
@@ -890,7 +892,7 @@
     <span class="k">def</span> <span class="nf">to_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;FIXME!!!&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="WordCloud.to_svg"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud.to_svg">[docs]</a>    <span class="k">def</span> <span class="nf">to_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed_font</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">optimize_embedded_font</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">embed_image</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed_font</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">optimize_embedded_font</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">embed_image</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Export to SVG.</span>
 
 <span class="sd">        Font is assumed to be available to the SVG reader. Otherwise, text</span>
@@ -1136,7 +1138,7 @@
 
         <span class="c1"># Complete SVG file</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&lt;/svg&gt;&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_bolean_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Cast to two dimensional boolean mask.&quot;&quot;&quot;</span>

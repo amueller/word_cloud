@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Using custom colors &mdash; wordcloud 1.6.0.post27+g260c20f documentation</title>
+  <title>Using custom colors &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
   
 
   
@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Image-colored wordcloud with boundary map" href="parrot.html" />
@@ -61,7 +63,7 @@
             
             
               <div class="version">
-                1.6.0.post27+g260c20f
+                1.6.0.post33+gfe89bfd
               </div>
             
           
@@ -175,7 +177,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-a-new-hope-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-a-new-hope-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="using-custom-colors">
 <span id="sphx-glr-auto-examples-a-new-hope-py"></span><h1>Using custom colors<a class="headerlink" href="#using-custom-colors" title="Permalink to this headline">¶</a></h1>
@@ -193,7 +195,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">STOPWORDS</span>
 
 
 <span class="k">def</span> <span class="nf">grey_color_func</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">font_size</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -222,14 +224,14 @@
 <span class="n">stopwords</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
 <span class="n">stopwords</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;ext&quot;</span><span class="p">)</span>
 
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">max_words</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">stopwords</span><span class="o">=</span><span class="n">stopwords</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">max_words</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">stopwords</span><span class="o">=</span><span class="n">stopwords</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="c1"># store default colored image</span>
-<span class="n">default_colors</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
+<span class="n">default_colors</span> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Custom colors&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">grey_color_func</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">grey_color_func</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
            <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="View documentation for wordcloud.WordCloud"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;a_new_hope.png&quot;</span><span class="p">)</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;a_new_hope.png&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Default colors&quot;</span><span class="p">)</span>
@@ -238,12 +240,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.735 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.497 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-a-new-hope-py">
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/918ae0f24d4c0b66a72ecdc0f266e55a/a_new_hope.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">a_new_hope.py</span></code></a></p>
 </div>
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/a307a900484446165769295aaa9dd538/a_new_hope.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">a_new_hope.ipynb</span></code></a></p>
 </div>
 </div>

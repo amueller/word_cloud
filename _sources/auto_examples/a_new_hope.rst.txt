@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_a_new_hope.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_a_new_hope.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_a_new_hope.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_a_new_hope.py:
 
 
 Using custom colors
@@ -89,7 +91,7 @@ Using the recolor method and custom coloring functions.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.735 seconds)
+   **Total running time of the script:** ( 0 minutes  6.497 seconds)
 
 
 .. _sphx_glr_download_auto_examples_a_new_hope.py:
@@ -102,13 +104,13 @@ Using the recolor method and custom coloring functions.
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: a_new_hope.py <a_new_hope.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: a_new_hope.ipynb <a_new_hope.ipynb>`
 

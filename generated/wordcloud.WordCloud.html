@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.WordCloud &mdash; wordcloud 1.6.0.post27+g260c20f documentation</title>
+  <title>wordcloud.WordCloud &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
   
 
   
@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="wordcloud.ImageColorGenerator" href="wordcloud.ImageColorGenerator.html" />
@@ -61,7 +63,7 @@
             
             
               <div class="version">
-                1.6.0.post27+g260c20f
+                1.6.0.post33+gfe89bfd
               </div>
             
           
@@ -168,9 +170,9 @@
             
   <div class="section" id="wordcloud-wordcloud">
 <h1>wordcloud.WordCloud<a class="headerlink" href="#wordcloud-wordcloud" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="wordcloud.WordCloud">
-<em class="property">class </em><code class="sig-prename descclassname">wordcloud.</code><code class="sig-name descname">WordCloud</code><span class="sig-paren">(</span><em class="sig-param">font_path=None</em>, <em class="sig-param">width=400</em>, <em class="sig-param">height=200</em>, <em class="sig-param">margin=2</em>, <em class="sig-param">ranks_only=None</em>, <em class="sig-param">prefer_horizontal=0.9</em>, <em class="sig-param">mask=None</em>, <em class="sig-param">scale=1</em>, <em class="sig-param">color_func=None</em>, <em class="sig-param">max_words=200</em>, <em class="sig-param">min_font_size=4</em>, <em class="sig-param">stopwords=None</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">background_color='black'</em>, <em class="sig-param">max_font_size=None</em>, <em class="sig-param">font_step=1</em>, <em class="sig-param">mode='RGB'</em>, <em class="sig-param">relative_scaling='auto'</em>, <em class="sig-param">regexp=None</em>, <em class="sig-param">collocations=True</em>, <em class="sig-param">colormap=None</em>, <em class="sig-param">normalize_plurals=True</em>, <em class="sig-param">contour_width=0</em>, <em class="sig-param">contour_color='black'</em>, <em class="sig-param">repeat=False</em>, <em class="sig-param">include_numbers=False</em>, <em class="sig-param">min_word_length=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">wordcloud.</code><code class="sig-name descname">WordCloud</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">font_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">400</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">ranks_only</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefer_horizontal</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_words</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">min_font_size</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">stopwords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">background_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">max_font_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font_step</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'RGB'</span></em>, <em class="sig-param"><span class="n">relative_scaling</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">regexp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collocations</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">colormap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">normalize_plurals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">contour_width</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">contour_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">repeat</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">include_numbers</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">min_word_length</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud" title="Permalink to this definition">¶</a></dt>
 <dd><p>Word cloud object for generating and drawing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -288,31 +290,31 @@ size, position, orientation and color.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#wordcloud.WordCloud.fit_words" title="wordcloud.WordCloud.fit_words"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_words</span></code></a>(self, frequencies)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_words</span></code>(self, frequencies)</p></td>
 <td><p>Create a word_cloud from words and frequencies.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#wordcloud.WordCloud.generate" title="wordcloud.WordCloud.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code></a>(self, text)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code>(self, text)</p></td>
 <td><p>Generate wordcloud from text.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#wordcloud.WordCloud.generate_from_frequencies" title="wordcloud.WordCloud.generate_from_frequencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_frequencies</span></code></a>(self, frequencies)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_frequencies</span></code>(self, frequencies)</p></td>
 <td><p>Create a word_cloud from words and frequencies.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#wordcloud.WordCloud.generate_from_text" title="wordcloud.WordCloud.generate_from_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_text</span></code></a>(self, text)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_text</span></code>(self, text)</p></td>
 <td><p>Generate wordcloud from text.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#wordcloud.WordCloud.process_text" title="wordcloud.WordCloud.process_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_text</span></code></a>(self, text)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_text</span></code>(self, text)</p></td>
 <td><p>Splits a long text into words, eliminates the stopwords.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#wordcloud.WordCloud.recolor" title="wordcloud.WordCloud.recolor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recolor</span></code></a>(self[, random_state, color_func, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">recolor</span></code>(self[, random_state, color_func, …])</p></td>
 <td><p>Recolor existing layout.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#wordcloud.WordCloud.to_array" title="wordcloud.WordCloud.to_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_array</span></code></a>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_array</span></code>(self)</p></td>
 <td><p>Convert to numpy array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#wordcloud.WordCloud.to_file" title="wordcloud.WordCloud.to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code></a>(self, filename)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code>(self, filename)</p></td>
 <td><p>Export to image file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#wordcloud.WordCloud.to_svg" title="wordcloud.WordCloud.to_svg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_svg</span></code></a>(self[, embed_font, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_svg</span></code>(self[, embed_font, …])</p></td>
 <td><p>Export to SVG.</p></td>
 </tr>
 </tbody>
@@ -331,221 +333,10 @@ size, position, orientation and color.</p>
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="py method">
 <dt id="wordcloud.WordCloud.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">font_path=None</em>, <em class="sig-param">width=400</em>, <em class="sig-param">height=200</em>, <em class="sig-param">margin=2</em>, <em class="sig-param">ranks_only=None</em>, <em class="sig-param">prefer_horizontal=0.9</em>, <em class="sig-param">mask=None</em>, <em class="sig-param">scale=1</em>, <em class="sig-param">color_func=None</em>, <em class="sig-param">max_words=200</em>, <em class="sig-param">min_font_size=4</em>, <em class="sig-param">stopwords=None</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">background_color='black'</em>, <em class="sig-param">max_font_size=None</em>, <em class="sig-param">font_step=1</em>, <em class="sig-param">mode='RGB'</em>, <em class="sig-param">relative_scaling='auto'</em>, <em class="sig-param">regexp=None</em>, <em class="sig-param">collocations=True</em>, <em class="sig-param">colormap=None</em>, <em class="sig-param">normalize_plurals=True</em>, <em class="sig-param">contour_width=0</em>, <em class="sig-param">contour_color='black'</em>, <em class="sig-param">repeat=False</em>, <em class="sig-param">include_numbers=False</em>, <em class="sig-param">min_word_length=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">font_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">400</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">ranks_only</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefer_horizontal</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_words</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">min_font_size</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">stopwords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">background_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">max_font_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font_step</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'RGB'</span></em>, <em class="sig-param"><span class="n">relative_scaling</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">regexp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collocations</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">colormap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">normalize_plurals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">contour_width</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">contour_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">repeat</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">include_numbers</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">min_word_length</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.fit_words">
-<code class="sig-name descname">fit_words</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">frequencies</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.fit_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.fit_words" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a word_cloud from words and frequencies.</p>
-<p>Alias to generate_from_frequencies.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>frequencies</strong><span class="classifier">dict from string to float</span></dt><dd><p>A contains words and associated frequency.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>self</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.generate">
-<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.generate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate wordcloud from text.</p>
-<p>The input “text” is expected to be a natural text. If you pass a sorted
-list of words, words will appear in your output twice. To remove this
-duplication, set <code class="docutils literal notranslate"><span class="pre">collocations=False</span></code>.</p>
-<p>Alias to generate_from_text.</p>
-<p>Calls process_text and generate_from_frequencies.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>self</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.generate_from_frequencies">
-<code class="sig-name descname">generate_from_frequencies</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">frequencies</em>, <em class="sig-param">max_font_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.generate_from_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.generate_from_frequencies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a word_cloud from words and frequencies.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>frequencies</strong><span class="classifier">dict from string to float</span></dt><dd><p>A contains words and associated frequency.</p>
-</dd>
-<dt><strong>max_font_size</strong><span class="classifier">int</span></dt><dd><p>Use this font-size instead of self.max_font_size</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>self</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.generate_from_text">
-<code class="sig-name descname">generate_from_text</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.generate_from_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.generate_from_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate wordcloud from text.</p>
-<p>The input “text” is expected to be a natural text. If you pass a sorted
-list of words, words will appear in your output twice. To remove this
-duplication, set <code class="docutils literal notranslate"><span class="pre">collocations=False</span></code>.</p>
-<p>Calls process_text and generate_from_frequencies.</p>
-<dl class="simple">
-<dt>..versionchanged:: 1.2.2</dt><dd><p>Argument of generate_from_frequencies() is not return of
-process_text() any more.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>self</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.process_text">
-<code class="sig-name descname">process_text</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.process_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.process_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>Splits a long text into words, eliminates the stopwords.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>text</strong><span class="classifier">string</span></dt><dd><p>The text to be processed.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>words</strong><span class="classifier">dict (string, int)</span></dt><dd><p>Word tokens with associated frequency.</p>
-</dd>
-<dt>..versionchanged:: 1.2.2</dt><dd><p>Changed return type from list of tuples to dict.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>There are better ways to do word tokenization, but I don’t want to
-include all those things.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.recolor">
-<code class="sig-name descname">recolor</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">color_func=None</em>, <em class="sig-param">colormap=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.recolor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.recolor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recolor existing layout.</p>
-<p>Applying a new coloring is much faster than generating the whole
-wordcloud.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>random_state</strong><span class="classifier">RandomState, int, or None, default=None</span></dt><dd><p>If not None, a fixed random state is used. If an int is given, this
-is used as seed for a random.Random state.</p>
-</dd>
-<dt><strong>color_func</strong><span class="classifier">function or None, default=None</span></dt><dd><p>Function to generate new color from word count, font size, position
-and orientation.  If None, self.color_func is used.</p>
-</dd>
-<dt><strong>colormap</strong><span class="classifier">string or matplotlib colormap, default=None</span></dt><dd><p>Use this colormap to generate new colors. Ignored if color_func
-is specified. If None, self.color_func (or self.color_map) is used.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>self</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.to_array">
-<code class="sig-name descname">to_array</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.to_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.to_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert to numpy array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>image</strong><span class="classifier">nd-array size (width, height, 3)</span></dt><dd><p>Word cloud image as numpy matrix.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.to_file">
-<code class="sig-name descname">to_file</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.to_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export to image file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>Location to write to.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>self</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="wordcloud.WordCloud.to_svg">
-<code class="sig-name descname">to_svg</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">embed_font=False</em>, <em class="sig-param">optimize_embedded_font=True</em>, <em class="sig-param">embed_image=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.to_svg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.to_svg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export to SVG.</p>
-<p>Font is assumed to be available to the SVG reader. Otherwise, text
-coordinates may produce artifacts when rendered with replacement font.
-It is also possible to include a subset of the original font in WOFF
-format using <code class="docutils literal notranslate"><span class="pre">embed_font</span></code> (requires <cite>fontTools</cite>).</p>
-<p>Note that some renderers do not handle glyphs the same way, and may
-differ from <code class="docutils literal notranslate"><span class="pre">to_image</span></code> result. In particular, Complex Text Layout may
-not be supported. In this typesetting, the shape or positioning of a
-grapheme depends on its relation to other graphemes.</p>
-<p>Pillow, since version 4.2.0, supports CTL using <code class="docutils literal notranslate"><span class="pre">libraqm</span></code>. However,
-due to dependencies, this feature is not always enabled. Hence, the
-same rendering differences may appear in <code class="docutils literal notranslate"><span class="pre">to_image</span></code>. As this
-rasterized output is used to compute the layout, this also affects the
-layout generation. Use <code class="docutils literal notranslate"><span class="pre">PIL.features.check</span></code> to test availability of
-<code class="docutils literal notranslate"><span class="pre">raqm</span></code>.</p>
-<p>Consistant rendering is therefore expected if both Pillow and the SVG
-renderer have the same support of CTL.</p>
-<p>Contour drawing is not supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>embed_font</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether to include font inside resulting SVG file.</p>
-</dd>
-<dt><strong>optimize_embedded_font</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether to be aggressive when embedding a font, to reduce size. In
-particular, hinting tables are dropped, which may introduce slight
-changes to character shapes (w.r.t. <cite>to_image</cite> baseline).</p>
-</dd>
-<dt><strong>embed_image</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether to include rasterized image inside resulting SVG file.
-Useful for debugging.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>content</strong><span class="classifier">string</span></dt><dd><p>Word cloud image as SVG string</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
