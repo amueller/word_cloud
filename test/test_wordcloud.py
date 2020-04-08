@@ -385,7 +385,7 @@ def test_repeat():
     # all frequencies are 1
     assert len(wc.words_) == 3
     assert_array_equal(list(wc.words_.values()), 1)
-    frequencies = [w[0][1] for w in wc.layout_]
+    frequencies = [w.frequency for w in wc.layout_]
     assert_array_equal(frequencies, 1)
     repetition_text = "Some short text with text"
     wc = WordCloud(max_words=52, stopwords=[], repeat=True)
@@ -395,7 +395,7 @@ def test_repeat():
     assert wc.words_['text'] == 1
     assert wc.words_['with'] == .5
     assert len(wc.layout_), wc.max_words
-    frequencies = [w[0][1] for w in wc.layout_]
+    frequencies = [w.frequency for w in wc.layout_]
     # check that frequencies are sorted
     assert np.all(np.diff(frequencies) <= 0)
 
@@ -406,4 +406,4 @@ def test_zero_frequencies():
 
     word_cloud.generate_from_frequencies({'test': 1, 'test1': 0, 'test2': 0})
     assert len(word_cloud.layout_) == 1
-    assert word_cloud.layout_[0][0][0] == 'test'
+    assert word_cloud.layout_[0].word == 'test'
