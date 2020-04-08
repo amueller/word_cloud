@@ -18,16 +18,6 @@ environment:
       PYTHON_ARCH: "64"
       BLOCK: "0"
 
-#    - PYTHON_DIR: "C:\\Python34"
-#      PYTHON_VERSION: "3.4.x"
-#      PYTHON_ARCH: "32"
-#      BLOCK: "0"
-
-    - PYTHON_DIR: "C:\\Python34-x64"
-      PYTHON_VERSION: "3.4.x"
-      PYTHON_ARCH: "64"
-      BLOCK: "0"
-
 #    - PYTHON_DIR: "C:\\Python35"
 #      PYTHON_VERSION: "3.5.x"
 #      PYTHON_ARCH: "32"
