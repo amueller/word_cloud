@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Colored by Group Example &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
+  <title>Colored by Group Example &mdash; wordcloud 1.6.0.post35+g5edd3fa documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                1.6.0.post33+gfe89bfd
+                1.6.0.post35+g5edd3fa
               </div>
             
           
@@ -184,7 +184,7 @@
 <p>Generating a word cloud that assigns colors to words based on
 a predefined mapping from colors to words</p>
 <img alt="../_images/sphx_glr_colored_by_group_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_colored_by_group_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">,</span> <span class="n">get_single_color_func</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">,</span> <a href="../generated/wordcloud.get_single_color_func.html#wordcloud.get_single_color_func" title="wordcloud.get_single_color_func" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-function"><span class="n">get_single_color_func</span></a><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
@@ -231,10 +231,10 @@ a predefined mapping from colors to words</p>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_to_words</span><span class="p">,</span> <span class="n">default_color</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_func_to_words</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="n">get_single_color_func</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+            <span class="p">(</span><a href="../generated/wordcloud.get_single_color_func.html#wordcloud.get_single_color_func" title="wordcloud.get_single_color_func" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-function"><span class="n">get_single_color_func</span></a><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
             <span class="k">for</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span> <span class="ow">in</span> <span class="n">color_to_words</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">default_color_func</span> <span class="o">=</span> <span class="n">get_single_color_func</span><span class="p">(</span><span class="n">default_color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_color_func</span> <span class="o">=</span> <a href="../generated/wordcloud.get_single_color_func.html#wordcloud.get_single_color_func" title="wordcloud.get_single_color_func" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-function"><span class="n">get_single_color_func</span></a><span class="p">(</span><span class="n">default_color</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_color_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a single_color_func associated with the word&quot;&quot;&quot;</span>
@@ -306,7 +306,7 @@ a predefined mapping from colors to words</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.223 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.269 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-colored-by-group-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/140fcdad2a9d0b8d6625c5d86b3970d5/colored_by_group.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">colored_by_group.py</span></code></a></p>

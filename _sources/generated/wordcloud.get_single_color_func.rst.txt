@@ -1,0 +1,7 @@
+wordcloud.get_single_color_func
+===============================
+
+.. currentmodule:: wordcloud
+
+.. autofunction:: get_single_color_func
+

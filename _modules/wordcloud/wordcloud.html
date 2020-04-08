@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.6.0.post33+gfe89bfd documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.6.0.post35+g5edd3fa documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.6.0.post33+gfe89bfd
+                1.6.0.post35+g5edd3fa
               </div>
             
           
@@ -273,7 +273,7 @@
         <span class="k">return</span> <span class="s2">&quot;rgb(</span><span class="si">{:.0f}</span><span class="s2">, </span><span class="si">{:.0f}</span><span class="s2">, </span><span class="si">{:.0f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">get_single_color_func</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+<div class="viewcode-block" id="get_single_color_func"><a class="viewcode-back" href="../../generated/wordcloud.get_single_color_func.html#wordcloud.get_single_color_func">[docs]</a><span class="k">def</span> <span class="nf">get_single_color_func</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create a color function which returns a single hue and saturation with.</span>
 <span class="sd">    different values (HSV). Accepted values are color strings as usable by</span>
 <span class="sd">    PIL/Pillow.</span>
@@ -307,7 +307,7 @@
         <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">colorsys</span><span class="o">.</span><span class="n">hsv_to_rgb</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">random_state</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">return</span> <span class="s1">&#39;rgb(</span><span class="si">{:.0f}</span><span class="s1">, </span><span class="si">{:.0f}</span><span class="s1">, </span><span class="si">{:.0f}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">rgb_max</span><span class="p">,</span> <span class="n">g</span> <span class="o">*</span> <span class="n">rgb_max</span><span class="p">,</span>
                                                     <span class="n">b</span> <span class="o">*</span> <span class="n">rgb_max</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">single_color_func</span>
+    <span class="k">return</span> <span class="n">single_color_func</span></div>
 
 
 <div class="viewcode-block" id="WordCloud"><a class="viewcode-back" href="../../generated/wordcloud.WordCloud.html#wordcloud.WordCloud">[docs]</a><span class="k">class</span> <span class="nc">WordCloud</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
