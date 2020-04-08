@@ -55,8 +55,6 @@ jobs:
     <<: *x64_build_job
   manylinux-x64_cp27-cp27mu:
     <<: *x64_build_job
-  manylinux-x64_cp34-cp34m:
-    <<: *x64_build_job
   manylinux-x64_cp35-cp35m:
     <<: *x64_build_job
   manylinux-x64_cp36-cp36m_upload-sdist:
@@ -68,8 +66,6 @@ jobs:
   #manylinux-x86_cp27-cp27m:
   #  <<: *x86_build_job
   #manylinux-x86_cp27-cp27mu:
-  #  <<: *x86_build_job
-  #manylinux-x86_cp34-cp34m:
   #  <<: *x86_build_job
   #manylinux-x86_cp35-cp35m:
   #  <<: *x86_build_job
@@ -141,8 +137,6 @@ workflows:
           <<: *no_filters
       - manylinux-x64_cp27-cp27mu:
           <<: *no_filters
-      - manylinux-x64_cp34-cp34m:
-          <<: *no_filters
       - manylinux-x64_cp35-cp35m:
           <<: *no_filters
       - manylinux-x64_cp36-cp36m_upload-sdist:
@@ -153,8 +147,6 @@ workflows:
       #- manylinux-x86_cp27-cp27m:
       #    <<: *no_filters
       #- manylinux-x86_cp27-cp27mu:
-      #    <<: *no_filters
-      #- manylinux-x86_cp34-cp34m:
       #    <<: *no_filters
       #- manylinux-x86_cp35-cp35m:
       #    <<: *no_filters
@@ -173,14 +165,12 @@ workflows:
             # x64
             - manylinux-x64_cp27-cp27m
             - manylinux-x64_cp27-cp27mu
-            - manylinux-x64_cp34-cp34m
             - manylinux-x64_cp35-cp35m
             - manylinux-x64_cp36-cp36m_upload-sdist
             - manylinux-x64_cp37-cp37m
             # x86
             #- manylinux-x86_cp27-cp27m
             #- manylinux-x86_cp27-cp27mu
-            #- manylinux-x86_cp34-cp34m
             #- manylinux-x86_cp35-cp35m
             #- manylinux-x86_cp36-cp36m
             #- manylinux-x86_cp37-cp37m
@@ -194,14 +184,12 @@ workflows:
             # x64
             - manylinux-x64_cp27-cp27m
             - manylinux-x64_cp27-cp27mu
-            - manylinux-x64_cp34-cp34m
             - manylinux-x64_cp35-cp35m
             - manylinux-x64_cp36-cp36m_upload-sdist
             - manylinux-x64_cp37-cp37m
             # x86
             #- manylinux-x86_cp27-cp27m
             #- manylinux-x86_cp27-cp27mu
-            #- manylinux-x86_cp34-cp34m
             #- manylinux-x86_cp35-cp35m
             #- manylinux-x86_cp36-cp36m
             #- manylinux-x86_cp37-cp37m
