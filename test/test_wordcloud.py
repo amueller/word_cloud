@@ -41,17 +41,40 @@ Namespaces are one honking great idea -- let's do more of those!
     46 09 55 05 82   23 17 25 35 94   08 128
 """
 
+STOPWORDED_COLLOCATIONS = """
+thank you very much
+thank you very much
+thank you very much
+thanks
+"""
+
+SMALL_CANVAS = """
+better late than never someone will say
+"""
+
 
 def test_collocations():
-    wc = WordCloud(collocations=False, stopwords=[])
+    wc = WordCloud(collocations=False, stopwords=set())
     wc.generate(THIS)
 
-    wc2 = WordCloud(collocations=True, stopwords=[])
+    wc2 = WordCloud(collocations=True, stopwords=set())
     wc2.generate(THIS)
 
     assert "is better" in wc2.words_
     assert "is better" not in wc.words_
     assert "way may" not in wc2.words_
+
+
+def test_collocation_stopwords():
+    wc = WordCloud(collocations=True, stopwords={"you", "very"}, collocation_threshold=9)
+    wc.generate(STOPWORDED_COLLOCATIONS)
+
+    assert "thank you" in wc.words_
+    assert "very much" in wc.words_
+    # "thank" will have been removed in favor of the bigrams including "thank"
+    assert "thank" not in wc.words_
+    # a bigram of all stopwords will be removed
+    assert "you very" not in wc.words_
 
 
 def test_plurals_numbers():
@@ -352,8 +375,8 @@ def test_recolor_too_small_set_default():
 def test_small_canvas():
     # check font size fallback works on small canvas
     wc = WordCloud(max_words=50, width=21, height=21)
-    wc.generate(THIS)
-    assert len(wc.layout_) == 1
+    wc.generate(SMALL_CANVAS)
+    assert len(wc.layout_) > 0
 
 
 def test_tiny_canvas():

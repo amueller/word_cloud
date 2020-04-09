@@ -36,26 +36,27 @@ def pairwise(iterable):
     return zip(a, b)
 
 
-def unigrams_and_bigrams(words, normalize_plurals=True):
+def unigrams_and_bigrams(words, stopwords, normalize_plurals=True, collocation_threshold=30):
+    # We must create the bigrams before removing the stopword tokens from the words, or else we get bigrams like
+    # "thank much" from "thank you very much".  But bigrams consisting entirely of stopwords are still invalid.
+    bigrams = list(p for p in pairwise(words) if not all(w in stopwords for w in p))
     n_words = len(words)
-    # make tuples of two words following each other
-    bigrams = list(pairwise(words))
     counts_unigrams, standard_form = process_tokens(
         words, normalize_plurals=normalize_plurals)
     counts_bigrams, standard_form_bigrams = process_tokens(
         [" ".join(bigram) for bigram in bigrams],
         normalize_plurals=normalize_plurals)
     # create a copy of counts_unigram so the score computation is not changed
-    counts = counts_unigrams.copy()
+    orig_counts = counts_unigrams.copy()
 
-    # decount words inside bigrams
+    # Include bigrams that are also collocations
     for bigram_string, count in counts_bigrams.items():
         bigram = tuple(bigram_string.split(" "))
-        # collocation detection (30 is arbitrary):
         word1 = standard_form[bigram[0].lower()]
         word2 = standard_form[bigram[1].lower()]
 
-        if score(count, counts[word1], counts[word2], n_words) > 30:
+        collocation_score = score(count, orig_counts[word1], orig_counts[word2], n_words)
+        if collocation_score > collocation_threshold:
             # bigram is a collocation
             # discount words in unigrams dict. hack because one word might
             # appear in multiple collocations at the same time
@@ -63,10 +64,9 @@ def unigrams_and_bigrams(words, normalize_plurals=True):
             counts_unigrams[word1] -= counts_bigrams[bigram_string]
             counts_unigrams[word2] -= counts_bigrams[bigram_string]
             counts_unigrams[bigram_string] = counts_bigrams[bigram_string]
-    words = list(counts_unigrams.keys())
-    for word in words:
-        # remove empty / negative counts
-        if counts_unigrams[word] <= 0:
+    for word, count in list(counts_unigrams.items()):
+        # remove stopwords and empty / negative counts
+        if all(w in stopwords for w in word.split(" ")) or count <= 0:
             del counts_unigrams[word]
     return counts_unigrams
 

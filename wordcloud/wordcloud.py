@@ -1,3 +1,4 @@
+# coding=utf-8
 # Author: Andreas Christian Mueller <t3kcit@gmail.com>
 #
 # (c) 2012
@@ -273,6 +274,14 @@ class WordCloud(object):
     min_word_length : int, default=0
         Minimum number of letters a word must have to be included.
 
+    collocation_threshold: int, default=30
+        Bigrams must have a Dunning likelihood collocation score greater than this
+        parameter to be counted as bigrams. Default of 30 is arbitrary.
+
+        See Manning, C.D., Manning, C.D. and Schütze, H., 1999. Foundations of
+        Statistical Natural Language Processing. MIT press, p. 162
+        https://nlp.stanford.edu/fsnlp/promo/colloc.pdf#page=22
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -303,7 +312,7 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False, min_word_length=0):
+                 include_numbers=False, min_word_length=0, collocation_threshold=30):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -354,6 +363,7 @@ class WordCloud(object):
         self.repeat = repeat
         self.include_numbers = include_numbers
         self.min_word_length = min_word_length
+        self.collocation_threshold = collocation_threshold
 
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
@@ -557,15 +567,11 @@ class WordCloud(object):
         include all those things.
         """
 
-        stopwords = set([i.lower() for i in self.stopwords])
-
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
         regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
         words = re.findall(regexp, text, flags)
-        # remove stopwords
-        words = [word for word in words if word.lower() not in stopwords]
         # remove 's
         words = [word[:-2] if word.lower().endswith("'s") else word
                  for word in words]
@@ -576,9 +582,12 @@ class WordCloud(object):
         if self.min_word_length:
             words = [word for word in words if len(word) >= self.min_word_length]
 
+        stopwords = set([i.lower() for i in self.stopwords])
         if self.collocations:
-            word_counts = unigrams_and_bigrams(words, self.normalize_plurals)
+            word_counts = unigrams_and_bigrams(words, stopwords, self.normalize_plurals, self.collocation_threshold)
         else:
+            # remove stopwords
+            words = [word for word in words if word.lower() not in stopwords]
             word_counts, _ = process_tokens(words, self.normalize_plurals)
 
         return word_counts
