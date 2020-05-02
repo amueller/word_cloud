@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; wordcloud 1.6.0.post43+gd1ec087 documentation</title>
+  <title>Changelog &mdash; wordcloud 1.7.0 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                1.6.0.post43+gd1ec087
+                1.7.0
               </div>
             
           
@@ -95,24 +95,29 @@
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#next-release">Next Release</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#wordcloud-1-6-0">WordCloud 1.6.0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wordcloud-1-7-0">WordCloud 1.7.0</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wordcloud-1-6-0">WordCloud 1.6.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#wordcloud-1-5-0">WordCloud 1.5.0</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wheels">Wheels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Bug fixes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#website">Website</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test">Test</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#wordcloud-1-4-1">WordCloud 1.4.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Bug fixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Bug fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Test</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#wordcloud-1-4-0">WordCloud 1.4.0</a></li>
@@ -197,10 +202,26 @@ details, see the commit logs at <a class="reference external" href="https://gith
 <div class="section" id="next-release">
 <h2>Next Release<a class="headerlink" href="#next-release" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="wordcloud-1-6-0">
-<h2>WordCloud 1.6.0<a class="headerlink" href="#wordcloud-1-6-0" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="wordcloud-1-7-0">
+<h2>WordCloud 1.7.0<a class="headerlink" href="#wordcloud-1-7-0" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="features">
 <h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add export of SVG files using <code class="xref py py-func docutils literal notranslate"><span class="pre">WordCloud.to_svg()</span></code> by <a class="reference external" href="https://github.com/jojolebarjos">&#64;jojolebarjos</a> .</p></li>
+<li><p>Add missing options to the command line interface, <a class="reference external" href="https://github.com/amueller/word_cloud/pull/527">PR #527</a> by <a class="reference external" href="https://github.com/dm-logv">&#64;dm-logv</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Make bigrams stopword aware, <a href="#id9"><span class="problematic" id="id10">`PR #528&lt;https://github.com/amueller/word_cloud/pull/529&gt;`_</span></a> by <a class="reference external" href="https://github.com/carlgieringer">&#64;carlgieringer</a>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="wordcloud-1-6-0">
+<h2>WordCloud 1.6.0<a class="headerlink" href="#wordcloud-1-6-0" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Features<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Add support to render numbers and single letters using the
 <code class="docutils literal notranslate"><span class="pre">include_numbers</span></code> and <code class="docutils literal notranslate"><span class="pre">min_word_length</span></code> arguments.</p></li>
@@ -216,8 +237,8 @@ image-based coloring and masks.</p></li>
 </div>
 <div class="section" id="wordcloud-1-5-0">
 <h2>WordCloud 1.5.0<a class="headerlink" href="#wordcloud-1-5-0" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id2">
-<h3>Examples<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Examples<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Add <a class="reference internal" href="auto_examples/frequency.html#sphx-glr-auto-examples-frequency-py"><span class="std std-ref">Using frequency</span></a> example for understanding how
 to generate a wordcloud using a dictionary of word frequency.
@@ -226,8 +247,8 @@ Contributed by <a class="reference external" href="https://github.com/yoonsubKim
 Contributed by <a class="reference external" href="https://github.com/FontTian">&#64;FontTian</a> and improved by <a class="reference external" href="https://github.com/duohappy">&#64;duohappy</a>.</p></li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>Features<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Features<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Add support for mask contour. Contributed by <a class="reference external" href="https://github.com/jsmedmar">&#64;jsmedmar</a>.</p>
 <ul>
@@ -263,8 +284,8 @@ tagging a release, there is no need to manually update version in <code class="d
 See <a class="reference external" href="https://github.com/amueller/word_cloud/issues/420">#420</a>. Contributed by <a class="reference external" href="https://github.com/jcfr">&#64;jcfr</a>.</p></li>
 </ul>
 </div>
-<div class="section" id="bug-fixes">
-<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Bug fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud"><code class="xref py py-class docutils literal notranslate"><span class="pre">wordcloud.WordCloud</span></code></a> API</p>
 <ul>
@@ -318,14 +339,14 @@ opening <code class="docutils literal notranslate"><span class="pre">htmlcov/ind
 </div>
 <div class="section" id="wordcloud-1-4-1">
 <h2>WordCloud 1.4.1<a class="headerlink" href="#wordcloud-1-4-1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id5">
-<h3>Bug fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Bug fixes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Improve stopwords list. Contributed by <a class="reference external" href="https://github.com/xuhdev">&#64;xuhdev</a>.</p></li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h3>Test<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Test<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Remove outdated channel and use conda-forge. Contributed by <a class="reference external" href="https://github.com/amueller">&#64;amueller</a>.</p></li>
 <li><p>Add test for the command line utility. Contributed by <a class="reference external" href="https://github.com/xuhdev">&#64;xuhdev</a>.</p></li>

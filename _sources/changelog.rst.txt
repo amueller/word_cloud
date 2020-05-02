@@ -10,6 +10,19 @@ details, see the commit logs at https://github.com/amueller/word_cloud
 Next Release
 ==============
 
+WordCloud 1.7.0
+===============
+
+Features
+--------
+* Add export of SVG files using :func:`WordCloud.to_svg` by :user:`jojolebarjos` .
+* Add missing options to the command line interface, `PR #527 <https://github.com/amueller/word_cloud/pull/527>`_ by :user:`dm-logv`.
+
+Bug fixes
+---------
+* Make bigrams stopword aware, `PR #528<https://github.com/amueller/word_cloud/pull/529>`_ by :user:`carlgieringer`.
+
+
 WordCloud 1.6.0
 ===============
 
