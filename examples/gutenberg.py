@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Using Gutenberg project as a text source
 ========================================
@@ -16,7 +16,6 @@ from string import punctuation, digits
 import os
 import numpy as np
 from PIL import Image
-import matplotlib.pyplot as plt
 
 # ... creating the word cloud
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
@@ -64,7 +63,7 @@ for word in book.split():
         words_dict[word] += 1
     else:
         words_dict[word] = 1
-max_words = int(0.5*len(words_dict))
+max_words = int(0.5 * len(words_dict))
 
 
 # load masking image for creating exterior shape and defining word coloring cloud
@@ -72,7 +71,9 @@ img_mask = np.array(Image.open(os.path.join(d, "book_color.png")))
 
 
 # put it all together including the coloring part
-wc = WordCloud(background_color="white", mask=img_mask, stopwords=stopwords, max_words=max_words, contour_width=3, contour_color="black", random_state=42)
+wc = WordCloud(background_color="white", mask=img_mask, 
+        stopwords=stopwords, max_words=max_words, 
+        contour_width=3, contour_color="black", random_state=42)
 wc.generate_from_frequencies(words_dict)
 image_colors = ImageColorGenerator(img_mask)
 wc.recolor(color_func=image_colors)
