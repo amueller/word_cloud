@@ -145,6 +145,8 @@ workflows:
           <<: *no_filters
       - manylinux-x64_cp37-cp37m:
           <<: *no_filters
+      - manylinux-x64_cp38-cp38m:
+          <<: *no_filters
       # x86
       #- manylinux-x86_cp27-cp27m:
       #    <<: *no_filters
