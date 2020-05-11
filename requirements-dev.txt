@@ -1,6 +1,6 @@
 codecov
 coverage
-flake8
+flake8==3.8.0
 mock
 pytest<5.4.0
 pytest-cov
