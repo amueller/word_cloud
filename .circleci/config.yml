@@ -99,7 +99,7 @@ jobs:
 
   deploy-master:
     docker:
-      - image: circleci/python:3.7.0-stretch
+      - image: circleci/python:3.8.0-stretch
     steps:
       - checkout
       - attach_workspace:
@@ -113,7 +113,7 @@ jobs:
 
   deploy-release:
     docker:
-      - image: circleci/python:3.7.0-stretch
+      - image: circleci/python:3.8.0-stretch
     steps:
       - checkout
       - attach_workspace:
