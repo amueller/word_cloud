@@ -10,6 +10,19 @@ details, see the commit logs at https://github.com/amueller/word_cloud
 Next Release
 ==============
 
+Wheels
+------
+
+* Add support for building wheels for Python 3.8 for all platforms and 32-bit wheels for windows **only**.
+  See :issue:`547` and :issue:`549`. Contributed by :user:`amueller` and :user:`jcfr`.
+
+Test
+----
+
+* Update CircleCI configuration to use `dockcross/manylinux1-x64 <https://github.com/dockcross/dockcross#cross-compilers>`_
+  image instead of obsolete `dockcross/manylinux-x64` one. See :issue:`548`. Contributed by :user:`jcfr`.
+
+
 WordCloud 1.6.0
 ===============
 
