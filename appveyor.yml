@@ -42,9 +42,19 @@ environment:
 #      PYTHON_VERSION: "3.7.x"
 #      PYTHON_ARCH: "32"
 #      BLOCK: "0"
-#
+
     - PYTHON_DIR: "C:\\Python37-x64"
       PYTHON_VERSION: "3.7.x"
+      PYTHON_ARCH: "64"
+      BLOCK: "0"
+
+#    - PYTHON_DIR: "C:\\Python38"
+#      PYTHON_VERSION: "3.8.x"
+#      PYTHON_ARCH: "32"
+#      BLOCK: "0"
+
+    - PYTHON_DIR: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.8.x"
       PYTHON_ARCH: "64"
       BLOCK: "0"
 
