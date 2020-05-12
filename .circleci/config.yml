@@ -28,12 +28,12 @@ references:
 
   x64_build_job: &x64_build_job
     docker:
-      - image: dockcross/manylinux-x64
+      - image: dockcross/manylinux1-x64
     <<: *ci_steps
 
   x86_build_job: &x86_build_job
     docker:
-      - image: dockcross/manylinux-x86
+      - image: dockcross/manylinux1-x86
     <<: *ci_steps
 
   deploy_website_command: &deploy_website_command
