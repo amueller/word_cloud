@@ -47,6 +47,7 @@ before_install:
   - python -m pip install --disable-pip-version-check --upgrade pip
   - pip install -U scikit-ci scikit-ci-addons
   - ci_addons --install ../addons
+  - pip install arabic-reshaper python-bidi
 
 install:
   - ci install
