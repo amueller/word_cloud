@@ -25,7 +25,8 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 
-# provide URL to (any) utf-8 encoded e-book on the web, here project Gutenberg does the job
+# provide URL to an utf-8 encoded e-book on the web
+# here project Gutenberg does the job
 ebook_url = "https://www.gutenberg.org/files/1342/1342-0.txt"
 
 
@@ -52,9 +53,8 @@ stopwords.add("ebook")
 stopwords.add("project")
 
 
-# assess frequencies and place words & counts in dictionary
-# as the books may contain many words, we'll extend the max number used in the cloud
-# and set to 50% of the words found
+# assess frequencies of words, we'll extend the max number of them used in the
+# cloud to 50% of the words found within the given book
 words_dict = {}
 for word in book.split():
     if word in stopwords:
@@ -66,14 +66,14 @@ for word in book.split():
 max_words = int(0.5 * len(words_dict))
 
 
-# load masking image for creating exterior shape and defining word coloring cloud
+# load masking image for defining exterior shape and word coloring
 img_mask = np.array(Image.open(os.path.join(d, "book_color.png")))
 
 
 # put it all together including the coloring part
-wc = WordCloud(background_color="white", mask=img_mask, 
-        stopwords=stopwords, max_words=max_words, 
-        contour_width=3, contour_color="black", random_state=42)
+wc = WordCloud(background_color="white", mask=img_mask,
+               stopwords=stopwords, max_words=max_words,
+               contour_width=3, contour_color="black", random_state=42)
 wc.generate_from_frequencies(words_dict)
 image_colors = ImageColorGenerator(img_mask)
 wc.recolor(color_func=image_colors)
