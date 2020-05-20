@@ -5,7 +5,7 @@ from collections import defaultdict
 from math import log
 
 
-def l(k, n, x):  # noqa: E743
+def l(k, n, x):  # noqa: E741, E743
     # dunning's likelihood ratio with notation from
     # http://nlp.stanford.edu/fsnlp/promo/colloc.pdf p162
     return log(max(x, 1e-10)) * k + log(max(1 - x, 1e-10)) * (n - k)
