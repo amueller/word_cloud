@@ -3,7 +3,13 @@
 Create wordcloud with Arabic
 ===============
 Generating a wordcloud from Arabic text
-Other dependencies: bidi.algorithm, arabic_reshaper
+
+Dependencies:
+- bidi.algorithm
+- arabic_reshaper
+
+Dependencies installation:
+pip install python-bidi arabic_reshape
 """
 
 from os import path
