@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Example using Arabic
+Create wordcloud with Arabic
 ===============
 Generating a wordcloud from Arabic text
 Other dependencies: bidi.algorithm, arabic_reshaper
