@@ -12,16 +12,17 @@ Dependencies installation:
 pip install python-bidi arabic_reshape
 """
 
-from os import path
+import os
 import codecs
 from wordcloud import WordCloud
 import arabic_reshaper
 from bidi.algorithm import get_display
 
-d = path.dirname(__file__)
+# get data directory (using getcwd() is needed to support running example in generated IPython notebook)
+d = os.path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 # Read the whole text.
-f = codecs.open(path.join(d, 'arabicwords.txt'), 'r', 'utf-8')
+f = codecs.open(os.path.join(d, 'arabicwords.txt'), 'r', 'utf-8')
 
 # Make text readable for a non-Arabic library like wordcloud
 text = arabic_reshaper.reshape(f.read())
