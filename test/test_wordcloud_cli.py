@@ -140,7 +140,7 @@ def test_unicode_with_stopwords():
     assert u'\u304D' in args['stopwords']
 
 
-def test_cli_writes_image(tmpdir, tmp_text_file):
+def test_cli_writes_to_imagefile(tmpdir, tmp_text_file):
     # ensure writing works with all python versions
     tmp_image_file = tmpdir.join("word_cloud.png")
 
@@ -149,8 +149,19 @@ def test_cli_writes_image(tmpdir, tmp_text_file):
     args, text, image_file = cli.parse_args(['--text', str(tmp_text_file), '--imagefile', str(tmp_image_file)])
     cli.main(args, text, image_file)
 
-    # expecting image to be written
+    # expecting image to be written to imagefile
     assert tmp_image_file.size() > 0
+
+
+def test_cli_writes_to_stdout(tmp_text_file, capsysbinary):
+    tmp_text_file.write(b'some text')
+
+    args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
+    cli.main(args, text, image_file)
+
+    # expecting image to be written to stdout
+    out, _ = capsysbinary.readouterr()
+    assert len(str(out)) > 0
 
 
 def test_cli_regexp(tmp_text_file):
