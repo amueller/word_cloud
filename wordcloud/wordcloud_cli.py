@@ -90,8 +90,11 @@ def main(args, text, imagefile):
     wordcloud.generate(text)
     image = wordcloud.to_image()
 
-    with imagefile:
+    try:
         image.save(imagefile, format='png', optimize=True)
+    finally:
+        if imagefile != sys.stdout.buffer:
+            imagefile.close()
 
 
 def make_parser():
