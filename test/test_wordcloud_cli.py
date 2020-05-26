@@ -162,7 +162,7 @@ def test_cli_writes_to_stdout(tmpdir, tmp_text_file):
     tmp_text_file.write(b'some text')
 
     originalBuffer = sys.stdout.buffer
-    sys.stdout.buffer = open(tmp_image_file, 'wb+')
+    sys.stdout.buffer = tmp_image_file.open('wb+')
 
     args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
     cli.main(args, text, image_file)
