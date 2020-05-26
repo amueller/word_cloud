@@ -1,6 +1,7 @@
 import argparse
 import os
 import subprocess
+import sys
 from collections import namedtuple
 
 import wordcloud as wc
@@ -153,15 +154,23 @@ def test_cli_writes_to_imagefile(tmpdir, tmp_text_file):
     assert tmp_image_file.size() > 0
 
 
-def test_cli_writes_to_stdout(tmp_text_file, capsysbinary):
+# capsysbinary should be used here, but it's not supported in python 2.
+def test_cli_writes_to_stdout(tmpdir, tmp_text_file):
+    # ensure writing works with all python versions
+    tmp_image_file = tmpdir.join("word_cloud.png")
+
     tmp_text_file.write(b'some text')
+
+    originalBuffer = sys.stdout.buffer
+    sys.stdout.buffer = open(tmp_image_file, 'wb+')
 
     args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
     cli.main(args, text, image_file)
 
+    sys.stdout.buffer = originalBuffer
+
     # expecting image to be written to stdout
-    out, _ = capsysbinary.readouterr()
-    assert len(str(out)) > 0
+    assert tmp_image_file.size() > 0
 
 
 def test_cli_regexp(tmp_text_file):
