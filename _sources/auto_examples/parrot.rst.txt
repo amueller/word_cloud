@@ -23,22 +23,26 @@ Recreating an image similar to the parrot example.
     *
 
       .. image:: /auto_examples/images/sphx_glr_parrot_001.png
-            :class: sphx-glr-multi-img
+          :alt: parrot
+          :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/images/sphx_glr_parrot_002.png
-            :class: sphx-glr-multi-img
+          :alt: parrot
+          :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/images/sphx_glr_parrot_003.png
-            :class: sphx-glr-multi-img
+          :alt: Original Image
+          :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/images/sphx_glr_parrot_004.png
-            :class: sphx-glr-multi-img
+          :alt: Edge map
+          :class: sphx-glr-multi-img
 
 
 
@@ -105,7 +109,7 @@ Recreating an image similar to the parrot example.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  24.304 seconds)
+   **Total running time of the script:** ( 0 minutes  17.320 seconds)
 
 
 .. _sphx_glr_download_auto_examples_parrot.py:

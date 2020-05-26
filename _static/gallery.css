@@ -175,6 +175,15 @@ ul.sphx-glr-horizontal img {
   height: auto;
 }
 
+div.sphx-glr-animation {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+}
+div.sphx-glr-animation .animation{
+  display: block;
+}
+
 p.sphx-glr-signature a.reference.external {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;

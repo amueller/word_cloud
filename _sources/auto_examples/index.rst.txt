@@ -18,6 +18,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_single_word_thumb.png
+     :alt: Single Word
 
      :ref:`sphx_glr_auto_examples_single_word.py`
 
@@ -33,11 +34,33 @@ Gallery of Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Dependencies: - bidi.algorithm - arabic_reshaper">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_arabic_thumb.png
+     :alt: Create wordcloud with Arabic
+
+     :ref:`sphx_glr_auto_examples_arabic.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/arabic
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Generating a square wordcloud from the US constitution using default arguments.">
 
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_simple_thumb.png
+     :alt: Minimal Example
 
      :ref:`sphx_glr_auto_examples_simple.py`
 
@@ -58,6 +81,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_masked_thumb.png
+     :alt: Masked wordcloud
 
      :ref:`sphx_glr_auto_examples_masked.py`
 
@@ -78,6 +102,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_frequency_thumb.png
+     :alt: Using frequency
 
      :ref:`sphx_glr_auto_examples_frequency.py`
 
@@ -98,6 +123,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_colored_thumb.png
+     :alt: Image-colored wordcloud
 
      :ref:`sphx_glr_auto_examples_colored.py`
 
@@ -118,6 +144,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_emoji_thumb.png
+     :alt: Emoji Example
 
      :ref:`sphx_glr_auto_examples_emoji.py`
 
@@ -138,6 +165,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_a_new_hope_thumb.png
+     :alt: Using custom colors
 
      :ref:`sphx_glr_auto_examples_a_new_hope.py`
 
@@ -158,6 +186,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_parrot_thumb.png
+     :alt: Image-colored wordcloud with boundary map
 
      :ref:`sphx_glr_auto_examples_parrot.py`
 
@@ -178,6 +207,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_wordcloud_cn_thumb.png
+     :alt: create wordcloud with chinese
 
      :ref:`sphx_glr_auto_examples_wordcloud_cn.py`
 
@@ -198,6 +228,7 @@ Gallery of Examples
 .. only:: html
 
  .. figure:: /auto_examples/images/thumb/sphx_glr_colored_by_group_thumb.png
+     :alt: Colored by Group Example
 
      :ref:`sphx_glr_auto_examples_colored_by_group.py`
 

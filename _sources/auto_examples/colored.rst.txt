@@ -23,6 +23,7 @@ If you want white as a legal color, you can just pass a different image to
 
 
 .. image:: /auto_examples/images/sphx_glr_colored_001.png
+    :alt: colored
     :class: sphx-glr-single-img
 
 
@@ -75,7 +76,7 @@ If you want white as a legal color, you can just pass a different image to
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.950 seconds)
+   **Total running time of the script:** ( 0 minutes  2.210 seconds)
 
 
 .. _sphx_glr_download_auto_examples_colored.py:

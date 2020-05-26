@@ -22,12 +22,14 @@ Using the recolor method and custom coloring functions.
     *
 
       .. image:: /auto_examples/images/sphx_glr_a_new_hope_001.png
-            :class: sphx-glr-multi-img
+          :alt: Custom colors
+          :class: sphx-glr-multi-img
 
     *
 
       .. image:: /auto_examples/images/sphx_glr_a_new_hope_002.png
-            :class: sphx-glr-multi-img
+          :alt: Default colors
+          :class: sphx-glr-multi-img
 
 
 
@@ -91,7 +93,7 @@ Using the recolor method and custom coloring functions.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.920 seconds)
+   **Total running time of the script:** ( 0 minutes  5.356 seconds)
 
 
 .. _sphx_glr_download_auto_examples_a_new_hope.py:
