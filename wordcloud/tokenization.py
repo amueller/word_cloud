@@ -38,8 +38,9 @@ def pairwise(iterable):
 
 def unigrams_and_bigrams(words, stopwords, normalize_plurals=True, collocation_threshold=30):
     # We must create the bigrams before removing the stopword tokens from the words, or else we get bigrams like
-    # "thank much" from "thank you very much".  But bigrams consisting entirely of stopwords are still invalid.
-    bigrams = list(p for p in pairwise(words) if not all(w in stopwords for w in p))
+    # "thank much" from "thank you very much".
+    # We don't allow any of the words in the bigram to be stopwords
+    bigrams = list(p for p in pairwise(words) if not any(w in stopwords for w in p))
     n_words = len(words)
     counts_unigrams, standard_form = process_tokens(
         words, normalize_plurals=normalize_plurals)

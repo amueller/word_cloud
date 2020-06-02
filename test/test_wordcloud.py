@@ -69,10 +69,9 @@ def test_collocation_stopwords():
     wc = WordCloud(collocations=True, stopwords={"you", "very"}, collocation_threshold=9)
     wc.generate(STOPWORDED_COLLOCATIONS)
 
-    assert "thank you" in wc.words_
-    assert "very much" in wc.words_
-    # "thank" will have been removed in favor of the bigrams including "thank"
-    assert "thank" not in wc.words_
+    assert "thank you" not in wc.words_
+    assert "very much" not in wc.words_
+    assert "thank" in wc.words_
     # a bigram of all stopwords will be removed
     assert "you very" not in wc.words_
 
