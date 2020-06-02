@@ -34,6 +34,27 @@ Gallery of Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Dependencies: - bidi.algorithm - arabic_reshaper">
+
+.. only:: html
+
+ .. figure:: /auto_examples/images/thumb/sphx_glr_arabic_thumb.png
+     :alt: Create wordcloud with Arabic
+
+     :ref:`sphx_glr_auto_examples_arabic.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/arabic
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Generating a square wordcloud from the US constitution using default arguments.">
 
 .. only:: html

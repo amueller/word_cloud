@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Single Word &mdash; wordcloud 1.6.0.post80+g0aba08f documentation</title>
+  <title>Create wordcloud with Arabic &mdash; wordcloud 1.6.0.post80+g0aba08f documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Create wordcloud with Arabic" href="arabic.html" />
-    <link rel="prev" title="Gallery of Examples" href="index.html" /> 
+    <link rel="next" title="Minimal Example" href="simple.html" />
+    <link rel="prev" title="Single Word" href="single_word.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,8 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">Command Line Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Gallery of Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Single Word</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arabic.html">Create wordcloud with Arabic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="single_word.html">Single Word</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Create wordcloud with Arabic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simple.html">Minimal Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="masked.html">Masked wordcloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="frequency.html">Using frequency</a></li>
@@ -158,13 +158,13 @@
         
           <li><a href="index.html">Gallery of Examples</a> &raquo;</li>
         
-      <li>Single Word</li>
+      <li>Create wordcloud with Arabic</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/auto_examples/single_word.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/auto_examples/arabic.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -179,39 +179,53 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-single-word-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-arabic-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="single-word">
-<span id="sphx-glr-auto-examples-single-word-py"></span><h1>Single Word<a class="headerlink" href="#single-word" title="Permalink to this headline">¶</a></h1>
-<p>Make a word cloud with a single word that’s repeated.</p>
-<img alt="single word" class="sphx-glr-single-img" src="../_images/sphx_glr_single_word_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a>
-
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;square&quot;</span>
-
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[:</span><span class="mi">300</span><span class="p">,</span> <span class="p">:</span><span class="mi">300</span><span class="p">]</span>
-
-<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">150</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">150</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">130</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-
-
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wc</span></a><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="sphx-glr-example-title section" id="create-wordcloud-with-arabic">
+<span id="sphx-glr-auto-examples-arabic-py"></span><h1>Create wordcloud with Arabic<a class="headerlink" href="#create-wordcloud-with-arabic" title="Permalink to this headline">¶</a></h1>
+<p>Generating a wordcloud from Arabic text</p>
+<p>Dependencies:
+- bidi.algorithm
+- arabic_reshaper</p>
+<p>Dependencies installation:
+pip install python-bidi arabic_reshape</p>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;wordcloud.wordcloud.WordCloud object at 0x7fa0f73e5fd0&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.532 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-single-word-py">
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a>
+<span class="kn">import</span> <span class="nn">arabic_reshaper</span>
+<span class="kn">from</span> <span class="nn">bidi.algorithm</span> <span class="kn">import</span> <span class="n">get_display</span>
+
+<span class="c1"># get data directory (using getcwd() is needed to support running example in generated IPython notebook)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;__file__&quot;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+<span class="c1"># Read the whole text.</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;arabicwords.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+<span class="c1"># Make text readable for a non-Arabic library like wordcloud</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">arabic_reshaper</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">get_display</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Generate a word cloud image</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wordcloud</span></a> <span class="o">=</span> <a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class"><span class="n">WordCloud</span></a><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="s1">&#39;fonts/NotoNaskhArabic/NotoNaskhArabic-Regular.ttf&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Export to an image</span>
+<a href="../generated/wordcloud.WordCloud.html#wordcloud.WordCloud" title="wordcloud.WordCloud" class="sphx-glr-backref-module-wordcloud sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wordcloud</span></a><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;arabic_example.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.929 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-arabic-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../_downloads/f935a7baa3096d46161785933a695d10/single_word.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">single_word.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../_downloads/d32a865265c84c98180b101a7a73fe84/arabic.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">arabic.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
-<p><a class="reference download internal" download="" href="../_downloads/86b6a3ef02e4e335da0f67b23d9f871d/single_word.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">single_word.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../_downloads/580011698154c690fe7d0e92616a200e/arabic.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">arabic.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
@@ -225,10 +239,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="arabic.html" class="btn btn-neutral float-right" title="Create wordcloud with Arabic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="simple.html" class="btn btn-neutral float-right" title="Minimal Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Gallery of Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="single_word.html" class="btn btn-neutral float-left" title="Single Word" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
