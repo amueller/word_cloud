@@ -48,6 +48,17 @@ thank you very much
 thanks
 """
 
+STOPWORDED_COLLOCATIONS_UPPERCASE = """
+Thank you very much
+Thank you very much
+Thank you very much
+thank you very much
+hi There
+Hi there
+Hi There
+thanks
+"""
+
 SMALL_CANVAS = """
 better late than never someone will say
 """
@@ -74,6 +85,19 @@ def test_collocation_stopwords():
     assert "thank" in wc.words_
     # a bigram of all stopwords will be removed
     assert "you very" not in wc.words_
+
+
+def test_collocation_stopwords_uppercase():
+    wc = WordCloud(collocations=True, stopwords={"thank", "hi", "there"}, collocation_threshold=9)
+    wc.generate(STOPWORDED_COLLOCATIONS_UPPERCASE)
+
+    assert "Thank you" not in wc.words_
+    assert "thank you" not in wc.words_
+    assert "Thank" not in wc.words_
+    # a bigram of all stopwords will be removed
+    assert "hi There" not in wc.words_
+    assert "Hi there" not in wc.words_
+    assert "Hi There" not in wc.words_
 
 
 def test_plurals_numbers():
