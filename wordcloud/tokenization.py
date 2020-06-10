@@ -36,7 +36,7 @@ def pairwise(iterable):
     return zip(a, b)
 
 def bigram_stop(STOPWORDS):
-    #bigram=[]
+    # create a bigram tuple list of stopword
     bigram_tup_stop=[]
     for w in STOPWORDS:
         s=w.strip().split(' ')
@@ -46,6 +46,7 @@ def bigram_stop(STOPWORDS):
     return bigram_tup_stop
             
 def remove_bigram(bigrams, bigram_tup_stop):
+    # create a bigram list after removing the bigram stopwords
     bigrams=[s for s in bigrams if not(s in bigram_tup_stop)]                    
     return bigrams
 
