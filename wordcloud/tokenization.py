@@ -46,12 +46,10 @@ def bigram_stop(STOPWORDS):
     return bigram_tup_stop
             
 def remove_bigram(bigrams, bigram_tup_stop):
-    for s in bigrams:
-        for w in bigram_tup_stop:
-            if w==s:
-                bigrams.remove(s)
-                
+    bigrams=[s for s in bigrams if not(s in bigram_tup_stop)]                    
     return bigrams
+
+
 
 def unigrams_and_bigrams(words, stopwords, normalize_plurals=True, collocation_threshold=30):
     # We must create the bigrams before removing the stopword tokens from the words, or else we get bigrams like
