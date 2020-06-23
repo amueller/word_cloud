@@ -41,9 +41,10 @@ def unigrams_and_bigrams(words, stopwords, normalize_plurals=True, collocation_t
     # "thank much" from "thank you very much".
     # We don't allow any of the words in the bigram to be stopwords
     bigrams = list(p for p in pairwise(words) if not any(w.lower() in stopwords for w in p))
-    n_words = len(words)
+    unigrams = list(w for w in words if w.lower() not in stopwords)
+    n_words = len(unigrams)
     counts_unigrams, standard_form = process_tokens(
-        words, normalize_plurals=normalize_plurals)
+        unigrams, normalize_plurals=normalize_plurals)
     counts_bigrams, standard_form_bigrams = process_tokens(
         [" ".join(bigram) for bigram in bigrams],
         normalize_plurals=normalize_plurals)
@@ -66,8 +67,7 @@ def unigrams_and_bigrams(words, stopwords, normalize_plurals=True, collocation_t
             counts_unigrams[word2] -= counts_bigrams[bigram_string]
             counts_unigrams[bigram_string] = counts_bigrams[bigram_string]
     for word, count in list(counts_unigrams.items()):
-        # remove stopwords and empty / negative counts
-        if all(w.lower() in stopwords for w in word.split(" ")) or count <= 0:
+        if count <= 0:
             del counts_unigrams[word]
     return counts_unigrams
 
