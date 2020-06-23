@@ -46,10 +46,10 @@ at the same time using wordcloud with jieba very convenient
 
     Building prefix dict from the default dictionary ...
     Dumping model to file cache /tmp/jieba.cache
-    Loading model cost 0.870 seconds.
+    Loading model cost 0.814 seconds.
     Prefix dict has been built successfully.
 
-    <wordcloud.wordcloud.WordCloud object at 0x7fc1b005e438>
+    <wordcloud.wordcloud.WordCloud object at 0x7ff61089c518>
 
 
 
@@ -148,7 +148,7 @@ at the same time using wordcloud with jieba very convenient
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.714 seconds)
+   **Total running time of the script:** ( 0 minutes  8.693 seconds)
 
 
 .. _sphx_glr_download_auto_examples_wordcloud_cn.py:
