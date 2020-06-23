@@ -453,3 +453,15 @@ def test_zero_frequencies():
     word_cloud.generate_from_frequencies({'test': 1, 'test1': 0, 'test2': 0})
     assert len(word_cloud.layout_) == 1
     assert word_cloud.layout_[0][0][0] == 'test'
+
+
+def test_plural_stopwords():
+    x = '''was was was was was was was was was was was was was was was
+    wa
+    hello hello hello hello hello hello hello hello
+    goodbye good bye maybe yes no'''
+    w = WordCloud().generate(x)
+    assert w.words_['wa'] < 1
+
+    w = WordCloud(collocations=False).generate(x)
+    assert w.words_['wa'] < 1
