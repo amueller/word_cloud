@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.WordCloud &mdash; wordcloud 1.6.0.post88+ge196d19 documentation</title>
+  <title>wordcloud.WordCloud &mdash; wordcloud 1.6.0.post90+gbda4195 documentation</title>
   
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                1.6.0.post88+ge196d19
+                1.6.0.post90+gbda4195
               </div>
             
           
@@ -301,31 +301,31 @@ size, position, orientation and color.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_words</span></code>(self, frequencies)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_words</span></code>(frequencies)</p></td>
 <td><p>Create a word_cloud from words and frequencies.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code>(self, text)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code>(text)</p></td>
 <td><p>Generate wordcloud from text.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_frequencies</span></code>(self, frequencies)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_frequencies</span></code>(frequencies[, …])</p></td>
 <td><p>Create a word_cloud from words and frequencies.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_text</span></code>(self, text)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_from_text</span></code>(text)</p></td>
 <td><p>Generate wordcloud from text.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_text</span></code>(self, text)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_text</span></code>(text)</p></td>
 <td><p>Splits a long text into words, eliminates the stopwords.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">recolor</span></code>(self[, random_state, color_func, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">recolor</span></code>([random_state, color_func, colormap])</p></td>
 <td><p>Recolor existing layout.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_array</span></code>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_array</span></code>()</p></td>
 <td><p>Convert to numpy array.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code>(self, filename)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_file</span></code>(filename)</p></td>
 <td><p>Export to image file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_svg</span></code>(self[, embed_font, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_svg</span></code>([embed_font, optimize_embedded_font, …])</p></td>
 <td><p>Export to SVG.</p></td>
 </tr>
 </tbody>
@@ -346,7 +346,7 @@ size, position, orientation and color.</p>
 </table>
 <dl class="py method">
 <dt id="wordcloud.WordCloud.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">font_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">400</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">ranks_only</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefer_horizontal</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_words</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">min_font_size</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">stopwords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">background_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">max_font_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font_step</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'RGB'</span></em>, <em class="sig-param"><span class="n">relative_scaling</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">regexp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collocations</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">colormap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">normalize_plurals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">contour_width</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">contour_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">repeat</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">include_numbers</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">min_word_length</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">collocation_threshold</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">font_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">400</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">ranks_only</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefer_horizontal</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_words</span><span class="o">=</span><span class="default_value">200</span></em>, <em class="sig-param"><span class="n">min_font_size</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">stopwords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">background_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">max_font_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font_step</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'RGB'</span></em>, <em class="sig-param"><span class="n">relative_scaling</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">regexp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collocations</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">colormap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">normalize_plurals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">contour_width</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">contour_color</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">repeat</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">include_numbers</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">min_word_length</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">collocation_threshold</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wordcloud/wordcloud.html#WordCloud.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wordcloud.WordCloud.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
