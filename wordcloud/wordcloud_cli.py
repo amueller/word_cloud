@@ -182,7 +182,7 @@ def make_parser():
     parser.add_argument(
         '--mode',
         type=str, default='RGB', metavar='mode',
-        help='use RGB or RGBA for trasparent background')
+        help='use RGB or RGBA for transparent background')
     parser.add_argument(
         '--max_words',
         type=int, default=200, metavar='N',
