@@ -114,13 +114,13 @@ class colormap_color_func(object):
         return "rgb({:.0f}, {:.0f}, {:.0f})".format(r, g, b)
 
 
-def get_single_color_func(color):
+def get_single_color_func(color, random_value=True):
     """Create a color function which returns a single hue and saturation with.
     different values (HSV). Accepted values are color strings as usable by
     PIL/Pillow.
 
     >>> color_func1 = get_single_color_func('deepskyblue')
-    >>> color_func2 = get_single_color_func('#00b4d2')
+    >>> color_func2 = get_single_color_func('#00b4d2', random_value=False)
     """
     old_r, old_g, old_b = ImageColor.getrgb(color)
     rgb_max = 255.
@@ -143,11 +143,15 @@ def get_single_color_func(color):
           numbers.
 
         """
-        if random_state is None:
-            random_state = Random()
-        r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
-        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
-                                                    b * rgb_max)
+        if random_value:
+	        if random_state is None:
+	            random_state = Random()
+	        r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
+	        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
+	                                                    b * rgb_max)
+	    else:
+	    	return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(old_r, old_g, old_b)
+	    	
     return single_color_func
 
 
