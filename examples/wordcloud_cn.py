@@ -12,9 +12,14 @@ You can use 'PIP install jieba'. To install it. As you can see,
 at the same time using wordcloud with jieba very convenient
 """
 
-import jieba
-jieba.enable_parallel(4)
-# Setting up parallel processes :4 ,but unable to run on Windows
+import sys
+try:
+    import jieba
+except ImportError:
+    sys.exit('For this example you need to pip install jieba')
+if not sys.platform == 'win32':
+    jieba.enable_parallel(4)
+    # Setting up parallel processes :4 ,but unable to run on Windows
 from os import path
 from imageio import imread
 import matplotlib.pyplot as plt
@@ -24,7 +29,7 @@ import os
 from wordcloud import WordCloud, ImageColorGenerator
 
 # get data directory (using getcwd() is needed to support running example in generated IPython notebook)
-d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+d = path.dirname(path.abspath(__file__)) if "__file__" in locals() else path.abspath(os.getcwd())
 
 stopwords_path = d + '/wc_cn/stopwords_cn_en.txt'
 # Chinese fonts must be set
@@ -34,10 +39,10 @@ font_path = d + '/fonts/SourceHanSerif/SourceHanSerifK-Light.otf'
 imgname1 = d + '/wc_cn/LuXun.jpg'
 imgname2 = d + '/wc_cn/LuXun_colored.jpg'
 # read the mask / color image taken from
-back_coloring = imread(path.join(d, d + '/wc_cn/LuXun_color.jpg'))
+back_coloring = imread(imgname2)
 
 # Read the whole text.
-text = open(path.join(d, d + '/wc_cn/CalltoArms.txt')).read()
+text = open(path.join(d, d + '/wc_cn/CalltoArms.txt'), encoding='utf-8').read()
 
 # if you want use wordCloud,you need it
 # add userdict by add_word()
