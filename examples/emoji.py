@@ -24,7 +24,7 @@ from wordcloud import WordCloud
 d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 # It is important to use io.open to correctly load the file as UTF-8
-text = io.open(path.join(d, 'happy-emoji.txt')).read()
+text = io.open(path.join(d, 'happy-emoji.txt'), encoding='utf-8').read()
 
 # the regex used to detect words is a combination of normal words, ascii art, and emojis
 # 2+ consecutive letters (also include apostrophes), e.x It's
