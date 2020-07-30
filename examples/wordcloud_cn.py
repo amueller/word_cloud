@@ -30,7 +30,6 @@ from wordcloud import WordCloud, ImageColorGenerator
 
 # get data directory (using getcwd() is needed to support running example in generated IPython notebook)
 d = path.dirname(path.abspath(__file__)) if "__file__" in locals() else path.abspath(os.getcwd())
-print(f"{d=} {__file__=}")
 
 stopwords_path = d + '/wc_cn/stopwords_cn_en.txt'
 # Chinese fonts must be set
@@ -39,8 +38,6 @@ font_path = d + '/fonts/SourceHanSerif/SourceHanSerifK-Light.otf'
 # the path to save worldcloud
 imgname1 = d + '/wc_cn/LuXun.jpg'
 imgname2 = d + '/wc_cn/LuXun_colored.jpg'
-#print(f"{imgname1=} {path.exists(imgname1)}")
-#print(f"{imgname2=} {path.exists(imgname2)}")
 # read the mask / color image taken from
 back_coloring = imread(imgname2)
 
