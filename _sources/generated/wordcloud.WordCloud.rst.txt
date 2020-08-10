@@ -1,4 +1,4 @@
-wordcloud.WordCloud
+﻿wordcloud.WordCloud
 ===================
 
 .. currentmodule:: wordcloud

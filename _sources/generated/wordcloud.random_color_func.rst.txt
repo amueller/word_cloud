@@ -1,4 +1,4 @@
-wordcloud.random_color_func
+﻿wordcloud.random_color_func
 ===========================
 
 .. currentmodule:: wordcloud

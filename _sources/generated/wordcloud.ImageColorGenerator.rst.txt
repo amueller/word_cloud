@@ -1,4 +1,4 @@
-wordcloud.ImageColorGenerator
+﻿wordcloud.ImageColorGenerator
 =============================
 
 .. currentmodule:: wordcloud
