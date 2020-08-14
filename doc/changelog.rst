@@ -10,6 +10,10 @@ details, see the commit logs at https://github.com/amueller/word_cloud
 Next Release
 ==============
 
+
+WordCloud 1.8.0
+===============
+
 Wheels
 ------
 
@@ -21,6 +25,18 @@ Test
 
 * Update CircleCI configuration to use `dockcross/manylinux1-x64 <https://github.com/dockcross/dockcross#cross-compilers>`_
   image instead of obsolete `dockcross/manylinux-x64` one. See :issue:`548`. Contributed by :user:`jcfr`.
+
+WordCloud 1.7.0
+===============
+
+Features
+--------
+* Add export of SVG files using :func:`WordCloud.to_svg` by :user:`jojolebarjos` .
+* Add missing options to the command line interface, `PR #527 <https://github.com/amueller/word_cloud/pull/527>`_ by :user:`dm-logv`.
+
+Bug fixes
+---------
+* Make bigrams stopword aware, `PR #528<https://github.com/amueller/word_cloud/pull/529>`_ by :user:`carlgieringer`.
 
 
 WordCloud 1.6.0
