@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>wordcloud.wordcloud &mdash; wordcloud 1.8.0 documentation</title>
+  <title>wordcloud.wordcloud &mdash; wordcloud 1.8.0.post1+g5f23ed4 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                1.8.0
+                1.8.0.post1+g5f23ed4
               </div>
             
           
@@ -733,7 +733,8 @@
 
         <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span> <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span> <span class="o">&lt;</span> <span class="s1">&#39;3&#39;</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">is</span> <span class="n">unicode</span>  <span class="c1"># noqa: F821</span>
                  <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">regexp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">r</span><span class="s2">&quot;\w[\w&#39;]+&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\w[\w&#39;]*&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_word_length</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="sa">r</span><span class="s2">&quot;\w[\w&#39;]+&quot;</span>
+        <span class="n">regexp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regexp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pattern</span>
 
         <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
         <span class="c1"># remove &#39;s</span>
