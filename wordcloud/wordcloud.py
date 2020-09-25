@@ -569,7 +569,8 @@ class WordCloud(object):
 
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
-        regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
+        pattern = r"\w[\w']*" if self.min_word_length <= 1 else r"\w[\w']+"
+        regexp = self.regexp if self.regexp is not None else pattern
 
         words = re.findall(regexp, text, flags)
         # remove 's
