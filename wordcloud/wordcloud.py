@@ -20,7 +20,7 @@ import matplotlib
 import numpy as np
 from operator import itemgetter
 from xml.sax import saxutils
-
+import json
 from PIL import Image
 from PIL import ImageColor
 from PIL import ImageDraw
@@ -569,8 +569,7 @@ class WordCloud(object):
 
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
-        pattern = r"\w[\w']*" if self.min_word_length <= 1 else r"\w[\w']+"
-        regexp = self.regexp if self.regexp is not None else pattern
+        regexp = self.regexp if self.regexp is not None else r"\w[\w']+"
 
         words = re.findall(regexp, text, flags)
         # remove 's
@@ -739,8 +738,81 @@ class WordCloud(object):
         """
         return self.to_array()
 
-    def to_html(self):
-        raise NotImplementedError("FIXME!!!")
+    def to_html(self,words):
+        text=self.process_text(words)
+        word_freq=[]
+        for i in text:
+            temp={}
+            temp["word"]=i
+            temp["f"]=text[i]
+            word_freq.append(temp)
+        f=open('index.html','w')
+        html='''<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            <div id="divs" style="position: fixed; height: 100vh; width: 70vw;">
+
+            </div>
+        </body>
+        </html>
+        <style>
+            .rotate{
+                display: inline-block;
+                transform:rotate(90deg);
+                
+            }
+            body{
+                background-color:'''+self.background_color+'''
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script>
+            function shuffle(arra1) {
+                var ctr = arra1.length, temp, index;
+                while (ctr > 0) {
+                    index = Math.floor(Math.random() * ctr);
+                    ctr--;
+                    temp = arra1[ctr];
+                    arra1[ctr] = arra1[index];
+                    arra1[index] = temp;
+                }
+                return arra1;
+            }
+            function genrateWordCloud(data){
+                    var color=[["91c7b1","b33951","e3d081"],["330c2f","7b287d","7067cf","b7c0ee","cbf3d2"],["1e152a","4e6766","5ab1bb","a5c882","f7dd72"]
+                    ,["ecc8af","e7ad99","ce796b","c18c5d","495867"],["240115","de3c4b","87f5fb","2f131e","cec3c1"],["eec643","141414","eef0f2","0d21a1","011638"]
+                    ,["541388","d90368","2e294e","ffd400"]];
+                    data.sort(function(a, b){return a.f - b.f});
+                    font=1
+                    a=Math.floor(Math.random() * color.length)
+                    for(i=0;i<data.length;i++){
+                        data[i].font=font
+                        font+=Math.floor(Math.random() * 3);
+                        font=font%100
+                        data[i].color=color[a][Math.floor(Math.random() * color[a].length)]
+                    }
+                    var data2=shuffle(data)
+                    for(i=0;i<data2.length;i++){
+                        z=Math.floor(Math.random() * 100);
+                        if(i%2==0){
+                            var e = `<span style="font-size:`+data2[i].font.toString()+`px;color:`+data2[i].color+`; position:relative" class="rotate">`+data2[i].word+`</span>`
+                        }
+                        else{
+                            var e = `<span style="font-size:`+data2[i].font.toString()+`px; display:inline-block; color:`+data2[i].color+`; position:relative">`+data2[i].word+`</span>`
+                        }
+                        $('#divs').append(e)
+                    }
+            }
+            var data='''+json.dumps(word_freq) +'''
+            genrateWordCloud(data)
+        </script>'''
+        f.write(html)
+        f.close()
+        
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.
