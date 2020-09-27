@@ -9,6 +9,7 @@
 from __future__ import division
 
 import warnings
+import random
 from random import Random
 import io
 import os
@@ -741,10 +742,12 @@ class WordCloud(object):
     def to_html(self,words):
         text=self.process_text(words)
         word_freq=[]
+        color=random.randint(1,7)
         for i in text:
             temp={}
             temp["word"]=i
             temp["f"]=text[i]
+            temp["colornum"]=color
             word_freq.append(temp)
         f=open('index.html','w')
         html='''<html lang="en">
@@ -754,7 +757,7 @@ class WordCloud(object):
             <title>Document</title>
         </head>
         <body>
-            <div id="divs" style="position: fixed; height: 100vh; width: 70vw;">
+            <div id="divs" class="divstyle">
 
             </div>
         </body>
@@ -765,8 +768,11 @@ class WordCloud(object):
                 transform:rotate(90deg);
                 
             }
-            body{
-                background-color:'''+self.background_color+'''
+            .divstyle{
+                background-color:'''+self.background_color+''';
+                height:'''+str(self.height)+'''px;
+                width:'''+str(self.width)+'''px;
+                overflow:hidden;
             }
         </style>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -788,12 +794,11 @@ class WordCloud(object):
                     ,["541388","d90368","2e294e","ffd400"]];
                     data.sort(function(a, b){return a.f - b.f});
                     font=1
-                    a=Math.floor(Math.random() * color.length)
                     for(i=0;i<data.length;i++){
                         data[i].font=font
                         font+=Math.floor(Math.random() * 3);
                         font=font%100
-                        data[i].color=color[a][Math.floor(Math.random() * color[a].length)]
+                        data[i].color=color[data[i].colornum][Math.floor(Math.random() * color[data[i].colornum].length)]
                     }
                     var data2=shuffle(data)
                     for(i=0;i<data2.length;i++){
