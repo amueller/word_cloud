@@ -817,7 +817,6 @@ class WordCloud(object):
         </script>'''
         f.write(html)
         f.close()
-        
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.
