@@ -43,7 +43,8 @@ cache:
     - $HOME/downloads
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; ln -s $(which python2) $HOME/bin/python; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" && "${PYTHON_VERSION}" == "3.8.0" ]]; then brew install pyenv fi
+  - if 1[[ "$TRAVIS_OS_NAME" == "osx" ] ]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; ln -s $(which python2) $HOME/bin/python; fi
   - python -m pip install --disable-pip-version-check --upgrade pip
   - pip install -U scikit-ci scikit-ci-addons
   - ci_addons --install ../addons
