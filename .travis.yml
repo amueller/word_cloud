@@ -43,7 +43,15 @@ cache:
     - $HOME/downloads
 
 before_install:
-  - if 1[[ "$TRAVIS_OS_NAME" == "osx" ] ]; then brew install pyenv; mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; ln -s $(which python2) $HOME/bin/python; fi
+  - |
+    # Workaround the following error occuring because python installation is cached but gettext dependency is not
+    #   dyld: Library not loaded: /usr/local/opt/gettext/lib/libintl.8.dylib
+    #     Referenced from: /Users/travis/.pyenv/versions/3.7.2/bin/python
+    #     Reason: Incompatible library version: python requires version 11.0.0 or later, but libintl.8.dylib provides version 10.0.0
+    if [[ "$TRAVIS_OS_NAME" == "osx" && "${PYTHON_VERSION}" == "3.7.8" ]]; then
+      brew install gettext
+    fi
+  - if 1[[ "$TRAVIS_OS_NAME" == "osx" ] ]; then mkdir $HOME/bin; ln -s $(which pip2) $HOME/bin/pip; ln -s $(which python2) $HOME/bin/python; fi
   - python -m pip install --disable-pip-version-check --upgrade pip
   - pip install -U scikit-ci scikit-ci-addons
   - ci_addons --install ../addons
