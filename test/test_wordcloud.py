@@ -205,7 +205,6 @@ def test_svg_syntax():
     svg = wc.to_svg()
     ET.fromstring(svg)
 
-
 def test_recolor():
     wc = WordCloud(max_words=50, colormap="jet")
     wc.generate(THIS)
@@ -328,16 +327,9 @@ def test_process_text():
 def test_process_text_default_patterns():
     wc = WordCloud(stopwords=set(), include_numbers=True, min_word_length=2)
     words = wc.process_text(THIS)
-
-    wc2 = WordCloud(stopwords=set(), include_numbers=True, min_word_length=1)
-    words2 = wc2.process_text(THIS)
-
+    
     assert "a" not in words
     assert "3" not in words
-
-    #assert "a" in words2
-    #assert "3" in words2
-
 
 def test_process_text_regexp_parameter():
     # test that word processing is influenced by `regexp`
