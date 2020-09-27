@@ -199,11 +199,13 @@ def test_check_errors():
     except ValueError as e:
         assert "call generate" in str(e)
 
+        
 def test_svg_syntax():
     wc = WordCloud()
     wc.generate(THIS)
     svg = wc.to_svg()
     ET.fromstring(svg)
+
 
 def test_recolor():
     wc = WordCloud(max_words=50, colormap="jet")
@@ -327,9 +329,10 @@ def test_process_text():
 def test_process_text_default_patterns():
     wc = WordCloud(stopwords=set(), include_numbers=True, min_word_length=2)
     words = wc.process_text(THIS)
-    
+
     assert "a" not in words
     assert "3" not in words
+
 
 def test_process_text_regexp_parameter():
     # test that word processing is influenced by `regexp`
