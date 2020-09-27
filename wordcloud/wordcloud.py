@@ -768,15 +768,15 @@ class WordCloud(object):
                 transform:rotate(90deg);
             }
             .divstyle{
-                background-color:''' +self.background_color+ ''';
-                height:''' +str(self.height)+ '''px;
-                width:''' +str(self.width)+ '''px;
+                background-color:''' + self.background_color + ''';
+                height:''' + str(self.height) + '''px;
+                width:''' + str(self.width) + '''px;
                 overflow:hidden;
             }
         </style>
-        <script 
-            src="https://code.jquery.com/jquery-3.5.1.js" 
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
             crossorigin="anonymous"></script>
         <script>
             function shuffle(arra1) {
@@ -810,17 +810,24 @@ class WordCloud(object):
                     for(i=0;i<data2.length;i++){
                         z=Math.floor(Math.random() * 100);
                         if(i%2==0){
-       var e = `<span style="font-size:`+data2[i].font.toString()+`px;color:`+data2[i].color+`; position:relative" class="rotate">`+data2[i].word+`</span>`
+       var e = `<span 
+       style="font-size:`+data2[i].font.toString()+`px;color:`+data2[i].color+`; position:relative" 
+       class="rotate">`
+       +data2[i].word+
+       `</span>`
                         }
                         else{
-       var e = `<span style="font-size:`+data2[i].font.toString()+`px; display:inline-block; color:`+data2[i].color+`; position:relative">`+data2[i].word+`</span>`
+       var e = `<span 
+       style="font-size:`+data2[i].font.toString()+`px; display:inline-block; color:`+data2[i].color+`; position:relative">`
+       +data2[i].word+`
+       </span>`
                         }
                         $('#divs').append(e)
                     }
             }
-            var data='''+ json.dumps(word_freq) +'''
+            var data=''' + json.dumps(word_freq) + '''
             genrateWordCloud(data)
-        </script>''' 
+        </script>'''
         f.write(html)
         f.close()
 
