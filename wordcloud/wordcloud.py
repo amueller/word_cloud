@@ -810,15 +810,17 @@ class WordCloud(object):
                     for(i=0;i<data2.length;i++){
                         z=Math.floor(Math.random() * 100);
                         if(i%2==0){
-       var e = `<span 
-       style="font-size:`+data2[i].font.toString()+`px;color:`+data2[i].color+`; position:relative" 
+       var e = `<span
+       style="font-size:`+data2[i].font.toString()+`px;
+       color:`+data2[i].color+`; position:relative"
        class="rotate">`
        +data2[i].word+
        `</span>`
                         }
                         else{
-       var e = `<span 
-       style="font-size:`+data2[i].font.toString()+`px; display:inline-block; color:`+data2[i].color+`; position:relative">`
+       var e = `<span
+       style="font-size:`+data2[i].font.toString()+`px;
+       display:inline-block; color:`+data2[i].color+`; position:relative">`
        +data2[i].word+`
        </span>`
                         }
