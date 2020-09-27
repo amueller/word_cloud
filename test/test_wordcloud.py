@@ -199,7 +199,7 @@ def test_check_errors():
     except ValueError as e:
         assert "call generate" in str(e)
 
-        
+
 def test_svg_syntax():
     wc = WordCloud()
     wc.generate(THIS)
