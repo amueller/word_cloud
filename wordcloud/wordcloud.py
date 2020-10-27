@@ -739,9 +739,6 @@ class WordCloud(object):
         """
         return self.to_array()
 
-    def to_html(self):
-        raise NotImplementedError("FIXME!!!")
-
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.
 
