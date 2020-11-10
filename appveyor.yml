@@ -18,16 +18,6 @@ environment:
       PYTHON_ARCH: "64"
       BLOCK: "0"
 
-    - PYTHON_DIR: "C:\\Python35"
-      PYTHON_VERSION: "3.5.x"
-      PYTHON_ARCH: "32"
-      BLOCK: "0"
-
-    - PYTHON_DIR: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5.x"
-      PYTHON_ARCH: "64"
-      BLOCK: "0"
-
     - PYTHON_DIR: "C:\\Python36"
       PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "32"
@@ -55,6 +45,16 @@ environment:
 
     - PYTHON_DIR: "C:\\Python38-x64"
       PYTHON_VERSION: "3.8.x"
+      PYTHON_ARCH: "64"
+      BLOCK: "0"
+
+    - PYTHON_DIR: "C:\\Python38"
+      PYTHON_VERSION: "3.9.x"
+      PYTHON_ARCH: "32"
+      BLOCK: "0"
+
+    - PYTHON_DIR: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.9.x"
       PYTHON_ARCH: "64"
       BLOCK: "0"
 
