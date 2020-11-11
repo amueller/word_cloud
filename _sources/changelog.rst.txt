@@ -10,6 +10,14 @@ details, see the commit logs at https://github.com/amueller/word_cloud
 Next Release
 ==============
 
+WordCloud 1.8.1
+===============
+Release Date 11/11/2020
+
+Wheels
+------
+* Added wheels for Python 3.9.
+
 
 WordCloud 1.8.0
 ===============

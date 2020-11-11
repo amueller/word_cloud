@@ -5,28 +5,28 @@
 
 Computation times
 =================
-**00:39.970** total execution time for **auto_examples** files:
+**00:41.150** total execution time for **auto_examples** files:
 
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_parrot.py` (``parrot.py``)                     | 00:15.211 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_parrot.py` (``parrot.py``)                     | 00:15.923 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_wordcloud_cn.py` (``wordcloud_cn.py``)         | 00:08.111 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_wordcloud_cn.py` (``wordcloud_cn.py``)         | 00:08.397 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_a_new_hope.py` (``a_new_hope.py``)             | 00:05.949 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_a_new_hope.py` (``a_new_hope.py``)             | 00:05.929 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_masked.py` (``masked.py``)                     | 00:03.334 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_masked.py` (``masked.py``)                     | 00:03.683 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_frequency.py` (``frequency.py``)               | 00:03.087 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_frequency.py` (``frequency.py``)               | 00:02.822 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_colored.py` (``colored.py``)                   | 00:02.133 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_colored.py` (``colored.py``)                   | 00:02.163 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_simple.py` (``simple.py``)                     | 00:00.655 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_simple.py` (``simple.py``)                     | 00:00.677 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_arabic.py` (``arabic.py``)                     | 00:00.652 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_arabic.py` (``arabic.py``)                     | 00:00.655 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_emoji.py` (``emoji.py``)                       | 00:00.342 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_emoji.py` (``emoji.py``)                       | 00:00.363 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_single_word.py` (``single_word.py``)           | 00:00.318 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_single_word.py` (``single_word.py``)           | 00:00.357 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_colored_by_group.py` (``colored_by_group.py``) | 00:00.180 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_colored_by_group.py` (``colored_by_group.py``) | 00:00.181 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+

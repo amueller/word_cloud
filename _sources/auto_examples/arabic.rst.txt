@@ -30,7 +30,7 @@ pip install python-bidi arabic_reshape
  .. code-block:: none
 
 
-    <wordcloud.wordcloud.WordCloud object at 0x7fb2dd519fd0>
+    <wordcloud.wordcloud.WordCloud object at 0x7faf08788fd0>
 
 
 
@@ -67,7 +67,7 @@ pip install python-bidi arabic_reshape
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.652 seconds)
+   **Total running time of the script:** ( 0 minutes  0.655 seconds)
 
 
 .. _sphx_glr_download_auto_examples_arabic.py:
