@@ -1,8 +1,8 @@
 import argparse
 import os
 import subprocess
-import sys
 from collections import namedtuple
+import contextlib
 
 import wordcloud as wc
 from wordcloud import wordcloud_cli as cli
@@ -161,13 +161,9 @@ def test_cli_writes_to_stdout(tmpdir, tmp_text_file):
 
     tmp_text_file.write(b'some text')
 
-    originalBuffer = sys.stdout.buffer
-    sys.stdout.buffer = tmp_image_file.open('wb+')
-
-    args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
-    cli.main(args, text, image_file)
-
-    sys.stdout.buffer = originalBuffer
+    with contextlib.redirect_stdout(tmp_image_file.open('w+')):
+        args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
+        cli.main(args, text, image_file)
 
     # expecting image to be written to stdout
     assert tmp_image_file.size() > 0
