@@ -365,6 +365,11 @@ class WordCloud(object):
         self.min_word_length = min_word_length
         self.collocation_threshold = collocation_threshold
 
+        # Override the width and height if there is a mask
+        if mask is not None:
+            self.width = mask.shape[1]
+            self.height = mask.shape[0]
+
     def fit_words(self, frequencies):
         """Create a word_cloud from words and frequencies.
 
