@@ -510,7 +510,7 @@ class WordCloud(object):
                 # but first try to rotate!
                 if not tried_other_orientation and self.prefer_horizontal < 1:
                     orientation = (Image.ROTATE_90 if orientation is None else
-                                   Image.ROTATE_90)
+                                   None)
                     tried_other_orientation = True
                 else:
                     font_size -= self.font_step
