@@ -290,9 +290,11 @@ class WordCloud(object):
         .. versionchanged: 2.0
             ``words_`` is now a dictionary
 
-    ``layout_`` : list of tuples (string, int, (int, int), int, color))
-        Encodes the fitted word cloud. Encodes for each word the string, font
-        size, position, orientation and color.
+    ``layout_`` : list of tuples ((string, float), int, (int, int), int, color))
+        Encodes the fitted word cloud. For each word, it encodes the string, 
+        normalized frequency, font size, position, orientation, and color.
+        The frequencies are normalized by the most commonly occurring word.
+        The color is in the format of 'rgb(R, G, B).'
 
     Notes
     -----
