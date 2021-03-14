@@ -969,9 +969,8 @@ class WordCloud(object):
 
         # Get font information
         font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
-        raw_font_family, raw_font_style = font.getname()
-        # TODO properly escape/quote this name?
-        font_family = repr(raw_font_family)
+
+        font_family, raw_font_style = font.getname()
         # TODO better support for uncommon font styles/weights?
         raw_font_style = raw_font_style.lower()
         if 'bold' in raw_font_style:
@@ -991,10 +990,12 @@ class WordCloud(object):
             ' xmlns="http://www.w3.org/2000/svg"'
             ' width="{}"'
             ' height="{}"'
+            ' font-family="{}"'
             '>'
             .format(
                 width * self.scale,
-                height * self.scale
+                height * self.scale,
+                font_family
             )
         )
 
