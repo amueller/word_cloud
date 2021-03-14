@@ -746,8 +746,160 @@ class WordCloud(object):
         """
         return self.to_array()
 
-    def to_html(self):
-        raise NotImplementedError("FIXME!!!")
+    def to_html(self, type='svg', file_path=None):
+        """Convert to html
+
+        Parameters
+        ----------
+        type : string
+            type of imamge export to html
+            now supported : enum {'svg' , 'canvas'}
+
+        Returns
+        -------
+        html_string : html document text
+            html DOM node text
+        """
+
+        # type map to method
+        type_to_method = {
+            'svg': self.to_html_svg,
+            'canvas': self.to_html_canvas
+        }
+
+        if type not in type_to_method.keys():
+            raise NotImplementedError(f"{type} not implemented")
+
+        html_string = type_to_method[type]()
+
+        # write to file
+        if file_path != None:
+            with open(file_path, "w+",encoding='utf-8') as html_file:
+                html_file.write(html_string)
+
+        return html_string
+
+    def to_html_svg(self):
+        svg_html_template = \
+            """
+           <!DOCTYPE html>
+           <html>
+           <body>
+              {}
+           </body>
+           </html>
+           """
+        html_string = svg_html_template.format(self.to_svg())
+        return html_string
+
+    def to_html_canvas(self):
+        # TODO: to canvas
+
+        # formate(font-family_name , font-path , width, height,font-family_name, canvas_draw_result)
+        html_template = """
+             <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                @font-face {{
+                          font-family: {};
+                          src: url({}) format("truetype");
+                    }}
+                </style>
+
+            </head>
+            <body>
+            <!--        load font -->
+            <div style="font-family: DroidSansMono;"></div>
+
+                <canvas id="wordCloudCanvas" width="{}" height="{}" style="border:1px solid #000000;">
+                Your browser does not support the HTML canvas tag.
+                </canvas>
+            <script>
+
+                var interval = null;
+         
+                function fontLoadListener() {{
+                  var hasLoaded = false;
+                 
+                  try {{
+                    hasLoaded = document.fonts.check('12px "{}"')
+                  }} catch(error) {{
+                    console.info("CSS font loading API error", error);
+                    fontLoadedSuccess();
+                    return;
+                  }}
+
+                  if(hasLoaded) {{
+                    fontLoadedSuccess();
+                  }}
+                }}
+                 
+                function fontLoadedSuccess() {{
+                  if(interval) {{
+                    clearInterval(interval);
+                    drawCanvas()
+                  }}
+                  /* Apply class names */
+                }}
+                 
+                interval = setInterval(fontLoadListener, 100);
+                 function drawCanvas(){{
+                    var c = document.getElementById("wordCloudCanvas");
+                    var ctx = c.getContext("2d");
+                    {}
+                 }}
+            </script>
+            </body>
+            </html>
+            """
+
+        result = []
+
+
+        # {text_style} {size} {font_style}
+        # {color}
+        # {text_content} {x} {y}
+        canvas_text_template = \
+            """
+                ctx.font = "{} {} {}";
+                ctx.fillStyle = "{}";
+                ctx.rotate({});
+                ctx.fillText("{}", {}, {});
+            """
+
+
+
+
+        for (word, count), font_size, (y, x), orientation, color in self.layout_:
+            x *= self.scale
+            y *= self.scale
+            font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
+
+            # get font type name
+            font_family = os.path.basename(self.font_path)
+            font_family = font_family[:font_family.find(".")]
+
+            (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
+
+            result.append(
+                canvas_text_template.format(
+                    'normal', str(font_size) + 'px', font_family,
+                    color,
+                    "-90 * Math.PI / 180" if orientation == Image.ROTATE_90 else "0",
+                    word,
+                    -y - size_x if orientation == Image.ROTATE_90 else x,
+                    x + size_y if orientation == Image.ROTATE_90 else y + size_y,
+                )
+            )
+            # rotate back
+            result.append(
+                "ctx.rotate(90 * Math.PI / 180);" if orientation == Image.ROTATE_90 else "")
+
+        return html_template.format(
+            font_family, repr(self.font_path),self.width,self.height,
+            font_family,'\n'.join(result)
+        )
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.
