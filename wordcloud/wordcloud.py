@@ -101,6 +101,7 @@ class colormap_color_func(object):
     >>> WordCloud(color_func=colormap_color_func("magma"))
 
     """
+
     def __init__(self, colormap):
         import matplotlib.pyplot as plt
         self.colormap = plt.cm.get_cmap(colormap)
@@ -148,6 +149,7 @@ def get_single_color_func(color):
         r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
         return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
                                                     b * rgb_max)
+
     return single_color_func
 
 
@@ -774,7 +776,7 @@ class WordCloud(object):
 
         # write to file
         if file_path != None:
-            with open(file_path, "w+",encoding='utf-8') as html_file:
+            with open(file_path, "w+", encoding='utf-8') as html_file:
                 html_file.write(html_string)
 
         return html_string
@@ -797,12 +799,12 @@ class WordCloud(object):
            """
         font = ImageFont.truetype(self.font_path)
         font_family, raw_font_style = font.getname()
-        html_string = svg_html_template.format(font_family,repr(self.font_path),self.to_svg())
+        html_string = svg_html_template.format(font_family, repr(self.font_path), self.to_svg())
         return html_string
 
     def to_html_canvas(self):
-        # TODO: to canvas
 
+        # TODO: format("truetype") compatibility issues?
         # formate(font-family_name , font-path , width, height,font-family_name, canvas_draw_result)
         html_template = """
              <!DOCTYPE html>
@@ -865,7 +867,15 @@ class WordCloud(object):
             """
 
         result = []
-
+        # Add background
+        if self.background_color is not None:
+            result.append(
+                """
+                    ctx.fillStyle = "{}";
+                    ctx.fillRect(0, 0, c.width, c.height);
+                """
+                    .format(self.background_color)
+            )
 
         # {text_style} {size} {font_style}
         # {color}
@@ -877,9 +887,6 @@ class WordCloud(object):
                 ctx.rotate({});
                 ctx.fillText("{}", {}, {});
             """
-
-
-
 
         for (word, count), font_size, (y, x), orientation, color in self.layout_:
             x *= self.scale
@@ -923,8 +930,8 @@ class WordCloud(object):
                 "ctx.rotate(90 * Math.PI / 180);" if orientation == Image.ROTATE_90 else "")
 
         return html_template.format(
-            font_family, repr(self.font_path),self.width,self.height,
-            font_family,'\n'.join(result)
+            font_family, repr(self.font_path), self.width, self.height,
+            font_family, '\n'.join(result)
         )
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
@@ -1018,7 +1025,7 @@ class WordCloud(object):
             ' height="{}"'
             ' font-family="{}"'
             '>'
-            .format(
+                .format(
                 width * self.scale,
                 height * self.scale,
                 font_family
@@ -1027,7 +1034,6 @@ class WordCloud(object):
 
         # Embed font, if requested
         if embed_font:
-
             # Import here, to avoid hard dependency on fonttools
             import fontTools
             import fontTools.subset
@@ -1075,7 +1081,7 @@ class WordCloud(object):
                 'src:url("{}")format("woff");'
                 '}}'
                 '</style>'
-                .format(
+                    .format(
                     font_family,
                     font_weight,
                     font_style,
@@ -1092,7 +1098,7 @@ class WordCloud(object):
             'font-style:{};'
             '}}'
             '</style>'
-            .format(
+                .format(
                 font_family,
                 font_weight,
                 font_style
@@ -1108,7 +1114,7 @@ class WordCloud(object):
                 ' style="fill:{}"'
                 '>'
                 '</rect>'
-                .format(self.background_color)
+                    .format(self.background_color)
             )
 
         # Embed image, useful for debug purpose
@@ -1123,7 +1129,7 @@ class WordCloud(object):
                 ' height="100%"'
                 ' href="data:image/jpg;base64,{}"'
                 '/>'
-                .format(data)
+                    .format(data)
             )
 
         # For each word in layout
@@ -1162,7 +1168,7 @@ class WordCloud(object):
                 '>'
                 '{}'
                 '</text>'
-                .format(
+                    .format(
                     transform,
                     font_size * self.scale,
                     color,
