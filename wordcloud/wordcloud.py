@@ -784,12 +784,20 @@ class WordCloud(object):
             """
            <!DOCTYPE html>
            <html>
+           <style>
+            @font-face {{
+                      font-family: {};
+                      src: url({}) format("truetype");
+                }}
+            </style>
            <body>
               {}
            </body>
            </html>
            """
-        html_string = svg_html_template.format(self.to_svg())
+        font = ImageFont.truetype(self.font_path)
+        font_family, raw_font_style = font.getname()
+        html_string = svg_html_template.format(font_family,repr(self.font_path),self.to_svg())
         return html_string
 
     def to_html_canvas(self):
@@ -810,7 +818,7 @@ class WordCloud(object):
             </head>
             <body>
             <!--        load font -->
-            <div style="font-family: DroidSansMono;"></div>
+            <div id="wordCloudPlaceHolder" style="font-family: DroidSansMono;" >loading</div>
 
                 <canvas id="wordCloudCanvas" width="{}" height="{}" style="border:1px solid #000000;">
                 Your browser does not support the HTML canvas tag.
@@ -832,13 +840,15 @@ class WordCloud(object):
 
                   if(hasLoaded) {{
                     fontLoadedSuccess();
+                    var placeHolder = document.getElementById("wordCloudPlaceHolder");
+                    placeHolder.parentNode.removeChild(placeHolder);
                   }}
                 }}
                  
                 function fontLoadedSuccess() {{
                   if(interval) {{
                     clearInterval(interval);
-                    drawCanvas()
+                    drawCanvas();
                   }}
                   /* Apply class names */
                 }}
@@ -881,6 +891,21 @@ class WordCloud(object):
             font_family = font_family[:font_family.find(".")]
 
             (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
+            ascent, descent = font.getmetrics()
+
+            # Compute text bounding box
+            min_x = -offset_x
+            max_x = size_x - offset_x
+            max_y = ascent - offset_y
+
+            # Compute text attributes
+            attributes = {}
+            if orientation == Image.ROTATE_90:
+                x += max_y
+                y += max_x - min_x
+            else:
+                x += min_x
+                y += max_y
 
             result.append(
                 canvas_text_template.format(
@@ -888,11 +913,12 @@ class WordCloud(object):
                     color,
                     "-90 * Math.PI / 180" if orientation == Image.ROTATE_90 else "0",
                     word,
-                    -y - size_x if orientation == Image.ROTATE_90 else x,
-                    x + size_y if orientation == Image.ROTATE_90 else y + size_y,
+                    x,
+                    y,
                 )
             )
-            # rotate back
+
+            # rotate back to 0 angle
             result.append(
                 "ctx.rotate(90 * Math.PI / 180);" if orientation == Image.ROTATE_90 else "")
 
