@@ -803,8 +803,8 @@ class WordCloud(object):
         # TODO: compatibility issue: work fine in chrome , bad in firefox
         font_face_src = {
             "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
-                   + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(
-                    font_path=repr(self.font_path)),
+            + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(
+                font_path=repr(self.font_path)),
             "otf": "src: url({font_path}) format('opentype');  /* for open type */".format(
                 font_path=repr(self.font_path)),
             "ttf": "src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(
@@ -893,10 +893,10 @@ class WordCloud(object):
         if self.background_color is not None:
             result.append(
                 """
-                ctx.fillStyle = "{}";
-                ctx.fillRect(0, 0, c.width, c.height);
-                """
-            .format(self.background_color)
+            ctx.fillStyle = "{}";
+            ctx.fillRect(0, 0, c.width, c.height);
+        """
+                .format(self.background_color)
             )
         canvas_text_template = \
             """
@@ -951,18 +951,24 @@ class WordCloud(object):
             result.append(
                 canvas_text_template.format(
                     font_weight + " " + font_style, str(font_size) + 'px',
-                    font_family,color,
-                    orientation_str,word,x,y,)
+                    font_family, color,
+                    orientation_str, word, x, y)
             )
             # TODO: compability issue: work fine in chrome , bad in firefox
-            font_face_src ={
+            font_face_src = {
                 "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
-                    + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(font_path=repr(self.font_path)),
-                "otf": "src: url({font_path}) format('opentype');  /* for open type */".format(font_path=repr(self.font_path)),
-                "ttf": "src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(font_path=repr(self.font_path)),
-                "woff2": "src: url({font_path}) format('woff2'); /* Super Modern Browsers */".format(font_path=repr(self.font_path)),
-                "woff": "src: url({font_path}) format('woff'); /* Pretty Modern Browsers */".format(font_path=repr(self.font_path)),
-                "svg": "src: url({font_path}) format('svg'); /* Legacy iOS */".format(font_path=repr(self.font_path)),
+                + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */"
+                .format(font_path=repr(self.font_path)),
+                "otf": "src: url({font_path}) format('opentype');  /* for open type */"
+                .format(font_path=repr(self.font_path)),
+                "ttf": "src: url({font_path}) format('truetype');  /* Safari, Android, iOS */"
+                .format(font_path=repr(self.font_path)),
+                "woff2": "src: url({font_path}) format('woff2'); /* Super Modern Browsers */"
+                .format(font_path=repr(self.font_path)),
+                "woff": "src: url({font_path}) format('woff'); /* Pretty Modern Browsers */"
+                .format(font_path=repr(self.font_path)),
+                "svg": "src: url({font_path}) format('svg'); /* Legacy iOS */"
+                .format(font_path=repr(self.font_path)),
             }
 
             # rotate back to 0 angle
