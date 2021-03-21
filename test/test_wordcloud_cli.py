@@ -12,6 +12,7 @@ from mock import patch
 import pytest
 
 import matplotlib
+
 matplotlib.use('Agg')
 
 
@@ -64,7 +65,6 @@ def all_arguments():
 
 
 def test_main_passes_arguments_through(tmpdir):
-
     image_filepath = str(tmpdir.join('word_cloud.png'))
 
     args = argparse.Namespace()
@@ -92,7 +92,7 @@ def check_argument_unary(text_filepath, name, result_name):
 
 
 def check_argument_type(text_filepath, name, value):
-    with pytest.raises((SystemExit, ValueError),):
+    with pytest.raises((SystemExit, ValueError), ):
         args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name, str(value)])
 
 
@@ -154,6 +154,7 @@ def test_cli_writes_to_imagefile(tmpdir, tmp_text_file):
     # expecting image to be written to imagefile
     assert tmp_image_file.size() > 0
 
+
 @contextlib.contextmanager
 def redirect_stdout(target):
     original = sys.stdout
@@ -162,6 +163,7 @@ def redirect_stdout(target):
         yield
     finally:
         sys.stdout = original
+
 
 # capsysbinary should be used here, but it's not supported in python 2.
 def test_cli_writes_to_stdout(tmpdir, tmp_text_file):
@@ -196,7 +198,6 @@ def test_cli_regexp_invalid(tmp_text_file, capsys):
     ("python %s/../wordcloud/wordcloud_cli.py --help" % os.path.dirname(__file__), "To execute the CLI", 1),
 ])
 def test_cli_as_executable(command, expected_output, expected_exit_code, tmpdir, capfd, no_cover_compat):
-
     ret_code = 0
     try:
         subprocess.check_call(
