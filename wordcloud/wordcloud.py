@@ -101,7 +101,6 @@ class colormap_color_func(object):
     >>> WordCloud(color_func=colormap_color_func("magma"))
 
     """
-
     def __init__(self, colormap):
         import matplotlib.pyplot as plt
         self.colormap = plt.cm.get_cmap(colormap)
@@ -149,7 +148,6 @@ def get_single_color_func(color):
         r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
         return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
                                                     b * rgb_max)
-
     return single_color_func
 
 
@@ -1074,7 +1072,7 @@ class WordCloud(object):
             ' height="{}"'
             ' font-family="{}"'
             '>'
-                .format(
+            .format(
                 width * self.scale,
                 height * self.scale,
                 font_family
@@ -1083,6 +1081,7 @@ class WordCloud(object):
 
         # Embed font, if requested
         if embed_font:
+
             # Import here, to avoid hard dependency on fonttools
             import fontTools
             import fontTools.subset
@@ -1130,7 +1129,7 @@ class WordCloud(object):
                 'src:url("{}")format("woff");'
                 '}}'
                 '</style>'
-                    .format(
+                .format(
                     font_family,
                     font_weight,
                     font_style,
@@ -1147,7 +1146,7 @@ class WordCloud(object):
             'font-style:{};'
             '}}'
             '</style>'
-                .format(
+            .format(
                 font_family,
                 font_weight,
                 font_style
@@ -1163,7 +1162,7 @@ class WordCloud(object):
                 ' style="fill:{}"'
                 '>'
                 '</rect>'
-                    .format(self.background_color)
+                .format(self.background_color)
             )
 
         # Embed image, useful for debug purpose
@@ -1178,7 +1177,7 @@ class WordCloud(object):
                 ' height="100%"'
                 ' href="data:image/jpg;base64,{}"'
                 '/>'
-                    .format(data)
+                .format(data)
             )
 
         # For each word in layout
@@ -1217,7 +1216,7 @@ class WordCloud(object):
                 '>'
                 '{}'
                 '</text>'
-                    .format(
+                .format(
                     transform,
                     font_size * self.scale,
                     color,
