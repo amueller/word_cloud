@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 import subprocess
 from collections import namedtuple
 import contextlib
@@ -153,6 +154,14 @@ def test_cli_writes_to_imagefile(tmpdir, tmp_text_file):
     # expecting image to be written to imagefile
     assert tmp_image_file.size() > 0
 
+@contextlib.contextmanager
+def redirect_stdout(target):
+    original = sys.stdout
+    try:
+        sys.stdout = target
+        yield
+    finally:
+        sys.stdout = original
 
 # capsysbinary should be used here, but it's not supported in python 2.
 def test_cli_writes_to_stdout(tmpdir, tmp_text_file):
