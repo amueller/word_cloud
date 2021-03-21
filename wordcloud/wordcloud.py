@@ -786,12 +786,15 @@ class WordCloud(object):
             """
            <!DOCTYPE html>
            <html>
-           <style>
+           <head>
+          <style>
             @font-face {{
-                      font-family: {};
-                      src: url({}) format("truetype");
+                font-family: {font_family};
+                {font_face_src}
                 }}
             </style>
+           </head>
+
            <body>
               {}
            </body>
@@ -799,13 +802,32 @@ class WordCloud(object):
            """
         font = ImageFont.truetype(self.font_path)
         font_family, raw_font_style = font.getname()
-        html_string = svg_html_template.format(font_family, repr(self.font_path), self.to_svg())
+        # TODO: compability issue: work fine in chrome , bad in firefox
+        font_face_src = {
+            "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
+                   + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(
+                font_path=repr(self.font_path)),
+            "otf": "src: url({font_path}) format('opentype');  /* for open type */".format(
+                font_path=repr(self.font_path)),
+            "ttf": "src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(
+                font_path=repr(self.font_path)),
+            "woff2": "src: url({font_path}) format('woff2'); /* Super Modern Browsers */".format(
+                font_path=repr(self.font_path)),
+            "woff": "src: url({font_path}) format('woff'); /* Pretty Modern Browsers */".format(
+                font_path=repr(self.font_path)),
+            "svg": "src: url({font_path}) format('svg'); /* Legacy iOS */".format(font_path=repr(self.font_path)),
+        }
+        # get font type name
+        font_family_path = os.path.basename(self.font_path)
+        # font_family = font_family_path[:font_family_path.find(".")]
+        font_type_suffix = font_family_path[font_family_path.find(".") + 1:]
+
+        html_string = svg_html_template.format(self.to_svg(),font_face_src=font_face_src[font_type_suffix],font_family=font_family)
         return html_string
 
     def to_html_canvas(self):
 
         # TODO: format("truetype") compatibility issues?
-        # formate(font-family_name , font-path , width, height,font-family_name, canvas_draw_result)
         html_template = """
              <!DOCTYPE html>
             <html>
@@ -895,11 +917,11 @@ class WordCloud(object):
 
             # get font type name
             font_family_path = os.path.basename(self.font_path)
-            font_family = font_family_path[:font_family_path.find(".")]
+            # font_family = font_family_path[:font_family_path.find(".")]
             font_type_suffix = font_family_path[font_family_path.find(".") + 1:]
 
             # TODO better support for uncommon font styles/weights?
-            _, raw_font_style = font.getname()
+            font_family, raw_font_style = font.getname()
             raw_font_style = raw_font_style.lower()
             if 'bold' in raw_font_style:
                 font_weight = 'bold'
