@@ -45,7 +45,6 @@ stopwords.add("ext")
 wc = WordCloud(max_words=1000, mask=mask, stopwords=stopwords, margin=10,
                random_state=1)
 wc.generate(text)
-# wc.to_html(type='canvas', file_path='a_new_hope10.html')
 # now supported ('svg', 'canvas')
 wc.to_html(type='svg', file_path='a_new_hope_svg.html')
 wc.to_html(type='canvas', file_path='a_new_hope_canvas.html')

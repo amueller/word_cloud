@@ -768,12 +768,12 @@ class WordCloud(object):
         }
 
         if type not in type_to_method.keys():
-            raise NotImplementedError(f"{type} not implemented")
+            raise NotImplementedError("{} not implemented".format(type))
 
         html_string = type_to_method[type]()
 
         # write to file
-        if file_path != None:
+        if file_path is not None:
             with open(file_path, "w+", encoding='utf-8') as html_file:
                 html_file.write(html_string)
 
@@ -800,11 +800,11 @@ class WordCloud(object):
            """
         font = ImageFont.truetype(self.font_path)
         font_family, raw_font_style = font.getname()
-        # TODO: compability issue: work fine in chrome , bad in firefox
+        # TODO: compatibility issue: work fine in chrome , bad in firefox
         font_face_src = {
             "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
                    + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(
-                font_path=repr(self.font_path)),
+                    font_path=repr(self.font_path)),
             "otf": "src: url({font_path}) format('opentype');  /* for open type */".format(
                 font_path=repr(self.font_path)),
             "ttf": "src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(
@@ -820,7 +820,9 @@ class WordCloud(object):
         # font_family = font_family_path[:font_family_path.find(".")]
         font_type_suffix = font_family_path[font_family_path.find(".") + 1:]
 
-        html_string = svg_html_template.format(self.to_svg(),font_face_src=font_face_src[font_type_suffix],font_family=font_family)
+        html_string = svg_html_template.format(self.to_svg(),
+                                               font_face_src=font_face_src[font_type_suffix],
+                                               font_family=font_family)
         return html_string
 
     def to_html_canvas(self):
@@ -891,21 +893,17 @@ class WordCloud(object):
         if self.background_color is not None:
             result.append(
                 """
-                    ctx.fillStyle = "{}";
-                    ctx.fillRect(0, 0, c.width, c.height);
+                ctx.fillStyle = "{}";
+                ctx.fillRect(0, 0, c.width, c.height);
                 """
-                    .format(self.background_color)
+            .format(self.background_color)
             )
-
-        # {text_style} {size} {font_style}
-        # {color}
-        # {text_content} {x} {y}
         canvas_text_template = \
             """
-                ctx.font = "{} {} {}";
-                ctx.fillStyle = "{}";
-                ctx.rotate({});
-                ctx.fillText("{}", {}, {});
+            ctx.font = "{} {} {}";
+            ctx.fillStyle = "{}";
+            ctx.rotate({});
+            ctx.fillText("{}", {}, {});
             """
         font_family = ""
         for (word, count), font_size, (y, x), orientation, color in self.layout_:
@@ -915,7 +913,6 @@ class WordCloud(object):
 
             # get font type name
             font_family_path = os.path.basename(self.font_path)
-            # font_family = font_family_path[:font_family_path.find(".")]
             font_type_suffix = font_family_path[font_family_path.find(".") + 1:]
 
             # TODO better support for uncommon font styles/weights?
@@ -942,7 +939,6 @@ class WordCloud(object):
             max_y = ascent - offset_y
 
             # Compute text attributes
-            attributes = {}
             if orientation == Image.ROTATE_90:
                 x += max_y
                 y += max_x - min_x
@@ -950,26 +946,23 @@ class WordCloud(object):
                 x += min_x
                 y += max_y
 
+            orientation_str = "-90 * Math.PI / 180" if orientation == Image.ROTATE_90 else "0"
+
             result.append(
-                canvas_text_template
-                    .format(
-                    font_weight + " " + font_style, str(font_size) + 'px', font_family,
-                    color,
-                    "-90 * Math.PI / 180" if orientation == Image.ROTATE_90 else "0",
-                    word,
-                    x,
-                    y,
-                )
+                canvas_text_template.format(
+                    font_weight + " " + font_style, str(font_size) + 'px',
+                    font_family,color,
+                    orientation_str,word,x,y,)
             )
             # TODO: compability issue: work fine in chrome , bad in firefox
             font_face_src ={
-                "eot":"src: url({font_path}); /* IE9 Compat Modes */ \n"
+                "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
                     + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(font_path=repr(self.font_path)),
-                "otf":"src: url({font_path}) format('opentype');  /* for open type */".format(font_path=repr(self.font_path)),
-                "ttf":"src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(font_path=repr(self.font_path)),
-                "woff2":"src: url({font_path}) format('woff2'); /* Super Modern Browsers */".format(font_path=repr(self.font_path)),
-                "woff":"src: url({font_path}) format('woff'); /* Pretty Modern Browsers */".format(font_path=repr(self.font_path)),
-                "svg":"src: url({font_path}) format('svg'); /* Legacy iOS */".format(font_path=repr(self.font_path)),
+                "otf": "src: url({font_path}) format('opentype');  /* for open type */".format(font_path=repr(self.font_path)),
+                "ttf": "src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(font_path=repr(self.font_path)),
+                "woff2": "src: url({font_path}) format('woff2'); /* Super Modern Browsers */".format(font_path=repr(self.font_path)),
+                "woff": "src: url({font_path}) format('woff'); /* Pretty Modern Browsers */".format(font_path=repr(self.font_path)),
+                "svg": "src: url({font_path}) format('svg'); /* Legacy iOS */".format(font_path=repr(self.font_path)),
             }
 
             # rotate back to 0 angle
@@ -978,7 +971,7 @@ class WordCloud(object):
 
         return html_template.format(
             self.width, self.height,
-            '\n'.join(result), font_family=font_family,font_face_src=font_face_src[font_type_suffix]
+            '\n'.join(result), font_family=font_family, font_face_src=font_face_src[font_type_suffix]
         )
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
