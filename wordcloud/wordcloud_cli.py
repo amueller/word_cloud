@@ -223,6 +223,8 @@ def parse_args(arguments):
     # prog = 'python wordcloud_cli.py'
     parser = make_parser()
     args = parser.parse_args(arguments)
+    if args.background_color == 'None':
+        args.background_color = None
 
     if args.colormask and args.color:
         raise ValueError('specify either a color mask or a color function')
