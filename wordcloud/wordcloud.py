@@ -298,7 +298,7 @@ class WordCloud(object):
 
     Notes
     -----
-    Larger canvases with make the code significantly slower. If you need a
+    Larger canvases make the code significantly slower. If you need a
     large word cloud, try a lower canvas size, and set the scale parameter.
 
     The algorithm might give more weight to the ranking of the words
