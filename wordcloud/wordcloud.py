@@ -291,7 +291,7 @@ class WordCloud(object):
             ``words_`` is now a dictionary
 
     ``layout_`` : list of tuples ((string, float), int, (int, int), int, color))
-        Encodes the fitted word cloud. For each word, it encodes the string, 
+        Encodes the fitted word cloud. For each word, it encodes the string,
         normalized frequency, font size, position, orientation, and color.
         The frequencies are normalized by the most commonly occurring word.
         The color is in the format of 'rgb(R, G, B).'
@@ -746,8 +746,239 @@ class WordCloud(object):
         """
         return self.to_array()
 
-    def to_html(self):
-        raise NotImplementedError("FIXME!!!")
+    def to_html(self, type='svg', file_path=None):
+        """Convert to html
+
+        Parameters
+        ----------
+        type : string
+            type of imamge export to html
+            now supported : enum {'svg' , 'canvas'}
+
+        Returns
+        -------
+        html_string : html document text
+            html DOM node text
+        """
+
+        # type map to method
+        type_to_method = {
+            'svg': self.to_html_svg,
+            'canvas': self.to_html_canvas
+        }
+
+        if type not in type_to_method.keys():
+            raise NotImplementedError("{} not implemented".format(type))
+
+        html_string = type_to_method[type]()
+
+        # write to file
+        if file_path is not None:
+            with open(file_path, "w+", encoding='utf-8') as html_file:
+                html_file.write(html_string)
+
+        return html_string
+
+    def to_html_svg(self):
+        svg_html_template = \
+            """
+           <!DOCTYPE html>
+           <html>
+           <head>
+          <style>
+            @font-face {{
+                font-family: {font_family};
+                {font_face_src}
+                }}
+            </style>
+           </head>
+
+           <body>
+              {}
+           </body>
+           </html>
+           """
+        font = ImageFont.truetype(self.font_path)
+        font_family, raw_font_style = font.getname()
+        # TODO: compatibility issue: work fine in chrome , bad in firefox
+        font_face_src = {
+            "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
+            + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */".format(
+                font_path=repr(self.font_path)),
+            "otf": "src: url({font_path}) format('opentype');  /* for open type */".format(
+                font_path=repr(self.font_path)),
+            "ttf": "src: url({font_path})  format('truetype'); /* Safari, Android, iOS */".format(
+                font_path=repr(self.font_path)),
+            "woff2": "src: url({font_path}) format('woff2'); /* Super Modern Browsers */".format(
+                font_path=repr(self.font_path)),
+            "woff": "src: url({font_path}) format('woff'); /* Pretty Modern Browsers */".format(
+                font_path=repr(self.font_path)),
+            "svg": "src: url({font_path}) format('svg'); /* Legacy iOS */".format(font_path=repr(self.font_path)),
+        }
+        # get font type name
+        font_family_path = os.path.basename(self.font_path)
+        # font_family = font_family_path[:font_family_path.find(".")]
+        font_type_suffix = font_family_path[font_family_path.find(".") + 1:]
+
+        html_string = svg_html_template.format(self.to_svg(),
+                                               font_face_src=font_face_src[font_type_suffix],
+                                               font_family=font_family)
+        return html_string
+
+    def to_html_canvas(self):
+
+        # TODO: format("truetype") compatibility issues?
+        html_template = """
+             <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                @font-face {{
+                  font-family: {font_family};
+                        {font_face_src}
+                }}
+                </style>
+
+            </head>
+            <body>
+            <!--        load font -->
+            <div id="wordCloudPlaceHolder" style="font-family: {font_family};" >loading</div>
+
+                <canvas id="wordCloudCanvas" width="{}" height="{}" style="border:1px solid #000000;">
+                Your browser does not support the HTML canvas tag.
+                </canvas>
+            <script>
+
+                var interval = null;
+         
+                function fontLoadListener() {{
+                  var hasLoaded = false;
+                 
+                  try {{
+                    hasLoaded = document.fonts.check('12px "{font_family}"')
+                  }} catch(error) {{
+                    console.info("CSS font loading API error", error);
+                    fontLoadedSuccess();
+                    return;
+                  }}
+
+                  if(hasLoaded) {{
+                    fontLoadedSuccess();
+                    var placeHolder = document.getElementById("wordCloudPlaceHolder");
+                    placeHolder.parentNode.removeChild(placeHolder);
+                  }}
+                }}
+                 
+                function fontLoadedSuccess() {{
+                  if(interval) {{
+                    clearInterval(interval);
+                    drawCanvas();
+                  }}
+                  /* Apply class names */
+                }}
+                 
+                interval = setInterval(fontLoadListener, 100);
+                 function drawCanvas(){{
+                    var c = document.getElementById("wordCloudCanvas");
+                    var ctx = c.getContext("2d");
+                    {}
+                 }}
+            </script>
+            </body>
+            </html>
+            """
+
+        result = []
+        # Add background
+        if self.background_color is not None:
+            result.append(
+                """
+            ctx.fillStyle = "{}";
+            ctx.fillRect(0, 0, c.width, c.height);
+        """
+                .format(self.background_color)
+            )
+        canvas_text_template = \
+            """
+            ctx.font = "{} {} {}";
+            ctx.fillStyle = "{}";
+            ctx.rotate({});
+            ctx.fillText("{}", {}, {});
+            """
+        font_family = ""
+        for (word, count), font_size, (y, x), orientation, color in self.layout_:
+            x *= self.scale
+            y *= self.scale
+            font = ImageFont.truetype(self.font_path, int(font_size * self.scale))
+
+            # get font type name
+            font_family_path = os.path.basename(self.font_path)
+            font_type_suffix = font_family_path[font_family_path.find(".") + 1:]
+
+            # TODO better support for uncommon font styles/weights?
+            font_family, raw_font_style = font.getname()
+            raw_font_style = raw_font_style.lower()
+            if 'bold' in raw_font_style:
+                font_weight = 'bold'
+            else:
+                font_weight = 'normal'
+            if 'italic' in raw_font_style:
+                font_style = 'italic'
+            elif 'oblique' in raw_font_style:
+                font_style = 'oblique'
+            else:
+                font_style = 'normal'
+
+            # basically the same with svg
+            (size_x, size_y), (offset_x, offset_y) = font.font.getsize(word)
+            ascent, descent = font.getmetrics()
+
+            # Compute text bounding box
+            min_x = -offset_x
+            max_x = size_x - offset_x
+            max_y = ascent - offset_y
+
+            # Compute text attributes
+            if orientation == Image.ROTATE_90:
+                x += max_y
+                y += max_x - min_x
+            else:
+                x += min_x
+                y += max_y
+
+            orientation_str = "-90 * Math.PI / 180" if orientation == Image.ROTATE_90 else "0"
+
+            result.append(
+                canvas_text_template.format(
+                    font_weight + " " + font_style, str(font_size) + 'px',
+                    font_family, color,
+                    orientation_str, word, x, y)
+            )
+            # TODO: compability issue: work fine in chrome , bad in firefox
+            font_face_src = {
+                "eot": "src: url({font_path}); /* IE9 Compat Modes */ \n"
+                + "src: url({font_path}) format('embedded-opentype'); /* IE6-IE8 */"
+                .format(font_path=repr(self.font_path)),
+                "otf": "src: url({font_path}) format('opentype');  /* for open type */"
+                .format(font_path=repr(self.font_path)),
+                "ttf": "src: url({font_path}) format('truetype');  /* Safari, Android, iOS */"
+                .format(font_path=repr(self.font_path)),
+                "woff2": "src: url({font_path}) format('woff2'); /* Super Modern Browsers */"
+                .format(font_path=repr(self.font_path)),
+                "woff": "src: url({font_path}) format('woff'); /* Pretty Modern Browsers */"
+                .format(font_path=repr(self.font_path)),
+                "svg": "src: url({font_path}) format('svg'); /* Legacy iOS */"
+                .format(font_path=repr(self.font_path)),
+            }
+
+            # rotate back to 0 angle
+            result.append(
+                "ctx.rotate(90 * Math.PI / 180);" if orientation == Image.ROTATE_90 else "")
+
+        return html_template.format(
+            self.width, self.height,
+            '\n'.join(result), font_family=font_family, font_face_src=font_face_src[font_type_suffix]
+        )
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.
@@ -817,9 +1048,8 @@ class WordCloud(object):
 
         # Get font information
         font = ImageFont.truetype(self.font_path, int(max_font_size * self.scale))
-        raw_font_family, raw_font_style = font.getname()
-        # TODO properly escape/quote this name?
-        font_family = repr(raw_font_family)
+
+        font_family, raw_font_style = font.getname()
         # TODO better support for uncommon font styles/weights?
         raw_font_style = raw_font_style.lower()
         if 'bold' in raw_font_style:
@@ -839,10 +1069,12 @@ class WordCloud(object):
             ' xmlns="http://www.w3.org/2000/svg"'
             ' width="{}"'
             ' height="{}"'
+            ' font-family="{}"'
             '>'
             .format(
                 width * self.scale,
-                height * self.scale
+                height * self.scale,
+                font_family
             )
         )
 

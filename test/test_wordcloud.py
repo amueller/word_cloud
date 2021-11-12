@@ -185,8 +185,6 @@ def test_writing_to_file(tmpdir):
 
 def test_check_errors():
     wc = WordCloud()
-    with pytest.raises(NotImplementedError):
-        wc.to_html()
 
     try:
         np.array(wc)
