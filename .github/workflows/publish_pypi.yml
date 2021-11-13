@@ -54,7 +54,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      run: |
+    - run: |
         git fetch --prune --unshallow --tags
     - run: |
          docker run --rm --privileged hypriot/qemu-register
