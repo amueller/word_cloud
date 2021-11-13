@@ -1,9 +1,10 @@
-name: Build and Test Wheel
+name: Publish to Pypi
+on:
+  workflow_dispatch:
 
-on: [push]
 
 jobs:
-  test_x86_64:
+  build_wheel_x86_64:
     name: "Build ${{ matrix.pyver }} on ${{ matrix.os }}"
     strategy:
       matrix:
@@ -23,10 +24,22 @@ jobs:
           pip install auditwheel
           #Install locally to support tests
           pip install -e .
+      - name: Building source distribution
+        run: python setup.py sdist
+      - name: Building wheel
+        run: python setup.py bdist_wheel
+      - name: Repair wheel
+        if: matrix.os == 'ubuntu-latest'
+        run: auditwheel repair dist/*.whl --wheel-dir dist --plat linux_x86_64
       - name: Test with pytest
         run: pytest
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@v1.4.1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_TOKEN }}
 
-  test_aarch64:
+  build_wheel_aarch64:
     name: "Build aarch64 ${{ matrix.pyver }}"
     strategy:
       matrix:
@@ -49,8 +62,11 @@ jobs:
             pip install --upgrade setuptools && \
             python -m pip install --disable-pip-version-check --upgrade pip && \
             pip install -U -r requirements.txt -r requirements-dev.txt && \
-            python setup.py bdist_wheel && \
             pip install -e . && \
-            auditwheel repair dist/*.whl --wheel-dir dist && \
             pytest && \
             deactivate"
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@v1.4.1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_TOKEN }}
