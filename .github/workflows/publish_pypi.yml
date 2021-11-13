@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-        run: |
+      - run: |
           git fetch --prune --unshallow --tags
       - name: Setting up Python
         uses: actions/setup-python@v2
