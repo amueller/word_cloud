@@ -1,4 +1,4 @@
-name: Build and Test Wheel
+name: Unit Tests
 
 on: [push]
 
