@@ -1,18 +1,6 @@
 [![licence](http://img.shields.io/badge/licence-MIT-blue.svg?style=flat)](https://github.com/amueller/word_cloud/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/21369/amueller/word_cloud.svg)](https://zenodo.org/badge/latestdoi/21369/amueller/word_cloud)
 
-|      | Linux                                        | macOS                                        | Windows                                      |
-|------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
-| PyPI | [![CircleCI][circleci_image]][circleci_link] | [![TravisCI][travisci_image]][travisci_link] | [![AppVeyor][appveyor_image]][appveyor_link] |
-
-[circleci_link]: https://circleci.com/gh/amueller/word_cloud/tree/master
-[circleci_image]: https://circleci.com/gh/amueller/word_cloud/tree/master.svg?style=svg
-
-[travisci_link]: https://travis-ci.org/amueller/word_cloud
-[travisci_image]: https://travis-ci.org/amueller/word_cloud.svg?branch=master
-
-[appveyor_link]: https://ci.appveyor.com/project/amueller/word-cloud/branch/master
-[appveyor_image]: https://img.shields.io/appveyor/ci/amueller/word-cloud/master.svg
 
 word_cloud
 ==========
