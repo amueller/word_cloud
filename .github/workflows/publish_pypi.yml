@@ -33,11 +33,11 @@ jobs:
         run: auditwheel repair dist/*.whl --wheel-dir dist --plat linux_x86_64
       - name: Test with pytest
         run: pytest
-    - name: Publish package to PyPI
-      uses: pypa/gh-action-pypi-publish@v1.4.1
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_TOKEN }}
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.4.1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
 
   build_wheel_aarch64:
     name: "Build aarch64 ${{ matrix.pyver }}"
