@@ -6,6 +6,11 @@
 #
 # License: MIT
 
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+stop = set(stopwords.words('english')) #download for STOPWORDS 
+
 from __future__ import division
 
 import warnings
@@ -18,6 +23,7 @@ import sys
 import colorsys
 import matplotlib
 import numpy as np
+import pandas as pd
 from operator import itemgetter
 from xml.sax import saxutils
 
@@ -32,7 +38,8 @@ from .tokenization import unigrams_and_bigrams, process_tokens
 
 FILE = os.path.dirname(__file__)
 FONT_PATH = os.environ.get('FONT_PATH', os.path.join(FILE, 'DroidSansMono.ttf'))
-STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
+# STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
+STOPWORDS = stop
 
 
 class IntegralOccupancyMap(object):
@@ -83,9 +90,10 @@ def random_color_func(word=None, font_size=None, position=None,
         numbers.
 
     """
-    if random_state is None:
-        random_state = Random()
-    return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
+#     if random_state is None:
+#         random_state = Random()
+#     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
+    pass
 
 
 class colormap_color_func(object):
@@ -123,9 +131,9 @@ def get_single_color_func(color):
     >>> color_func2 = get_single_color_func('#00b4d2')
     """
     old_r, old_g, old_b = ImageColor.getrgb(color)
-    rgb_max = 255.
-    h, s, v = colorsys.rgb_to_hsv(old_r / rgb_max, old_g / rgb_max,
-                                  old_b / rgb_max)
+#     rgb_max = 255.
+#     h, s, v = colorsys.rgb_to_hsv(old_r / rgb_max, old_g / rgb_max,
+#                                   old_b / rgb_max)
 
     def single_color_func(word=None, font_size=None, position=None,
                           orientation=None, font_path=None, random_state=None):
@@ -143,11 +151,13 @@ def get_single_color_func(color):
           numbers.
 
         """
-        if random_state is None:
-            random_state = Random()
-        r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
-        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
-                                                    b * rgb_max)
+#         if random_state is None:
+#             random_state = Random()
+#         r, g, b = colorsys.hsv_to_rgb(h, s, random_state.uniform(0.2, 1))
+#         return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(r * rgb_max, g * rgb_max,
+#                                                     b * rgb_max)
+        return 'rgb({:.0f}, {:.0f}, {:.0f})'.format(old_r, old_g,
+                                                    old_b)
     return single_color_func
 
 
