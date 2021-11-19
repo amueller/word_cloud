@@ -121,11 +121,6 @@ def test_check_duplicate_color_error(tmpdir, tmp_text_file):
         cli.parse_args(['--color', 'red', '--colormask', str(color_mask_file), '--text', str(tmp_text_file)])
 
 
-def test_parse_args_defaults_to_random_color(tmp_text_file):
-    args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
-    assert args['color_func'] == wc.random_color_func
-
-
 def test_unicode_text_file():
     unicode_file = os.path.join(os.path.dirname(__file__), "unicode_text.txt")
     args, text, image_file = cli.parse_args(['--text', unicode_file])
