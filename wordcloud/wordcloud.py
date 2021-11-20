@@ -1081,7 +1081,8 @@ class WordCloud(object):
         return Image.fromarray(ret)
 
     
-    
+## from "examples/colored_by_group.py"
+
 class SimpleGroupedColorFunc(object):
     """Create a color function object which assigns EXACT colors
        to certain words based on the color to words mapping
