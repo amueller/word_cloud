@@ -398,7 +398,7 @@ class WordCloud(object):
         """
         return self.generate_from_frequencies(frequencies)
 
-    def generate_from_frequencies(self, frequencies, max_font_size=None):  # noqa: C901
+    def generate_from_frequencies(self, frequencies, max_font_size=None, tsne_plot=None):  # noqa: C901
         """Create a word_cloud from words and frequencies.
 
         Parameters
@@ -414,6 +414,16 @@ class WordCloud(object):
         self
 
         """
+        
+        ## edit
+        maxX = 0
+        maxY = 0
+        for ind in tsne_plot.values():
+          if ind[0] > maxX:
+            maxX = ind[0]
+          if ind[1] > maxY:
+            maxY = ind[1]
+        
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=itemgetter(1), reverse=True)
         if len(frequencies) <= 0:
@@ -495,6 +505,10 @@ class WordCloud(object):
                                     for word, freq in frequencies_org])
 
         # start drawing grey image
+        
+        ## edit
+        collect_font_size = []
+        
         for word, freq in frequencies:
             if freq == 0:
                 continue
@@ -517,9 +531,16 @@ class WordCloud(object):
                 # get size of resulting text
                 box_size = draw.textsize(word, font=transposed_font)
                 # find possible places using integral image:
+                
+                ## edit
+                resu = tsne_plot[word]
+                to_mul_x = width/maxX
+                to_mul_y = height/maxY
+                fix_state = (to_mul_x*resu[0],to_mul_y*resu[1]) # x
                 result = occupancy.sample_position(box_size[1] + self.margin,
                                                    box_size[0] + self.margin,
-                                                   random_state)
+                                                   fix_state)
+                
                 if result is not None or font_size < self.min_font_size:
                     # either we found a place or font-size went too small
                     break
@@ -538,6 +559,9 @@ class WordCloud(object):
                 break
 
             x, y = np.array(result) + self.margin // 2
+            
+            ## edit
+            occupancy.text_boxes.append((x,y, font_size* len(word), font_size))
             # actually draw the text
             draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
@@ -546,8 +570,10 @@ class WordCloud(object):
             colors.append(self.color_func(word, font_size=font_size,
                                           position=(x, y),
                                           orientation=orientation,
-                                          random_state=random_state,
+                                          random_state=None,
                                           font_path=self.font_path))
+            collect_font_size.append((word,font_size))
+            
             # recompute integral image
             if self.mask is None:
                 img_array = np.asarray(img_grey)
@@ -560,6 +586,9 @@ class WordCloud(object):
 
         self.layout_ = list(zip(frequencies, font_sizes, positions,
                                 orientations, colors))
+        ## edit
+        print(collect_font_size)
+        
         return self
 
     def process_text(self, text):
