@@ -6,11 +6,6 @@
 #
 # License: MIT
 
-import nltk
-nltk.download('stopwords')
-from nltk.corpus import stopwords
-stop = set(stopwords.words('english')) #download for STOPWORDS 
-
 from __future__ import division
 
 import warnings
@@ -38,8 +33,7 @@ from .tokenization import unigrams_and_bigrams, process_tokens
 
 FILE = os.path.dirname(__file__)
 FONT_PATH = os.environ.get('FONT_PATH', os.path.join(FILE, 'DroidSansMono.ttf'))
-# STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
-STOPWORDS = stop
+STOPWORDS = set(map(str.strip, open(os.path.join(FILE, 'stopwords')).readlines()))
 
 
 class IntegralOccupancyMap(object):
