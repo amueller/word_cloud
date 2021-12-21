@@ -74,28 +74,6 @@ class IntegralOccupancyMap(object):
         self.integral[pos_x:, pos_y:] = partial_integral
 
 
-def random_color_func(word=None, font_size=None, position=None,
-                      orientation=None, font_path=None, random_state=None):
-    """Random hue color generation.
-
-    Default coloring method. This just picks a random hue with value 80% and
-    lumination 50%.
-
-    Parameters
-    ----------
-    word, font_size, position, orientation  : ignored.
-
-    random_state : random.Random object or None, (default=None)
-        If a random object is given, this is used for generating random
-        numbers.
-
-    """
-#     if random_state is None:
-#         random_state = Random()
-#     return "hsl(%d, 80%%, 50%%)" % random_state.randint(0, 255)
-    pass
-
-
 class colormap_color_func(object):
     """Color func created from matplotlib colormap.
 
