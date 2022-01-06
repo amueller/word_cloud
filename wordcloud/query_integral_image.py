@@ -1,22 +1,18 @@
 import array
 import numpy as np
 
-#integral_image = np.zeros((3000, 2000), dtype=np.uint32)
+
 def query_integral_image(integral_image, size_x,
                          size_y, fix_state):
   
     x = integral_image.shape[1] # width
     y = integral_image.shape[0] # hieght
     
-
-    hits = 0
-    lis = []
     fix_x = round(fix_state[1])
     fix_y = round(fix_state[0])
-    #center_x = round(fix_x-(size_x/2))
+    
     center_y = round(fix_y-(size_y/2))
     center_x = fix_x
-    #center_y = fix_y
 
     if center_x < 0:
       center_x = 0
@@ -33,7 +29,7 @@ def query_integral_image(integral_image, size_x,
             area = integral_image[new_center_x, new_center_y] + integral_image[new_center_x + size_x, new_center_y + size_y]
             area -= integral_image[new_center_x + size_x, new_center_y] + integral_image[new_center_x, new_center_y + size_y]
 
-            if not area: #ถ้า not area --> size x < x or/and size y < y แสดงว่ามีพท แต่ถ้าสมมติมันใหญ่เกินก็ค่อยไปลด font size ใน 
+            if not area: #ถ้า not area --> size x < x or size y < y แสดงว่ามีพท แต่ถ้าสมมติมันใหญ่เกินก็ค่อยไปลด font size
               return new_center_x,new_center_y
 
           except:
