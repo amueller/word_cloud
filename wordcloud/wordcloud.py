@@ -40,6 +40,7 @@ class IntegralOccupancyMap(object):
     def __init__(self, height, width, mask):
         self.height = height
         self.width = width
+        self.text_boxes = []
         if mask is not None:
             # the order of the cumsum's is important for speed ?!
             self.integral = np.cumsum(np.cumsum(255 * mask, axis=1),
@@ -50,7 +51,7 @@ class IntegralOccupancyMap(object):
     def sample_position(self, size_x, size_y, random_state):
         return query_integral_image(self.integral, size_x, size_y,
                                     random_state)
-
+    
     def update(self, img_array, pos_x, pos_y):
         partial_integral = np.cumsum(np.cumsum(img_array[pos_x:, pos_y:],
                                                axis=1), axis=0)
