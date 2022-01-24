@@ -389,13 +389,14 @@ class WordCloud(object):
         """
         
         ## edit
-        maxX = 0
-        maxY = 0
-        for ind in tsne_plot.values():
-          if ind[0] > maxX:
-            maxX = ind[0]
-          if ind[1] > maxY:
-            maxY = ind[1]
+        if tsne_plot != None:
+            maxX = 0
+            maxY = 0
+            for ind in tsne_plot.values():
+              if ind[0] > maxX:
+                maxX = ind[0]
+              if ind[1] > maxY:
+                maxY = ind[1]
         
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=itemgetter(1), reverse=True)
@@ -506,13 +507,18 @@ class WordCloud(object):
                 # find possible places using integral image:
                 
                 ## edit
-                resu = tsne_plot[word]
-                to_mul_x = width/maxX
-                to_mul_y = height/maxY
-                fix_state = (to_mul_x*resu[0],to_mul_y*resu[1]) # x
-                result = occupancy.sample_position(box_size[1] + self.margin,
-                                                   box_size[0] + self.margin,
-                                                   fix_state)
+                if tsne_plot != None:
+                    resu = tsne_plot[word]
+                    to_mul_x = width/maxX
+                    to_mul_y = height/maxY
+                    fix_state = (to_mul_x*resu[0],to_mul_y*resu[1]) # x
+                    result = occupancy.sample_position(box_size[1] + self.margin,
+                                                       box_size[0] + self.margin,
+                                                       fix_state)
+                else:
+                    result = occupancy.sample_position(box_size[1] + self.margin,
+                                                       box_size[0] + self.margin,
+                                                       random_state)
                 
                 if result is not None or font_size < self.min_font_size:
                     # either we found a place or font-size went too small
@@ -540,11 +546,18 @@ class WordCloud(object):
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
-            colors.append(self.color_func(word, font_size=font_size,
-                                          position=(x, y),
-                                          orientation=orientation,
-                                          random_state=None,
-                                          font_path=self.font_path))
+            if tsne_plot != None:
+                colors.append(self.color_func(word, font_size=font_size,
+                                              position=(x, y),
+                                              orientation=orientation,
+                                              random_state=None,
+                                              font_path=self.font_path))
+            else:
+                colors.append(self.color_func(word, font_size=font_size,
+                                              position=(x, y),
+                                              orientation=orientation,
+                                              random_state=random_state,
+                                              font_path=self.font_path))
             collect_font_size.append((word,font_size))
             
             # recompute integral image
