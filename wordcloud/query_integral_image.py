@@ -3,12 +3,12 @@ import numpy as np
 
 
 def query_integral_image(integral_image, size_x,
-                         size_y, fix_state):
+                         size_y, random_state):
   
     x = integral_image.shape[1] # width
     y = integral_image.shape[0] # hieght
     
-    if isinstance(fix_state, Random):
+    if isinstance(random_state, Random):
       hits = 0
       for i in range(y - size_y):
         for j in range(x - size_x):
@@ -32,8 +32,8 @@ def query_integral_image(integral_image, size_x,
               return j, i
       
     else:
-      fix_x = round(fix_state[1])
-      fix_y = round(fix_state[0])
+      fix_x = round(random_state[1])
+      fix_y = round(random_state[0])
 
       center_y = round(fix_y-(size_y/2))
       center_x = fix_x
