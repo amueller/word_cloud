@@ -8,7 +8,7 @@ def query_integral_image(integral_image, size_x,
     x = integral_image.shape[1] # width
     y = integral_image.shape[0] # hieght
     
-    if isinstance(fix_state, Random()):
+    if isinstance(fix_state, Random):
       hits = 0
       for i in range(y - size_y):
         for j in range(x - size_x):
