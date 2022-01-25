@@ -1,5 +1,6 @@
 import array
 import numpy as np
+from random import Random
 
 
 def query_integral_image(integral_image, size_x,
