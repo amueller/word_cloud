@@ -13,6 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - run: |
+          git fetch --prune --unshallow --tags
+
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.7.0
 
@@ -25,6 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - run: |
+          git fetch --prune --unshallow --tags
 
       - name: Build sdist
         run: pipx run build --sdist
