@@ -246,7 +246,7 @@ def test_mask():
 
     # use actual nonzero mask
     mask = np.zeros((234, 456), dtype=np.int32)
-    mask[100:150, 300:400] = 255
+    mask[0:150, 0:400] = 255
 
     wc = WordCloud(mask=mask)
     wc.generate(THIS)
