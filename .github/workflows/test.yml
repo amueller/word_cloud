@@ -1,6 +1,8 @@
 name: Unit Tests
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  pull_request:
+    types: [opened, edited, labeled, unlabeled, synchronize]
 
 jobs:
   test_x86_64:
