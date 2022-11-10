@@ -1,13 +1,13 @@
 name: Unit Tests
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test_x86_64:
     name: "Build ${{ matrix.pyver }} on ${{ matrix.os }}"
     strategy:
       matrix:
-        pyver: ['3.6', '3.7', '3.8', '3.9']
+        pyver: ['3.7', '3.8', '3.9', '3.10']
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -29,7 +29,7 @@ jobs:
     name: "Build aarch64 ${{ matrix.pyver }}"
     strategy:
       matrix:
-        pyver: [cp36-cp36m, cp37-cp37m, cp38-cp38, cp39-cp39]
+        pyver: [cp37-cp37m, cp38-cp38, cp39-cp39, cp310-cp310]
       fail-fast: false
     runs-on: ubuntu-latest
     env:
