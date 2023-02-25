@@ -239,13 +239,13 @@ def test_mask():
     # check that using an empty mask is equivalent to not using a mask
     wc = WordCloud(random_state=42)
     wc.generate(THIS)
-    mask = np.zeros(np.array(wc).shape[:2], dtype=np.int)
+    mask = np.zeros(np.array(wc).shape[:2], dtype=int)
     wc_mask = WordCloud(mask=mask, random_state=42)
     wc_mask.generate(THIS)
     assert_array_equal(wc, wc_mask)
 
     # use actual nonzero mask
-    mask = np.zeros((234, 456), dtype=np.int)
+    mask = np.zeros((234, 456), dtype=int)
     mask[100:150, 300:400] = 255
 
     wc = WordCloud(mask=mask)
@@ -259,7 +259,7 @@ def test_mask():
 def test_mask_contour():
     # test mask contour is created, learn more at:
     # https://github.com/amueller/word_cloud/pull/348#issuecomment-370883873
-    mask = np.zeros((234, 456), dtype=np.int)
+    mask = np.zeros((234, 456), dtype=int)
     mask[100:150, 300:400] = 255
 
     sm = WordCloud(mask=mask, contour_width=1, contour_color='blue')
@@ -491,7 +491,7 @@ def test_max_font_size_as_mask_height():
     size = (default_size[0] * 2, default_size[1] * 2)
 
     # using mask, all drawable
-    mask = np.zeros(size, dtype=np.int)
+    mask = np.zeros(size, dtype=int)
     mask[:, :] = 0
     wc = WordCloud(mask=mask, random_state=42)
     wc.generate(x)
