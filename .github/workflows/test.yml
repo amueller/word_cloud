@@ -2,7 +2,8 @@ name: Unit Tests
 
 on:
   pull_request:
-    types: [opened, edited, labeled, unlabeled, synchronize]
+    branches:
+      - master
 
 jobs:
   test_x86_64:
