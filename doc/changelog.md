@@ -5,6 +5,12 @@ details, see the commit logs at <https://github.com/amueller/word_cloud>
 
 <!--next-version-placeholder-->
 
+## v1.8.4 (2023-03-20)
+
+### Chore
+
+- Replace versioneer with python-semantic-release ([`a486bbb`](https://github.com/Yuhao-C/word_cloud/commit/a486bbb9a03ec9e9d7eca88bd654aa1b5c1ca642))
+
 ## WordCloud 1.8.3
 
 - Fix deprecated `numpy.int`.
