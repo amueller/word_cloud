@@ -8,7 +8,7 @@ with io.open("README.md", encoding="utf_8") as fp:
 
 setup(
     author="CS489 - Group 12",
-    name="wordcloud",
+    name="wordcloud_cs489",
     version=__version__,
     url="https://github.com/Yuhao-C/word_cloud",
     description="A little word cloud generator",
