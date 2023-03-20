@@ -9,7 +9,8 @@ from PIL import Image
 import xml.etree.ElementTree as ET
 
 import matplotlib
-matplotlib.use('Agg')
+
+matplotlib.use("Agg")
 
 THIS = """The Zen of Python, by Tim Peters
 
@@ -77,7 +78,9 @@ def test_collocations():
 
 
 def test_collocation_stopwords():
-    wc = WordCloud(collocations=True, stopwords={"you", "very"}, collocation_threshold=9)
+    wc = WordCloud(
+        collocations=True, stopwords={"you", "very"}, collocation_threshold=9
+    )
     wc.generate(STOPWORDED_COLLOCATIONS)
 
     assert "thank you" not in wc.words_
@@ -88,7 +91,9 @@ def test_collocation_stopwords():
 
 
 def test_collocation_stopwords_uppercase():
-    wc = WordCloud(collocations=True, stopwords={"thank", "hi", "there"}, collocation_threshold=9)
+    wc = WordCloud(
+        collocations=True, stopwords={"thank", "hi", "there"}, collocation_threshold=9
+    )
     wc.generate(STOPWORDED_COLLOCATIONS_UPPERCASE)
 
     assert "Thank you" not in wc.words_
@@ -115,7 +120,7 @@ def test_plurals_numbers():
 
 
 def test_multiple_s():
-    text = 'flo flos floss flosss'
+    text = "flo flos floss flosss"
     wc = WordCloud(stopwords=[]).generate(text)
     assert "flo" in wc.words_
     assert "flos" not in wc.words_
@@ -133,12 +138,12 @@ def test_empty_text():
     # test originally empty text raises an exception
     wc = WordCloud(stopwords=[])
     with pytest.raises(ValueError):
-        wc.generate('')
+        wc.generate("")
 
     # test empty-after-filtering text raises an exception
-    wc = WordCloud(stopwords=['a', 'b'])
+    wc = WordCloud(stopwords=["a", "b"])
     with pytest.raises(ValueError):
-        wc.generate('a b a')
+        wc.generate("a b a")
 
 
 def test_default():
@@ -213,8 +218,7 @@ def test_recolor():
     wc.recolor()
     array_after = wc.to_array()
     # check that the same places are filled
-    assert_array_equal(array_before.sum(axis=-1) != 0,
-                       array_after.sum(axis=-1) != 0)
+    assert_array_equal(array_before.sum(axis=-1) != 0, array_after.sum(axis=-1) != 0)
     # check that they are not the same
     assert np.abs(array_before - array_after).sum() > 10000
 
@@ -239,13 +243,13 @@ def test_mask():
     # check that using an empty mask is equivalent to not using a mask
     wc = WordCloud(random_state=42)
     wc.generate(THIS)
-    mask = np.zeros(np.array(wc).shape[:2], dtype=np.int)
+    mask = np.zeros(np.array(wc).shape[:2], dtype=np.int64)
     wc_mask = WordCloud(mask=mask, random_state=42)
     wc_mask.generate(THIS)
     assert_array_equal(wc, wc_mask)
 
     # use actual nonzero mask
-    mask = np.zeros((234, 456), dtype=np.int)
+    mask = np.zeros((234, 456), dtype=np.int64)
     mask[100:150, 300:400] = 255
 
     wc = WordCloud(mask=mask)
@@ -259,20 +263,20 @@ def test_mask():
 def test_mask_contour():
     # test mask contour is created, learn more at:
     # https://github.com/amueller/word_cloud/pull/348#issuecomment-370883873
-    mask = np.zeros((234, 456), dtype=np.int)
+    mask = np.zeros((234, 456), dtype=np.int64)
     mask[100:150, 300:400] = 255
 
-    sm = WordCloud(mask=mask, contour_width=1, contour_color='blue')
+    sm = WordCloud(mask=mask, contour_width=1, contour_color="blue")
     sm.generate(THIS)
     sm_array = np.array(sm)
     sm_total = sm_array[100:150, 300:400].sum()
 
-    lg = WordCloud(mask=mask, contour_width=20, contour_color='blue')
+    lg = WordCloud(mask=mask, contour_width=20, contour_color="blue")
     lg.generate(THIS)
     lg_array = np.array(lg)
     lg_total = lg_array[100:150, 300:400].sum()
 
-    sc = WordCloud(mask=mask, contour_width=1, scale=2, contour_color='blue')
+    sc = WordCloud(mask=mask, contour_width=1, scale=2, contour_color="blue")
     sc.generate(THIS)
     sc_array = np.array(sc)
     sc_total = sc_array[100:150, 300:400].sum()
@@ -291,29 +295,29 @@ def test_single_color_func():
     # test single color function for different color formats
     random = Random(42)
 
-    red_function = get_single_color_func('red')
-    assert red_function(random_state=random) == 'rgb(181, 0, 0)'
+    red_function = get_single_color_func("red")
+    assert red_function(random_state=random) == "rgb(181, 0, 0)"
 
-    hex_function = get_single_color_func('#00b4d2')
-    assert hex_function(random_state=random) == 'rgb(0, 48, 56)'
+    hex_function = get_single_color_func("#00b4d2")
+    assert hex_function(random_state=random) == "rgb(0, 48, 56)"
 
-    rgb_function = get_single_color_func('rgb(0,255,0)')
-    assert rgb_function(random_state=random) == 'rgb(0, 107, 0)'
+    rgb_function = get_single_color_func("rgb(0,255,0)")
+    assert rgb_function(random_state=random) == "rgb(0, 107, 0)"
 
-    rgb_perc_fun = get_single_color_func('rgb(80%,60%,40%)')
-    assert rgb_perc_fun(random_state=random) == 'rgb(97, 72, 48)'
+    rgb_perc_fun = get_single_color_func("rgb(80%,60%,40%)")
+    assert rgb_perc_fun(random_state=random) == "rgb(97, 72, 48)"
 
-    hsl_function = get_single_color_func('hsl(0,100%,50%)')
-    assert hsl_function(random_state=random) == 'rgb(201, 0, 0)'
+    hsl_function = get_single_color_func("hsl(0,100%,50%)")
+    assert hsl_function(random_state=random) == "rgb(201, 0, 0)"
 
 
 def test_single_color_func_grey():
     # grey is special as it's a corner case
     random = Random(42)
 
-    red_function = get_single_color_func('darkgrey')
-    assert red_function(random_state=random) == 'rgb(181, 181, 181)'
-    assert red_function(random_state=random) == 'rgb(56, 56, 56)'
+    red_function = get_single_color_func("darkgrey")
+    assert red_function(random_state=random) == "rgb(181, 181, 181)"
+    assert red_function(random_state=random) == "rgb(56, 56, 56)"
 
 
 def test_process_text():
@@ -341,10 +345,10 @@ def test_process_text_default_patterns():
 
 def test_process_text_regexp_parameter():
     # test that word processing is influenced by `regexp`
-    wc = WordCloud(max_words=50, regexp=r'\w{5}')
+    wc = WordCloud(max_words=50, regexp=r"\w{5}")
     words = wc.process_text(THIS)
 
-    assert 'than' not in words
+    assert "than" not in words
 
 
 def test_generate_from_frequencies():
@@ -363,13 +367,13 @@ def test_relative_scaling_zero():
 
 
 def test_unicode_stopwords():
-    wc_unicode = WordCloud(stopwords=[u'Beautiful'])
+    wc_unicode = WordCloud(stopwords=["Beautiful"])
     try:
         words_unicode = wc_unicode.process_text(unicode(THIS))
     except NameError:  # PY3
         words_unicode = wc_unicode.process_text(THIS)
 
-    wc_str = WordCloud(stopwords=['Beautiful'])
+    wc_str = WordCloud(stopwords=["Beautiful"])
     words_str = wc_str.process_text(str(THIS))
 
     assert words_unicode == words_str
@@ -379,7 +383,7 @@ def test_include_numbers():
     wc_numbers = WordCloud(include_numbers=True)
     wc = wc_numbers.process_text(THIS)
 
-    assert '14' in wc.keys()
+    assert "14" in wc.keys()
 
 
 def test_min_word_length():
@@ -392,16 +396,18 @@ def test_min_word_length():
 
 def test_recolor_too_small():
     # check exception is raised when image is too small
-    colouring = np.array(Image.new('RGB', size=(20, 20)))
+    colouring = np.array(Image.new("RGB", size=(20, 20)))
     wc = WordCloud(width=30, height=30, random_state=0, min_font_size=1).generate(THIS)
     image_colors = ImageColorGenerator(colouring)
-    with pytest.raises(ValueError, match='ImageColorGenerator is smaller than the canvas'):
+    with pytest.raises(
+        ValueError, match="ImageColorGenerator is smaller than the canvas"
+    ):
         wc.recolor(color_func=image_colors)
 
 
 def test_recolor_too_small_set_default():
     # check no exception is raised when default colour is used
-    colouring = np.array(Image.new('RGB', size=(20, 20)))
+    colouring = np.array(Image.new("RGB", size=(20, 20)))
     wc = WordCloud(max_words=50, width=30, height=30, min_font_size=1).generate(THIS)
     image_colors = ImageColorGenerator(colouring, default_color=(0, 0, 0))
     wc.recolor(color_func=image_colors)
@@ -426,8 +432,9 @@ def test_coloring_black_works():
     # check that using black colors works.
     mask = np.zeros((50, 50, 3))
     image_colors = ImageColorGenerator(mask)
-    wc = WordCloud(width=50, height=50, random_state=42,
-                   color_func=image_colors, min_font_size=1)
+    wc = WordCloud(
+        width=50, height=50, random_state=42, color_func=image_colors, min_font_size=1
+    )
     wc.generate(THIS)
 
 
@@ -450,8 +457,8 @@ def test_repeat():
     wc.generate(repetition_text)
     assert len(wc.words_) == 4
     # normalized frequencies
-    assert wc.words_['text'] == 1
-    assert wc.words_['with'] == .5
+    assert wc.words_["text"] == 1
+    assert wc.words_["with"] == 0.5
     assert len(wc.layout_), wc.max_words
     frequencies = [w[0][1] for w in wc.layout_]
     # check that frequencies are sorted
@@ -462,27 +469,27 @@ def test_zero_frequencies():
 
     word_cloud = WordCloud()
 
-    word_cloud.generate_from_frequencies({'test': 1, 'test1': 0, 'test2': 0})
+    word_cloud.generate_from_frequencies({"test": 1, "test1": 0, "test2": 0})
     assert len(word_cloud.layout_) == 1
-    assert word_cloud.layout_[0][0][0] == 'test'
+    assert word_cloud.layout_[0][0][0] == "test"
 
 
 def test_plural_stopwords():
-    x = '''was was was was was was was was was was was was was was was
+    x = """was was was was was was was was was was was was was was was
     wa
     hello hello hello hello hello hello hello hello
-    goodbye good bye maybe yes no'''
+    goodbye good bye maybe yes no"""
     w = WordCloud().generate(x)
-    assert w.words_['wa'] < 1
+    assert w.words_["wa"] < 1
 
     w = WordCloud(collocations=False).generate(x)
-    assert w.words_['wa'] < 1
+    assert w.words_["wa"] < 1
 
 
 def test_max_font_size_as_mask_height():
     # test if max font size will respect the mask height
-    x = '''hello hello hello
-    bye'''
+    x = """hello hello hello
+    bye"""
 
     # Get default wordcloud size
     wcd = WordCloud()
@@ -491,7 +498,7 @@ def test_max_font_size_as_mask_height():
     size = (default_size[0] * 2, default_size[1] * 2)
 
     # using mask, all drawable
-    mask = np.zeros(size, dtype=np.int)
+    mask = np.zeros(size, dtype=np.int64)
     mask[:, :] = 0
     wc = WordCloud(mask=mask, random_state=42)
     wc.generate(x)
