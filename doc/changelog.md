@@ -5,6 +5,13 @@ details, see the commit logs at <https://github.com/amueller/word_cloud>
 
 <!--next-version-placeholder-->
 
+## v1.8.5 (2023-03-20)
+### Chore
+* Update semantic-release changelog_sections ([`7cc70e9`](https://github.com/Yuhao-C/word_cloud/commit/7cc70e93b7037efc92b7d0ff5b0cbf9ea815583d))
+
+### Ci
+* Remove unnecessary unit test in workflow ([`da508dd`](https://github.com/Yuhao-C/word_cloud/commit/da508dd17856636126077a55f4ac26ae3ce3caa3))
+
 ## v1.8.4 (2023-03-20)
 
 ### Chore
