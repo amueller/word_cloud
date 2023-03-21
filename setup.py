@@ -1,7 +1,8 @@
 import io
 from setuptools import setup
 from setuptools.extension import Extension
-from wordcloud import __version__
+
+__version__ = "1.8.5"
 
 with io.open("README.md", encoding="utf_8") as fp:
     readme = fp.read()

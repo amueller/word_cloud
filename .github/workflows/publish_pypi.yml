@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Fetch master
+        run: git fetch --prune origin +refs/heads/master:refs/remotes/origin/master
       - name: Python Semantic Release
         uses: python-semantic-release/python-semantic-release@master
         with:
