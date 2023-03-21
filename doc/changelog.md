@@ -5,6 +5,11 @@ details, see the commit logs at <https://github.com/amueller/word_cloud>
 
 <!--next-version-placeholder-->
 
+## v1.8.6 (2023-03-21)
+### Ci
+* Fix semantic release ([`170c336`](https://github.com/Yuhao-C/word_cloud/commit/170c336380064d71b68605c5f1ad4cfbd1ae182e))
+* Use semantic release ([`a3cf446`](https://github.com/Yuhao-C/word_cloud/commit/a3cf4467ca3a9a1125933d4ba11f14cd44466055))
+
 ## v1.8.5 (2023-03-20)
 ### Chore
 * Update semantic-release changelog_sections ([`7cc70e9`](https://github.com/Yuhao-C/word_cloud/commit/7cc70e93b7037efc92b7d0ff5b0cbf9ea815583d))

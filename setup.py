@@ -2,7 +2,7 @@ import io
 from setuptools import setup
 from setuptools.extension import Extension
 
-__version__ = "1.8.5"
+__version__ = "1.8.6"
 
 with io.open("README.md", encoding="utf_8") as fp:
     readme = fp.read()
