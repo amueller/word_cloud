@@ -4,5 +4,3 @@
 .. currentmodule:: {{ module }}
 
 .. autofunction:: {{ objname }}
-
-

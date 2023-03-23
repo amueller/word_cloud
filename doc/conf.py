@@ -22,61 +22,61 @@ import wordcloud
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('sphinxext'))
+sys.path.insert(0, os.path.abspath("sphinxext"))
 
 # -- General configuration ----------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
-    'sphinx_gallery.gen_gallery',
-    'sphinx_issues',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.doctest',
-    'sphinx.ext.viewcode',
-    'sphinxarg.ext',
-    'numpydoc'
+    "sphinx_gallery.gen_gallery",
+    "sphinx_issues",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.doctest",
+    "sphinx.ext.viewcode",
+    "sphinxarg.ext",
+    "numpydoc",
 ]
 
 autosummary_generate = True
 
-autodoc_default_flags = ['members', 'inherited-members']
+autodoc_default_flags = ["members", "inherited-members"]
 numpydoc_class_members_toctree = False
 
 # generate autosummary even if no references
 autosummary_generate = True
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
-project = u'wordcloud'
-copyright = u'%s, Andreas Mueller' % date.today().year
+project = "wordcloud"
+copyright = "%s, Andreas Mueller" % date.today().year
 
-issues_github_path = 'amueller/word_cloud'
+issues_github_path = "amueller/word_cloud"
 
 sphinx_gallery_conf = {
-    'backreferences_dir': 'gen_modules/backreferences',
+    "backreferences_dir": "gen_modules/backreferences",
     # path to your examples scripts
-    'examples_dirs': '../examples',
+    "examples_dirs": "../examples",
     # path where to save gallery generated examples
-    'gallery_dirs': 'auto_examples',
-    'filename_pattern': r'/\w+',
-    'doc_module': ('wordcloud',),
-    'reference_url': {
+    "gallery_dirs": "auto_examples",
+    "filename_pattern": r"/\w+",
+    "doc_module": ("wordcloud",),
+    "reference_url": {
         # The module you locally document uses None
-        'wordcloud': None,
-    }
+        "wordcloud": None,
+    },
 }
 
 # The version info for the project you're documenting, acts as replacement for
@@ -91,11 +91,11 @@ release = wordcloud.__version__
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', '_templates', '_themes']
+exclude_patterns = ["_build", "_templates", "_themes"]
 
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -105,7 +105,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 html_style = "css/wordcloud.css"
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -130,7 +130,7 @@ html_style = "css/wordcloud.css"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -174,7 +174,7 @@ html_static_path = ['_static']
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'wordclouddoc'
+htmlhelp_basename = "wordclouddoc"
 
 
 # -- Options for LaTeX output -------------------------------------------------
@@ -182,10 +182,8 @@ htmlhelp_basename = 'wordclouddoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     # 'preamble': '',
 }
@@ -221,10 +219,7 @@ latex_elements = {
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'wordcloud', u'wordcloud Documentation',
-     [u'Andreas Mueller'], 1)
-]
+man_pages = [("index", "wordcloud", "wordcloud Documentation", ["Andreas Mueller"], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -236,8 +231,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'wordcloud', u'wordcloud Documentation', u'Andreas Mueller',
-     'wordcloud', 'One line description of project.', 'Miscellaneous'),
+    (
+        "index",
+        "wordcloud",
+        "wordcloud Documentation",
+        "Andreas Mueller",
+        "wordcloud",
+        "One line description of project.",
+        "Miscellaneous",
+    ),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -252,8 +254,8 @@ texinfo_documents = [
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.
-html_theme_options = {
-}
+html_theme_options = {}
+
 
 def setup(app):
     # a copy button to copy snippet of code from the documentation

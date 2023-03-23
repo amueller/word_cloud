@@ -48,6 +48,6 @@ def makeImage(text):
 # get data directory (using getcwd() is needed to support running example in generated IPython notebook)
 d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
-text = open(path.join(d, 'alice.txt'), encoding='utf-8')
+text = open(path.join(d, "alice.txt"), encoding="utf-8")
 text = text.read()
 makeImage(getFrequencyDictForText(text))

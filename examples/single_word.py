@@ -13,7 +13,7 @@ text = "square"
 
 x, y = np.ogrid[:300, :300]
 
-mask = (x - 150) ** 2 + (y - 150) ** 2 > 130 ** 2
+mask = (x - 150) ** 2 + (y - 150) ** 2 > 130**2
 mask = 255 * mask.astype(int)
 
 
