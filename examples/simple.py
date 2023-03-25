@@ -15,7 +15,7 @@ from wordcloud import WordCloud
 d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 # Read the whole text.
-text = open(path.join(d, "constitution.txt")).read()
+text = open(path.join(d, 'constitution.txt')).read()
 
 # Generate a word cloud image
 wordcloud = WordCloud().generate(text)
@@ -23,8 +23,7 @@ wordcloud = WordCloud().generate(text)
 # Display the generated image:
 # the matplotlib way:
 import matplotlib.pyplot as plt
-
-plt.imshow(wordcloud, interpolation="bilinear")
+plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 
 # lower max_font_size

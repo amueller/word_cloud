@@ -33,5 +33,5 @@ def main():
     wordcloud_cli_main(*wordcloud_cli_parse_args(sys.argv[1:]))
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     main()

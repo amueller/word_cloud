@@ -4,7 +4,7 @@ import pytest
 @pytest.fixture()
 def tmp_text_file(tmpdir_factory):
     fn = tmpdir_factory.mktemp("data").join("empty.txt")
-    fn.write(b"")
+    fn.write(b'')
     return fn
 
 
@@ -19,8 +19,8 @@ def no_cover_compat(request):
     """
 
     # Check with hasplugin to avoid getplugin exception in older pytest.
-    if request.config.pluginmanager.hasplugin("_cov"):
-        plugin = request.config.pluginmanager.getplugin("_cov")
+    if request.config.pluginmanager.hasplugin('_cov'):
+        plugin = request.config.pluginmanager.getplugin('_cov')
         if plugin.cov_controller:
             plugin.cov_controller.cov.stop()
             plugin.cov_controller.unset_env()

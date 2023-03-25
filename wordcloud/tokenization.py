@@ -23,12 +23,8 @@ def score(count_bigram, count1, count2, n_words):
     p = c2 / N
     p1 = c12 / c1
     p2 = (c2 - c12) / (N - c1)
-    score = (
-        l(c12, c1, p)
-        + l(c2 - c12, N - c1, p)
-        - l(c12, c1, p1)
-        - l(c2 - c12, N - c1, p2)
-    )
+    score = (l(c12, c1, p) + l(c2 - c12, N - c1, p)
+             - l(c12, c1, p1) - l(c2 - c12, N - c1, p2))
     return -2 * score
 
 
@@ -40,23 +36,18 @@ def pairwise(iterable):
     return zip(a, b)
 
 
-def unigrams_and_bigrams(
-    words, stopwords, normalize_plurals=True, collocation_threshold=30
-):
+def unigrams_and_bigrams(words, stopwords, normalize_plurals=True, collocation_threshold=30):
     # We must create the bigrams before removing the stopword tokens from the words, or else we get bigrams like
     # "thank much" from "thank you very much".
     # We don't allow any of the words in the bigram to be stopwords
-    bigrams = list(
-        p for p in pairwise(words) if not any(w.lower() in stopwords for w in p)
-    )
+    bigrams = list(p for p in pairwise(words) if not any(w.lower() in stopwords for w in p))
     unigrams = list(w for w in words if w.lower() not in stopwords)
     n_words = len(unigrams)
     counts_unigrams, standard_form = process_tokens(
-        unigrams, normalize_plurals=normalize_plurals
-    )
+        unigrams, normalize_plurals=normalize_plurals)
     counts_bigrams, standard_form_bigrams = process_tokens(
-        [" ".join(bigram) for bigram in bigrams], normalize_plurals=normalize_plurals
-    )
+        [" ".join(bigram) for bigram in bigrams],
+        normalize_plurals=normalize_plurals)
     # create a copy of counts_unigram so the score computation is not changed
     orig_counts = counts_unigrams.copy()
 
@@ -66,9 +57,7 @@ def unigrams_and_bigrams(
         word1 = standard_form[bigram[0].lower()]
         word2 = standard_form[bigram[1].lower()]
 
-        collocation_score = score(
-            count, orig_counts[word1], orig_counts[word2], n_words
-        )
+        collocation_score = score(count, orig_counts[word1], orig_counts[word2], n_words)
         if collocation_score > collocation_threshold:
             # bigram is a collocation
             # discount words in unigrams dict. hack because one word might
@@ -123,14 +112,15 @@ def process_tokens(words, normalize_plurals=True):
         # merge plurals into the singular count (simple cases only)
         merged_plurals = {}
         for key in list(d.keys()):
-            if key.endswith("s") and not key.endswith("ss"):
+            if key.endswith('s') and not key.endswith("ss"):
                 key_singular = key[:-1]
                 if key_singular in d:
                     dict_plural = d[key]
                     dict_singular = d[key_singular]
                     for word, count in dict_plural.items():
                         singular = word[:-1]
-                        dict_singular[singular] = dict_singular.get(singular, 0) + count
+                        dict_singular[singular] = (
+                            dict_singular.get(singular, 0) + count)
                     merged_plurals[key] = key_singular
                     del d[key]
     fused_cases = {}

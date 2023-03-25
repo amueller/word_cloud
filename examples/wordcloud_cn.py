@@ -13,14 +13,12 @@ at the same time using wordcloud with jieba very convenient
 """
 
 import jieba
-
 jieba.enable_parallel(4)
 # Setting up parallel processes :4 ,but unable to run on Windows
 from os import path
 from imageio import imread
 import matplotlib.pyplot as plt
 import os
-
 # jieba.load_userdict("txt\userdict.txt")
 # add userdict by load_userdict()
 from wordcloud import WordCloud, ImageColorGenerator
@@ -28,22 +26,22 @@ from wordcloud import WordCloud, ImageColorGenerator
 # get data directory (using getcwd() is needed to support running example in generated IPython notebook)
 d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
-stopwords_path = d + "/wc_cn/stopwords_cn_en.txt"
+stopwords_path = d + '/wc_cn/stopwords_cn_en.txt'
 # Chinese fonts must be set
-font_path = d + "/fonts/SourceHanSerif/SourceHanSerifK-Light.otf"
+font_path = d + '/fonts/SourceHanSerif/SourceHanSerifK-Light.otf'
 
 # the path to save worldcloud
-imgname1 = d + "/wc_cn/LuXun.jpg"
-imgname2 = d + "/wc_cn/LuXun_colored.jpg"
+imgname1 = d + '/wc_cn/LuXun.jpg'
+imgname2 = d + '/wc_cn/LuXun_colored.jpg'
 # read the mask / color image taken from
-back_coloring = imread(path.join(d, d + "/wc_cn/LuXun_color.jpg"))
+back_coloring = imread(path.join(d, d + '/wc_cn/LuXun_color.jpg'))
 
 # Read the whole text.
-text = open(path.join(d, d + "/wc_cn/CalltoArms.txt")).read()
+text = open(path.join(d, d + '/wc_cn/CalltoArms.txt')).read()
 
 # if you want use wordCloud,you need it
 # add userdict by add_word()
-userdict_list = ["阿Ｑ", "孔乙己", "单四嫂子"]
+userdict_list = ['阿Ｑ', '孔乙己', '单四嫂子']
 
 
 # The function for processing text with Jieba
@@ -55,27 +53,18 @@ def jieba_processing_txt(text):
     seg_list = jieba.cut(text, cut_all=False)
     liststr = "/ ".join(seg_list)
 
-    with open(stopwords_path, encoding="utf-8") as f_stop:
+    with open(stopwords_path, encoding='utf-8') as f_stop:
         f_stop_text = f_stop.read()
         f_stop_seg_list = f_stop_text.splitlines()
 
-    for myword in liststr.split("/"):
+    for myword in liststr.split('/'):
         if not (myword.strip() in f_stop_seg_list) and len(myword.strip()) > 1:
             mywordlist.append(myword)
-    return " ".join(mywordlist)
+    return ' '.join(mywordlist)
 
 
-wc = WordCloud(
-    font_path=font_path,
-    background_color="white",
-    max_words=2000,
-    mask=back_coloring,
-    max_font_size=100,
-    random_state=42,
-    width=1000,
-    height=860,
-    margin=2,
-)
+wc = WordCloud(font_path=font_path, background_color="white", max_words=2000, mask=back_coloring,
+               max_font_size=100, random_state=42, width=1000, height=860, margin=2,)
 
 
 wc.generate(jieba_processing_txt(text))
