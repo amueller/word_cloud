@@ -9,19 +9,17 @@ repos:
     rev: 22.10.0
     hooks:
       - id: black
-  - repo: https://github.com/pycqa/flake8
-    rev: 4.0.1
-    hooks:
-      - id: flake8
-        additional_dependencies:
-          - flake8-bugbear
-          - flake8-comprehensions
-          - flake8-simplify
   - repo: local
     hooks:
       - id: pytest-check
         name: pytest-check
         entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: flake
+        name: flake
+        entry: flake8
         language: system
         pass_filenames: false
         always_run: true
