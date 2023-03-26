@@ -1,10 +1,8 @@
 # Contributing
 
-To contribute to wordcloud, you'll need to follow the instructions in
-[Creating a pull request from a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+To contribute to wordcloud, you'll need to follow the instructions in [Creating a pull request from a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
 
-In addition to the general procedure for creating a pull request, please follow
-the following steps:
+In addition to the general procedure for creating a pull request, please follow the following steps:
 
 ## Before starting development
 
@@ -43,4 +41,11 @@ pytest
 ```
 flake8
 pytest
+```
+
+### To test your branch against the pre-commit checks run the following commands
+
+```
+pre-commit install
+pre-commit run --all-files
 ```
