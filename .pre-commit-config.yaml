@@ -9,6 +9,8 @@ repos:
     rev: v2.42.1
     hooks:
       - id: commitizen
+      - id: commitizen-branch
+        stages: [push]
   - repo: local
     hooks:
       - id: pytest-check
