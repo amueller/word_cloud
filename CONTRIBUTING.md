@@ -19,33 +19,24 @@ python --version
 
 ```
 pip install -U -r requirements.txt -r requirements-dev.txt
+pre-commit install
 ```
 
-### Ensure that files are correctly formatted
+### Ensure that tests pass and files are correctly formatted
 
 ```
-flake8
-```
-
-### Ensure that tests pass
-
-```
-pip install -e .
-pytest
+pre-commit run --all-files
 ```
 
 ## Before creating a pull request
 
-### Confirm formatting and test passage
+### Commit changes
 
-```
-flake8
-pytest
-```
+Again make sure that you have installed dependencies properly following the previous section.
 
-### To test your branch against the pre-commit checks run the following commands
+When committing, tests and code style checks will run automatically.
+You can successfully commit only if your changes pass the tests and style checks.
+Otherwise, you will have to fix them before committing.
 
-```
-pre-commit install
-pre-commit run --all-files
-```
+When writing the commit message, follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specifications.
+Commit messages that do not conform to the specifications will be rejected.
