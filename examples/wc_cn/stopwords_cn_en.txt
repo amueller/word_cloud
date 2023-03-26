@@ -328,7 +328,7 @@ tou
 needed
 遭到
 ordered
-exp
+exp 
 excepts
 将近
 大致
@@ -590,7 +590,7 @@ perhaps
 乘胜
 略为
 尚且
-’‘
+’‘ 
 九
 thoughts
 云云
@@ -630,7 +630,7 @@ gave
 t's
 猛然间
 赶快
-５：０
+５：０  
 但
 possible
 像
@@ -641,7 +641,7 @@ wanting
 距
 反之则
 apart
-≈
+≈ 
 ×××
 成年累月
 据
@@ -673,7 +673,7 @@ bottom
 不单
 everything
 asking
-［②ｃ］
+［②ｃ］ 
 Lex
 另悉
 平素
@@ -761,7 +761,7 @@ tell
 方面
 sometime
 amoungst
-［⑨］
+［⑨］ 
 不特
 分头
 约
@@ -819,7 +819,7 @@ whoever
 不已
 mill
 会
-－－
+－－ 
 certainly
 system
 被
@@ -977,7 +977,7 @@ such
 truly
 替代
 任凭
-?
+? 
 出于
 thoughh
 不可开交
@@ -1304,7 +1304,7 @@ better
 hardly
 differently
 wants
-×××
+××× 
 ′｜
 thousand
 再者说
@@ -1373,7 +1373,7 @@ being
 when
 therere
 speek
-１．
+１． 
 〔
 tis
 合理
@@ -1520,7 +1520,7 @@ as
 〕
 at
 av
-］∧′＝［
+］∧′＝［ 
 望
 倒是
 构成
@@ -1588,7 +1588,7 @@ former
 方
 te
 尽心尽力
-∈［
+∈［ 
 各位
 worse
 shalt
@@ -1687,7 +1687,7 @@ taken
 refs
 便
 甚至
-０：２
+０：２ 
 尽然
 knows
 不
@@ -1724,7 +1724,7 @@ prompt
 迫于
 states
 重新
-㈧
+㈧ 
 一定
 有所
 总的来说
@@ -1819,7 +1819,7 @@ interests
 always
 凭
 normally
-×
+× 
 ＋＋
 someone
 亲口
@@ -1846,13 +1846,13 @@ miss
 别
 since
 意思
-.日
+.日 
 research
 howsoever
 7
 已矣
 ［④ｅ］
-［②Ｂ］
+［②Ｂ］ 
 牢牢
 differ
 问题
@@ -2270,7 +2270,7 @@ degli
 该
 ..
 ./
-.
+. 
 不止
 didn't
 long
@@ -2294,7 +2294,7 @@ line
 ③
 吧哒
 任何
-℃
+℃ 
 up
 之前
 throug
@@ -2435,7 +2435,7 @@ youngest
 ［②ｈ］
 挨门逐户
 let
-Lex
+Lex 
 others
 sing
 fifteen
@@ -2539,7 +2539,7 @@ six
 如上
 如下
 whilst
-，也
+，也 
 including
 looks
 ［③ｃ］
@@ -3082,7 +3082,7 @@ year
 能否
 怕
 必定
---
+-- 
 尽快
 inc
 隔夜
