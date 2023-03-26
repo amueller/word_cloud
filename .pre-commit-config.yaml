@@ -5,12 +5,6 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.42.1
-    hooks:
-      - id: commitizen
-      - id: commitizen-branch
-        stages: [push]
   - repo: local
     hooks:
       - id: pytest-check
