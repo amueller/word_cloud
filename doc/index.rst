@@ -1,7 +1,7 @@
 WordCloud for Python documentation
 ==================================
 
-Here you find instructions on how to create wordclouds with my Python wordcloud project. 
+Here you find instructions on how to create wordclouds with my Python wordcloud project.
 Compared to other wordclouds, my algorithm has the advantage of
 
 * filling all available space.
@@ -21,7 +21,7 @@ The code of the project is on Github: `word_cloud <https://github.com/amueller/w
 .. toctree::
     :hidden:
     :caption: User Documentation
-    
+
     references
     cli
     auto_examples/index

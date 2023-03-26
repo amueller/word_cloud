@@ -9,5 +9,3 @@
    .. automethod:: __init__
    .. automethod:: __call__
    {% endblock %}
-
-
