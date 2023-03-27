@@ -30,7 +30,7 @@ repos:
     hooks:
       - id: pytest-check
         name: pytest-check
-        entry: bash -c 'pip install -e . && pytest'
+        entry: bash -c 'pip install -U -r requirements.txt -r requirements-dev.txt && pip install -e . && pytest'
         language: system
         pass_filenames: false
         always_run: true
