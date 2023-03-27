@@ -10,7 +10,16 @@ repos:
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
+        exclude: |
+          (?x)^(
+            examples/.*\.txt
+          )$
       - id: trailing-whitespace
+        exclude: |
+          (?x)^(
+            examples/.*\.txt|
+            wordcloud/query_integral_image\.c
+          )$
   - repo: https://github.com/commitizen-tools/commitizen
     rev: master
     hooks:
