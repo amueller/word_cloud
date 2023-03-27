@@ -22,4 +22,3 @@ pushd doc
   make html
   echo "sha:${SOURCE_SHA_REF}" >> _build/html/.buildinfo
 popd
-
