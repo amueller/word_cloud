@@ -8,7 +8,7 @@ word_cloud
 A little word cloud generator in Python. Read more about it on the [blog
 post][blog-post] or the [website][website].
 
-The code is tested against Python 2.7, 3.4, 3.5, 3.6 and 3.7.
+The code is tested against Python 3.7, 3.8, 3.9, 3.10, 3.11.
 
 ## Installation
 
@@ -23,9 +23,7 @@ If you are using conda, you can install from the `conda-forge` channel:
 
 #### Installation notes
 
-wordcloud depends on `numpy` and `pillow`.
-
-To save the wordcloud into a file, `matplotlib` can also be installed. See [examples](#examples) below.
+wordcloud depends on `numpy`, `pillow`, and `matplotlib`.
 
 If there are no wheels available for your version of python, installing the
 package requires having a C compiler set up. Before installing a compiler, report
