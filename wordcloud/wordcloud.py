@@ -505,10 +505,10 @@ class WordCloud(object):
                 transposed_font = ImageFont.TransposedFont(
                     font, orientation=orientation)
                 # get size of resulting text
-                box_size = draw.textsize(word, font=transposed_font)
+                box_size = draw.textbbox((0, 0), word, font=transposed_font, anchor="lt")
                 # find possible places using integral image:
-                result = occupancy.sample_position(box_size[1] + self.margin,
-                                                   box_size[0] + self.margin,
+                result = occupancy.sample_position(box_size[3] + self.margin,
+                                                   box_size[2] + self.margin,
                                                    random_state)
                 if result is not None or font_size < self.min_font_size:
                     # either we found a place or font-size went too small
