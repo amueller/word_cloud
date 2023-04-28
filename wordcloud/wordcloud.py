@@ -103,7 +103,7 @@ class colormap_color_func(object):
     """
     def __init__(self, colormap):
         import matplotlib.pyplot as plt
-        self.colormap = plt.cm.get_cmap(colormap)
+        self.colormap = plt.colormaps.get_cmap(colormap)
 
     def __call__(self, word, font_size, position, orientation,
                  random_state=None, **kwargs):
@@ -576,13 +576,14 @@ class WordCloud(object):
 
         flags = (re.UNICODE if sys.version < '3' and type(text) is unicode  # noqa: F821
                  else 0)
-        pattern = r"\w[\w']*" if self.min_word_length <= 1 else r"\w[\w']+"
-        regexp = self.regexp if self.regexp is not None else pattern
+        if self.regexp is not None:
+            regexp = re.compile(self.regexp, flags)
+        else:
+            regexp = re.compile(r"\w[\w']*" if self.min_word_length <= 1 else r"\w[\w']+", flags)
 
-        words = re.findall(regexp, text, flags)
         # remove 's
         words = [word[:-2] if word.lower().endswith("'s") else word
-                 for word in words]
+                 for word in regexp.findall(text)]
         # remove numbers
         if not self.include_numbers:
             words = [word for word in words if not word.isdigit()]
