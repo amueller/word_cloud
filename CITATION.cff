@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+authors:
+- family-names: "Mueller"
+  given-names: "Andreas C"
+  orcid: "https://orcid.org/0000-0002-2349-9428"
+
+title: "Wordcloud"
+version: 1.9.1
+date-released: 2023-4-27
+url: "https://github.com/amueller/wordcloud"
