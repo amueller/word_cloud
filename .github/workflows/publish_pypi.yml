@@ -17,7 +17,7 @@ jobs:
           git fetch --prune --unshallow
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.7.0
+        uses: pypa/cibuildwheel@v2.12.3
 
       - uses: actions/upload-artifact@v3
         with:
