@@ -8,7 +8,7 @@ import contextlib
 import wordcloud as wc
 from wordcloud import wordcloud_cli as cli
 
-from mock import patch
+from unittest.mock import patch
 import pytest
 
 import matplotlib
