@@ -6,5 +6,4 @@ __all__ = ['WordCloud', 'STOPWORDS', 'random_color_func',
            'get_single_color_func', 'ImageColorGenerator',
            '__version__']
 
-from . import _version
-__version__ = _version.get_versions()['version']
+from ._version import __version__

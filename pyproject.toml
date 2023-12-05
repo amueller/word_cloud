@@ -22,3 +22,4 @@ wordcloud_cli = "wordcloud.__main__:main"
 packages = ["wordcloud"]
 
 [tool.setuptools_scm]
+write_to = "wordcloud/_version.py"
