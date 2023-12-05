@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-20.04, windows-2019, macos-12]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - run: |
           git fetch --prune --unshallow
@@ -31,7 +31,7 @@ jobs:
     name: Build source distribution
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - run: |
           git fetch --prune --unshallow
