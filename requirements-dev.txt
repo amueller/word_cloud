@@ -1,7 +1,6 @@
 codecov
 coverage
 flake8>=3.8.0
-mock
 pytest
 pytest-cov
 pytest-sugar
