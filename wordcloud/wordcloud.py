@@ -103,7 +103,7 @@ class colormap_color_func(object):
     """
     def __init__(self, colormap):
         import matplotlib.pyplot as plt
-        self.colormap = plt.cm.get_cmap(colormap)
+        self.colormap = plt.get_cmap(colormap)
 
     def __call__(self, word, font_size, position, orientation,
                  random_state=None, **kwargs):
@@ -499,6 +499,9 @@ class WordCloud(object):
                 orientation = Image.ROTATE_90
             tried_other_orientation = False
             while True:
+                if font_size < self.min_font_size:
+                    # font-size went too small
+                    break
                 # try to find a position
                 font = ImageFont.truetype(self.font_path, font_size)
                 # transpose font optionally
@@ -510,8 +513,8 @@ class WordCloud(object):
                 result = occupancy.sample_position(box_size[3] + self.margin,
                                                    box_size[2] + self.margin,
                                                    random_state)
-                if result is not None or font_size < self.min_font_size:
-                    # either we found a place or font-size went too small
+                if result is not None:
+                    # Found a place
                     break
                 # if we didn't find a place, make font smaller
                 # but first try to rotate!
