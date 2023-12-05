@@ -1,10 +1,4 @@
 from setuptools import setup
-from setuptools.extension import Extension
+from Cython.Build import cythonize
 
-setup(
-    ext_modules=[
-        Extension(
-            "wordcloud.query_integral_image", ["wordcloud/query_integral_image.c"]
-        )
-    ],
-)
+setup(ext_modules=cythonize("wordcloud/query_integral_image.pyx"))
