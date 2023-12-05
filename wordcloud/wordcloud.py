@@ -514,7 +514,7 @@ class WordCloud(object):
                                                    box_size[2] + self.margin,
                                                    random_state)
                 if result is not None:
-                    # either we found a place
+                    # Found a place
                     break
                 # if we didn't find a place, make font smaller
                 # but first try to rotate!
