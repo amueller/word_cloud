@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
   pull_request:
-    types: [opened, edited, labeled, unlabeled, synchronize]
+    types: [opened, reopened, synchronize]
 
 jobs:
   test_x86_64:
@@ -13,9 +13,9 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setting up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.pyver }}
       - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
       img: quay.io/pypa/manylinux2014_aarch64
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - run: |
           docker run --rm --privileged hypriot/qemu-register
       - uses: docker://quay.io/pypa/manylinux2014_aarch64
