@@ -1,6 +1,5 @@
 import io
 from setuptools import setup
-from setuptools.extension import Extension
 import versioneer
 
 from Cython.Build import cythonize
