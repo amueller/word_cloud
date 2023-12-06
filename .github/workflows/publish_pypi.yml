@@ -9,6 +9,7 @@ jobs:
     env:
       CIBW_TEST_SKIP: "*_arm64"
       CIBW_ARCHS_MACOS: "x86_64 arm64"
+      CIBW_SKIP: "cp36-*"
 
     strategy:
       matrix:
