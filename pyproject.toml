@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "Cython>=0.29.33", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wordcloud"
+authors = [{ name = "Andreas Mueller", email = "t3kcit+wordcloud@gmail.com" }]
+description = "A little word cloud generator"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.7"
+license = { text = "MIT License" }
+dependencies = ["numpy>=1.6.1", "pillow", "matplotlib"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/amueller/word_cloud"
+
+[project.scripts]
+wordcloud_cli = "wordcloud.__main__:main"
+
+[tool.setuptools]
+packages = ["wordcloud"]
+
+[tool.setuptools_scm]
+write_to = "wordcloud/_version.py"
