@@ -1,4 +1,4 @@
-name: Publish to Pypi
+name: Build Wheel and Publish for Releases
 on:
   workflow_dispatch:
   release:
