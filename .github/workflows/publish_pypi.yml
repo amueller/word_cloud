@@ -1,13 +1,14 @@
 name: Publish to Pypi
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     env:
-      CIBW_TEST_SKIP: "*_arm64"
       CIBW_ARCHS_MACOS: "x86_64 arm64"
 
     strategy:
@@ -49,7 +50,7 @@ jobs:
     # upload to PyPI on every tag starting with 'v'
     # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     # alternatively, to publish when a GitHub Release is created, use the following rule:
-    # if: github.event_name == 'release' && github.event.action == 'published'
+    if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - uses: actions/download-artifact@v3
         with:
