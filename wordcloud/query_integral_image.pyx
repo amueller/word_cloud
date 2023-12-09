@@ -23,7 +23,7 @@ def query_integral_image(unsigned int[:,:] integral_image, int size_x, int
         # no room left
         return None
     # pick a location at random
-    cdef int goal = random_state.randint(0, hits)
+    cdef int goal = random_state.randint(1, hits)
     hits = 0
     for i in xrange(x - size_x):
         for j in xrange(y - size_y):
