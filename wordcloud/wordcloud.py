@@ -1033,6 +1033,14 @@ class WordCloud(object):
         contour = np.array(contour) > 0
         contour = np.dstack((contour, contour, contour))
 
+        # img is RGBA but the contour is RGB
+        if img.mode == 'RGBA' and contour.shape[2] == 3:
+            # RGB dims are equal, i.e., [:, :, 0] == [:, :, 1] == [:, :, 2]
+            # duplicate a color dimension and append to be a new alpha
+            alpha = contour[:, :, -1]
+            alpha = alpha.reshape((contour.shape[0], contour.shape[1], 1))
+            contour = np.concatenate((contour, alpha), axis=2)
+
         # color the contour
         ret = np.array(img) * np.invert(contour)
         if self.contour_color != 'black':
