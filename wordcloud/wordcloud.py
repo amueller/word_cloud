@@ -101,6 +101,7 @@ class colormap_color_func(object):
     >>> WordCloud(color_func=colormap_color_func("magma"))
 
     """
+
     def __init__(self, colormap):
         import matplotlib.pyplot as plt
         self.colormap = plt.get_cmap(colormap)
@@ -991,8 +992,23 @@ class WordCloud(object):
                 )
             )
 
-        # TODO draw contour
-
+        if self.mask is not None and self.contour_width > 0:
+            img = self.to_image()
+            contour = self._get_contour(img)
+            contour_path = self._get_svg_contour_path(contour)
+            result.append(
+                '<path'
+                ' d="{}"'
+                ' stroke="{}"'
+                ' stroke-width="{}"'
+                ' fill="none"'
+                '/>'
+                .format(
+                    contour_path,
+                    self.contour_color,
+                    self.contour_width
+                )
+            )
         # Complete SVG file
         result.append('</svg>')
         return '\n'.join(result)
@@ -1012,27 +1028,7 @@ class WordCloud(object):
         return boolean_mask
 
     def _draw_contour(self, img):
-        """Draw mask contour on a pillow image."""
-        if self.mask is None or self.contour_width == 0:
-            return img
-
-        mask = self._get_bolean_mask(self.mask) * 255
-        contour = Image.fromarray(mask.astype(np.uint8))
-        contour = contour.resize(img.size)
-        contour = contour.filter(ImageFilter.FIND_EDGES)
-        contour = np.array(contour)
-
-        # make sure borders are not drawn before changing width
-        contour[[0, -1], :] = 0
-        contour[:, [0, -1]] = 0
-
-        # use gaussian to change width, divide by 10 to give more resolution
-        radius = self.contour_width / 10
-        contour = Image.fromarray(contour)
-        contour = contour.filter(ImageFilter.GaussianBlur(radius=radius))
-        contour = np.array(contour) > 0
-        contour = np.dstack((contour, contour, contour))
-
+        contour = self._get_contour(img)
         # color the contour
         ret = np.array(img) * np.invert(contour)
         if self.contour_color != 'black':
@@ -1040,3 +1036,51 @@ class WordCloud(object):
             ret += np.array(color) * contour
 
         return Image.fromarray(ret)
+
+    def _get_contour(self, img):
+            """
+            Get the contour of the mask.
+
+            Args:
+                img (PIL.Image.Image): The input image.
+
+            Returns:
+                numpy.ndarray: The contour of the mask as a binary array.
+            """
+            if self.mask is None or self.contour_width == 0:
+                return None
+            mask = self._get_bolean_mask(self.mask) * 255
+            contour = Image.fromarray(mask.astype(np.uint8))
+            contour = contour.resize(img.size)
+            contour = contour.filter(ImageFilter.FIND_EDGES)
+            contour = np.array(contour)
+
+            # make sure borders are not drawn before changing width
+            contour[[0, -1], :] = 0
+            contour[:, [0, -1]] = 0
+
+            # use gaussian to change width, divide by 10 to give more resolution
+            radius = self.contour_width / 10
+            contour = Image.fromarray(contour)
+            contour = contour.filter(ImageFilter.GaussianBlur(radius=radius))
+            contour = np.array(contour) > 0
+            contour = np.dstack((contour, contour, contour))
+
+            return contour
+
+    def _get_svg_contour_path(self, contour):
+        """Get SVG path of contour.
+
+        Args:
+            contour (ndarray): The contour array.
+
+        Returns:
+            str: The SVG path string.
+
+        """
+        svg_path_str = ''
+        for i in range(contour.shape[0]):
+            for j in range(contour.shape[1]):
+                if contour[i, j, 0]:
+                    svg_path_str += 'M{},{} h1 v1 h-1 Z '.format(j, i)
+        return svg_path_str
