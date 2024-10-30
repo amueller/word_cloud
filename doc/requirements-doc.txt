@@ -1,4 +1,5 @@
 numpydoc
+imageio
 sphinx
 sphinx_rtd_theme
 sphinx_gallery
@@ -18,3 +19,7 @@ multidict
 # wordcloud_cn example
 jieba
 scipy
+
+# arabic example
+python-bidi
+arabic_reshaper

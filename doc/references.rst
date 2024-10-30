@@ -21,3 +21,5 @@ All functionality is encapsulated in the WordCloud class.
    :template: function.rst
    
    random_color_func
+   colormap_color_func
+   get_single_color_func

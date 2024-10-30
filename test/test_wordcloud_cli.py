@@ -1,12 +1,14 @@
 import argparse
 import os
 import subprocess
+import sys
 from collections import namedtuple
+import contextlib
 
 import wordcloud as wc
 from wordcloud import wordcloud_cli as cli
 
-from mock import patch
+from unittest.mock import patch
 import pytest
 
 import matplotlib
@@ -25,7 +27,10 @@ ARGUMENT_SPEC_TYPED = [
     ArgOption(cli_name='relative_scaling', init_name='relative_scaling', pass_value=1, fail_value='c'),
 ]
 ARGUMENT_SPEC_UNARY = [
-    ArgOption(cli_name='no_collocations', init_name='collocations', pass_value=True, fail_value=1)
+    ArgOption(cli_name='no_collocations', init_name='collocations', pass_value=True, fail_value=1),
+    ArgOption(cli_name='include_numbers', init_name='include_numbers', pass_value=True, fail_value=2),
+    ArgOption(cli_name='no_normalize_plurals', init_name='normalize_plurals', pass_value=True, fail_value=3),
+    ArgOption(cli_name='repeat', init_name='repeat', pass_value=True, fail_value=4),
 ]
 ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='stopwords', init_name='stopwords', pass_value=PassFile(), fail_value=None),
@@ -36,6 +41,16 @@ ARGUMENT_SPEC_REMAINING = [
     ArgOption(cli_name='background', init_name='background_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_color', init_name='contour_color', pass_value='grey', fail_value=None),
     ArgOption(cli_name='contour_width', init_name='contour_width', pass_value=0.5, fail_value='blue'),
+    ArgOption(cli_name='min_word_length', init_name='min_word_length', pass_value=5, fail_value='blue'),
+    ArgOption(cli_name='prefer_horizontal', init_name='prefer_horizontal', pass_value=.1, fail_value='blue'),
+    ArgOption(cli_name='scale', init_name='scale', pass_value=1., fail_value='blue'),
+    ArgOption(cli_name='colormap', init_name='colormap', pass_value='Greens', fail_value=1),
+    ArgOption(cli_name='mode', init_name='mode', pass_value='RGBA', fail_value=2),
+    ArgOption(cli_name='max_words', init_name='max_words', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='min_font_size', init_name='min_font_size', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='max_font_size', init_name='max_font_size', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='font_step', init_name='font_step', pass_value=10, fail_value='blue'),
+    ArgOption(cli_name='random_state', init_name='random_state', pass_value=100, fail_value='blue'),
 ]
 ARGUMENT_CLI_NAMES_UNARY = [arg_opt.cli_name for arg_opt in ARGUMENT_SPEC_UNARY]
 
@@ -77,10 +92,7 @@ def check_argument_unary(text_filepath, name, result_name):
 
 
 def check_argument_type(text_filepath, name, value):
-    with pytest.raises(
-            (SystemExit, ValueError),
-            message='argument "{}" was accepted even though the type did not match'.format(name)
-    ):
+    with pytest.raises((SystemExit, ValueError),):
         args, text, image_file = cli.parse_args(['--text', text_filepath, '--' + name, str(value)])
 
 
@@ -130,7 +142,7 @@ def test_unicode_with_stopwords():
     assert u'\u304D' in args['stopwords']
 
 
-def test_cli_writes_image(tmpdir, tmp_text_file):
+def test_cli_writes_to_imagefile(tmpdir, tmp_text_file):
     # ensure writing works with all python versions
     tmp_image_file = tmpdir.join("word_cloud.png")
 
@@ -139,7 +151,22 @@ def test_cli_writes_image(tmpdir, tmp_text_file):
     args, text, image_file = cli.parse_args(['--text', str(tmp_text_file), '--imagefile', str(tmp_image_file)])
     cli.main(args, text, image_file)
 
-    # expecting image to be written
+    # expecting image to be written to imagefile
+    assert tmp_image_file.size() > 0
+
+
+# capsysbinary should be used here, but it's not supported in python 2.
+def test_cli_writes_to_stdout(tmpdir, tmp_text_file):
+    # ensure writing works with all python versions
+    tmp_image_file = tmpdir.join("word_cloud.png")
+
+    tmp_text_file.write(b'some text')
+
+    with contextlib.redirect_stdout(tmp_image_file.open('w+')):
+        args, text, image_file = cli.parse_args(['--text', str(tmp_text_file)])
+        cli.main(args, text, image_file)
+
+    # expecting image to be written to stdout
     assert tmp_image_file.size() > 0
 
 
@@ -157,8 +184,8 @@ def test_cli_regexp_invalid(tmp_text_file, capsys):
 
 @pytest.mark.parametrize("command,expected_output, expected_exit_code", [
     ("wordcloud_cli --help", "usage: wordcloud_cli", 0),
-    ("python -m wordcloud --help", "usage: __main__", 0),
-    ("python %s/../wordcloud/wordcloud_cli.py --help" % os.path.dirname(__file__), "To execute the CLI", 1),
+    ("%s -m wordcloud --help" % sys.executable, "usage: __main__", 0),
+    ("%s %s/../wordcloud/wordcloud_cli.py --help" % (sys.executable, os.path.dirname(__file__)), "To execute the CLI", 1),
 ])
 def test_cli_as_executable(command, expected_output, expected_exit_code, tmpdir, capfd, no_cover_compat):
 

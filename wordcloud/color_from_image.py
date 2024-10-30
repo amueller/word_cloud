@@ -38,11 +38,11 @@ class ImageColorGenerator(object):
         transposed_font = ImageFont.TransposedFont(font,
                                                    orientation=orientation)
         # get size of resulting text
-        box_size = transposed_font.getsize(word)
+        box_size = transposed_font.getbbox(word)
         x = position[0]
         y = position[1]
         # cut out patch under word box
-        patch = self.image[x:x + box_size[0], y:y + box_size[1]]
+        patch = self.image[x:x + box_size[2], y:y + box_size[3]]
         if patch.ndim == 3:
             # drop alpha channel if any
             patch = patch[:, :, :3]

@@ -1,0 +1,55 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  test_x86_64:
+    name: "Build ${{ matrix.pyver }} on ${{ matrix.os }}"
+    strategy:
+      matrix:
+        pyver: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.pyver }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --upgrade pip
+          pip install -U -r requirements.txt -r requirements-dev.txt
+          #Install locally to support tests
+          pip install -e .
+      - name: Test with pytest
+        run: pytest
+
+  test_aarch64:
+    name: "Build aarch64 ${{ matrix.pyver }}"
+    strategy:
+      matrix:
+        pyver: [cp37-cp37m, cp38-cp38, cp39-cp39, cp310-cp310, cp311-cp311, cp312-cp312]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    env:
+      py: /opt/python/${{ matrix.pyver }}/bin/python
+      img: quay.io/pypa/manylinux2014_aarch64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: |
+          docker run --rm --privileged hypriot/qemu-register
+      - uses: docker://quay.io/pypa/manylinux2014_aarch64
+        with:
+          args: |
+            bash -c "${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
+            source .env/bin/activate && \
+            pip install --upgrade setuptools && \
+            python -m pip install --disable-pip-version-check --upgrade pip && \
+            pip install -U -r requirements.txt -r requirements-dev.txt && \
+            pip install -e . && \
+            pytest && \
+            deactivate"

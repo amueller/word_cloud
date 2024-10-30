@@ -5,7 +5,7 @@ Here you find instructions on how to create wordclouds with my Python wordcloud 
 Compared to other wordclouds, my algorithm has the advantage of
 
 * filling all available space.
-* being able to use arbitraty masks.
+* being able to use arbitrary masks.
 * having a stupid simple algorithm (with an efficient implementation) that can be easily modified.
 * being in Python
 
