@@ -12,6 +12,8 @@ Republic of People's Republic of China, so Chinese law is no longer on the "Call
 protection. But if you want to use two pieces of art in business, because the time limit for copyright
 is not over, you have to get the consent of the artist.
 
-* stopwords: Free to use, without authorization
+* Stopwords: Can be opened for personal development  or commercial purposes, no signature required.  authorized by the author Tian Fengshou.
 
-Shandong University of Science and Technology (Ji'nan campus) Software Alliance Laboratory(2017) Font Tian
+Source: Shandong University of Science and Technology, Software Alliance Laboratory, Tian Fengshou, 2017 Chinese stop words.
+
+Author's GitHub: https://github.com/TianFengshou.
