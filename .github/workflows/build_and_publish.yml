@@ -22,7 +22,7 @@ jobs:
           git fetch --prune --unshallow
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.21.0
+        uses: pypa/cibuildwheel@v2.21.3
 
       - uses: actions/upload-artifact@v4
         with:
@@ -67,4 +67,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
-          To test: repository_url: https://test.pypi.org/legacy/
+          # To test: repository_url: https://test.pypi.org/legacy/
