@@ -502,3 +502,22 @@ def test_max_font_size_as_mask_height():
 
     # Check if the biggest element has the same font size
     assert wc.layout_[0][1] == wc2.layout_[0][1]
+
+
+# test/test_wordcloud.py
+def test_svg_contour():
+    # Create a WordCloud with a contour
+    mask = np.ones((300, 300, 3), dtype=int) * 255
+    mask[100:200, 100:200, :] = 0
+
+    wc = WordCloud(contour_width=1, contour_color='blue', mask=mask, background_color='white')
+    wc.generate(THIS)
+    
+    # Convert the WordCloud to SVG
+    svg_output = wc.to_svg()
+    
+    # Check that the SVG output includes the contour path
+    assert '<path d="' in svg_output
+    assert 'fill="none"' in svg_output
+    assert 'stroke="blue"' in svg_output
+    assert 'stroke-width="1"' in svg_output
