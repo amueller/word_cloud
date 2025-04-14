@@ -531,6 +531,7 @@ class WordCloud(object):
                 break
 
             x, y = np.array(result) + self.margin // 2
+            x, y = x.item(), y.item() #convert np.float to float (native python). It cannot be jsonify otherwise
             # actually draw the text
             draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
