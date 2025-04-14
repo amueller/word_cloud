@@ -88,10 +88,14 @@ class RegExpAction(argparse.Action):
 def main(args, text, imagefile):
     wordcloud = wc.WordCloud(**args)
     wordcloud.generate(text)
-    image = wordcloud.to_image()
 
     with imagefile:
-        image.save(imagefile, format='png', optimize=True)
+        if imagefile.name.endswith('.svg'):
+            image = wordcloud.to_svg()
+            imagefile.write(image.encode('utf-8'))
+        else:
+            image = wordcloud.to_image()
+            image.save(imagefile, format='png', optimize=True)
 
 
 def make_parser():
@@ -110,7 +114,7 @@ def make_parser():
     parser.add_argument(
         '--imagefile', metavar='file', type=FileType('wb'),
         default='-',
-        help='file the completed PNG image should be written to'
+        help='file the completed image should be written to'
              ' (default: stdout)')
     parser.add_argument(
         '--fontfile', metavar='path', dest='font_path',
