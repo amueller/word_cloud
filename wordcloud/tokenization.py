@@ -3,6 +3,7 @@ from itertools import tee
 from operator import itemgetter
 from collections import defaultdict
 from math import log
+from enchant import Dict
 
 
 def l(k, n, x):  # noqa: E741, E743
@@ -101,6 +102,7 @@ def process_tokens(words, normalize_plurals=True):
     # d is a dict of dicts.
     # Keys of d are word.lower(). Values are dicts
     # counting frequency of each capitalization
+    eng_d = Dict("en_US")
     d = defaultdict(dict)
     for word in words:
         word_lower = word.lower()
@@ -114,15 +116,16 @@ def process_tokens(words, normalize_plurals=True):
         for key in list(d.keys()):
             if key.endswith('s') and not key.endswith("ss"):
                 key_singular = key[:-1]
-                if key_singular in d:
-                    dict_plural = d[key]
-                    dict_singular = d[key_singular]
-                    for word, count in dict_plural.items():
-                        singular = word[:-1]
-                        dict_singular[singular] = (
-                            dict_singular.get(singular, 0) + count)
-                    merged_plurals[key] = key_singular
-                    del d[key]
+                if eng_d.check(key_singular):
+                    if key_singular in d:
+                        dict_plural = d[key]
+                        dict_singular = d[key_singular]
+                        for word, count in dict_plural.items():
+                            singular = word[:-1]
+                            dict_singular[singular] = (
+                                dict_singular.get(singular, 0) + count)
+                        merged_plurals[key] = key_singular
+                        del d[key]
     fused_cases = {}
     standard_cases = {}
     item1 = itemgetter(1)
