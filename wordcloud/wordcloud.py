@@ -10,6 +10,7 @@ from __future__ import division
 
 import warnings
 from random import Random
+from typing import Optional
 import io
 import os
 import re
@@ -207,7 +208,8 @@ class WordCloud(object):
         list will be used. Ignored if using generate_from_frequencies.
 
     background_color : color value (default="black")
-        Background color for the word cloud image.
+        Background color for the word cloud image. If set to None, then no
+        background rectangle will be drawn.
 
     max_font_size : int or None (default=None)
         Maximum font size for the largest word. If None, height of the image is
@@ -309,11 +311,11 @@ class WordCloud(object):
     def __init__(self, font_path=None, width=400, height=200, margin=2,
                  ranks_only=None, prefer_horizontal=.9, mask=None, scale=1,
                  color_func=None, max_words=200, min_font_size=4,
-                 stopwords=None, random_state=None, background_color='black',
-                 max_font_size=None, font_step=1, mode="RGB",
-                 relative_scaling='auto', regexp=None, collocations=True,
-                 colormap=None, normalize_plurals=True, contour_width=0,
-                 contour_color='black', repeat=False,
+                 stopwords=None, random_state=None,
+                 background_color: Optional[str]='black', max_font_size=None,
+                 font_step=1, mode="RGB", relative_scaling='auto', regexp=None,
+                 collocations=True, vcolormap=None, normalize_plurals=True,
+                 contour_width=0, contour_color='black', repeat=False,
                  include_numbers=False, min_word_length=0, collocation_threshold=30):
         if font_path is None:
             font_path = FONT_PATH
