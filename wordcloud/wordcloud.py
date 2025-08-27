@@ -405,6 +405,11 @@ class WordCloud(object):
         self
 
         """
+
+        # make sure frequencies are of type dict
+        if not insanceof(frequencies, dict):
+            raise TypeError(f"Expected argument of type 'dict', but got {type(frequencies).__name__}")
+
         # make sure frequencies are sorted and normalized
         frequencies = sorted(frequencies.items(), key=itemgetter(1), reverse=True)
         if len(frequencies) <= 0:
