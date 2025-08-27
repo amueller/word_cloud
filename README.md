@@ -34,18 +34,18 @@ an issue describing the version of python and operating system being used.
 
 Check out [examples/simple.py][simple] for a short intro. A sample output is:
 
-![Constitution](examples/constitution.png)
+![Constitution](https://raw.githubusercontent.com/amueller/word_cloud/main/examples/constitution.png)
 
 Or run [examples/masked.py][masked] to see more options. A sample output is:
 
-![Alice in Wonderland](examples/alice.png)
+![Alice in Wonderland](https://raw.githubusercontent.com/amueller/word_cloud/main/examples/alice.png)
 
 Getting fancy with some colors:
-![Parrot with rainbow colors](examples/parrot_new.png)
+![Parrot with rainbow colors](https://raw.githubusercontent.com/amueller/word_cloud/main/examples/parrot_new.png)
 
 Generating wordclouds for Arabic:
 
-![Arabic wordlcloud](examples/arabic_example.png)
+![Arabic wordlcloud](https://raw.githubusercontent.com/amueller/word_cloud/main/examples/arabic_example.png)
 
 
 ## Command-line usage
@@ -64,8 +64,8 @@ Use `wordcloud_cli --help` so see all available options.
 
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [website]: http://amueller.github.io/word_cloud/
-[simple]: examples/simple.py
-[masked]: examples/masked.py
+[simple]: https://github.com/amueller/word_cloud/blob/main/examples/simple.py
+[masked]: https://github.com/amueller/word_cloud/blob/main/examples/masked.py
 [reddit-cloud]: https://github.com/amueller/reddit-cloud
 [wc2]: http://www.reddit.com/user/WordCloudBot2
 [wc2top]: http://www.reddit.com/user/WordCloudBot2/?sort=top
