@@ -18,6 +18,7 @@ import sys
 import colorsys
 import matplotlib
 import numpy as np
+import json
 from operator import itemgetter
 from xml.sax import saxutils
 
@@ -1041,3 +1042,17 @@ class WordCloud(object):
             ret += np.array(color) * contour
 
         return Image.fromarray(ret)
+    
+    def save_frequency(self, file_name):
+        """Save the frequency of the words and frequencies to a file."""
+        with open(file_name, 'w') as fp:
+            json.dump(self.words_, fp)
+            
+        return
+    
+    def generate_from_frequencies_file(self, frequencies_file, max_font_size=None):
+        """Create a word_cloud from a words and frequencies JSON file."""
+        with open(frequencies_file, 'r') as fp:
+            frequencies = json.load(fp)
+            
+        return self.generate_from_frequencies(frequencies, max_font_size):
