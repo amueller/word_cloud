@@ -36,13 +36,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       py: /opt/python/${{ matrix.pyver }}/bin/python
-      img: quay.io/pypa/manylinux2014_aarch64
+      img: quay.io/pypa/manylinux_2_28_aarch64
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - run: |
           docker run --rm --privileged hypriot/qemu-register
-      - uses: docker://quay.io/pypa/manylinux2014_aarch64
+      - uses: docker://quay.io/pypa/manylinux_2_28_aarch64
         with:
           args: |
             bash -c "${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
