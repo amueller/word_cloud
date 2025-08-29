@@ -9,7 +9,7 @@ jobs:
     name: "Build ${{ matrix.pyver }} on ${{ matrix.os }}"
     strategy:
       matrix:
-        pyver: ["3.7", "3.9", "3.11", "3.13"]
+        pyver: ["3.9", "3.11", "3.13"]
         os: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -31,18 +31,18 @@ jobs:
     name: "Build aarch64 ${{ matrix.pyver }}"
     strategy:
       matrix:
-        pyver: [cp38-cp38, cp310-cp310, cp312-cp312]
+        pyver: [cp310-cp310, cp312-cp312]
       fail-fast: false
     runs-on: ubuntu-latest
     env:
       py: /opt/python/${{ matrix.pyver }}/bin/python
-      img: quay.io/pypa/manylinux2014_aarch64
+      img: quay.io/pypa/manylinux_2_28_aarch64
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - run: |
           docker run --rm --privileged hypriot/qemu-register
-      - uses: docker://quay.io/pypa/manylinux2014_aarch64
+      - uses: docker://quay.io/pypa/manylinux_2_28_aarch64
         with:
           args: |
             bash -c "${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
