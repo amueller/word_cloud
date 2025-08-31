@@ -7,7 +7,7 @@ name = "wordcloud"
 authors = [{ name = "Andreas Mueller", email = "t3kcit+wordcloud@gmail.com" }]
 description = "A little word cloud generator"
 readme = { file = "README.md", content-type = "text/markdown" }
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 license = { text = "MIT License" }
 dependencies = ["numpy>=1.6.1", "pillow", "matplotlib"]
 dynamic = ["version"]
