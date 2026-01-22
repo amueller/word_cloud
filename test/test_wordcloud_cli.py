@@ -153,6 +153,23 @@ def test_cli_writes_to_imagefile(tmpdir, tmp_text_file):
 
     # expecting image to be written to imagefile
     assert tmp_image_file.size() > 0
+    # assert png header
+    assert tmp_image_file.read('rb').startswith(b'\x89PNG')
+
+
+def test_cli_writes_to_svg_imagefile(tmpdir, tmp_text_file):
+    # ensure writing works with all python versions
+    tmp_image_file = tmpdir.join('word_cloud.svg')
+
+    tmp_text_file.write(b'some text')
+
+    args, text, image_file = cli.parse_args(['--text', str(tmp_text_file), '--imagefile', str(tmp_image_file)])
+    cli.main(args, text, image_file)
+
+    # expecting image to be written to imagefile
+    assert tmp_image_file.size() > 0
+    # assert svg header
+    assert tmp_image_file.read().startswith('<svg xmlns=')
 
 
 # capsysbinary should be used here, but it's not supported in python 2.
