@@ -9,7 +9,13 @@ description = "A little word cloud generator"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.9"
 license = "MIT"
-dependencies = ["numpy>=1.19.3", "pillow", "matplotlib"]
+dependencies = [
+    "cython",
+    "matplotlib>=1.5.3",
+    "numpy==1.19.3; python_version == '3.9'",
+    "numpy>1.19.3; python_version >= '3.10'",
+    "pillow",
+]
 dynamic = ["version"]
 
 [project.urls]
