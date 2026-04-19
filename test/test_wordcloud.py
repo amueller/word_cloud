@@ -502,3 +502,11 @@ def test_max_font_size_as_mask_height():
 
     # Check if the biggest element has the same font size
     assert wc.layout_[0][1] == wc2.layout_[0][1]
+
+
+def test_auto_text_direction_uses_unicode_bidi_classes():
+    """auto text_direction picks direction from first strong Unicode bidi class."""
+    wc = WordCloud(text_direction="auto")
+    assert wc._text_draw_kwargs("سڵاو")["direction"] == "rtl"
+    assert wc._text_draw_kwargs("שלום")["direction"] == "rtl"
+    assert wc._text_draw_kwargs("hello")["direction"] == "ltr"
