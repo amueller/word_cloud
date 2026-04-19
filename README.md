@@ -25,6 +25,10 @@ If you are using conda, you can install from the `conda-forge` channel:
 
 wordcloud depends on `numpy`, `pillow`, and `matplotlib`.
 
+For **correct Arabic / Hebrew / Syriac** (RTL) shaping in the Python API, use a
+Pillow build with **libraqm** (`PIL.features.check("raqm")`). The examples under
+`examples/` that set `text_direction` and `text_language` assume that stack.
+
 If there are no wheels available for your version of python, installing the
 package requires having a C compiler set up. Before installing a compiler, report
 an issue describing the version of python and operating system being used.
@@ -43,10 +47,13 @@ Or run [examples/masked.py][masked] to see more options. A sample output is:
 Getting fancy with some colors:
 ![Parrot with rainbow colors](examples/parrot_new.png)
 
-Generating wordclouds for Arabic:
+Generating wordclouds for Arabic in Arabic Unicode range (native RTL rendering via Pillow+libraqm; no `arabic_reshaper`). See [examples/arabic.py](examples/arabic.py) and [examples/arabicwords.txt](examples/arabicwords.txt).
 
-![Arabic wordlcloud](examples/arabic_example.png)
+![Arabic wordcloud](examples/arabic_example.png)
 
+Kurdish Sorani (ckb) in Arabic Unicode range script: see [examples/ku_ckb_wordcloud.py](examples/ku_ckb_wordcloud.py) and [examples/ku_ckb_wordcloud.txt](examples/ku_ckb_wordcloud.txt). Sample output:
+
+![Kurdish Sorani (ckb) word cloud](examples/ku_ckb_wordcloud.png)
 
 ## Command-line usage
 
@@ -60,7 +67,7 @@ If you're dealing with PDF files, then `pdftotext`, included by default with man
 
 In the previous example, the `-` argument orders `pdftotext` to write the resulting text to stdout, which is then piped to the stdin of `wordcloud_cli.py`.
 
-Use `wordcloud_cli --help` so see all available options.
+Use `wordcloud_cli --help` to see all available options.
 
 [blog-post]: http://peekaboo-vision.blogspot.de/2012/11/a-wordcloud-in-python.html
 [website]: http://amueller.github.io/word_cloud/
