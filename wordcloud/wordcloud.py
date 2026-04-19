@@ -16,6 +16,7 @@ import re
 import base64
 import sys
 import colorsys
+import unicodedata
 import matplotlib
 import numpy as np
 from operator import itemgetter
@@ -283,6 +284,19 @@ class WordCloud(object):
         Statistical Natural Language Processing. MIT press, p. 162
         https://nlp.stanford.edu/fsnlp/promo/colloc.pdf#page=22
 
+    text_direction : {"ltr", "rtl", "ttb", "auto"} or None, default=None
+        Text direction passed to Pillow text rendering. ``"auto"`` selects a
+        direction per word using the Unicode bidirectional class of the first
+        strong character (``R``/``AL``/``AN`` -> ``"rtl"``, else ``"ltr"``).
+        This is useful for Arabic/Hebrew-script languages when Pillow was built
+        with ``libraqm`` support.
+
+    text_language : str or None, default=None
+        BCP 47/OpenType language tag passed to Pillow (for example ``"ar"``).
+
+    text_features : list[str] or None, default=None
+        OpenType feature tags passed to Pillow text rendering.
+
     Attributes
     ----------
     ``words_`` : dict of string to float
@@ -315,7 +329,8 @@ class WordCloud(object):
                  relative_scaling='auto', regexp=None, collocations=True,
                  colormap=None, normalize_plurals=True, contour_width=0,
                  contour_color='black', repeat=False,
-                 include_numbers=False, min_word_length=0, collocation_threshold=30):
+                 include_numbers=False, min_word_length=0, collocation_threshold=30,
+                 text_direction=None, text_language=None, text_features=None):
         if font_path is None:
             font_path = FONT_PATH
         if color_func is None and colormap is None:
@@ -367,6 +382,13 @@ class WordCloud(object):
         self.include_numbers = include_numbers
         self.min_word_length = min_word_length
         self.collocation_threshold = collocation_threshold
+        valid_text_directions = {None, "ltr", "rtl", "ttb", "auto"}
+        if text_direction not in valid_text_directions:
+            raise ValueError("text_direction needs to be one of None, 'ltr', "
+                             "'rtl', 'ttb', 'auto', got %r." % text_direction)
+        self.text_direction = text_direction
+        self.text_language = text_language
+        self.text_features = text_features
 
         # Override the width and height if there is a mask
         if mask is not None:
@@ -388,6 +410,28 @@ class WordCloud(object):
         self
         """
         return self.generate_from_frequencies(frequencies)
+
+    def _auto_direction(self, text):
+        for char in text:
+            bidi_class = unicodedata.bidirectional(char)
+            if bidi_class in ("R", "AL", "AN"):
+                return "rtl"
+            if bidi_class == "L":
+                return "ltr"
+        return None
+
+    def _text_draw_kwargs(self, text):
+        kwargs = {}
+        direction = self.text_direction
+        if direction == "auto":
+            direction = self._auto_direction(text)
+        if direction is not None:
+            kwargs["direction"] = direction
+        if self.text_language is not None:
+            kwargs["language"] = self.text_language
+        if self.text_features is not None:
+            kwargs["features"] = self.text_features
+        return kwargs
 
     def generate_from_frequencies(self, frequencies, max_font_size=None):  # noqa: C901
         """Create a word_cloud from words and frequencies.
@@ -509,7 +553,9 @@ class WordCloud(object):
                 transposed_font = ImageFont.TransposedFont(
                     font, orientation=orientation)
                 # get size of resulting text
-                box_size = draw.textbbox((0, 0), word, font=transposed_font, anchor="lt")
+                box_size = draw.textbbox(
+                    (0, 0), word, font=transposed_font, anchor="lt",
+                    **self._text_draw_kwargs(word))
                 # find possible places using integral image:
                 result = occupancy.sample_position(box_size[3] + self.margin,
                                                    box_size[2] + self.margin,
@@ -533,7 +579,8 @@ class WordCloud(object):
 
             x, y = np.array(result) + self.margin // 2
             # actually draw the text
-            draw.text((y, x), word, fill="white", font=transposed_font)
+            draw.text((y, x), word, fill="white", font=transposed_font,
+                      **self._text_draw_kwargs(word))
             positions.append((x, y))
             orientations.append(orientation)
             font_sizes.append(font_size)
@@ -667,7 +714,8 @@ class WordCloud(object):
                 font, orientation=orientation)
             pos = (int(position[1] * self.scale),
                    int(position[0] * self.scale))
-            draw.text(pos, word, fill=color, font=transposed_font)
+            draw.text(pos, word, fill=color, font=transposed_font,
+                      **self._text_draw_kwargs(word))
 
         return self._draw_contour(img=img)
 
