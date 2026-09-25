@@ -97,7 +97,7 @@ def main(args, text, imagefile):
 
 def make_parser():
     description = 'A simple command line interface for wordcloud module.'
-    parser = argparse.ArgumentParser(description=description)
+    parser = argparse.ArgumentParser(prog='wordcloud_cli', description=description)
     parser.add_argument(
         '--text', metavar='file', type=FileType(), default='-',
         help='specify file of words to build the word cloud (default: stdin)')

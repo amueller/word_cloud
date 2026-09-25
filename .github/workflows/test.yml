@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         pyver: ["3.9", "3.11", "3.13"]
-        os: [ubuntu-24.04, windows-latest]
+        os: [ubuntu-24.04, windows-latest, windows-11-arm]
         include:
           - pyver: "3.10"
             os: ubuntu-24.04-arm
@@ -18,6 +18,9 @@ jobs:
             os: ubuntu-24.04-arm
           - pyver: "3.14"
             os: ubuntu-24.04
+        exclude:
+          - pyver: "3.9"
+            os: windows-11-arm
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
