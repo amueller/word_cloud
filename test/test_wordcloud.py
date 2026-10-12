@@ -5,7 +5,7 @@ import pytest
 
 from random import Random
 from numpy.testing import assert_array_equal
-from PIL import Image
+from PIL import Image, ImageFont
 import xml.etree.ElementTree as ET
 
 import matplotlib
@@ -429,6 +429,59 @@ def test_coloring_black_works():
     wc = WordCloud(width=50, height=50, random_state=42,
                    color_func=image_colors, min_font_size=1)
     wc.generate(THIS)
+
+
+@pytest.mark.parametrize('orientation', [None, Image.Transpose.ROTATE_90])
+@pytest.mark.parametrize('channels', [3, 4])
+def test_image_colors_sample_word_rectangle(orientation, channels):
+    wc = WordCloud()
+    font = ImageFont.TransposedFont(
+        ImageFont.truetype(wc.font_path, 20), orientation=orientation)
+    _, _, width, height = font.getbbox('coloring')
+    row, column = 10, 15
+    image = np.zeros((200, 200, channels), dtype=np.uint8)
+    image[row:row + height, column:column + width, :3] = (255, 0, 0)
+    if channels == 4:
+        image[:, :, 3] = 127
+
+    color = ImageColorGenerator(image)(
+        'coloring', 20, wc.font_path, (row, column), orientation)
+
+    assert color == 'rgb(255, 0, 0)'
+
+
+@pytest.mark.parametrize('prefer_horizontal', [0, 1])
+def test_recolor_samples_layout_rectangle(prefer_horizontal):
+    wc = WordCloud(width=300, height=300, random_state=1,
+                   max_font_size=25, prefer_horizontal=prefer_horizontal)
+    wc.generate_from_frequencies({'coloring': 1})
+    (word, _), font_size, (row, column), orientation, _ = wc.layout_[0]
+    font = ImageFont.TransposedFont(
+        ImageFont.truetype(wc.font_path, font_size), orientation=orientation)
+    _, _, width, height = font.getbbox(word)
+    image = np.zeros((300, 300, 3), dtype=np.uint8)
+    image[row:row + height, column:column + width] = (40, 120, 240)
+
+    wc.recolor(color_func=ImageColorGenerator(image))
+
+    assert wc.layout_[0][-1] == 'rgb(40, 120, 240)'
+
+
+@pytest.mark.parametrize('orientation', [None, Image.Transpose.ROTATE_90])
+@pytest.mark.parametrize('position', [(5, 7), (65, 7), (5, 105)])
+def test_image_colors_clip_rectangle_at_image_edges(orientation, position):
+    wc = WordCloud()
+    rows, columns = np.indices((80, 120))
+    image = np.dstack((rows, columns, rows + columns)).astype(np.uint8)
+    font = ImageFont.TransposedFont(
+        ImageFont.truetype(wc.font_path, 20), orientation=orientation)
+    _, _, width, height = font.getbbox('coloring')
+    row, column = position
+    patch = image[row:row + height, column:column + width]
+    expected = 'rgb(%d, %d, %d)' % tuple(patch.reshape(-1, 3).mean(axis=0))
+
+    assert ImageColorGenerator(image)(
+        'coloring', 20, wc.font_path, position, orientation) == expected
 
 
 def test_repeat():
