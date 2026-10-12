@@ -755,11 +755,13 @@ class WordCloud(object):
         except TypeError:
             return np.asarray(image)
 
-    def __array__(self, copy=None):
+    def __array__(self, dtype=None, copy=None):
         """Convert to numpy array.
 
         Parameters
         ----------
+        dtype : numpy dtype, optional
+            Data type of the returned array. Default: the image's data type.
         copy : bool
             If `True`, then the object is copied. If `None` then the object is copied
             only if needed. For `False` it raises a ValueError if a copy cannot be
@@ -770,7 +772,12 @@ class WordCloud(object):
         image : nd-array size (width, height, 3)
             Word cloud image as numpy matrix.
         """
-        return self.to_array(copy=copy)
+        array = self.to_array()
+        if copy is True:
+            return np.array(array, dtype=dtype, copy=True)
+        if copy is False and dtype is not None and array.dtype != np.dtype(dtype):
+            raise ValueError("Unable to avoid a copy while converting the image data type.")
+        return np.asarray(array, dtype=dtype)
 
     def to_svg(self, embed_font=False, optimize_embedded_font=True, embed_image=False):
         """Export to SVG.

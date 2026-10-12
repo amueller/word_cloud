@@ -186,7 +186,8 @@ def test_cli_regexp_invalid(tmp_text_file, capsys):
 @pytest.mark.parametrize("command,expected_output, expected_exit_code", [
     ("wordcloud_cli --help", "usage: wordcloud_cli", 0),
     ("%s -m wordcloud --help" % sys.executable, "A simple command line", 0),
-    ("%s %s/../wordcloud/wordcloud_cli.py --help" % (sys.executable, os.path.dirname(__file__)), "To execute the CLI", 1),
+    ("%s %s/../wordcloud/wordcloud_cli.py --help" % (sys.executable, os.path.dirname(__file__)),
+     "To execute the CLI", 1),
 ])
 def test_cli_as_executable(command, expected_output, expected_exit_code, tmpdir, capfd):
 
