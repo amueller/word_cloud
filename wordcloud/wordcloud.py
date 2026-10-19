@@ -382,6 +382,7 @@ class WordCloud(object):
         ----------
         frequencies : dict from string to float
             A contains words and associated frequency.
+            Words with a frequency of zero are ignored.
 
         Returns
         -------
@@ -396,6 +397,7 @@ class WordCloud(object):
         ----------
         frequencies : dict from string to float
             A contains words and associated frequency.
+            Words with a frequency of zero are ignored.
 
         max_font_size : int
             Use this font-size instead of self.max_font_size
@@ -406,7 +408,9 @@ class WordCloud(object):
 
         """
         # make sure frequencies are sorted and normalized
-        frequencies = sorted(frequencies.items(), key=itemgetter(1), reverse=True)
+        frequencies = sorted(
+            ((word, freq) for word, freq in frequencies.items() if freq != 0),
+            key=itemgetter(1), reverse=True)
         if len(frequencies) <= 0:
             raise ValueError("We need at least 1 word to plot a word cloud, "
                              "got %d." % len(frequencies))

@@ -467,6 +467,26 @@ def test_zero_frequencies():
     assert word_cloud.layout_[0][0][0] == 'test'
 
 
+@pytest.mark.parametrize('max_words', [3, 6])
+@pytest.mark.parametrize('max_font_size', [None, 24])
+def test_repeat_ignores_zero_frequencies(max_words, max_font_size):
+    options = dict(repeat=True, max_words=max_words,
+                   max_font_size=max_font_size, random_state=42)
+    frequencies = {'alpha': 2, 'beta': 1}
+    expected = WordCloud(**options).generate_from_frequencies(frequencies)
+    with_zeros = dict(frequencies, unused=0, also_unused=0)
+    actual = WordCloud(**options).generate_from_frequencies(with_zeros)
+
+    assert actual.layout_ == expected.layout_
+    assert actual.words_ == expected.words_
+    assert with_zeros == dict(frequencies, unused=0, also_unused=0)
+
+
+def test_all_zero_frequencies():
+    with pytest.raises(ValueError, match='We need at least 1 word'):
+        WordCloud().generate_from_frequencies({'alpha': 0, 'beta': 0})
+
+
 def test_plural_stopwords():
     x = '''was was was was was was was was was was was was was was was
     wa
