@@ -18,6 +18,10 @@ jobs:
             os: ubuntu-24.04-arm
           - pyver: "3.14"
             os: ubuntu-24.04
+          - pyver: "3.15"
+            os: ubuntu-24.04
+          - pyver: "3.15t"
+            os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
