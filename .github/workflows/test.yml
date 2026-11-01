@@ -8,8 +8,9 @@ jobs:
   test_x86_64:
     name: "Build ${{ matrix.pyver }} on ${{ matrix.os }}"
     strategy:
+      fail-fast: false
       matrix:
-        pyver: ["3.9", "3.11", "3.13"]
+        pyver: ["3.9", "3.11", "3.13", "3.14", "3.15", "3.15t"]
         os: [ubuntu-24.04, windows-latest]
         include:
           - pyver: "3.10"
@@ -17,6 +18,10 @@ jobs:
           - pyver: "3.12"
             os: ubuntu-24.04-arm
           - pyver: "3.14"
+            os: ubuntu-24.04
+          - pyver: "3.15"
+            os: ubuntu-24.04
+          - pyver: "3.15t"
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     steps:
