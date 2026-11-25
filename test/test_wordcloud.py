@@ -7,6 +7,8 @@ from random import Random
 from numpy.testing import assert_array_equal
 from PIL import Image
 import xml.etree.ElementTree as ET
+import base64
+import io
 
 import matplotlib
 matplotlib.use('Agg')
@@ -204,6 +206,29 @@ def test_svg_syntax():
     wc.generate(THIS)
     svg = wc.to_svg()
     ET.fromstring(svg)
+
+
+@pytest.mark.parametrize("mode, background_color", [
+    ("RGB", "white"),
+    ("RGBA", "white"),
+    ("RGBA", None),
+])
+def test_svg_embedded_image(mode, background_color):
+    wc = WordCloud(mode=mode, background_color=background_color,
+                   random_state=42, scale=2).generate("hello world")
+    expected = wc.to_image()
+
+    svg = ET.fromstring(wc.to_svg(embed_image=True))
+    image = svg.find("{http://www.w3.org/2000/svg}image")
+    media_type, encoded = image.attrib["href"].split(",", 1)
+    assert media_type == "data:image/png;base64"
+    with Image.open(io.BytesIO(base64.b64decode(encoded))) as actual:
+        assert actual.format == "PNG"
+        assert actual.mode == expected.mode
+        assert actual.size == expected.size
+        assert_array_equal(np.asarray(actual), np.asarray(expected))
+        if background_color is None:
+            assert np.any(np.asarray(actual)[:, :, 3] == 0)
 
 
 def test_recolor():
