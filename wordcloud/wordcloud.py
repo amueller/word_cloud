@@ -809,7 +809,7 @@ class WordCloud(object):
 
         embed_image : bool, default=False
             Whether to include rasterized image inside resulting SVG file.
-            Useful for debugging.
+            Embedded as a lossless PNG, preserving transparency. Useful for debugging.
 
         Returns
         -------
@@ -959,13 +959,13 @@ class WordCloud(object):
         if embed_image:
             image = self.to_image()
             data = io.BytesIO()
-            image.save(data, format='JPEG')
+            image.save(data, format='PNG')
             data = base64.b64encode(data.getbuffer()).decode('ascii')
             result.append(
                 '<image'
                 ' width="100%"'
                 ' height="100%"'
-                ' href="data:image/jpg;base64,{}"'
+                ' href="data:image/png;base64,{}"'
                 '/>'
                 .format(data)
             )
